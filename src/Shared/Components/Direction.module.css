@@ -1,0 +1,27 @@
+.direction{
+    width: 5em;
+    height: 5em;
+    box-shadow: 1px 1px 12px rgba(152, 195, 84, 0.23);
+border-radius: 100%;
+transform: rotate(0deg);
+/* position:absolute; */
+margin-right: 1em;
+margin-left: 1em;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: transform 0.5s, box-shadow 0.5s;
+
+
+}
+.arrow{
+    width: 50%;
+}
+
+.direction:hover{
+  box-shadow: 3px 3px 20px rgba(31, 114, 192, 0.43);
+  transform: rotate(360deg);
+ /* -webkit-transform: scale(1.25, 1.25); */
+  /* transform: scale(1.25, 1.25); */
+}
+

@@ -1,0 +1,41 @@
+
+
+.set-containter{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* text-align: center; */
+}
+
+.set-subtitle{
+color : var(--javolin-text-lt-gray);
+font-size: 13px;
+
+}
+
+.active-num{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.set-pager{
+color : var(--javolin-text-lt-gray);
+}
+.set-title, .set-subtitle{
+    text-align: center;
+}
+
+.page-num{
+    color : var(--javolin-text-lt-gray);
+}
+
+.set-pager{
+    max-width: 200px;
+    /* margin: auto; */
+    margin: 1em auto;
+    display: flex;
+    align-items: center;
+    /* background-color: var(--javolin-blue-color); */
+}

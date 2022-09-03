@@ -1,0 +1,65 @@
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3em;
+    /* overflow-x: hidden; */
+}
+
+.title {
+    color: #000C26;
+    font-weight: 700;
+    font-size: 23px;
+    margin: 1em 0;
+    text-align: center;
+
+}
+
+.subTitle {
+    color: #B2BDC9;
+    width: 300px;
+    text-align: center;
+
+}
+
+.iconCircle {
+    background: #FDEDED;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+
+}
+
+.footer {
+    color: var(--javolin-text-lt-gray);
+    font-size: 17px;
+    margin: 1em 0 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pinInput {
+    display: grid;
+    grid-template-columns: repeat(6 1fr);
+    column-gap: 2px;
+    margin: 2em 0;
+}
+
+.star_bg {
+    background: url('../../assets/stars.svg') top no-repeat;
+}
+
+.popupModals {
+    top: 250px;
+}
+
+@media(max-width: 769px) {
+    .popupModals {
+        top: 100px;
+    }
+
+}

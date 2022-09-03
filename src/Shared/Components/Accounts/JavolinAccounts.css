@@ -1,0 +1,67 @@
+.cardTile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2em;
+}
+
+.searchInput {
+    margin: 1em;
+    width: 90%;
+    height: 50px;
+}
+
+.cardRightHem {
+    display: flex;
+    flex-direction: row;
+}
+
+.lastSeen {
+    font-size: 13px;
+    color: var(--javolin-text-lt-gray);
+}
+
+.cardDesign {
+    margin-left: 0.5em;
+}
+
+.cardName{
+    margin-right: 1em;
+}
+.accountNumber{
+    font-size: 10;
+    color: rgb(145, 145, 145);
+}
+.source {
+    height: 60px;
+    width: 400px;
+    padding: 14.1px 11px;
+    line-height: 1.5715;
+    background-color: #F7F7F7;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.source:hover {
+    border: 1px solid var(--javolin-blue-color);
+}
+
+.cardLeftHemSelected {
+    line-height: 20px;
+}
+
+.sourcePH {
+    color: var(--javolin-text-dk-gray);
+}
+
+.c_select.ant-select-single.ant-select-show-arrow > .ant-select-selector > .ant-select-selection-item > .carTitle {
+    height: 100% !important;
+    font-size: 40px
+}
+
+.selectedCard {
+    height: 100%;
+}

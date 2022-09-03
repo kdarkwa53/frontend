@@ -1,0 +1,44 @@
+.card {
+    background-color: #D4DFF7;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    height: fit-content;
+    width: 100%;
+    margin: 1em 0;
+    max-height: 88px;
+
+
+}
+
+.arrow {
+    flex-basis: 10%
+}
+.iconBg {
+    background: #ffffff;
+    border-radius: 100%;
+    padding: 7px;
+}
+
+.labelDiv {
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+
+    color: #000C26;
+}
+
+.subText {
+    font-size: 13px;
+    line-height: 16px;
+    color: #5D6066;
+}
+
+.textArea {
+    margin-left: 2em;
+    flex-basis: 70%;
+    overflow: auto;
+}

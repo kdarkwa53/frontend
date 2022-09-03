@@ -1,0 +1,86 @@
+/* Profile layout css */
+
+
+.avatarSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -10em;
+    z-index: 4;
+}
+
+.profileSumName {
+    color: var(--javolin-text-dk-gray);
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 28px
+}
+.profileSumEmail {
+    color: var(--javolin-text-lt-gray);
+    font-size: 17px;
+    line-height: 21px
+}
+
+.subMsg{
+    margin: 1em 0em 3em;
+    font-size: 13px;
+    color: gray;
+}
+
+.popupModals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changeProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editAvatar {
+    background-color: #ffffff;
+    position: relative;
+    right: 15%;
+    bottom: -40px;
+    box-shadow: 0 4px 6px rgba(32, 54, 72, 0.05);
+}
+
+.profileSection,
+.editSection {
+
+    background: #ffffff;
+    padding: 2em;
+    margin-top: 2em;
+}
+
+.editTitle {
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 28px;
+    color: var(--javolin-blue-color);
+    margin: 1em 0;
+}
+
+.inputTitle {
+    margin-top: 1em;
+    font-weight: 700;
+}
+
+.editFooter {
+    margin: 1em 0;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 21px;
+    color: var(--javolin-blue-color);
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 769px) {
+.avatarSection{
+    flex-direction: column;
+}
+
+}
