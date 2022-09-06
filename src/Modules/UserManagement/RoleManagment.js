@@ -1,6 +1,7 @@
 import { Tabs, Layout, Row, ConfigProvider, Table, Button, Tag, Form, Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
 import RoleItem from "./RoleItem";
 import Styles from "./UserMgt.module.css"
@@ -11,6 +12,9 @@ import Styles from "./UserMgt.module.css"
 const RoleManagement = () => {
     const { TabPane } = Tabs;
     const { Content } = Layout;
+
+    const perm = useSelector((state)=> state.userMgt.permissions)
+
 
 
     const customizeRenderEmpty = () => (
@@ -70,6 +74,8 @@ const RoleManagement = () => {
 
     }]
 
+
+
     const permissions = ['Create user', 'Edit user', 'Delete User', 'Apply service', 'Create Wallet', 'Edit Wallet']
     const [form] = useForm();
     return (
@@ -120,9 +126,9 @@ const RoleManagement = () => {
                                     <div className={Styles.title}>Role Permissions</div>
                                     
                                     {
-                                        permissions.map((per)=>{
+                                        Object.values(perm).map((per)=>{
                                             return(
-                                                <RoleItem name={per} />
+                                                <RoleItem key={per.id} name={per.name} />
                                             )
                                         })
                                     }

@@ -30,7 +30,8 @@ SAVE_FUNDING_SOURCE_REQUEST,
     ADD_DEFAULT_CURRENCIES,
     SETCURRENT_ROUTE,
     GET_RULES_CURRENCIES,
-    ADD_WALLET
+    ADD_WALLET,
+    
 
 
 } from "./types"
@@ -48,6 +49,7 @@ const INITIAL_STATE_2 = {
     settingQuestion: false,
     userSecurityQuestions:{},
     fundingSource:[],
+    gettingPermissions: false,
     verifyingIdentity: false,
     current_route: "/"
 }
@@ -79,6 +81,7 @@ export const pinReducer = (state = INITIAL_STATE, action = { type: "" }) => {
 export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
     const { type } = action;
     switch (type) {
+        
         case SETCURRENT_ROUTE:
             return {
                 ...state,

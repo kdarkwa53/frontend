@@ -30,7 +30,8 @@ import {
     VERIFY_IDENTITY_REQUEST,
     ADD_DEFAULT_CURRENCIES,
     SETCURRENT_ROUTE,
-    GET_RULES_CURRENCIES
+    GET_RULES_CURRENCIES,
+  
 } from "./types"
 
 import {
@@ -127,6 +128,8 @@ export const getCountries = () => {
         }
     };
 }
+
+
 
 export const getDefaultCurrencies = () => {
 

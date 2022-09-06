@@ -12,6 +12,7 @@ import profileReducer from "../Modules/Profile/duck/reducer"
 import prepaidReducer from "../Modules/Prepaid/duck/reducer"
 import kycReducer from "../Modules/BusinessKYC/duck/reducer"
 import storage from "redux-persist/lib/storage";
+import userMgtReducer from "../Modules/UserManagement/duck/reducer"
 import { SIGNOUT_REQUEST } from "../Modules/Login/duck/action";
 
 
@@ -29,7 +30,8 @@ const appReducer = combineReducers({
   profile: profileReducer,
   resources: resources,
   prepaid: prepaidReducer,
-  kyc: kycReducer
+  kyc: kycReducer,
+  userMgt: userMgtReducer
 });
 
 const rootReducer = (state, action) => {

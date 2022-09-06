@@ -26,7 +26,7 @@ const INITIAL_STATE = {
   loggingIn: false,
   loginSuccess: false,
   verifying: false,
-  userType: "individual",
+  userType: "business",
   recoverpass: false,
   signingOut: false
 };
