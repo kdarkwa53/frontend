@@ -50,6 +50,7 @@ import { getRulesCurrencies } from "../duck/action";
 import { useDispatch } from "react-redux";
 import ForexSend from "../../../Modules/TransferMoney/ForexSend";
 import SendMoneyForex from "../../../Modules/TransferMoney/SendMoneyForex";
+import PendingRequests from "../../../Modules/UserManagement/PendingRequests";
 export default function BusinessRoutes() {
     
     const dispatch = useDispatch()
@@ -92,6 +93,7 @@ export default function BusinessRoutes() {
                 <LayoutView primary path="/applications" component={MyApplications} />
                 <LayoutView primary path="/user-management" title="User Management" component={UserManagement} />
                 <LayoutView primary path="/role-management" title="User Management" component={RoleManagement} />
+                <LayoutView primary path="/business/requests" title="Pending Requests" component={PendingRequests} />
                 <DashboardLayoutRoute RightSider={BusRightSider} title="Portfolio" path="/business/portfolio" component={BusinessProducts} />
                 <MainLayoutRoute path="/prepaid/apply/:id" component={PrepaidApplication} />
                 <DashboardLayoutRoute RightSider={WalletRightSider} menuRoute="/business/wallet" title="Wallet" path="/business/wallet" component={WalletPage} />

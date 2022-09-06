@@ -1,19 +1,25 @@
-import { Button, Form, Input, Tabs, Layout, ConfigProvider, Table, Row, Tag, Col, Select} from "antd";
+import { Button, Form, Input, Tabs, Layout, ConfigProvider, Table, Row, Tag, Col, Select } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
+import React, { useState } from "react";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { EyeOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addingUser } from "./duck/action";
 
 
 const UserManagement = () => {
     const { TabPane } = Tabs;
     const { Content } = Layout;
     const [form] = useForm();
-    const {Option} = Select
+    const { Option } = Select
+    const [activeTab, setActiveTab] = useState("1")
 
-    const roles = useSelector((state)=>state.userMgt.roles)
+    const roles = useSelector((state) => state?.userMgt?.roles)
+    const users = useSelector((state) => state?.userMgt?.users)
+    const rLoading = useSelector((state) => state?.userMgt?.addingUser)
+    const dispatch = useDispatch()
+
     let _roles = roles ? roles : {}
 
     const customizeRenderEmpty = () => (
@@ -21,6 +27,9 @@ const UserManagement = () => {
             <p>You haven’t added any users yet. Add new</p>
         </div>
     );
+    const handleTabChange = (e)=>{
+        setActiveTab(e)
+    }
 
     const columns = [
         {
@@ -56,7 +65,7 @@ const UserManagement = () => {
                     <>
 
                         <Tag style={{ color: '#071CD4', padding: "10px" }} color="#E1E4FE" >
-                            <EyeOutlined/> 
+                            <EyeOutlined />
                         </Tag>
 
                         <Tag style={{ color: '#008000', padding: "10px" }} color="#E0FFE0" >
@@ -71,24 +80,30 @@ const UserManagement = () => {
         },
     ];
 
+    let tableData = users
+        ? Object.values(users).map((user) => {
+            return {
+                key: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                phone: user.phone,
+                role: user.role
+            };
+        })
+        : [];
 
-    const data = [
-        {
-        first_name: 'Benjamin',
-        last_name: 'Asamoah',
-        email: 'benasa@gmail.com',
-        phone: '+2332909892',
-        role: 'Admin'
-        },
-        {
-            first_name: 'Evans',
-            last_name: 'Asante',
-            email: 'benasa@gmail.com',
-            phone: '+2332909892',
-            role: 'Admin'
-        },
 
-]
+    const onFinish = (val) => {
+        console.log(val)
+        dispatch(addingUser(val)).then(()=>{
+            setActiveTab("1")
+            form.resetFields()
+        })
+        form.resetFields()
+
+    }
+
     return (
         <>
             <Content
@@ -100,12 +115,12 @@ const UserManagement = () => {
                 }}
             >
                 <Row>
-                    <Tabs defaultActiveKey="1">
+                    <Tabs activeKey={activeTab} onChange={handleTabChange} >
                         <TabPane tab="User List" key="1">
                             <ConfigProvider renderEmpty={customizeRenderEmpty}>
                                 <Table
                                     columns={columns}
-                                    dataSource={data}
+                                    dataSource={tableData}
                                     pagination={{ pageSize: 50 }}
                                     scroll={{ y: 600 }}
                                 />
@@ -117,7 +132,7 @@ const UserManagement = () => {
                                 name="profile_form"
                                 style={{ width: "100%" }}
                                 form={form}
-                                onFinish={''}
+                                onFinish={onFinish}
                             >
                                 <Row gutter={[16, 16]}>
                                     <Col>
@@ -147,7 +162,7 @@ const UserManagement = () => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                                
+
                                 <Row gutter={[16, 16]}>
                                     <Col>
                                         <div className={Styles.title}>Email</div>
@@ -190,8 +205,8 @@ const UserManagement = () => {
                                         >
                                             <Select style={{ width: "100%" }} placeholder='Select role' size="large" name="country" >
                                                 {
-                                                    Object.values(_roles)?.map((role)=>{
-                                                        return(
+                                                    Object.values(_roles)?.map((role) => {
+                                                        return (
                                                             <Option key={role.id}> {role.name}</Option>
                                                         )
                                                     })
@@ -205,8 +220,7 @@ const UserManagement = () => {
                                     htmlType="submit"
                                     size="large"
                                     style={{ marginTop: "3em", padding: "5px 50px" }}
-                                // disabled={disableButton}
-                                // loading={profile.updatingProfile}
+                                    loading={rLoading}
                                 >
                                     Add User
                                 </Button>

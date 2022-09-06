@@ -12,7 +12,7 @@ import  IdleTimer  from "../../../helpers/IdleTimer";
 import { userTimerOut } from "../../../Modules/Login/duck/action";
 import { useHistory } from "react-router";
 import Cookies from "js-cookie";
-import {getPermissions, getRoles} from "../../../Modules/UserManagement/duck/action"
+import {getPermissions, getRoles, getUsers} from "../../../Modules/UserManagement/duck/action"
 
 import BusinessRoutes from "./BusinessRoutes";
 import CustomerRoutes from "./CustomerRoutes";
@@ -37,6 +37,7 @@ export default function DefaultLayout() {
     dispatch(getPermissions())
     dispatch(getWallets())
     dispatch(getRoles())
+    dispatch(getUsers())
     // const timer = new IdleTimer({
     //   timeout: 600,
     //   onTimeout: () => {

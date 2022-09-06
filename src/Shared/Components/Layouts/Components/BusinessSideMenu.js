@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BriefCase, WalletIcon, Chart2, LogOutIcon, People, ShieldSecurityIcon, UserTag2 } from "../../JavIcons"
+import { BriefCase, WalletIcon, Chart2, LogOutIcon, People, ShieldSecurityIcon, UserTag2, Radar } from "../../JavIcons"
 import { Link } from "react-router-dom";
 import { Menu, Divider } from "antd";
 import Styles from "../../Menu/Menu.module.css"
@@ -109,6 +109,12 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 onClick={(e) => handleMenuClick("/business/profile")}
                 icon={<Chart2 className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={text.PROFILE}
+            />
+            <SideMenuItem
+                style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
+                onClick={(e) => handleMenuClick("/business/requests")}
+                icon={<Radar className={Styles.menuIcon} width="1.5em" height="1.5em" />}
+                text={"Pending Requests"}
             />
             
      
