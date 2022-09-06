@@ -4,6 +4,7 @@ import React from "react";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { EyeOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 
 const UserManagement = () => {
@@ -11,6 +12,9 @@ const UserManagement = () => {
     const { Content } = Layout;
     const [form] = useForm();
     const {Option} = Select
+
+    const roles = useSelector((state)=>state.userMgt.roles)
+    let _roles = roles ? roles : {}
 
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
@@ -185,8 +189,13 @@ const UserManagement = () => {
                                             ]}
                                         >
                                             <Select style={{ width: "100%" }} placeholder='Select role' size="large" name="country" >
-                                                <Option value="Ghana">Admin</Option>
-                                                <Option value="Ghana">Support Admin</Option>
+                                                {
+                                                    Object.values(_roles)?.map((role)=>{
+                                                        return(
+                                                            <Option key={role.id}> {role.name}</Option>
+                                                        )
+                                                    })
+                                                }
                                             </Select>
                                         </Form.Item>
                                     </Col>
