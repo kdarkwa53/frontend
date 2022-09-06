@@ -1,8 +1,9 @@
 import { Tabs, Layout, Row, ConfigProvider, Table, Button, Tag, Form, Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
+import { addingRole } from "./duck/action";
 import RoleItem from "./RoleItem";
 import Styles from "./UserMgt.module.css"
 
@@ -12,22 +13,43 @@ import Styles from "./UserMgt.module.css"
 const RoleManagement = () => {
     const { TabPane } = Tabs;
     const { Content } = Layout;
+    const [selectedPerm, setSelectedPerm] = useState({})
+    const [activeTab, setActiveTab] = useState("1")
 
     const perm = useSelector((state)=> state.userMgt.permissions)
+    const rLoading = useSelector((state)=> state.userMgt.addingRole)
+    const roles = useSelector((state)=> state.userMgt.roles)
+    const dispatch = useDispatch()
 
 
-
+const handleTabChange = (e)=>{
+    setActiveTab(e)
+}
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
             <p>You haven’t added any users yet. Add new</p>
         </div>
     );
 
+    const onFinish = (val)=>{
+        let details = {
+            ...val,
+            permissions: `[${Object.values(selectedPerm).toString()}]`
+        }
+        dispatch(addingRole(details)).then(()=>{
+            form.resetFields()
+            setActiveTab("1")
+        })
+       
+    }
+
+    
+
     const columns = [
         {
             title: "Role Name",
-            dataIndex: "role",
-            key: "role",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: "Role Permissions",
@@ -37,8 +59,9 @@ const RoleManagement = () => {
                 return (
                     permissions.map((per)=>{
                         return(
-                            <Tag style={{ color: '#000C26', marginTop:"5px", padding: "10px" }} color='#EBEDF1'  key={per}>
-                                {per}
+
+                            <Tag style={{ color: '#000C26', marginTop:"5px", padding: "10px" }} color='#EBEDF1'  key={per.id}>
+                                {per.name}
                             </Tag>
                         )
                     })
@@ -74,9 +97,19 @@ const RoleManagement = () => {
 
     }]
 
+    let tableData = roles
+    ? Object.values(roles).map((role) => {
+        return {
+            key: role.id,
+            name: role.name,
+            permissions: role.permissions
+        };
+    })
+    : [];
 
 
-    const permissions = ['Create user', 'Edit user', 'Delete User', 'Apply service', 'Create Wallet', 'Edit Wallet']
+    const rolesData = roles ? roles: {}
+
     const [form] = useForm();
     return (
         <>
@@ -89,12 +122,12 @@ const RoleManagement = () => {
                     }}
                 >
                     <Row>
-                        <Tabs defaultActiveKey="1">
+                        <Tabs activeKey={activeTab} onChange={handleTabChange}>
                             <TabPane tab="Role List" key="1">
                             <ConfigProvider renderEmpty={customizeRenderEmpty}>
                                 <Table
                                     columns={columns}
-                                    dataSource={data}
+                                    dataSource={tableData}
                                     pagination={{ pageSize: 50 }}
                                     scroll={{ y: 600 }}
                                 />
@@ -106,12 +139,12 @@ const RoleManagement = () => {
                                 name="profile_form"
                                 style={{ width: "100%" }}
                                 form={form}
-                                onFinish={''}
+                                onFinish={onFinish}
                             >
                                 <div>
                                     <div className={Styles.title}>Role Name</div>
                                     <Form.Item
-                                        name="role"
+                                        name="name"
                                         rules={[
                                             {
                                                 required: true,
@@ -128,7 +161,7 @@ const RoleManagement = () => {
                                     {
                                         Object.values(perm).map((per)=>{
                                             return(
-                                                <RoleItem key={per.id} name={per.name} />
+                                                <RoleItem selectedPerm={selectedPerm} setSelectedPerm={setSelectedPerm} key={per.id} perm={per} />
                                             )
                                         })
                                     }
@@ -141,7 +174,7 @@ const RoleManagement = () => {
                                     size="large"
                                     style={{ marginTop: "3em", padding: "5px 50px" }}
                                     // disabled={disableButton}
-                                    // loading={profile.updatingProfile}
+                                    loading={rLoading}
                                 >
                                     Add Role
                                 </Button>

@@ -3,11 +3,21 @@ import { useState } from "react"
 
 
 
-const RoleItem = ({name})=>{
-
+const RoleItem = ({perm, selectedPerm, setSelectedPerm})=>{
     const [select, setSelect] = useState(false)
 
-    const handleClick = ()=>{
+    const handleClick = (e)=>{
+        if(e in selectedPerm){
+            var perms = selectedPerm
+            delete perms[e]
+            setSelectedPerm(perms)
+        }else{
+        setSelectedPerm({
+            ...selectedPerm,
+            [e]:e
+        })
+        console.log(selectedPerm)
+        }
         setSelect(!select)
     }
 
@@ -31,8 +41,8 @@ const RoleItem = ({name})=>{
         }
     }
     return (
-        <Tag style={select ? { ...selectStyle.clicked } : { ...selectStyle.default }} onClick={handleClick} color={select ? '#D4DFF7': '#EBEDF1'} key={name}>
-            {name}
+        <Tag style={select ? { ...selectStyle.clicked } : { ...selectStyle.default }} onClick={()=>handleClick(perm.id)} color={select ? '#D4DFF7': '#EBEDF1'} key={perm?.id}>
+            {perm?.name}
         </Tag>
     )
 }
