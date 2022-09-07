@@ -176,7 +176,8 @@ const SendMoneyForex = (props) => {
                     form.setFieldsValue({
                         beneficiary: val?.recipient?.amount,
                         quote_id: val?.quoteId,
-                        rate: `${val?.sender?.currency} 1 / ${val?.recipient?.currency} ${val?.rate}`
+                        rate: `${val.javolin_rate[0]} / ${val.javolin_rate[1]}`
+                        // rate: `${val?.sender?.currency} 1 / ${val?.recipient?.currency} ${val?.rate}`
                     })
                     setSettlementDetails(val)
                     setDisCount(false)
@@ -197,7 +198,8 @@ const SendMoneyForex = (props) => {
                     form.setFieldsValue({
                         amount: val?.sender?.amount,
                         quote_id: val?.quoteId,
-                        rate: `${val?.recipient?.currency} 1 / ${val?.sender?.currency} ${val?.rate}`
+                        rate: `${val.javolin_rate[0]} / ${val.javolin_rate[1]}`
+                        // rate: `${val?.recipient?.currency} ${val.javolin_rate[0]} / ${val?.sender?.currency} ${val.javolin_rate[1]}`
                     })
                     setSettlementDetails(val)
                     setDisCount(false)
