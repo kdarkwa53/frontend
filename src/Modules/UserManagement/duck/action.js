@@ -23,7 +23,10 @@ import {
   GET_PENDING_TRANX_ERROR,
   APPROVE_TRANX_REQUEST,
   APPROVE_TRANX_SUCCESS,
-  APPROVE_TRANX_ERROR
+  APPROVE_TRANX_ERROR,
+  DECLINE_TRANX_SUCCESS,
+  DECLINE_TRANX_REQUEST,
+  DECLINE_TRANX_ERROR
 } from "./types"
 
 
@@ -223,7 +226,7 @@ export const getPendingTransactions = () => {
         });
         try {
             const { data } = await axios.get(
-                `${REACT_APP_BASE_API_URL}/${userType}/accounts`,
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions`,
                 authHeader
             );
   
@@ -248,7 +251,7 @@ export const getPendingTransactions = () => {
     };
   }
   
-export const approveTransaction = (details) => {
+export const approveTransaction = (id) => {
     const userType = getUserType()
   
     return async (dispatch) => {
@@ -257,8 +260,7 @@ export const approveTransaction = (details) => {
         });
         try {
             const { data } = await axios.post(
-                `${REACT_APP_BASE_API_URL}/${userType}/accounts`,
-                details,
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/approve`,
                 authHeader
             );
   
@@ -284,4 +286,41 @@ export const approveTransaction = (details) => {
         }
     };
   }
+
+  export const declineTransaction = (id) => {
+    const userType = getUserType()
+  
+    return async (dispatch) => {
+        dispatch({
+            type: DECLINE_TRANX_REQUEST,
+        });
+        try {
+            const { data } = await axios.post(
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/decline`,
+                authHeader
+            );
+  
+            dispatch({
+                type: DECLINE_TRANX_SUCCESS,
+                data : normalizeOneIdData(data)
+            });
+  
+            dispatch(showSuccessNotification('Approved successfully'))
+        } catch (error) {
+            dispatch({
+                type: DECLINE_TRANX_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Check your internet and try again")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+            }
+        }
+    };
+  }
+
   

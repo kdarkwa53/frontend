@@ -1,3 +1,4 @@
+import { DECLINE_MORTGAGE_REQUEST } from "../../MyApplications/duck/type";
 import {
   GETTING_PERMISSIONS_REQUEST,
   GETTING_PERMISSIONS_SUCCESS,
@@ -19,7 +20,10 @@ import {
   GET_PENDING_TRANX_ERROR,
   APPROVE_TRANX_REQUEST,
   APPROVE_TRANX_SUCCESS,
-  APPROVE_TRANX_ERROR
+  APPROVE_TRANX_ERROR,
+  DECLINE_TRANX_SUCCESS,
+  DECLINE_TRANX_REQUEST,
+  DECLINE_TRANX_ERROR
 } from "./types"
 
 
@@ -74,6 +78,21 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
           ...state,
           approveTranx: false,
         };
+        case DECLINE_TRANX_REQUEST:
+          return {
+            ...state,
+            approveTranx: true,
+          };
+        case DECLINE_TRANX_SUCCESS:
+          return {
+            ...state,
+            approveTranx: false,
+          };
+        case DECLINE_TRANX_ERROR:
+          return {
+            ...state,
+            approveTranx: false,
+          };
     case ADDING_USER_REQUEST:
       return {
         ...state,

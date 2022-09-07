@@ -33,15 +33,11 @@ const UserManagement = () => {
 
     const columns = [
         {
-            title: "First Name",
-            dataIndex: "first_name",
-            key: "first_name",
+            title: "Full Name",
+            dataIndex: "full_name",
+            key: "full_name",
         },
-        {
-            title: "Last Name",
-            dataIndex: "last_name",
-            key: "last_name",
-        },
+        
         {
             title: "Email",
             dataIndex: "email",
@@ -52,11 +48,7 @@ const UserManagement = () => {
             dataIndex: "phone",
             key: "phone",
         },
-        {
-            title: "Role",
-            dataIndex: "role",
-            key: "role",
-        },
+       
         {
             title: "Action",
             key: "action",
@@ -84,11 +76,10 @@ const UserManagement = () => {
         ? Object.values(users).map((user) => {
             return {
                 key: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name,
+                full_name: user.full_name,
                 email: user.email,
-                phone: user.phone,
-                role: user.role
+                phone: user.phone_number,
+                
             };
         })
         : [];

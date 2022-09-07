@@ -1,8 +1,9 @@
-import { Layout, Row, ConfigProvider, Table, Tag } from "antd";
+import { Layout, Row, ConfigProvider, Table, Tag, Spin } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
+import { approveTransaction, declineTransaction } from "./duck/action";
 
 
 
@@ -12,7 +13,11 @@ const PendingRequests = () => {
     const { Content } = Layout;
    
 
-    const roles = useSelector((state)=> state.userMgt.roles)
+    const transactions = useSelector((state)=> state.userMgt.pending_tranx)
+    const users = useSelector((state)=> state?.userMgt?.users)
+    const loading = useSelector((state)=> state?.userMgt?.approveTranx)
+
+    const dispatch = useDispatch()
   
 
 
@@ -22,32 +27,41 @@ const PendingRequests = () => {
         </div>
     );
 
+
+    const handleDecline = (e)=>{
+        console.log(e)
+        dispatch(approveTransaction(e))
+    }
   
+    const handleApprove = (e)=>{
+        console.log(e)
+        dispatch(declineTransaction(e))
+    }
 
     
 
     const columns = [
+       
         {
-            title: "Role Name",
-            dataIndex: "name",
-            key: "name",
+            title: "Module",
+            dataIndex: "module",
+            key: "module",
         },
         {
-            title: "Role Permissions",
-            dataIndex: "permissions",
-            key: "permissions",
-            render: (permissions) => {
-                return (
-                    permissions.map((per)=>{
-                        return(
-
-                            <Tag style={{ color: '#000C26', marginTop:"5px", padding: "10px" }} color='#EBEDF1'  key={per.id}>
-                                {per.name}
-                            </Tag>
-                        )
-                    })
-                );
-            },
+            title: "Transaction ID",
+            dataIndex: "transaction_id",
+            key: "transaction_id",
+        },
+        {
+            title: "User",
+            dataIndex: "user",
+            key: "user",
+            // render: (user) => {
+            //     return (
+            //         users[user].name
+            //     );
+            // },
+        
         },
         {
             title: "Action",
@@ -56,12 +70,13 @@ const PendingRequests = () => {
                 return (
                     <>
                     
-                        <Tag style={{ color: '#008000', padding: "10px", cursor:"pointer" }}  color="#E0FFE0" >
+                        <Tag onClick={()=>handleDecline('1')} style={{ color: '#008000', padding: "10px", cursor:"pointer" }}  color="#E0FFE0" >
                             Approve
                         </Tag>
-                        <Tag style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
+                        <Tag onClick={()=>handleApprove('2')} style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
                             Decline 
                         </Tag>
+                        <Spin spinning={false}/>
                     </>
                 );
             },
@@ -76,12 +91,13 @@ const PendingRequests = () => {
 
     }]
     
-    let tableData = roles
-    ? Object.values(roles).map((role) => {
+    let tableData = transactions
+    ? Object.values(transactions).map((trans) => {
         return {
-            key: role.id,
-            name: role.name,
-            permissions: role.permissions
+            key: trans.id,
+            user: trans.user_id,
+            module: trans.module,
+            transaction_id: trans.transaction_id,
         };
     })
     : [];

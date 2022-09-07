@@ -64,11 +64,11 @@ const SpotRateCalculator = () => {
                     }
                 
                 </div>
-                <div className={Styles.baseCurrency}>{  rate?`${rate?.recipient?.currency} 1 / ${rate?.sender?.currency} ${rate?.rate}`: ''}</div>
+                <div className={Styles.baseCurrency}>{  rate?`${rate?.javolin_rate[1]} / ${rate?.javolin_rate[0]}`: ''}</div>
             </div>
-            {showTimer ? (
+            {/* {showTimer ? (
                 <Timer reset={expireRate} />
-            ) : ""}
+            ) : ""} */}
             <div style={{marginTop: "1em"}}>
                 <Form
                 form={form}

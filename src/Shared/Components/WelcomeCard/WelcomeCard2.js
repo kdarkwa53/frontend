@@ -1,7 +1,7 @@
 
 import { useHistory } from "react-router"
 import "./WelcomeCard.css"
-import Image from "../../../assets/card_girl.png"
+import Image from "../../../assets/forex_banner.png"
 import { useSelector } from "react-redux"
 
 const WelcomeCard2 = ({ name }) => {
@@ -9,15 +9,16 @@ const WelcomeCard2 = ({ name }) => {
     const history = useHistory()
     return (
          <>
-            <div onClick={() => history.push("/prepaid/apply/1")} className="prepaid-card" >
+            <div onClick={() => history.push("/business/forex")} className="prepaid-card" >
                 <div className="messageContent">
                     <div className="title">
-                       {text.GET_PREPAID}
+                    Get Started with Forex
                     </div>
                     <div className="desc">
-                        {text.GET_PREPAID_MSG}                   </div>
+                    The foreign exchange marketplace at your convience                  
+                        </div>
                     <button className="bannerBtn">
-                        {text.APPLY_NOW}
+                        Get Started
                     </button>
                 </div>
                 <div className="image"  >
