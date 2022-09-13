@@ -1,4 +1,4 @@
-import { Layout, Col, Input, Select, Form, Button, Row, } from 'antd';
+import { Layout, Col, Input,InputNumber, Select, Form, Button, Row, } from 'antd';
 import React, {useState } from 'react';
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -176,7 +176,7 @@ const SendMoneyForex = (props) => {
                     form.setFieldsValue({
                         beneficiary: val?.recipient?.amount,
                         quote_id: val?.quoteId,
-                        rate: `${val.javolin_rate[0]} / ${val.javolin_rate[1]}`
+                        rate: `${Number(val?.javolin_rate[0]).toFixed(4)} / ${Number(val?.javolin_rate[1]).toFixed(4)}`
                         // rate: `${val?.sender?.currency} 1 / ${val?.recipient?.currency} ${val?.rate}`
                     })
                     setSettlementDetails(val)
@@ -334,7 +334,9 @@ const SendMoneyForex = (props) => {
                                                         }
                                                     ]}
                                                 >
-                                                    <Input onChange={handleAmountChange} prefix={currencies[sourceWallet?.currency_id]?.ISO} width="100%" size="large" name='amount' type="number" />
+                                                    <InputNumber style={{width: "100%"}}
+                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                 onChange={handleAmountChange} prefix={currencies[sourceWallet?.currency_id]?.ISO} width="100%" size="large" name='amount'/>
                                                 </Form.Item>
                                             </div>
                                         </div>
@@ -351,7 +353,9 @@ const SendMoneyForex = (props) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            <Input onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
+                                                           <InputNumber style={{width: "100%"}}
+                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                 onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
                                                         </Form.Item>
                                                     </Col>
                                                 </Row>

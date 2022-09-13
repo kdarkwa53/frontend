@@ -1,3 +1,4 @@
+import { removeByKey } from "../../../helpers/utils";
 import { DECLINE_MORTGAGE_REQUEST } from "../../MyApplications/duck/type";
 import {
   GETTING_PERMISSIONS_REQUEST,
@@ -67,10 +68,7 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
       case APPROVE_TRANX_SUCCESS:
         return {
           ...state,
-          pending_tranx: {
-            ...state.pending_tranx,
-            ...action.data
-          },
+          pending_tranx: removeByKey(state?.pending_tranx, action.data),
           approveTranx: false,
         };
       case APPROVE_TRANX_ERROR:
@@ -86,7 +84,8 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
         case DECLINE_TRANX_SUCCESS:
           return {
             ...state,
-            approveTranx: false,
+            pending_tranx: removeByKey(state?.pending_tranx, action.data),
+          approveTranx: false,
           };
         case DECLINE_TRANX_ERROR:
           return {

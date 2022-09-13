@@ -1,4 +1,4 @@
-import { Layout, Col, Input, Select, Form, Button, Divider } from 'antd';
+import { Layout, Col, Input,InputNumber, Select, Form, Button, Divider } from 'antd';
 import React, {useRef, useState } from 'react';
 import { ArrowDownCircle } from "../../Shared/Components/JavIcons"
 import Styles from "./TransferMoney.module.css"
@@ -87,6 +87,7 @@ const SendMoney = (props) => {
                         <div className={Styles.inputContainer}>
                             <Form.Item
                                 name="amount"
+                                
                                 rules={[
                                     { required: true },
                                     {
@@ -95,7 +96,8 @@ const SendMoney = (props) => {
                                     }
                                 ]}
                             >
-                                <Input prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
+                               <InputNumber style={{width: "100%"}}
+                                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
                             </Form.Item>
                         </div>
                     </div>

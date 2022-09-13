@@ -35,7 +35,7 @@ const WalletRightSider = () => {
 
                 </div>
            
-                <CurrencyConverter />
+                {/* <CurrencyConverter /> */}
                 <SpotRateCalculator/>
             </div>
         </aside>

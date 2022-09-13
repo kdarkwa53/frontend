@@ -38,7 +38,7 @@ import {REACT_APP_BASE_API_URL, getUserType } from "../../../helpers/contants";
 import {
   authHeader
 } from "../../../helpers/contants"
-import { arrayToObjectByID, normalizeIdArrayData, normalizeIdData, normalizeOneIdData } from "../../../helpers/utils";
+import { arrayToObjectByID, normalizeIdArrayData, normalizeIdData, normalizeOneIdData, spiltErrors } from "../../../helpers/utils";
 import { showErrorNotification, showSuccessNotification } from "../../../Shared/actions/alert.actions";
 
 export const getPermissions = () => {
@@ -260,13 +260,13 @@ export const approveTransaction = (id) => {
         });
         try {
             const { data } = await axios.post(
-                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/approve`,
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/approve`, {id: id},
                 authHeader
             );
   
             dispatch({
                 type: APPROVE_TRANX_SUCCESS,
-                data : normalizeOneIdData(data)
+                data : id
             });
   
             dispatch(showSuccessNotification('Approved successfully'))
@@ -280,7 +280,7 @@ export const approveTransaction = (id) => {
                 );
             } else {
                 dispatch(
-                    showErrorNotification(error?.response?.data?.message)
+                    showErrorNotification(error?.response?.data?.message, spiltErrors(error?.errors))
                 );
             }
         }
@@ -296,16 +296,16 @@ export const approveTransaction = (id) => {
         });
         try {
             const { data } = await axios.post(
-                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/decline`,
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/decline`, {id: id},
                 authHeader
             );
   
             dispatch({
                 type: DECLINE_TRANX_SUCCESS,
-                data : normalizeOneIdData(data)
+                data : id
             });
   
-            dispatch(showSuccessNotification('Approved successfully'))
+            dispatch(showSuccessNotification('Declined successfully'))
         } catch (error) {
             dispatch({
                 type: DECLINE_TRANX_ERROR,

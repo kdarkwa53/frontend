@@ -1,5 +1,5 @@
 
-import { Button, Col, Form, Input, Row, Select } from "antd"
+import { Button, Col, Form, InputNumber, Row, Select } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -64,7 +64,7 @@ const SpotRateCalculator = () => {
                     }
                 
                 </div>
-                <div className={Styles.baseCurrency}>{  rate?`${rate?.javolin_rate[1]} / ${rate?.javolin_rate[0]}`: ''}</div>
+                <div className={Styles.baseCurrency}>{  rate?`${Number(rate?.javolin_rate[1]).toFixed(4)} / ${Number(rate?.javolin_rate[0]).toFixed(4)}`: ''}</div>
             </div>
             {/* {showTimer ? (
                 <Timer reset={expireRate} />
@@ -136,7 +136,10 @@ const SpotRateCalculator = () => {
                                 label={`Amount ${buyCurrency}`}
                                 name={"value"}
                             >
-                                <Input/>
+                                <InputNumber
+                                style={{width: "100%"}}
+                                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>

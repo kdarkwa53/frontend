@@ -215,6 +215,12 @@ export const statusTagColor = (msg) => {
     }
 }
 
+export const  removeByKey = (myObj, deleteKey) =>{
+    delete myObj[deleteKey]
+
+    return myObj
+  }
+
 export const spiltErrors = (sample) => {
     let message = "";
     if (sample) {

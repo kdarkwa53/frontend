@@ -23,7 +23,7 @@ const PendingRequests = () => {
 
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
-            <p>You haven’t added any users yet. Add new</p>
+            <p>You don't have any pending transactions</p>
         </div>
     );
 
@@ -66,17 +66,17 @@ const PendingRequests = () => {
         {
             title: "Action",
             key: "action",
-            render: () => {
+            render: (action) => {
                 return (
                     <>
                     
-                        <Tag onClick={()=>handleDecline('1')} style={{ color: '#008000', padding: "10px", cursor:"pointer" }}  color="#E0FFE0" >
+                        <Tag onClick={()=>handleDecline(action?.key)} style={{ color: '#008000', padding: "10px", cursor:"pointer" }}  color="#E0FFE0" >
                             Approve
                         </Tag>
-                        <Tag onClick={()=>handleApprove('2')} style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
+                        <Tag onClick={()=>handleApprove(action?.key)} style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
                             Decline 
                         </Tag>
-                        <Spin spinning={false}/>
+                        <Spin spinning={loading}/>
                     </>
                 );
             },
@@ -98,6 +98,7 @@ const PendingRequests = () => {
             user: trans.user_id,
             module: trans.module,
             transaction_id: trans.transaction_id,
+            action: trans.id
         };
     })
     : [];
