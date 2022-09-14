@@ -53,6 +53,16 @@ const PendingRequests = () => {
             key: "transaction_id",
         },
         {
+            title: "Amount",
+            dataIndex: "amount",
+            key: "amount",
+        },
+        {
+            title: "Account Number",
+            dataIndex: "account_number",
+            key: "account_number",
+        },
+        {
             title: "User",
             dataIndex: "user",
             key: "user",
@@ -98,6 +108,8 @@ const PendingRequests = () => {
             user: trans.user_id,
             module: trans.module,
             transaction_id: trans.transaction_id,
+            account_number: trans.transaction.account_number,
+            amount: `GHS ${Number(trans.transaction.amount).toFixed(2)}`,
             action: trans.id
         };
     })
