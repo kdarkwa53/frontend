@@ -207,8 +207,9 @@ color: #5D6066;
 
 }
 .baseCurrency {
-    font-size: 13px;
+    font-size: 18px;
     line-height: 16px;
+    font-weight: 600;
     color: #888B93;
 }
 
@@ -493,6 +494,15 @@ color: #888B93;
 .topNav{
     font-size : 23px;
     color : #000C26
+}
+
+.topBar{
+    color : #0032A0;
+    font-weight: 400;
+font-size: 17px;
+display: flex;
+justify-content: space-around;
+padding: 0.5em 1em ;
 }
 @media(min-width: 992px) {
     .rightSider, .rightSider2{

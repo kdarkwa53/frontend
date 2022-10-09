@@ -7,6 +7,7 @@ import {
   REACT_APP_BUSINESS_SERVICE_API_URL,
   REACT_APP_BASE_API_URL,
   getUserType,
+  authHeader,
 } from "../../../helpers/contants";
 
 import {
@@ -295,18 +296,12 @@ export const verifyPhone = (code, phone, history) => {
   const body = { "phone_verification_code": code, "phone_number": phone }
   return async (dispatch) => {
     dispatch({ type: PHONE_VERIFICATION_REQUEST });
-    const accessToken = Cookies.get("javAccessToken");
+    // const accessToken = Cookies.get("javAccessToken");
     try {
       await axios.post(
         `${REACT_APP_BASE_API_URL}/${userType}/account/verify`,
         body,
-        {
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-          },
-        }
+        authHeader
       );
       console.log(body)
       showSuccessNotification(

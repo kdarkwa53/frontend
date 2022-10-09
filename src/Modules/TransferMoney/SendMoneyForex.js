@@ -198,7 +198,7 @@ const SendMoneyForex = (props) => {
                     form.setFieldsValue({
                         amount: val?.sender?.amount,
                         quote_id: val?.quoteId,
-                        rate: `${val.javolin_rate[0]} / ${val.javolin_rate[1]}`
+                        rate: `${Number(val?.javolin_rate[0]).toFixed(4)} / ${Number(val?.javolin_rate[1]).toFixed(4)}`
                         // rate: `${val?.recipient?.currency} ${val.javolin_rate[0]} / ${val?.sender?.currency} ${val.javolin_rate[1]}`
                     })
                     setSettlementDetails(val)
@@ -369,7 +369,7 @@ const SendMoneyForex = (props) => {
                                                         <Form.Item
                                                         name={'rate'}
                                                         >
-                                                            <Input  disabled width="100%" size="large" className={Styles.placeholder} />
+                                                            <Input style={{color: "black"}}  disabled width="100%" size="large" className={Styles.placeholder} />
                                                         </Form.Item>
                                                     </Col>
                                                     <Col xs={24} sm={24} md={12} lg={9} xl={9}>
