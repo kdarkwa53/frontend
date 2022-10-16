@@ -314,15 +314,16 @@ export const verifyPhone = (code, phone, history) => {
       removeCookies();
       history.push("/login");
     } catch (error) {
+
       dispatch({
         type: PHONE_VERIFICATION_ERROR,
       });
-      console.log(error)
-      // dispatch(
-      //   showErrorNotification(
-      //     error.response.data.message,
-      //   )
-      // );
+      // console.log(error)
+      dispatch(
+        showErrorNotification(
+          error.response.data.message,
+        )
+      );
     }
   };
 };

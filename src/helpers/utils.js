@@ -230,7 +230,7 @@ export const spiltErrors = (sample) => {
             });
         });
     } else {
-        message = "check the details again";
+        message = "Something went wrong";
     }
 
     return message;

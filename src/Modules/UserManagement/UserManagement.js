@@ -87,11 +87,16 @@ const UserManagement = () => {
 
     const onFinish = (val) => {
         console.log(val)
-        dispatch(addingUser(val)).then(()=>{
-            setActiveTab("1")
-            form.resetFields()
+        dispatch(addingUser(val)).then((res)=>{
+            console.log("val: ", res)
+            if(res){
+                setActiveTab("1")
+                form.resetFields()
+            }
+            
+        }).catch((err)=>{
+            console.log(err)
         })
-        form.resetFields()
 
     }
 
@@ -171,7 +176,7 @@ const UserManagement = () => {
                                     <Col>
                                         <div className={Styles.title}>Phone Number</div>
                                         <Form.Item
-                                            name="phone"
+                                            name="phone_number"
                                             rules={[
                                                 {
                                                     required: true,
@@ -187,7 +192,7 @@ const UserManagement = () => {
                                     <Col span={12}>
                                         <div className={Styles.title}>Role</div>
                                         <Form.Item
-                                            name="role"
+                                            name="role_id"
                                             rules={[
                                                 {
                                                     required: true,

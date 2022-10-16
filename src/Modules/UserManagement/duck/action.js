@@ -198,19 +198,24 @@ export const addingUser = (details) => {
               type: ADDING_USER_SUCCESS,
               data : normalizeOneIdData(data)
           });
-
+          console.log('Data: ', data)
           dispatch(showSuccessNotification('User added successfully'))
+          return data
+          
       } catch (error) {
+
           dispatch({
               type: ADDING_USER_ERROR,
           });
           if (!error.response) {
+
               dispatch(
                   showErrorNotification("Action failed", "Check your internet and try again")
               );
           } else {
+            const errors = error.response.data.errors;
               dispatch(
-                  showErrorNotification(error?.response?.data?.message)
+                  showErrorNotification(error?.response?.data?.message, spiltErrors(errors))
               );
           }
       }
