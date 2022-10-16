@@ -112,7 +112,8 @@ export const removeCookies = (accountType) => {
 };
 
 export const getUserType=()=>{
-  return Cookies.get('userType')
+  // return Cookies.get('userType')
+  return 'business'
 }
 export const accounts = {
   customer: {
