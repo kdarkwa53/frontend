@@ -342,7 +342,7 @@ export const resendOTP = (phone) => {
     const accessToken = Cookies.get("javAccessToken");
     try {
       const { data } = await axios.post(
-        `${REACT_APP_BASE_API_URL}/${userType}/account/verify/resend`,
+        `${REACT_APP_BASE_API_URL}/${userType}/verify/resend`,
         body,
         {
           headers: {
