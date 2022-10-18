@@ -311,7 +311,9 @@ const ForexSend = (props) => {
                                         </div>
 
                                         <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Amount</div>
+                                            <div className={Styles.inputLabel}>Amount
+                                            <span style={{ fontWeight: "bold" }} >{currencies[sourceWallet?.currency_id]?.ISO ? ` (${currencies[sourceWallet?.currency_id]?.ISO})` : ""}</span>
+                                            </div>
                                             <div className={Styles.inputContainer}>
                                                 <Form.Item
                                                     name="amount"
@@ -328,7 +330,7 @@ const ForexSend = (props) => {
                                             </div>
                                         </div>
                                         <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Beneficiary Receives <span style={{ fontWeight: "bold" }} >{`(${state?.currency})`}</span>  </div>
+                                            <div className={Styles.inputLabel}> Beneficiary Receives <span style={{ fontWeight: "bold" }} >{state?.currency ? `(${state?.currency})` : ""}</span>  </div>
                                             <div className={Styles.inputContainer}>
                                                 <Row gutter={[32, 16]}>
                                                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
