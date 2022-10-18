@@ -1,5 +1,5 @@
-import { Layout, Col, Input,InputNumber, Select, Form, Button, Row, } from 'antd';
-import React, {useState } from 'react';
+import { Layout, Col, Input, InputNumber, Select, Form, Button, Row, } from 'antd';
+import React, { useState } from 'react';
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { bookRate, getRate, getTransactionFee, instructCorpayment } from "./duck/action"
@@ -19,7 +19,7 @@ const { Option } = Select;
 
 
 const SendMoneyForex = (props) => {
-    
+
     const state = props?.location?.state
     const [form] = Form.useForm()
     const [passcode, setPasscode] = useState(false)
@@ -27,7 +27,7 @@ const SendMoneyForex = (props) => {
     const [submitDetails, setSubDetails] = useState("")
     const [disableContinue, setDisCount] = useState(true)
     const bookingRate = useSelector((state) => state?.transfer?.bookingRate)
-    const checkingRate = useSelector((state) => state?.transfer?.gettingRate) 
+    const checkingRate = useSelector((state) => state?.transfer?.gettingRate)
     const instructingPayment = useSelector((state) => state?.transfer?.instructingPayment)
     const defaultValues = useSelector((state) => state?.transfer?.defaultValues)
     let defaultWallet = useSelector((state) => state?.user?.default_savings_wallet)
@@ -39,7 +39,7 @@ const SendMoneyForex = (props) => {
     const [sourceWallet, setsourcewallet] = useState(Object.keys(wallets).length === 1 ? wallets[defaultWallet?.id] : '')
     const [settlementDetails, setSettlementDetails] = useState()
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
-    
+
 
 
 
@@ -51,7 +51,7 @@ const SendMoneyForex = (props) => {
         //     return
         // }
 
-        
+
 
         values = {
             ...values,
@@ -60,7 +60,7 @@ const SendMoneyForex = (props) => {
 
 
 
-        try {     
+        try {
             dispatch(bookRate(
                 {
                     "quote_id": values?.quote_id,
@@ -74,8 +74,8 @@ const SendMoneyForex = (props) => {
                     }
                 )
                 // show review screen  
-                console.log('order: ', val)     
-                if(val){
+                console.log('order: ', val)
+                if (val) {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
                         "module": "COREPAY",
@@ -109,13 +109,13 @@ const SendMoneyForex = (props) => {
                         }
                         setDetails(info)
 
-                        if(fee){
+                        if (fee) {
                             setReview(true)
                         }
-                        
+
                     })
                     reset()
-                }else{
+                } else {
 
                     // Reset the action values: check rate and book deal and the fields
                     reset()
@@ -130,7 +130,7 @@ const SendMoneyForex = (props) => {
     }
     const sel = { title: "selectedCard", lineHeight: "cardLeftHemSelected" }
 
-    const handleAmountChange = ()=>{
+    const handleAmountChange = () => {
         form.setFieldsValue({
             beneficiary: '',
             rate: ''
@@ -139,7 +139,7 @@ const SendMoneyForex = (props) => {
         setShowTimer(false)
     }
 
-    
+
     const handleBeneChange = () => {
         form.setFieldsValue({
             amount: '',
@@ -157,7 +157,7 @@ const SendMoneyForex = (props) => {
     }
 
     const checkRate = () => {
-        const values =  form.getFieldsValue()
+        const values = form.getFieldsValue()
         const fieldVals = form.getFieldValue('amount')
         const beneField = form.getFieldValue('beneficiary')
 
@@ -170,9 +170,9 @@ const SendMoneyForex = (props) => {
             }
             //  check rate if the amount is a valid input
             if (fieldVals !== undefined) {
-                
+
                 dispatch(getRate(details)).then((val) => {
-                    console.log("quote: ",val)
+                    console.log("quote: ", val)
                     form.setFieldsValue({
                         beneficiary: val?.recipient?.amount,
                         quote_id: val?.quoteId,
@@ -183,10 +183,10 @@ const SendMoneyForex = (props) => {
                     setDisCount(false)
                     setShowTimer(true)
                 })
-                
+
             }
         } else if (fieldVals === undefined || fieldVals === '') {
-            
+
             const details = {
                 "wallet_id": values?.from_account,
                 "beneficiary_id": values?.beneficiary_account,
@@ -205,13 +205,13 @@ const SendMoneyForex = (props) => {
                     setDisCount(false)
                     setShowTimer(true)
                 })
-                
+
             }
         }
     }
 
 
-    const reset=()=>{
+    const reset = () => {
         form.setFieldsValue({
             beneficiary: '',
             amount: '',
@@ -222,7 +222,7 @@ const SendMoneyForex = (props) => {
         setShowTimer(false)
     }
 
-    const expireRate = ()=>{
+    const expireRate = () => {
         reset()
         dispatch(showErrorNotification('Rate has expired'))
     }
@@ -321,11 +321,14 @@ const SendMoneyForex = (props) => {
                                         </div>
 
                                         <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Selling Amount</div>
+                                            <div className={Styles.inputLabel}>Selling Amount
+                                            <span style={{ fontWeight: "bold" }} >{currencies[sourceWallet?.currency_id]?.ISO ? ` (${currencies[sourceWallet?.currency_id]?.ISO})` : ""}</span>
+                                            </div>
+                                            
                                             <div className={Styles.inputContainer}>
                                                 <Form.Item
                                                     name="amount"
-                                                    
+
                                                     rules={[
                                                         { required: true },
                                                         {
@@ -334,9 +337,11 @@ const SendMoneyForex = (props) => {
                                                         }
                                                     ]}
                                                 >
-                                                    <InputNumber style={{width: "100%"}}
-                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                 onChange={handleAmountChange} prefix={currencies[sourceWallet?.currency_id]?.ISO} width="100%" size="large" name='amount'/>
+                                                    <InputNumber style={{ width: "100%" }}
+                                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                        onChange={handleAmountChange} 
+                                                        width="100%" 
+                                                        size="large" name='amount' />
                                                 </Form.Item>
                                             </div>
                                         </div>
@@ -353,9 +358,9 @@ const SendMoneyForex = (props) => {
                                                                 },
                                                             ]}
                                                         >
-                                                           <InputNumber style={{width: "100%"}}
-                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                 onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
+                                                            <InputNumber style={{ width: "100%" }}
+                                                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                                onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
                                                         </Form.Item>
                                                     </Col>
                                                 </Row>
@@ -367,9 +372,9 @@ const SendMoneyForex = (props) => {
                                                 <Row gutter={[32, 16]}>
                                                     <Col xs={24} sm={24} md={12} lg={15} xl={15}>
                                                         <Form.Item
-                                                        name={'rate'}
+                                                            name={'rate'}
                                                         >
-                                                            <Input style={{color: "black"}}  disabled width="100%" size="large" className={Styles.placeholder} />
+                                                            <Input style={{ color: "black" }} disabled width="100%" size="large" className={Styles.placeholder} />
                                                         </Form.Item>
                                                     </Col>
                                                     <Col xs={24} sm={24} md={12} lg={9} xl={9}>
@@ -380,7 +385,7 @@ const SendMoneyForex = (props) => {
                                                 </Row>
                                                 {showTimer ? (
                                                     <Timer reset={expireRate} />
-                                                ): ""}
+                                                ) : ""}
                                             </div>
                                         </div>
                                     </div>

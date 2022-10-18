@@ -312,6 +312,8 @@ export const addBeneficiary = (details, history, type) => {
                 type:type
             }
 
+            console.log("data",data)
+
             if(type === 'forex'){
                 history.push({
                     'pathname': '/send-money/forex',

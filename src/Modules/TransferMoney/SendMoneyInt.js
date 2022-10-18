@@ -1,5 +1,5 @@
 import { Layout, Col, Input, InputNumber, Select, Form, Button, Row, } from 'antd';
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { bookRate, getRate, getTransactionFee, instructCorpayment } from "./duck/action"
@@ -19,15 +19,16 @@ const { Option } = Select;
 
 
 const SendMoneyInt = (props) => {
-    
+
     const state = props?.location?.state
+    console.log("Beneficiary: ", state)
     const [form] = Form.useForm()
     const [passcode, setPasscode] = useState(false)
     const [details, setDetails] = useState("")
     const [submitDetails, setSubDetails] = useState("")
     const [disableContinue, setDisCount] = useState(true)
     const bookingRate = useSelector((state) => state?.transfer?.bookingRate)
-    const checkingRate = useSelector((state) => state?.transfer?.gettingRate) 
+    const checkingRate = useSelector((state) => state?.transfer?.gettingRate)
     const instructingPayment = useSelector((state) => state?.transfer?.instructingPayment)
     const defaultValues = useSelector((state) => state?.transfer?.defaultValues)
     let defaultWallet = useSelector((state) => state?.user?.default_savings_wallet)
@@ -39,7 +40,7 @@ const SendMoneyInt = (props) => {
     const [sourceWallet, setsourcewallet] = useState(Object.keys(wallets).length === 1 ? wallets[defaultWallet?.id] : '')
     const [settlementDetails, setSettlementDetails] = useState()
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
-    
+
 
 
 
@@ -57,7 +58,7 @@ const SendMoneyInt = (props) => {
         }
 
 
-        try {     
+        try {
             dispatch(bookRate(
                 {
                     "quote_id": values?.quote_id,
@@ -71,8 +72,8 @@ const SendMoneyInt = (props) => {
                     }
                 )
                 // show review screen  
-                console.log('order: ', val)     
-                if(val){
+                console.log('order: ', val)
+                if (val) {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
                         "module": "COREPAY",
@@ -106,13 +107,13 @@ const SendMoneyInt = (props) => {
                         }
                         setDetails(info)
 
-                        if(fee){
+                        if (fee) {
                             setReview(true)
                         }
-                        
+
                     })
                     reset()
-                }else{
+                } else {
 
                     // Reset the action values: check rate and book deal and the fields
                     reset()
@@ -127,7 +128,7 @@ const SendMoneyInt = (props) => {
     }
     const sel = { title: "selectedCard", lineHeight: "cardLeftHemSelected" }
 
-    const handleAmountChange = ()=>{
+    const handleAmountChange = () => {
         form.setFieldsValue({
             beneficiary: '',
             rate: ''
@@ -136,7 +137,7 @@ const SendMoneyInt = (props) => {
         setShowTimer(false)
     }
 
-    
+
     const handleBeneChange = () => {
         form.setFieldsValue({
             amount: '',
@@ -154,7 +155,7 @@ const SendMoneyInt = (props) => {
     }
 
     const checkRate = () => {
-        const values =  form.getFieldsValue()
+        const values = form.getFieldsValue()
         const fieldVals = form.getFieldValue('amount')
         const beneField = form.getFieldValue('beneficiary')
 
@@ -167,9 +168,9 @@ const SendMoneyInt = (props) => {
             }
             //  check rate if the amount is a valid input
             if (fieldVals !== undefined) {
-                
+
                 dispatch(getRate(details)).then((val) => {
-                    console.log("quote: ",val)
+                    console.log("quote: ", val)
                     form.setFieldsValue({
                         beneficiary: val?.recipient?.amount,
                         quote_id: val?.quoteId,
@@ -180,10 +181,10 @@ const SendMoneyInt = (props) => {
                     setDisCount(false)
                     setShowTimer(true)
                 })
-                
+
             }
         } else if (fieldVals === undefined || fieldVals === '') {
-            
+
             const details = {
                 "wallet_id": values?.from_account,
                 "beneficiary_id": values?.beneficiary_account,
@@ -202,13 +203,13 @@ const SendMoneyInt = (props) => {
                     setDisCount(false)
                     setShowTimer(true)
                 })
-                
+
             }
         }
     }
 
 
-    const reset=()=>{
+    const reset = () => {
         form.setFieldsValue({
             beneficiary: '',
             amount: '',
@@ -219,7 +220,7 @@ const SendMoneyInt = (props) => {
         setShowTimer(false)
     }
 
-    const expireRate = ()=>{
+    const expireRate = () => {
         reset()
         dispatch(showErrorNotification('Rate has expired'))
     }
@@ -318,7 +319,8 @@ const SendMoneyInt = (props) => {
                                         </div>
 
                                         <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Amount</div>
+                                            <div className={Styles.inputLabel}>Amount
+                                                <span style={{ fontWeight: "bold" }} >{currencies[sourceWallet?.currency_id]?.ISO ? ` (${currencies[sourceWallet?.currency_id]?.ISO})` : ""}</span></div>
                                             <div className={Styles.inputContainer}>
                                                 <Form.Item
                                                     name="amount"
@@ -330,15 +332,17 @@ const SendMoneyInt = (props) => {
                                                         }
                                                     ]}
                                                 >
-                                                 
+
                                                     <InputNumber
-                                style={{width: "100%"}}
-                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange} prefix={currencies[sourceWallet?.currency_id]?.ISO} width="100%" size="large" name='amount' />
+                                                        style={{ width: "100%" }}
+                                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange}
+                                                        size="large" name='amount'
+                                                    />
                                                 </Form.Item>
                                             </div>
                                         </div>
                                         <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Beneficiary Receives <span style={{ fontWeight: "bold" }} >{`(${state?.currency})`}</span>  </div>
+                                            <div className={Styles.inputLabel}> Beneficiary Receives <span style={{ fontWeight: "bold" }} >{state?.currency ? `(${state?.currency})` : ""}</span>  </div>
                                             <div className={Styles.inputContainer}>
                                                 <Row gutter={[32, 16]}>
                                                     <Col xs={24} sm={24} md={12} lg={24} xl={24}>
@@ -350,8 +354,8 @@ const SendMoneyInt = (props) => {
                                                                 },
                                                             ]}
                                                         >
-                                                              <InputNumber
-                                                                style={{width: "100%"}}
+                                                            <InputNumber
+                                                                style={{ width: "100%" }}
                                                                 formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
                                                         </Form.Item>
                                                     </Col>
@@ -364,9 +368,9 @@ const SendMoneyInt = (props) => {
                                                 <Row gutter={[32, 16]}>
                                                     <Col xs={24} sm={24} md={12} lg={15} xl={15}>
                                                         <Form.Item
-                                                        name={'rate'}
+                                                            name={'rate'}
                                                         >
-                                                            <Input  disabled width="100%" size="large" className={Styles.placeholder} />
+                                                            <Input disabled width="100%" size="large" className={Styles.placeholder} />
                                                         </Form.Item>
                                                     </Col>
                                                     <Col xs={24} sm={24} md={12} lg={9} xl={9}>
@@ -377,7 +381,7 @@ const SendMoneyInt = (props) => {
                                                 </Row>
                                                 {showTimer ? (
                                                     <Timer reset={expireRate} />
-                                                ): ""}
+                                                ) : ""}
                                             </div>
                                         </div>
                                     </div>

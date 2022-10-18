@@ -17,6 +17,10 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
         setPasscode(true)
     }
 
+    const curFormat = (value)=>{
+        return `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
     console.log(details?.fee?.fee)
     return (
         <Modal
@@ -52,12 +56,12 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                                 <div className={Styles.ans}>
                                     {details?.to?.title}
                                 </div>
-                                <div className={Styles.subAns}>
+                                <div style={{fontWeight: "bold", marginTop:"0.5em", fontSize: "17px"}} className={Styles.subAns}>
                                     {details?.to?.subTitle}
                                 </div>
                             </div>
 
-                            <div className={Styles.account}>
+                            <div  className={Styles.account}>
                                 {details?.to?.acc_num ? <div>{details?.to?.acc_num}</div> : ""}
 
                                 {details?.to?.image_url ?
@@ -68,7 +72,7 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                         </div>
                         <div className={Styles.contentRow}>
 
-                            <div className={Styles.subAns}>
+                            <div style={{fontWeight: "bold", marginTop:"0.5em", fontSize: "17px"}} className={Styles.subAns}>
                                 {details?.to?.bank_name}
                             </div>
                         </div>
@@ -100,8 +104,8 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                                 <div className={Styles.detailsTitle}>
                                     INITIAL TRANSACTION AMOUNT
                                 </div>
-                                <div className={Styles.ansRed}>
-                                    {`${details?.from?.currency} ${details?.info?.amount}`}
+                                <div className={Styles.ans}>
+                                    {`${details?.from?.currency} ${curFormat(details?.info?.amount)}`}
                                 </div>
                             </div>
                             <div>
@@ -109,7 +113,7 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                                     TRANSACTION FEE
                                 </div>
                                 <div className={Styles.ans}>
-                                    {`${details?.from?.currency} ${Number(details?.fee?.fee).toFixed(2)}`}
+                                    {`${details?.from?.currency} ${curFormat(details?.fee?.fee)}`}
                                 </div>
                             </div>
                             <div>
@@ -117,7 +121,7 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                                     AMOUNT PAYABLE
                                 </div>
                                 <div className={Styles.ans}>
-                                    {`${details?.from?.currency} ${Number(details?.fee?.amount_payable).toFixed(2)}`}
+                                    {`${details?.from?.currency} ${curFormat(details?.fee?.amount_payable)}`}
                                 </div>
                             </div>
                         </div>
@@ -129,8 +133,8 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                             <div className={Styles.detailsTitle}>
                                 BENEFICIARY RECEIVES
                             </div>
-                            <div className={Styles.ans}>
-                                {`${details?.settlement?.currency} ${details?.settlement?.amount}`}
+                            <div className={Styles.ansRed}>
+                                {`${details?.settlement?.currency} ${curFormat(details?.settlement?.amount)}`}
                             </div>
                         </div>
 

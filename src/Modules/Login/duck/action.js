@@ -63,7 +63,7 @@ export const login = (details, history, accountType) => {
     console.log('accountType: ', accountType)
     try {
       const { data } = await axios.post(
-        `${accounts[accountType].baseURL}/login`,
+        `${accounts['business'].baseURL}/login`,
         details,
         urlEcodedConfig
       );
@@ -74,7 +74,7 @@ export const login = (details, history, accountType) => {
       user = {
         ...user,
         "pre_qualification_questions": "{}",
-        'userType': accountType
+        'userType': 'business'
       }
 
       // Verify user before login
