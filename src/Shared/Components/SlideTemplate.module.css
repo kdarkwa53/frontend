@@ -1,0 +1,38 @@
+
+
+.pq_question{
+    font-size: xx-large;
+    font-weight: 700;
+    margin-top: 1em;
+     margin-bottom: 1em;
+    text-align: center;
+    color: #055CA5;
+}
+.container{
+    width: 80%;
+    margin: auto;
+}
+.content{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center; 
+    flex-direction: column;
+}
+
+.directions{
+    position: fixed;
+    top: 40%;
+    display: flex;
+    margin-right: 1em;
+    margin-left: 1em;
+    justify-content: space-between;
+    width: 65%;
+    z-index: 1;
+}
+
+.answerSection{
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

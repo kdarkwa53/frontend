@@ -1,0 +1,74 @@
+.pc_card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 0.01em solid #B2BDC9;
+    box-sizing: border-box;
+    border-radius: 0.5em;
+    width: 100;
+    height: 158px;
+    box-shadow: none;
+    transition: all 0.6s;
+    padding: 20px;
+}
+
+.crypto {
+    background: url("/src/assets/crypto-invest.jpg");
+}
+
+
+/* .pc_card:hover{
+    transform:scale(1.1);
+    box-shadow: 3px 3px 20px rgba(31, 114, 192, 0.43);
+
+}
+
+.pc_card:active{
+    background: rgba(36, 94, 162, 0.12);
+    transform:scale(1.1);
+}
+
+.pc_card:focus{
+    background: rgba(36, 94, 162, 0.12);
+    transform:scale(1.1);
+} */
+.pc_label {
+    margin-top: 2em;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #245EA2;
+}
+.outterLabel {
+    text-align: center;
+    margin-top: 1em;
+}
+.pc_content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+}
+.pcTitle {
+
+    font-weight: 600;
+    font-size: 22px;
+    color: #245EA2;
+    text-align: left;
+
+}
+.pcDescription {
+    font-size: 10px;
+    color: #B2BDC9;
+    text-align: left;
+}
+.pc_card:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 3px rgba(82, 168, 236, 0.6)inset, 0 0 30px rgba(82, 168, 236, 0.6);
+    outline: 0 none;
+}
+.pc_icon {
+    width: 20%;
+}

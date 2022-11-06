@@ -1,0 +1,21 @@
+.container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infoBox {
+    max-width: 450px;
+    margin: auto;
+}
+.javHeader {
+    padding-top: 1em;
+    /* padding-bottom: 1em; */
+    text-align: center;
+    font-size: 32pt;
+}
+
+.loginHeading {
+    display: flex;
+    font-weight: bold;
+    flex-direction: row;
+}

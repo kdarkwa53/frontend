@@ -1,0 +1,44 @@
+.savings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.balanceTitle {
+    font-size: 13px;
+    line-height: 13px;
+    color: #ffffff;
+
+}
+
+.moneySection {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+.currency {
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    vertical-align: top;
+
+}
+
+.topUp {
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.amount {
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 48px;
+    color: #ffffff;
+}
+
+.money {
+    display: flex;
+    flex-direction: row;
+}

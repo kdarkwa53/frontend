@@ -1,0 +1,23 @@
+.intInputClass input {
+    height: 60px;
+    width: 100% !important;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    outline: none !important;
+    background: #F7F7F7 !important;
+}
+
+.intInputClass input:active {
+    outline: none !important;
+    border: none !important;
+}
+
+.intInputClass > .intl-tel-input {
+    display: inline !important;
+    outline: none !important;
+}
+
+.intInputClass.highlight {
+    margin: inherit;
+    font-size: inherit;
+}

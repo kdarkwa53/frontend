@@ -1,0 +1,148 @@
+.secTitle {
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 24px;
+    color: #000C26;
+    font-weight: bold;
+    margin: 1em;
+}
+
+.revTitle{
+font-size: 13px;
+line-height: 16px;
+color: #888B93;
+padding: 0.5em 0;
+}
+
+.revRow{
+margin-bottom: 1em;
+}
+
+.revSection{
+    margin-bottom: 1em;
+}
+.revLine{
+    display: flex;
+    justify-content: space-between;
+}
+.revAns{
+    font-weight: 500;
+font-size: 17px;
+line-height: 21px;
+
+color: #000C26;
+}
+
+.contentA{
+    margin: 2em;
+}
+
+.circleClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.4px solid #C4C6CC;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    margin: 0.5em;
+}
+
+.dividerBar{
+    border-left: 1px solid #C4C6CC;
+}
+.header {
+    display: flex;
+    background: url('../../../assets/review_header.svg') no-repeat center;
+    background-size: 100%;
+    justify-content: space-between;
+    height: 150px;
+}
+.reviewCard {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 1em;
+}
+.close {
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888B93;
+    margin: 1em;
+    cursor: pointer;
+
+}
+
+.receiverContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.receiver {
+    margin: -3em 3em 1em;
+    /* z-index: 3; */
+    box-shadow: 0 4px 6px rgba(32, 54, 72, 0.05);
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 1em;
+}
+
+.receiverTitle {
+    color: #888B93;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 1em;
+
+
+}
+
+.details {
+    padding: 2em;
+    margin: 1.5em;
+}
+
+.detailsTitle {
+    color: #888B93;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: 2.5em;
+}
+
+.ansRed {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 21px;
+    color: #DB211E;
+}
+
+.ans {
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 21px;
+}
+
+.subAns {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #888B93;
+}
+
+.account {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.subAnsBig{
+    font-size: 17px;
+    font-weight: 700;
+}

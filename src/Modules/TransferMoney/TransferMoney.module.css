@@ -1,0 +1,200 @@
+.cardContent {
+    padding: 2em;
+    /* background-color: #ffffff; */
+    /* box-shadow: 0 10px 20px rgba(161, 161, 161, 0.1);
+    border-radius: 0.3em; */
+    /* width: 80%; */
+}
+
+
+.titleCard {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+
+}
+
+.placeholder::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+.placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+
+.placeholder::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer {
+    width: 400px;
+}
+
+.ibanRow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0px;
+
+}
+
+.ibanTitle{
+    color: #888B93;
+}
+
+.itemRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+    /* align-items: flex-start; */
+
+}
+
+.inputLabel {
+    margin-top: 1em;
+    font-size: 17px;
+    color: #000000;
+}
+
+.buttonContainter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.card {
+    max-width: 1280px;
+    background-color: #F0F4FD;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.cardTitle {
+    padding: 2em;
+    background: url("../../assets/formheader.png") no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.sectionBox {
+    padding: 20px 40px;
+    border-radius: 16px;
+    border: 0.4px solid #0032A0;
+    margin-top: 4em;
+    margin-bottom: 2em;
+}
+
+.sectionBox p {
+    text-align: left;
+    margin-top: -33px;
+    color: #0032A0;
+    width: fit-content;
+    text-transform: uppercase;
+    background: #F0F4FD;
+    padding: 0 10px;
+    font-weight: 700;
+}
+
+.sectionBox.white p{
+background: #ffffff;
+}
+
+.sectionBox h5{
+
+}
+
+.checkboxContainer{
+background: #FAFAFA;
+border: 0.4px solid #888B93;
+border-radius: 8px;
+width: 100%;
+}
+
+
+.formRow{
+    margin-bottom: 1em;
+}
+
+.boldName {
+    color: #000000;
+}
+
+.sm_nputContainer {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+}
+
+.cvv {
+    padding: 0 1em;
+}
+
+.tnxButton {
+    max-width: 400px;
+    width: 100%;
+}
+
+.kycnotes{
+font-weight: 500;
+font-size: 17px;
+line-height: 21px;
+color: #C17509;
+font-style: italic;
+}
+
+.kycSubNote{
+font-weight: 600;
+font-size: 17px;
+line-height: 21px;
+color: #0032A0;
+cursor: pointer;
+
+}
+.tnxButton2 {
+    max-width: 400px;
+    width: 100%;
+    margin-right: 2em;
+}
+
+.tnxButton3{
+    max-width: 300px;
+    width: 100%;
+}
+
+
+@media(max-width: 769px) {
+    .tnxButton2 {
+        margin-right: auto;
+    }
+    .cardContent {
+        padding: 1em;
+    }
+    .itemRow {
+        flex-direction: column;
+    }
+    .sectionBox {
+        padding: 20px 10px;
+        margin-top: 1em;
+    }
+    .inputContainer {
+        width: 100%;
+    }
+    .cardTitle {
+        background-size: 250%;
+    }
+
+}

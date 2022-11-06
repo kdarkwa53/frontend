@@ -1,0 +1,21 @@
+.saveSection {
+  margin-bottom: 2em;
+}
+
+.saveButton {
+  margin-right: 1em;
+}
+
+.table {
+  margin-bottom: 2em;
+}
+
+.previewTitle {
+  margin-top: 2em;
+}
+
+.approveResponse {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(94, 95, 97);
+}

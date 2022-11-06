@@ -1,0 +1,5 @@
+name: javolin
+domain-root: javolin.com
+mappings:
+  - port: 3000 (or whatever your local app server is running on)
+    prefix: local

@@ -1,0 +1,37 @@
+.input_qp{
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #4a8ac5;
+    box-shadow: 0 1px -2px 3px rgba(82, 168, 236, 0.6) inset;
+    transition: border-bottom 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    background: transparent;
+    font-size: xx-large;
+    color: #055CA5;
+    text-align: center;
+    prefix: "GHS";
+}
+
+/* Chrome, Safari, Edge, Opera */
+.input_qp::-webkit-outer-spin-button,
+.input_qp::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input_qp[type=number] {
+  -moz-appearance: textfield;
+}
+.input_qp:active{
+border-top: none;
+border-left: none;
+border-right: none;
+}
+
+.input_qp:focus{
+border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 3px rgba(82, 168, 236, 0.6) inset, 0 0 -30px rgba(82, 168, 236, 0.6);
+    outline: 0 none;
+}

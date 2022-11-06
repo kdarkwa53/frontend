@@ -1,0 +1,25 @@
+
+.playBtnSVG{
+  transition: 0.5s all;
+}
+
+.playBtnSVG:hover{
+  transform: scale(1.4);
+  }
+
+  .playBtn{
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  margin: auto;
+  position: relative;
+  top: calc(50% - 180px);
+  left: calc(50% - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background: rgba(243, 243, 243, 0.5);
+backdrop-filter: blur(46.5909px);
+cursor: pointer;
+}

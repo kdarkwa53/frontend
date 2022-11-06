@@ -1,0 +1,624 @@
+.logoWrapper {
+    text-align: center;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.logo {
+    width: 8em;
+}
+
+
+
+.userName {
+    margin-right: 1em;
+    margin-left: 1em;
+    border-left: 1px solid #C4D7E8;
+    padding-left: 1em;
+    height: 30px;
+    display: flex;
+    align-items: center;
+
+}
+
+
+
+
+.titleRow {
+    margin: 1em 0;
+    display: flex;
+    /* width: 400px; */
+    justify-content: space-between;
+}
+
+.secTitle {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000C26;
+    font-weight: bold;
+}
+
+.viewLink {
+    color: var(--javolin-blue-color);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.backLink {
+    font-family: Product Sans;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.container {
+    width: 100%;
+    padding-right: 7rem;
+    padding-left: 7rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container2 {
+    margin-left: auto;
+}
+
+.sideHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sideHeader2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.iconCircle{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: #0032A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2em;
+}
+
+.circle{
+    border: 1px solid #BAC0CD;
+    border-radius: 100%;
+  
+}
+
+.fundSourceCard{
+    border: 0.6px solid #5D6066;
+box-sizing: border-box;
+border-radius: 8px;
+width: 100%;
+display: flex;
+align-items: center;
+flex-direction: row;
+margin: 2em 0;
+padding: 0.5em 0;
+}
+
+
+.subHeaderSticky{
+height: 160px;
+color: #ffffff;
+background: #0032A0;
+padding: 0 3em;
+position: -webkit-sticky; /* Safari */
+position: sticky;
+top: 0;
+z-index: 1;
+display: flex;
+justify-content: space-between;
+align-items: end;
+
+}
+.subHeader{
+color: #ffffff;
+height: 100px;
+background: #0032A0;
+}
+
+.subHeaderRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+width: 100%;
+padding-bottom: 2em;
+font-size: 20px;
+font-weight: 700;
+text-transform: uppercase;
+
+
+
+}
+
+.fsName{
+    font-weight: 500;
+font-size: 17px;
+}
+
+.fsAccount{
+    font-size: 13px;
+line-height: 16px;
+
+
+color: #5D6066;
+}
+
+.iconStroke {
+    stroke: #AFB3BD;
+}
+
+.iconStroke:hover,
+.iconStroke:focus {
+    stroke: var(--javolin-blue-color);
+}
+
+.menuText:hover {
+    /* font-weight: 700; */
+    color: var(--javolin-blue-color);
+}
+
+.menuText:active {
+    color: #ffffff !important;
+}
+
+
+.welcomeTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2em;
+    line-height: 26px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    color: white;
+}
+
+.rateCard {
+    /* border: 0.6px solid #C4C6CC; */
+    border-radius: 8px;
+    padding: 1em;
+    /* height: 400px; */
+    background: #ffffff;
+    width: 100%;
+    min-width: 350px;
+    padding: 2em;
+    box-shadow: 0px 10px 20px rgba(163, 165, 168, 0.1);
+
+    /* margin: 2em 0; */
+}
+.base {
+    background: #F1F8FE;
+    border-radius: 8px;
+    border: 1px solid #2272F4;
+    padding: 0.5em 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1em;
+    min-height: 71px;
+}
+.baseValue {
+    font-weight: bold;
+    font-size: 23px;
+
+}
+.baseCurrency {
+    font-size: 20px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #888B93;
+}
+
+.KCYSider{
+/* position: fixed; */
+overflow-y: scroll;
+top: 0;
+}
+
+.kycContentArea{
+    overflow-y: scroll;
+}
+
+.bkycArea{
+/* position: fixed; */
+top: 300px;
+
+}
+.exTitle {
+    /* font-weight: bold;
+    font-size: 13px;
+    margin: 0.2em 0; */
+font-weight: 700;
+color: #00050E;
+font-size: 24px;
+}
+.exRate {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6em;
+}
+.currency {
+    color: #888B93;
+    font-size: 13px;
+    color: #888B93;
+    text-transform: capitalize;
+}
+.rate {
+    color: #888B93;
+    font-weight: bold;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 21px;
+
+}
+
+.langMenu {
+    margin-right: 2em;
+}
+
+.bottomMenu {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.headerTop {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 64px;
+    padding: 0 50px;
+}
+.layoutContainer {
+    margin: 1em 2em;
+}
+
+.mobileLogoHeafer {
+    position: absolute;
+    left: 5%;
+    width: 10em;
+    margin-right: 2em;
+}
+
+.rightSider {
+    overflow-y: scroll;
+    height: 100%;
+    background: white;
+    display: flex;
+    overflow-x: hidden;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+
+}
+
+
+
+.fundAddBtn{
+    border: none;
+    background: #F0F4FD;
+    border-radius: 8px;
+    color : #0032A0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 7px 30px;
+}
+
+
+.rightSider2 {
+    height: 100vh;
+    background: white;
+    display: flex;
+    margin-top: 5em;
+    overflow-x: hidden;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+        max-width: 400px;
+
+}
+
+.middleCol{
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    background: "#F8F8F8"
+}
+.middleCol::-webkit-scrollbar {
+    display: none;
+}
+
+
+.walletTop {
+    margin-top: 2em
+}
+.layoutContent{
+    margin-top: 3em;
+    padding: 1em;
+}
+.siderContent {
+    width: 100%;
+    margin-top: 3.2em;
+   overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+        padding: 1em;
+
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.siderContent::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.pageContainer {
+    padding: 1em 2em;
+    background: #FAFAFB;
+    height: 100vh;
+    width: 100%;
+}
+nav .sideMenuItem{
+   
+    border-radius: 8px;
+    padding: 1em;
+    margin: 1em;
+    cursor: pointer;
+    
+}
+
+
+.prepCard{
+    background: #FFFFFF;
+border-radius: 12px;
+margin: 1em;
+padding: 1em;
+display: flex;
+flex-direction: row;
+flex: 30%
+/* justify-content: space-between; */
+}
+
+.prepaidIcon{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background : #ECF7E8;
+    margin: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contentPrep{
+    flex: 70%
+}
+
+.kycCard{
+background: linear-gradient(90deg, #FFE259 0%, #FFA751 100%);
+border-radius: 8px;
+padding: 1em;
+margin: 1em 0;
+width: 100%;
+min-width: 350px;
+cursor: pointer;
+}
+
+.kycTitle{
+    font-weight: bold;
+color : #000C26;
+}
+.prepStatus{
+    font-size: 13px;
+
+/* Fancy */
+
+color: #DBA11C;
+}
+
+.mainMenuDropdown{
+    cursor: pointer;
+padding: 1em;
+margin: 1em;
+color: "#888B93";
+/* font-size: 13px; */
+
+
+}
+
+.subMenuItem{
+padding: 1em;
+margin: 1em;
+cursor: pointer;
+
+}
+.totalValue{
+font-weight: 400;
+font-size: 13px;
+line-height: 16px;
+color: #888B93;
+
+}
+.rateSection{
+    margin-top: 1em;
+}
+.menuDropdown {
+    width: 100%;
+    margin: auto;
+}
+
+
+.prepSub {
+cursor: pointer;
+    font-size: 13px;
+
+
+color: #888B93;
+}
+
+.prepLow
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.javMenuText{
+    margin-left: 1em;
+    font-size: 20px;
+}
+
+
+.siderContainer {
+    display : flex;
+    justify-content: center;
+    /* align-items: flex-end; */
+}
+
+.rightSiderLayout{
+    margin-left: 296px;
+    background: #FAFAFB
+}
+
+.defaultMenu{
+    margin-right: 250px;
+}
+
+.topNav{
+    font-size : 23px;
+    color : #000C26
+}
+
+.topBar{
+    color : #0032A0;
+    font-weight: 400;
+font-size: 17px;
+display: flex;
+justify-content: space-around;
+padding: 0.5em 1em ;
+}
+@media(min-width: 992px) {
+    .rightSider, .rightSider2{
+    position : fixed;
+    }
+.mobileLogoHeafer {
+    display: none;
+}
+}
+
+
+
+@media(max-width: 991px) {
+   .kcyMsg{
+    max-width: 300px;
+}
+.siderContainer{
+    display: none;
+}
+.topNav{
+    margin-top: 5em;
+}
+.rightSiderLayout{
+    margin-left: 0;
+}
+.defaultMenu{
+    margin-right: 0;
+}
+.rightSider{
+    flex-direction: row;
+}
+.siderContent {
+    overflow-y: hidden;
+    height: auto;
+    flex-direction: row;
+}
+.headerTop {
+    background: #ffffff;
+}
+
+}
+
+@media(max-width: 769px) {
+.topNav{
+    margin-top: 5em;
+}
+.rightSiderLayout{
+    margin-left: 0;
+}
+.defaultMenu{
+    margin-right: 0;
+}
+
+
+    .avatarJav,
+    .langMenu {
+        display: none;
+    }
+    .langMenu {
+        margin: 0;
+    }
+    .sideHeader2 {
+        justify-content: space-between;
+    }
+    .headerTop {
+        padding: 0 2px;
+    }
+    .layoutContainer {
+        margin: 1em;
+    }
+    .siderContainer {
+        display: none;
+    }
+    .rightSider {
+        overflow-y: none;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .walletTop {
+        margin-top: 0;
+        width: 100%;
+    }
+    .siderContent {
+        width: 100%;
+        overflow-y: hidden;
+        height: auto;
+    }
+    .container2 {
+        margin-right: 1em;
+
+    }
+    .container {
+        padding: 0;
+    }
+    .sideHeader {
+        margin-right: 1em;
+    }
+}
+
+

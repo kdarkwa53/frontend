@@ -1,0 +1,75 @@
+.card {
+    /* background: url("/src/assets/card_bg.png") center no-repeat; */
+
+    background-color: #000B6B;
+    /* backdrop-filter: blur(50px); */
+
+    border-radius: 16px;
+    /* min-width: 300px; */
+    /* max-width: 400px; */
+    /* height: 300px; */
+    /* margin: 2em; */
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.upperSide {
+    display: flex;
+    flex-direction: row;
+    color: #ffffff;
+    justify-content: space-between;
+}
+
+/* .curInput > .ant-select-selector {
+background-color : #1c4fad; 
+} */
+
+.curInput > .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+background-color : #1c4fad; 
+}
+.lowerSide {
+    display: flex;
+    flex-direction: row;
+    color: #ffffff;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.accountNo {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.accountBal {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.slimTitle{
+    font-weight: 300;
+font-size: 20px;
+line-height: 26px;
+}
+.answer {
+    margin-top: 0.2em;
+    font-weight: bold;
+    font-weight: 700;
+    font-size: 23px;
+}
+
+/* @media(max-width: 769px) {
+    .card {
+        margin: 0;
+        padding: 1em;
+        width: 100%;
+        min-width: auto;
+    }
+
+} */

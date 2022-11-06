@@ -1,0 +1,108 @@
+.card {
+    width: 100%;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #FBED96 0%, #ABECD6 100%);
+    /* max-height: 170px; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.card2 {
+    width: 100%;
+    border-radius: 16px;
+    background: url("./banner2.png") no-repeat center;
+    max-height: 170px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 180px;
+    cursor: pointer;
+}
+
+.crypto-card{
+    width: 100%;
+    border-radius: 16px;
+    background: url("../../../assets/crypto_banner_bg.png") no-repeat center;
+    max-height: 170px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 180px;
+    cursor: pointer;
+}
+
+.bannerBtn{
+    background: white;
+    color : #0032A0;
+    border-radius: 8px;
+    border: none;
+    padding: 0.5em 2em;
+    margin: 0.2em 1em;
+    width: max-content
+
+}
+.prepaid-card{
+    width: 100%;
+    border-radius: 16px;
+    background: url("../../../assets/prepaid_banner_bg.png") no-repeat center;
+    max-height: 170px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 180px;
+    cursor: pointer;
+}
+
+.messageContent {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+-ms-overflow-style: none; /* IE and Edge */
+scrollbar-width: none;
+}
+.messageContent::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.title {
+    color: #000C26;
+    font-size: 23px;
+    margin: 1em 0;
+    line-height: 20px;
+
+}
+
+.desc {
+    font-size: 400;
+    font-size: 20px;
+    color: #3B404A;
+    margin: 0 1em;
+    max-width: 500px;
+
+}
+
+
+
+@media(max-width: 1280px) {
+    .title{
+        margin: 0.5em 0;
+    }
+}
+@media(max-width: 769px) {
+    .title {
+        margin: 0.5em 0;
+        font-size: 17px;
+
+    }
+    .desc {
+        font-size: 12px;
+    }
+    .image {
+        flex-basis: 375px;
+
+    }
+
+}

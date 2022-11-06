@@ -1,0 +1,80 @@
+
+
+.titleRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.completedText{
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 21px;
+    color: #2272F4;
+}
+
+.rowTaskTodo{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0;
+    /* justify-content: space-between; */
+
+}
+.steps{
+    width: 47px;
+height: 27.19px;
+left: 24px;
+top: 30.59px;
+text-align: center;
+
+background: #E0EAFF;
+border-radius: 100px;
+font-weight: 700;
+font-size: 16px;
+
+
+color: #0032A0;
+}
+.setupRight{
+    padding: 2em 1em;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.setupCard{
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+    border-radius: 16px;
+    /* padding: 1em; */
+}
+
+.setupCard:first-child{
+    width: 100px;
+}
+
+.setupCard > * {
+    flex: 2 1 auto;
+  }
+
+.setupLeft{
+    padding: 2em 1em;
+    border-radius: 16px 0px 0px 16px;
+    background: url("../../../assets/kyc_bg.png"), #0032A0
+}
+
+.conButton{
+    border: 1px solid #E0EAFF;
+    border-radius: 100px;
+    padding: 1em 0.5em;
+    max-width: 200px;
+    color: #E0EAFF;
+    text-align: center;
+    margin: 2em 0 ;
+    cursor: pointer;
+}

@@ -1,0 +1,159 @@
+.Intro {
+  /* background-color: #c5e1a5; */
+  padding: 1rem;
+}
+.intro .apple {
+  margin-right: 2rem;
+}
+.Intro h1 {
+  margin-top: 5rem;
+}
+.Intro p {
+  padding: 0.5rem;
+  color: darkcyan;
+}
+.head1 {
+  margin-top: 5rem;
+  margin-bottom: 0rem;
+  /* background-color:#c5e1a5; */
+  max-height: fit-content;
+}
+.head1 h2 {
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+}
+.head4 {
+  margin: 5rem;
+}
+.section2 {
+  margin-top: 0rem;
+  background-color: #e0f2f1;
+}
+.section2 h1 {
+  margin-top: 7rem;
+}
+.section2 img {
+  margin-top: 4rem;
+  background-size: contain;
+}
+.section2 .img-2 {
+  width: 50%;
+  border-radius: 20rem;
+}
+.section3 {
+  margin-top: 7rem;
+}
+.section3 img {
+  border-radius: 10rem;
+  /* height: 500px;
+    margin-top: -2rem;  */
+}
+.section4 {
+  margin-top: 5rem;
+}
+.section4 h2 {
+  margin-top: 6rem;
+}
+.section4 .column3 {
+  margin-top: 4rem;
+}
+.section5 {
+  /* height:550px; */
+  margin-top: 8rem;
+  background-color: #1c2a48;
+}
+
+.section5 .text-left {
+  padding: 2rem;
+  color: rgb(134, 133, 133);
+}
+.section5 h2 {
+  margin-top: 7rem;
+}
+.section5 .shield {
+  margin-top: 6rem;
+  font-size: 300px;
+}
+.section5 .text-section {
+  background-color: #e0f2f1;
+  height: 550px;
+}
+.Guide {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+.Guide-text h2 {
+  color: rgb(31, 182, 157);
+  margin-bottom: 2rem;
+}
+.Guide-text {
+  margin-top: 0rem;
+}
+.Guide-img img {
+  border-radius: 6rem;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+.quote {
+  padding-top: 1rem;
+  padding-right: 10rem;
+}
+hr {
+  border-color: grey;
+}
+.my-2 {
+  height: 5px;
+  width: 400px;
+}
+.testimony {
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+.test-section img {
+  height: 60px;
+}
+.final-section {
+  background-color: #e0f2f1;
+  margin-bottom: -2rem;
+  height: 400px;
+  max-height: fit-content;
+}
+.final-content {
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+.final-content h1 {
+  color: #1c2a48;
+}
+.final-content .butt {
+  width: 200px;
+  height: 60px;
+  font-size: medium;
+  font-weight: bold;
+}
+.footer {
+  background-color: #1c2a48;
+}
+.footer .contact li {
+  padding: 1rem;
+}
+.footer .contact {
+  margin-bottom: 1.5rem;
+}
+.footer .company li {
+  padding: 1rem;
+}
+.footer .company .title {
+  margin-left: 3.5rem;
+}
+.footer .community li {
+  padding: 1rem;
+}
+.footer img {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+.title {
+  font-weight: bolder;
+  margin-left: 1rem;
+}

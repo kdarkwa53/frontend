@@ -1,0 +1,203 @@
+.dummyCon {
+    background: #E4EBFA;
+    border: 1px dashed #0032A0;
+    box-sizing: border-box;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* min-height: 196px; */
+    cursor: pointer;
+    /* min-width: 300px; */
+}
+
+.addNewText {
+    font-size: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    color: #0032A0;
+}
+.walletProc{
+    min-width: 300px;
+}
+.welcomeTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2em;
+    line-height: 26px;
+    padding-left: 24px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    color: #245EA2;
+
+}
+
+.savings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.balanceTitle {
+    font-size: 13px;
+    line-height: 13px;
+    color: #1890FF;
+
+}
+
+.moneySection {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+.currency {
+    font-size: 20px;
+    line-height: 24px;
+    color: #245EA2;
+    vertical-align: top;
+
+}
+
+.topUp {
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.amount {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 48px;
+    color: #245EA2;
+}
+
+.header {
+    background: inherit;
+}
+
+.rightSideBar {
+    height: 100vh;
+    width: 100%;
+    background: black;
+}
+.getStarted {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 40px;
+    color: #B2BDC9;
+    margin-top: 3em;
+
+}
+
+.titleRow {
+    margin: 3px 0 2em;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.products {
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 50px;
+    column-gap: 60px;
+    grid-row-gap: 0;
+    row-gap: 30px;
+    color: #ffffff;
+    margin-bottom: 2em;
+}
+
+
+.serviceRow{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    column-gap: 60px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    margin-bottom: 2em;
+}
+.serviceRow::-webkit-scrollbar {
+    display: none;
+}
+
+.secTitle {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    color: #00050E;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.viewLink {
+    color: var(--javolin-blue-color);
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.viewLink a {
+    text-decoration: none !important;
+    color: var(--javolin-blue-color) !important;
+}
+
+
+.CardRow {
+    margin-top: 1em;
+    overflow-x: scroll;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
+.CardRow::-webkit-scrollbar {
+    display: none;
+}
+
+.pageCustomContainer{
+    padding: 1em;
+}
+
+
+
+@media(min-width: 992px) {
+.customDash {
+    display: none;
+}
+
+}
+@media(max-width: 1280px) {
+
+.servCard {
+    max-width: 250px;
+    flex: 0 0 25em;
+}
+
+    .products {
+        display: flex;
+        overflow: auto;
+        -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    padding: 1em;
+    }
+    .products::-webkit-scrollbar {
+        display: none;
+    }
+
+}
+
+
+
+

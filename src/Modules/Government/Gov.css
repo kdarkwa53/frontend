@@ -1,0 +1,27 @@
+
+.icon-middle{
+    display: flex;
+    flex-direction: row;
+}
+
+.iconCover{
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 30px;
+    margin: 1em;
+    outline: none;
+    border : solid 1px gray;
+}
+.iconCover:focus{
+    border : solid 1px #0032A0;
+    background : #E4EBFA;
+
+}
+
+.default{
+    border: solid 1px black;
+}
+
+.selected{
+    border: solid 1px blue;
+}

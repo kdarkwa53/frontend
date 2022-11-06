@@ -1,0 +1,402 @@
+
+.containerRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.containerLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+
+.smallScreenLogo {
+    width: 20em;
+    height: auto;
+    margin: auto;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media(max-width: 769px) {
+    .signupCard {
+        width: 100%;
+        height: 100vh;
+
+    }
+    .cardContent {
+        padding: 1em;
+    };
+    .containerRight {
+        display: none;
+    }
+
+    .footerContent {
+        padding-top: 1em;
+    }
+}
+
+.serviceCard {
+    width: 100%;
+    height: 6em;
+    border-radius: 1em;
+    background-color: #bcd4d4;
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    text-align: center;
+}
+
+
+div:hover.serviceCard {
+    background-color: #9da7a7;
+}
+div.serviceCard {
+    transition: background-color 1s;
+    font-weight: 300;
+    font-size: 16pt;
+    box-shadow: 3px 4px 13px -5px rgba(0, 0, 0, 0.92);
+    -webkit-box-shadow: 3px 4px 13px -5px rgba(0, 0, 0, 0.92);
+    -moz-box-shadow: 3px 4px 13px -5px rgba(0, 0, 0, 0.92);
+}
+.firstCard {
+    background-color: antiquewhite;
+}
+.statement {
+    font-size: 2.5em;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+.statement2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.secondCard {
+    background-color: aliceblue;
+}
+.rightSide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* @media (min-width: 992px) {
+  .formSide {
+    position: relative;
+    left: 700px;
+  }
+} */
+
+
+.footerMsg {
+    font-size: 17px;
+    color: var(--javolin-text-dk-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.socials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    margin: 1em 0 2em;
+
+}
+.circles {
+    border: gray 1px solid;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pinInput {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 5px;
+    margin: 2em 0
+}
+.signupCard {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.signupCard::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.topSection {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.welcomeMsg {
+    color: #F8F8F8;
+
+}
+.welcomeTitle {
+    font-weight: bold;
+    font-size: 52px;
+    line-height: 63px;
+}
+.welcomeLogo {
+    margin: 3em 0;
+}
+.welcomeBody {
+    font-weight: bold;
+    font-size: 52px;
+    line-height: 63px;
+
+}
+.authTitle {
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2em;
+    color: #000C26;
+}
+
+.iconHead {
+    display: flex;
+    justify-content: center;
+    margin: 1em 0 3em;
+}
+
+.brandLogo {
+    width: 250px;
+    height: 250px;
+}
+.socialButton {
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px 0 !important;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.optionButton {
+    margin-top: 1em;
+}
+.subInfo {
+    margin-top: 1em;
+    font-size: 15px;
+    color: var(--javolin-text-lt-gray);
+
+}
+.agreement {
+    border-radius: 0;
+}
+.subBoldGray {
+    font-weight: bold;
+    font-size: 17px;
+    color: var(--javolin-text-dk-gray);
+    white-space: nowrap;
+
+}
+
+@media(max-width: 767px){
+.containerRight{
+    display: none;
+}
+}
+
+
+@media(min-width:1161px){
+.signupCard {
+    width: 534px;
+    height: 100vh;
+    margin: 2em;
+    padding: 2em;
+    
+
+}
+
+.containerLeft {
+    display: block;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.smallScreenLogo {
+    display: none;
+}
+.cardContent {
+    padding: 1em 2em;
+}
+.rightSide {
+height: 100vh;
+}
+.overlay {
+    height: 100vh
+}
+
+    .sideImage {
+    background-image: url("../assets/sideimage.jpg");
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: block;
+    }
+    .auth_bg {
+    background: url("../assets/auth_bg.png") no-repeat;
+    overflow: hidden;
+    background-size: cover;
+}
+.overlay {
+    background: linear-gradient(54.83deg, #0036A0 -42.86%, #0032A0 13.18%, rgba(0, 50, 160, 0.6) 47.88%, rgba(0, 50, 160, 0.285121) 80.38%, rgba(0, 50, 160, 0) 109.82%);
+
+}
+.ringContainer {
+    display: flex;
+    /* width: 100%; */
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    overflow: hidden;
+    justify-content: flex-end;
+    /* height: max-content; */
+
+}
+.ringTwo {
+    -webkit-animation: spin 150s linear infinite;
+    -moz-animation: spin 100s linear infinite;
+    animation: spin 100s linear infinite;
+
+}
+.ringOne {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    height: 100%;
+    -webkit-animation: spin 150s linear infinite;
+    -moz-animation: spin 150s linear infinite;
+    animation: spin 150s linear infinite;
+}
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+}
+@media(max-width:1160px) and (min-width:768px){
+.containerRight{
+    display: none;
+}
+.authRow{
+    height: 100%;
+}
+
+.signupCard{
+    padding: 1em;
+    width: 650px;
+    height: 800px;
+
+}
+
+    .sideImage {
+    background-image: url("../assets/sideimage.jpg");
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: block;
+    }
+    .auth_bg {
+    background: url("../assets/auth_bg.png") no-repeat;
+    overflow: hidden;
+    background-size: cover;
+}
+.overlay {
+    background: linear-gradient(54.83deg, #0036A0 -42.86%, #0032A0 13.18%, rgba(0, 50, 160, 0.6) 47.88%, rgba(0, 50, 160, 0.285121) 80.38%, rgba(0, 50, 160, 0) 109.82%);
+    height: 100vh;
+}
+.ringContainer {
+    display: flex;
+    /* width: 100%; */
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    overflow: hidden;
+    justify-content: flex-end;
+    /* height: max-content; */
+
+}
+.ringTwo {
+    -webkit-animation: spin 150s linear infinite;
+    -moz-animation: spin 100s linear infinite;
+    animation: spin 100s linear infinite;
+
+}
+.ringOne {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    height: 100%;
+    -webkit-animation: spin 150s linear infinite;
+    -moz-animation: spin 150s linear infinite;
+    animation: spin 150s linear infinite;
+}
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+}
+
+/* .leftSide {
+  position: fixed;
+} */

@@ -1,0 +1,26 @@
+
+
+.d_wallet{
+    background: #ffffff;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 10px 20px rgba(163, 165, 168, 0.1);
+    border-radius: 16px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mainWalletSec{
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+
+.default_wallet {
+ width: 70%;
+}
+  
+.new_wallet{
+width: 20%;
+}
