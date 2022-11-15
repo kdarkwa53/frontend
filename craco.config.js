@@ -30,7 +30,8 @@ module.exports = {
                             '@table-font-size': '16px',
                             '@table-header-bg': '#000638',
                             '@table-header-color': "#BAC0CD",
-                            "@table-border-radius-base": "16px"
+                            "@table-border-radius-base": "16px",
+                            "@modal-border-radius": "16px"
                         },
                         javascriptEnabled: true,
                     },

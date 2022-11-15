@@ -43,7 +43,6 @@ const ReviewPopUp = ({ setReview, showReview, details, setPasscode }) => {
                         <div onClick={handleCancel} className={Styles.circleClose}>
                             <XIcon width="1em" height="1em" />
                         </div>
-                        {/* <div className={Styles.close} >x</div> */}
                     </div>
                     <div className={Styles.receiver}>
                         <div className={Styles.receiverTitle}>{details?.to?.msg}</div>
