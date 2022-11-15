@@ -41,7 +41,7 @@ const RoleItem = ({perm, selectedPerm, setSelectedPerm})=>{
         }
     }
     return (
-        <Tag style={select ? { ...selectStyle.clicked } : { ...selectStyle.default }} onClick={()=>handleClick(perm.id)} color={select ? '#D4DFF7': '#EBEDF1'} key={perm?.id}>
+        <Tag style={select ? { ...selectStyle.clicked } : { ...selectStyle.default }} onClick={()=>handleClick(perm.id)} color={select ? '#D4DFF7': '#ECF7E8'} key={perm?.id}>
             {perm?.name}
         </Tag>
     )

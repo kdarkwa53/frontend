@@ -81,6 +81,9 @@
 .ant-table-header{
     border-radius: 16px 16px 0 0 !important
 }
+.ant-modal-content{
+    border-radius: 16px !important;
+}
 
 table td {
     font-weight: 450 !important;
