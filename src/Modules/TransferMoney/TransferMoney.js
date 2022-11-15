@@ -98,10 +98,17 @@ const TransferMoney = () => {
                     name="form_in_modal"
                     style={{ width: "100%" }}
                     onFinish={onFinish}
+                    
                 >
-
+                    <div style={{display: "flex",  justifyContent: "center", alignItems: "center" }}>
                     <div className={Styles.sectionBox}>
                         <p>Source</p>
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                            
+                                        </div>
                         <div className={Styles.itemRow}>
                             <div className={Styles.inputLabel}>Transfer From</div>
                             <div className={Styles.inputContainer}>
@@ -154,11 +161,22 @@ const TransferMoney = () => {
                             </div>
                         </div>
                     </div>
+
+                    </div>
+                   
                     <Divider>
                         <ArrowDownCircle width="2em" color="#63B344" />
                     </Divider>
+                    
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className={Styles.sectionBox}>
                         <p>Destination</p>
+                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                            
+                                        </div>
                         <div className={Styles.itemRow}>
                             <div className={Styles.inputLabel}>Transfer To</div>
                             <div className={Styles.inputContainer}>
@@ -177,8 +195,10 @@ const TransferMoney = () => {
                         </div>
 
                     </div>
-                    <div className={Styles.buttonContainter}>
-                        <div className={Styles.tnxButton2}>
+                    </div>
+                   
+                    
+                    
                             <Button
                                 type="primary"
                                 block
@@ -189,8 +209,7 @@ const TransferMoney = () => {
                             >
                                 Transfer Money
                             </Button>
-                        </div>
-                    </div>
+                 
                 </Form>
 
             </>

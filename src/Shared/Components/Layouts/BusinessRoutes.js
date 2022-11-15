@@ -67,9 +67,9 @@ export default function BusinessRoutes() {
                 <LayoutView primary title="Government Fees" exact path="/business/government-services" component={GovernmentServices} />
                 <LayoutView primary title="Government Fees" path="/business/government-services/fee" component={FeePayment} />
                 <MainLayoutRoute title="Deposit" path="/make-deposit" exact component={MakeDeposit} />
-                <MainLayoutRoute title="Send Money" path="/send-money" exact component={SendMoney} />
-                <MainLayoutRoute title="Payments" path="/business/payments" exact component={SendMoney} />
-                <MainLayoutRoute title="Payments" path="/business/forex" exact component={ForexBeneficiary} />
+                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Send Money" path="/send-money" exact component={SendMoney} />
+                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Send Money" menuRoute="/business/payments" path="/business/payments" exact component={SendMoney} />
+                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Forex" path="/business/forex" exact component={ForexBeneficiary} />
                 <Route path="/preq" component={PreQualification} />
                 <MainLayoutRoute path="/payment" component={BorrowerPayment} />
                 <DashboardLayoutRoute RightSider={BusRightSider} title="Transactions" menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
@@ -91,9 +91,9 @@ export default function BusinessRoutes() {
                 <LayoutView primary path="/status/:id" component={MortgageStatusPage} />
                 <MainLayoutRoute path="/auth" component={AuthSignUp} />
                 <LayoutView primary path="/applications" component={MyApplications} />
-                <LayoutView primary path="/user-management" title="User Management" component={UserManagement} />
-                <LayoutView primary path="/role-management" title="User Management" component={RoleManagement} />
-                <LayoutView primary path="/business/requests" title="Pending Requests" component={PendingRequests} />
+                <MainLayoutRoute subtitle={"Users"} primary path="/user-management" title="User Management" component={UserManagement} />
+                <MainLayoutRoute subtitle={"Roles"} primary path="/role-management" title="User Management" component={RoleManagement} />
+                <MainLayoutRoute  subtitle="Transactions"  path="/business/requests" title="Pending Requests" component={PendingRequests} />
                 <DashboardLayoutRoute RightSider={BusRightSider} title="Portfolio" path="/business/portfolio" component={BusinessProducts} />
                 <MainLayoutRoute path="/prepaid/apply/:id" component={PrepaidApplication} />
                 <DashboardLayoutRoute RightSider={WalletRightSider} menuRoute="/business/wallet" title="Wallet" path="/business/wallet" component={WalletPage} />

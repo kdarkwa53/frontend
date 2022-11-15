@@ -139,9 +139,11 @@
 }
 
 .viewLink {
-    color: var(--javolin-blue-color);
-    font-size: 13px;
-    font-weight: bold;
+    color: #0032A0;
+    font-weight: 450;
+font-size: 20px;
+line-height: 26px;
+margin-right: 2em;
     cursor: pointer;
 }
 

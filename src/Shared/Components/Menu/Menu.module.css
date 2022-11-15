@@ -95,6 +95,11 @@
 .circle{
     border: 1px solid #BAC0CD;
     border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   
 }
 
@@ -191,7 +196,7 @@ color: #5D6066;
 }
 
 .rateCard {
-    /* border: 0.6px solid #C4C6CC; */
+    border: 1px solid #2272F4;
     border-radius: 8px;
     padding: 1em;
     /* height: 400px; */
@@ -282,7 +287,7 @@ font-size: 24px;
     position: fixed;
     z-index: 3;
     width: 100%;
-    background: transparent;
+    background: white;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -505,22 +510,51 @@ color: #888B93;
     background: #FAFAFB
 }
 
+.runningHeader{
+    background: url("../../../assets/running_header.png") #000B6B no-repeat;
+    min-height: 197px;
+    color: #ffffff;
+    margin-top: 2em;
+}
+
 .defaultMenu{
     margin-right: 250px;
 }
 
 .topNav{
     font-size : 23px;
-    color : #000C26
+    color : #00050E;
+    margin-top: 5em;
+    font-weight: 700;
+font-size: 28px;
+
+}
+
+.def_curr{
+    background: #ffffff;
+    color:  #000B6B;
+    font-weight: 700;
+    width: 112px;
+height: 32px;
+border-radius: 4px;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .topBar{
-    color : #0032A0;
+    background : #000B6B;
     font-weight: 400;
-font-size: 17px;
-display: flex;
-justify-content: space-around;
-padding: 0.5em 1em ;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5em 1em ;
+    color: #FFFFFF;
+    margin-top: 3em;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+
 }
 @media(min-width: 992px) {
     .rightSider, .rightSider2{

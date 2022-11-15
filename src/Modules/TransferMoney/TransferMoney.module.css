@@ -50,17 +50,18 @@
 }
 
 .itemRow {
-    display: flex;
-    justify-content: space-between;
-    margin: 1em 0;
+    /* display: flex;
+    justify-content: space-between; */
+    /* margin: 1em 0; */
     /* align-items: flex-start; */
 
 }
 
 .inputLabel {
     margin-top: 1em;
-    font-size: 17px;
-    color: #000000;
+    font-size: 20px;
+    color: #00050E;
+    padding: 1em 0;
 }
 
 .buttonContainter {
@@ -75,14 +76,15 @@
     width: 100%;
     height: 100%;
     margin: auto;
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 .cardTitle {
     padding: 2em;
-    background: url("../../assets/formheader.png") no-repeat;
+    /* background: url("../../assets/formheader.png") no-repeat; */
     background-size: 100%;
     color: #ffffff;
+    background: #000638;
     border-radius: 16px 16px 0 0;
     display: flex;
     flex-direction: row;
@@ -91,22 +93,46 @@
 }
 
 .sectionBox {
-    padding: 20px 40px;
-    border-radius: 16px;
-    border: 0.4px solid #0032A0;
+    padding: 20px 0px;
+    /* border-radius: 16px; */
+    /* border-top: 2px solid #2272F4; */
     margin-top: 4em;
     margin-bottom: 2em;
 }
 
-.sectionBox p {
+.sectionB{
+    border-top: 2px solid #2272F4;
+}
+
+/* .secRow{
+    d
+} */
+
+.sectionB .circle{
+    border-radius: 100%;
+    border: 2px solid #2272F4;
+    width: 9px;
+    height: 9px;
     text-align: left;
-    margin-top: -33px;
-    color: #0032A0;
-    width: fit-content;
-    text-transform: uppercase;
+    margin-top: -5px;
     background: #F0F4FD;
+}
+
+.sectionBox p {
+    /* text-align: left;
+    margin-top: -33px;
+    
+    width: fit-content; */
+    text-transform: lowercase;
+    /* background: #F0F4FD;
     padding: 0 10px;
-    font-weight: 700;
+    font-weight: 700; */
+    color: #2272F4;
+    font-size: 20px;
+}
+
+.sectionBox p:first-letter {
+    text-transform: uppercase;
 }
 
 .sectionBox.white p{

@@ -125,7 +125,6 @@ const PendingRequests = () => {
                         minHeight: 300,
                         padding: "50px",
                         margin: "1em",
-                        backgroundColor: "white",
                     }}
                 >
                     <Row>

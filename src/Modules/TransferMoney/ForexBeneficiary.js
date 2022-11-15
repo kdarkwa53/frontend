@@ -40,23 +40,30 @@ const ForexBeneficiary = () => {
                                 >
 
 
+                                    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <div className={Styles.sectionBox}>
                                         <p>Destination Account</p>
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                        </div>
 
                                         <InternationalBankTransferForm type={'forex'}  />
                                     </div>
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton}>
+                                   
                                             <Button
                                                 type="primary"
-                                                block
+                                                style={{width: "400px"}}
                                                 htmlType="submit"
+                                                shape="round"
                                                 size="large"
                                             >
                                                 Continue
                                             </Button>
-                                        </div>
+                               
                                     </div>
+                                  
                                 </Form>
 
                             </>

@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BriefCase, WalletIcon, Chart2, LogOutIcon, People, ShieldSecurityIcon, UserTag2, Radar } from "../../JavIcons"
+import { BriefCase, WalletIcon, Chart2, LogOutIcon, People, ShieldSecurityIcon, UserTag2, Radar, Stack, WalletIconDas, RocketLaunch, UsersIcon, ListChecks, UserListsIcon } from "../../JavIcons"
 import { Link } from "react-router-dom";
 import { Menu, Divider } from "antd";
 import Styles from "../../Menu/Menu.module.css"
@@ -73,7 +73,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
             menu: <SideMenuItem
                 style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/user-management")}
-                icon={<UserTag2 width={'1.5em'} height={'1.5em'} />}
+                icon={<ListChecks width={'1.5em'} height={'1.5em'} />}
                 text={"Users"}
             />,
             id: 1
@@ -83,7 +83,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
             menu: <SideMenuItem
                 style={current_route === "/role-management" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/role-management")}
-                icon={<ShieldSecurityIcon width={'1.5em'} height={'1.5em'} />}
+                icon={<UserListsIcon width={'1.5em'} height={'1.5em'} />}
                 text={"Roles"}
             />,
             id: 2
@@ -95,14 +95,14 @@ const BusinessSideMenu = ({ menuRoute}) => {
             <SideMenuItem 
                 style={current_route === "/" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/")}
-                icon={<Chart2 className={Styles.menuIcon} width="1.5em" height="1.5em" />}
+                icon={<Stack className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={text.DASHBOARD}
             />
            
             <SideMenuItem
                 style={current_route === "/business/wallet" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/wallet")}
-                icon={<WalletIcon className={Styles.menuIcon} stroke="iconStroke" width="1.5em" height="1.5em" />}
+                icon={<WalletIconDas className={Styles.menuIcon} stroke="iconStroke" width="1.5em" height="1.5em" />}
                 text={text.WALLET}
             />
             <SideMenuItem
@@ -114,14 +114,14 @@ const BusinessSideMenu = ({ menuRoute}) => {
             <SideMenuItem
                 style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/requests")}
-                icon={<Radar className={Styles.menuIcon} width="1.5em" height="1.5em" />}
+                icon={<RocketLaunch className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={"Pending Requests"}
             />
             
      
 
             <MenuDropdownItem
-                head={{ title: "User Management", icon: <People width={'1.5em'} height={'1.5em'} /> }}
+                head={{ title: "User Management", icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}
                 items={menu_items}
             />
             <div className={Styles.bottomMenu}>

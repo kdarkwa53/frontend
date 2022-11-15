@@ -78,6 +78,20 @@
     background : #FBFBFB;
     margin: 0.5em 0;
 }
+.ant-table-header{
+    border-radius: 16px 16px 0 0 !important
+}
+
+table td {
+    font-weight: 450 !important;
+font-size: 20px !important;
+line-height: 26px !important;
+}
+
+.ant-table-thead > tr > th{
+    font-size: 16px !important;
+}
+
 .ant-menu-inline {
     border-right: none !important;
 }

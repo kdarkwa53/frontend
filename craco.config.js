@@ -23,11 +23,14 @@ module.exports = {
                             '@modal-mask-bg': "background: rgba(35, 36, 39, 0.6);",
                             '@select-single-item-height-lg': '56px',
                             '@select-background': '#F7F7F7',
-                            '@checkbox-border-radius': '1px',
                             '@checkbox-color': '#2D9319',
                             '@btn-disable-color': '#FFFFFF',
                             '@btn-disable-bg': '#AFB3BD',
-                            '@btn-disable-border': '#AFB3BD'
+                            '@btn-disable-border': '#AFB3BD',
+                            '@table-font-size': '16px',
+                            '@table-header-bg': '#000638',
+                            '@table-header-color': "#BAC0CD",
+                            "@table-border-radius-base": "16px"
                         },
                         javascriptEnabled: true,
                     },

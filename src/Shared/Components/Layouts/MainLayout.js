@@ -3,29 +3,39 @@ import { Route } from "react-router-dom";
 import { Layout } from "antd";
 import MenuBar from "../Menu/Menu";
 import Styles from "../Menu/Menu.module.css"
+import SiderLayout from "./SiderLayout";
+import DefaultMenu from "../Menu/DefaultMenu";
 
 
 
 
-const MainLayout = ({ children, title, ...rest }) => {
+const MainLayout = ({ children, menuRoute, subtitle, breadSub, title, ...rest }) => {
 
 
 
     const { Header } = Layout
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Layout className="site-layout" >
-                <Header style={{
-                    position: 'fixed', padding: 0, background: "white", width: "100%", boxShadow: "0 10px 20px rgba(161, 161, 161, 0.2)", zIndex: 2
-                }} >
-                    <MenuBar />
-                </Header>
-                <div style={{ background: "#ffffff", minHeight: "100vh" }}>
+        <SiderLayout menuRoute={menuRoute} >
+            <Layout className={`${Styles.rightSiderLayout} site-layout`} >
+            <div className={Styles.headerTop}>
+                    <div className={Styles.defaultMenu}>
+                        <DefaultMenu />
+                    </div>
+                </div>
+                <div style={{ background: "#E0EAFF" }}>
+                    <div style={{padding: "1.5em 1.5em"}} className={Styles.runningHeader}>
+                        <div style={{marginTop: "2em"}} className={Styles.runningTitle}>
+                            <span style={{fontWeight: "700", fontSize: "28px", color: "white"}}>{title}</span> 
+                        </div>
+                        <div style={{color: "#BFC5D2"}} className={Styles.breadcrumb}>
+                            {subtitle} {breadSub ? <span style={{fontWeight: "700"}}>{breadSub}</span> : "" }  
+                        </div>
+                    </div>
 
                     <div className={Styles.layoutContainer}>
 
-                        <div style={{ marginTop: "8em" }}>
+                        <div style={{ marginTop: "-3em" }}>
                             {children}
                         </div>
                     </div>
@@ -33,16 +43,16 @@ const MainLayout = ({ children, title, ...rest }) => {
 
                 <div className="alan-btn"> </div>
             </Layout>
-        </Layout>
+        </SiderLayout>
     );
 }
 
-const MainLayoutRoute = ({ component: Component, title, ...rest }) => {
+const MainLayoutRoute = ({ component: Component, title, subtitle, breadSub, ...rest }) => {
     return (
         <Route
             {...rest}
             render={(props) => (
-                <MainLayout title={title}>
+                <MainLayout title={title} subtitle={subtitle} breadSub={breadSub} >
                     <Component {...props} />
                 </MainLayout>
             )}

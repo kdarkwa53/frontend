@@ -267,25 +267,32 @@ const SendMoneyInt = (props) => {
                                 >
                                     <div className={Styles.sectionBox}>
                                         <p>Sending Info</p>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Sending From</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name={"from_account"}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <JavolinAccounts setsourcewallet={setsourcewallet} />
-                                                </Form.Item>
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
                                             </div>
                                         </div>
 
+                                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+
+                                            <div className={Styles.itemRow}>
+                                                <div className={Styles.inputLabel}>Sending From</div>
+                                                <div className={Styles.inputContainer}>
+                                                    <Form.Item
+                                                        name={"from_account"}
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
 
 
-                                        <div className={Styles.itemRow}>
+                                            <div className={Styles.itemRow}>
                                             <div className={Styles.inputLabel}>Beneficiary</div>
                                             <div className={Styles.inputContainer}>
                                                 <Form.Item
@@ -362,6 +369,7 @@ const SendMoneyInt = (props) => {
                                                 </Row>
                                             </div>
                                         </div>
+
                                         <div className={Styles.itemRow}>
                                             <div className={Styles.inputLabel}> Rate  </div>
                                             <div className={Styles.inputContainer}>
@@ -379,35 +387,44 @@ const SendMoneyInt = (props) => {
                                                         </Button>
                                                     </Col>
                                                 </Row>
-                                                {showTimer ? (
-                                                    <Timer reset={expireRate} />
-                                                ) : ""}
-                                            </div>
+                                                        {showTimer ? (
+                                                            <Timer reset={expireRate} />
+                                                        ) : ""}
+                                                    </div>
                                         </div>
-                                    </div>
-                                    <Form.Item
+                                        <div className={Styles.itemRow}>
+                                        <Button
+                                            type="primary"
+                                            shape='round'
+                                            style={{width: "400px"}}
+                                            block
+                                            htmlType="submit"
+                                            size="large"
+                                            loading={bookingRate}
+                                            disabled={disableContinue}
 
-                                        name="quote_id"
-
-                                    >
-                                        <Input hidden />
-                                    </Form.Item>
-
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton2}>
-                                            <Button
-                                                type="primary"
-                                                block
-                                                htmlType="submit"
-                                                size="large"
-                                                loading={bookingRate}
-                                                disabled={disableContinue}
-
-                                            >
-                                                Continue
-                                            </Button>
+                                        >
+                                            Continue
+                                        </Button>
                                         </div>
-                                    </div>
+                        
+                                        
+
+                                        </div>
+
+
+
+
+                                         </div>
+                                                <Form.Item
+
+                                                    name="quote_id"
+
+                                                >
+                                                    <Input hidden />
+                                                </Form.Item>
+
+                                              
                                 </Form>
 
                             </>

@@ -41,7 +41,7 @@ const NewWallet = ()=>{
                     {/* <PlusIcon width="2em" height="2em" color="#5D6066" /> */}
                 </div>
                 <div className={Styles.addNewText}>
-                    Add
+                    Add Account
                 </div>
             </div>
         {/* </div> */}

@@ -40,7 +40,7 @@ const FundWallet = () => {
     const [destination, setDestination] = useState('')
     const [sourceWallet, setsourcewallet] = useState('')
     const [approving, showApproving] = useState(false)
-    const dispatch  = useDispatch()
+    const dispatch = useDispatch()
 
 
 
@@ -57,7 +57,7 @@ const FundWallet = () => {
     }
     const onFinish = (values) => {
 
-        if (destination === "momo"){
+        if (destination === "momo") {
             try {
                 dispatch(getTransactionFee({
                     "module": "JAVOLIN_TOP_UP",
@@ -91,13 +91,13 @@ const FundWallet = () => {
             } catch (error) {
                 dispatch(showErrorNotification('An error occurred. Try again later!'))
             }
-        }else{
+        } else {
             setDetails(values)
             setPasscode(true)
         }
 
 
-       
+
 
     }
 
@@ -115,13 +115,13 @@ const FundWallet = () => {
 
     const myStylesheet = {
 
-    item: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between"
+        item: {
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between"
+        }
     }
-}
-    
+
 
     return (
         <Content>
@@ -141,7 +141,7 @@ const FundWallet = () => {
                                     setPassCodeVisible={setPasscode}
                                     details={details}
                                     form={form}
-                                    action={destination==="momo" ? makeDeposit : getPrepaidLink}
+                                    action={destination === "momo" ? makeDeposit : getPrepaidLink}
                                     buttonloading={destination === "momo" ? btnLoading : getLoading}
                                     approving={approving}
                                     showApproving={showApproving}
@@ -154,105 +154,119 @@ const FundWallet = () => {
                                     onFinish={onFinish}
                                 >
 
-                                    <div className={Styles.sectionBox}>
-                                        <p>Funding Source</p>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Fund from</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name="source"
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder="destination">
-                                                        <Option value="momo">Mobile Money (Momo) </Option>
-                                                        <Option value="card"> New Debit/Credit Card </Option>
-                                                        {/* <Option value="bank"> <div style={myStylesheet.item}> <div>Bank Account </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option> */}
-                                                        <Option value="cash"> <div style={myStylesheet.item}> <div> Cash </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option>
+                                    <div style={{ display: "flex", justifyContent: "center" }}>
+                                        <div className={Styles.sectionBox}>
+                                            <p>Funding Source</p>
+                                            <div className={Styles.secRow}>
+                                                <div className={Styles.sectionB}>
+                                                    <div className={Styles.circle}></div>
+                                                </div>
 
-                                                    </Select>
-                                                </Form.Item>
                                             </div>
-                                        </div>
+                                            <div className={Styles.itemRow}>
+                                                <div className={Styles.inputLabel}>Fund from</div>
+                                                <div className={Styles.inputContainer}>
+                                                    <Form.Item
+                                                        name="source"
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder="destination">
+                                                            <Option value="momo">Mobile Money (Momo) </Option>
+                                                            <Option value="card"> New Debit/Credit Card </Option>
+                                                            {/* <Option value="bank"> <div style={myStylesheet.item}> <div>Bank Account </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option> */}
+                                                            <Option value="cash"> <div style={myStylesheet.item}> <div> Cash </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option>
 
-                                        {sendingTo[destination]?.form}
+                                                        </Select>
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+                                            {sendingTo[destination]?.form}
+                                        </div>
                                     </div>
+
 
                                     <Divider>
                                         <ArrowDownCircle width="2em" color="#63B344" />
                                     </Divider>
 
-                                    <div className={Styles.sectionBox}>
-                                        <p>Funding Details</p>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Funding Destination</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name={"account"}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <JavolinAccounts setsourcewallet={setsourcewallet} />
-                                                </Form.Item>
+                                    <div style={{ display: "flex", justifyContent: "center" }}>
+                                        <div className={Styles.sectionBox}>
+                                            <p>Funding Details</p>
+                                            <div className={Styles.secRow}>
+                                                <div className={Styles.sectionB}>
+                                                    <div className={Styles.circle}></div>
+                                                </div>
+
                                             </div>
-                                        </div>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Amount</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name="amount"
-                                                    rules={[
-                                                        { required: true },
-                                                        {
-                                                            pattern: /^[1-9]+[0-9]*$/,
-                                                            message: `Input invalid`
-                                                        }
-                                                    ]}
-                                                >
-                                                    <Input prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
-                                                </Form.Item>
+                                            <div className={Styles.itemRow}>
+                                                <div className={Styles.inputLabel}>Funding Destination</div>
+                                                <div className={Styles.inputContainer}>
+                                                    <Form.Item
+                                                        name={"account"}
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                                    </Form.Item>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Note <span style={{ color: "#888B93" }}>(optional)</span> </div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name="note"
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
-                                                </Form.Item>
+                                            <div className={Styles.itemRow}>
+                                                <div className={Styles.inputLabel}>Amount</div>
+                                                <div className={Styles.inputContainer}>
+                                                    <Form.Item
+                                                        name="amount"
+                                                        rules={[
+                                                            { required: true },
+                                                            {
+                                                                pattern: /^[1-9]+[0-9]*$/,
+                                                                message: `Input invalid`
+                                                            }
+                                                        ]}
+                                                    >
+                                                        <Input prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
+                                                    </Form.Item>
+                                                </div>
                                             </div>
-                                        </div>
+
+                                            <div className={Styles.itemRow}>
+                                                <div className={Styles.inputLabel}>Note <span style={{ color: "#888B93" }}>(optional)</span> </div>
+                                                <div className={Styles.inputContainer}>
+                                                    <Form.Item
+                                                        name="note"
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
 
 
 
 
-                                    </div>
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton2} >
-                                            <Button
-                                                type="primary"
-                                                block
-                                                htmlType="submit"
-                                                size="large"
-                                                loading={feeLoading}
-                                            >
-                                                Fund Wallet
-                                            </Button>
                                         </div>
                                     </div>
+
+                                    <Button
+                                        type="primary"
+                                        block
+                                        htmlType="submit"
+                                        size="large"
+                                        loading={feeLoading}
+                                    >
+                                        Fund Wallet
+                                    </Button>
                                 </Form>
 
                             </>

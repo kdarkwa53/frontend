@@ -15,7 +15,7 @@ import Pin from "../../Shared/Components/Pin"
 import SetSecurityQuestions from '../../Shared/Components/SetSecurityQuestions/SetSecurityQuestions';
 import WalletCard from '../../Shared/Components/WalletCard/WalletCard';
 import SimpleCard from '../../Shared/Components/SimpleCard/SimpleCard';
-import { CreditArrow, DebitArrow, DepositIcon, MobileAirtimeIcon, SendMoneyIcon, TransferIcon } from '../../Shared/Components/JavIcons';
+import { Cash, CreditArrow, DebitArrow, DepositIcon, MobileAirtimeIcon, Money, MoneyExchange, SendMoneyIcon, TransferDasIcon, TransferIcon } from '../../Shared/Components/JavIcons';
 import CurrencyConverter from '../../Shared/Components/Layouts/Components/CurrencyConverter';
 import Circle from '../../Shared/Components/Circle/Circle';
 import DashboardTitleRow from './Components/DashboardTitleRow';
@@ -28,7 +28,7 @@ const BusDashboard = () => {
     const text = useSelector((state) => state?.language)
 
     const userDetails = useSelector((state) => state?.user)
-    const vis = userDetails?.app_passcode ? true : true
+    const vis = userDetails?.app_passcode ? false : true
     const [isPinSetVisible, setIsPinSetVisible] = useState(vis)
     const business_kyc = userDetails?.business_kyc
 
@@ -44,9 +44,6 @@ const BusDashboard = () => {
 
     const default_wallet = userDetails?.default_savings_wallet
 
-
-    console.log("hs: ", user?.default_savings_wallet?.current_balance)
-    console.log("hs: ", user?.default_savings_wallet?.account_number)
 
 
     const columns = [
@@ -148,17 +145,7 @@ const BusDashboard = () => {
 
                 </Row>
                 <SetSecurityQuestions isVisible={showSC} setIsModalVisible={setSC} />
-                <div className={Styles.customDash}>
-                    <div className={Styles.walletTop}>
-                        {/* <WalletCard
-                            accountBalance={default_wallet?.current_balance}
-                            accountNumber={default_wallet?.account_number}
-                            accountName={default_wallet?.name}
-                            currency_id={default_wallet?.currency_id}
-                        /> */}
-
-                    </div>
-                </div>
+                
 
                 
                 
@@ -167,10 +154,10 @@ const BusDashboard = () => {
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                     <DashboardTitleRow title={"Javolin Services"} />
                         <div className={Styles.products}>
-                            <JavProductCard subTitle={text.PAYMENT_SENDMONEY} link={'/business/payments'} icon={<img src={Payments} alt={text.PAYMENT_SENDMONEY} />} color="#BC416B" />
-                            <JavProductCard subTitle={text.FOREIGN_EXCHANGE} icon={<SendMoneyIcon width="3em" height="3em" color="#ffffff" />} link="/business/forex" color="#007451" />
-                            <JavProductCard link="/business/transfer" subTitle={text.TRANSFER_MONEY} icon={<TransferIcon width="3em" height="3em" color="#ffffff" />} color="#FFA621" />
-                            <JavProductCard link="/business/fund-wallet" subTitle={text.FUND_MY_WALLET} icon={<DepositIcon width="3em" height="3em" color="#ffffff" />} color="#EE735D" />
+                            <JavProductCard subTitle={text.PAYMENT_SENDMONEY} link={'/business/payments'} icon={<Money width="5em" height="5em" color="#ffffff" />} color="#BC416B" />
+                            <JavProductCard subTitle={text.FOREIGN_EXCHANGE} icon={<MoneyExchange width="5em" height="5em" color="#ffffff" />} link="/business/forex" color="#007451" />
+                            <JavProductCard link="/business/transfer" subTitle={text.TRANSFER_MONEY} icon={<TransferDasIcon width="6em" height="6em" color="#ffffff" />} color="#FFA621" />
+                            <JavProductCard link="/business/fund-wallet" subTitle={text.FUND_MY_WALLET} icon={<Cash width="5em" height="5em" color="#ffffff" />} color="#EE735D" />
                         </div>
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -227,7 +214,7 @@ const BusDashboard = () => {
                     columns={columns}
                     dataSource={tableData}
                     loading={appData?.gettingSavings}
-                    scroll={{ y: 200, }}
+                    scroll={{ y: 400, }}
                 />
             </Row>
 

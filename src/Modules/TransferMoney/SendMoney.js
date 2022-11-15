@@ -310,9 +310,16 @@ const SendMoney = (props) => {
 
 
                                     <div className={Styles.sectionBox}>
-                                        <p>Destination</p>
+                                    <p>Destination</p>
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                        </div>
+                                       
                                         
-                                        <div className={Styles.itemRow}>
+                                        <   div style={{display: "flex", justifyContent:"center"}}>
+                                            <div className={Styles.itemRow}>
                                             <div className={Styles.inputLabel}>Send to</div>
 
                                             <div className={Styles.inputContainer}>
@@ -331,29 +338,21 @@ const SendMoney = (props) => {
                                                         <Option value="bank">Bank Account</Option>
                                                     </Select>
                                                 </Form.Item>
-                                            </div>
-                                        </div>
+                                                {tnxType[destination]?.form}
+                                                    {/* show the local or international form */}
+                                                    { bankTranxType[showLocal]}
+                                                    </div>
 
-                                       
-
-                                        {tnxType[destination]?.form}
-                                        {/* show the local or international form */}
-                                        { bankTranxType[showLocal]}
-                                    
-                                    </div>
-                                   
-                                    {tnxType[destination]?.send_from}
-                                    
-                                    {showLocal === 'local'? (
-                                        <>
-                                            <SendFrom />
-                                        </>
-                                       
-                                    ) : ""} 
-
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton}>
-                                            <Button
+                                                    {tnxType[destination]?.send_from}
+                                                    
+                                                    {showLocal === 'local'? (
+                                                        <>
+                                                            <SendFrom />
+                                                        </>
+                                                    
+                                                    ) : ""} 
+                                                <Button
+                                                shape="round"
                                                 type="primary"
                                                 block
                                                 htmlType="submit"
@@ -363,8 +362,24 @@ const SendMoney = (props) => {
                                             >
                                                 Continue
                                             </Button>
-                                        </div>
+                                            </div>
+                                                    
+
+                                   
+                                           
+                                    
+
+                                         </div>
+                                        
+                                        
+                                        
+                                       
+
+                                       
+                                    
                                     </div>
+                                   
+                                    
                                 </Form>
 
                             </>
