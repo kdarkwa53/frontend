@@ -3,9 +3,10 @@ import Styles from "./Menu.module.css";
 import React from "react";
 import UserMenu from "./UserMenu";
 // import LangDropDown from "../LangDropDown";
-import Logo from "../../../assets/javolin_logo.png"
+import Logo from "../../../assets/javolin_logo.png" 
 import LangDropDown from "../LangDropDown";
-import { NotificationIcon } from "../JavIcons";
+import { CaretDown, NotificationIcon } from "../JavIcons";
+import { Avatar } from "antd";
 
 
 
@@ -23,6 +24,7 @@ const DefaultMenu = () => {
                                 </div>
                             <div className={Styles.langMenu}>
                                 <LangDropDown />
+                                
                             </div>
 
 

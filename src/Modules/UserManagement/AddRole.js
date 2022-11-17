@@ -42,7 +42,7 @@ const AddRole = ({ isVisible, setIsModalVisible})=>{
     return(
         <>
            
-            <Button onClick={showModal} type="primary" size="large" shape="round" >
+            <Button style={{background: "#0032A0", fontSize: "16px"}} onClick={showModal} type="primary" size="large" shape="round" >
                             Add new role
                         </Button>
             <Modal

@@ -27,11 +27,13 @@ const RoleItem = ({perm, selectedPerm, setSelectedPerm})=>{
             padding: "10px"
         },
         clicked:{
-            color: '#000C26',
-            border: "1px solid #0032A0",
+            color: '#FFFFFF',
             marginTop: "5px",
             padding: "10px",
-            cursor: "pointer"
+            cursor: "pointer",
+            borderRadius: "4px",
+            border: "1px solid #3DA31F",
+            background: "#3DA31F"
         },
         default:{
             color: '#000C26',

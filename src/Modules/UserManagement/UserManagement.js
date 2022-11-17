@@ -1,6 +1,6 @@
 import {  Layout, ConfigProvider, Table, Row, Tag } from "antd";
 import React, { useState } from "react";
-import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
+import { Edit, Edit2Icon, Trash, TrashIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { EyeOutlined } from "@ant-design/icons";
 import {  useSelector } from "react-redux";
@@ -10,6 +10,16 @@ import AddUser from "./AddUser";
 
 const UserManagement = () => {
     const { Content } = Layout;
+    const [editUser, setEditUser] = useState(false)
+
+    const handleEdit = (user)=>{
+       setEditUser(user.id)
+       setIsModalVisible(true)
+    }
+
+    const handleDelete = ()=>{
+        
+    }
  
 
     const users = useSelector((state) => state?.userMgt?.users)
@@ -42,23 +52,28 @@ const UserManagement = () => {
             dataIndex: "phone",
             key: "phone",
         },
+        {
+            title: "Role",
+            dataIndex: "role",
+            key: "role",
+        },
        
         {
             title: "Action",
             key: "action",
-            render: () => {
+            render: (id) => {
                 return (
                     <>
 
-                        <Tag style={{ color: '#071CD4', padding: "10px" }} color="#E1E4FE" >
-                            <EyeOutlined />
-                        </Tag>
+                  
 
-                        <Tag style={{ color: '#008000', padding: "10px" }} color="#E0FFE0" >
-                            <Edit2Icon height={'1em'} width={'1em'} color='#008000' />
+                        <Tag key={id} onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
+                            <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
+                            Edit
                         </Tag>
-                        <Tag style={{ color: '#FF0000', padding: "10px" }} color="#FFE0E0" >
-                            <TrashIcon height={'1em'} width={'1em'} color='#FF0000' />
+                        <Tag key={id} style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
+                            <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
+                            delete
                         </Tag>
                     </>
                 );
@@ -73,6 +88,7 @@ const UserManagement = () => {
                 full_name: user.full_name,
                 email: user.email,
                 phone: user.phone_number,
+                id: user.id
                 
             };
         })
@@ -93,7 +109,7 @@ const UserManagement = () => {
                         <div className={Styles.title}>
                             User List
                         </div>
-                        <AddUser isVisible={isVisible} setIsModalVisible={setIsModalVisible}/>
+                        <AddUser editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible}/>
                     </div>
                 <Row style={{marginTop: "2em"}}>
                             <ConfigProvider renderEmpty={customizeRenderEmpty}>

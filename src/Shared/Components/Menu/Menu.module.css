@@ -1,7 +1,7 @@
 .logoWrapper {
-    text-align: center;
+    text-align: left;
     padding: 1em;
-    margin-bottom: 1em;
+    margin: 0 0 1em 1.5em;
 }
 
 .logo {
@@ -12,15 +12,19 @@
 
 .userName {
     margin-right: 1em;
-    margin-left: 1em;
-    border-left: 1px solid #C4D7E8;
-    padding-left: 1em;
+    margin-left: 0.5em;
     height: 30px;
     display: flex;
     align-items: center;
-
+    cursor: pointer;
 }
 
+.userDetails{
+    border: 0.4px solid #BAC0CD;
+    border-radius: 100px;
+    padding: 5px;
+    margin-left: 1em;
+}
 
 
 
@@ -275,7 +279,12 @@ font-size: 24px;
 }
 
 .langMenu {
-    margin-right: 2em;
+    margin-right: 1em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .bottomMenu {
@@ -518,7 +527,7 @@ color: #888B93;
 }
 
 .defaultMenu{
-    margin-right: 250px;
+    margin-right: 288px;
 }
 
 .topNav{

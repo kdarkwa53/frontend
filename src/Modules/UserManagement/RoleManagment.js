@@ -1,9 +1,10 @@
 import { Layout, Row, ConfigProvider, Table, Tag } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Edit, Edit2Icon, Trash, TrashIcon } from "../../Shared/Components/JavIcons";
 import AddRole from "./AddRole";
+import { getRoles } from "./duck/action";
 
 import Styles from "./UserMgt.module.css"
 
@@ -14,8 +15,11 @@ const RoleManagement = () => {
     const { Content } = Layout;
 
     const [isVisible, setIsModalVisible] = useState(false)
+    const dispatch = useDispatch()
 
-
+    useEffect(()=>{
+        dispatch(getRoles())
+    })
     const roles = useSelector((state) => state.userMgt.roles)
 
     const customizeRenderEmpty = () => (
@@ -43,7 +47,7 @@ const RoleManagement = () => {
                     permissions.map((per) => {
                         return (
 
-                            <Tag style={{ color: '#000C26', marginTop: "5px", padding: "10px" }} color='#EBEDF1' key={per.id}>
+                            <Tag className={Styles.permTile} style={{ color: '#000C26', marginTop: "5px", padding: "10px", borderRadius: "4px", border: "1px solid #3DA31F" }} color='#ECF7E8' key={per.id}>
                                 {per.name}
                             </Tag>
                         )
@@ -57,15 +61,13 @@ const RoleManagement = () => {
             render: () => {
                 return (
                     <>
-                        {/* <Button type="primary">Edit</Button>
-                        */}
-                        <Tag style={{ color: '#008000', padding: "10px" }} color="#E0FFE0" >
+                        <Tag style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
+                            <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
                             Edit
-                            <Edit2Icon height={'1em'} width={'1em'} color='#008000' />
                         </Tag>
-                        <Tag style={{ color: '#FF0000', padding: "10px" }} color="#FFE0E0" >
+                        <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
+                            <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
                             delete
-                            <TrashIcon height={'1em'} width={'1em'} color='#FF0000' />
                         </Tag>
                     </>
                 );

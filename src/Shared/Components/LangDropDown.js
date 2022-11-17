@@ -1,19 +1,70 @@
-import { Select } from "antd"
+import { Avatar, Dropdown, message, Select } from "antd"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { changeLanguage } from "../actions/actions"
+import { CaretDown } from "./JavIcons"
+import en_flag from "../../assets/usflag.png"
+import fr_flag from "../../assets/frflag.png"
 
 const LangDropDown = () => {
+    const langAdrr = {
+        EN: {
+            name: "EN",
+            flag: en_flag
+        },
+        FR: {
+            name: "FR",
+            flag: fr_flag
+        }
+    }
+
+    const items = [
+        {
+            label: 'EN',
+            key: 'EN',
+            icon: <Avatar src={langAdrr["EN"].flag} />
+ 
+        },
+        {
+            label: 'FR',
+            key: 'FR',
+            icon: <Avatar src={langAdrr["FR"].flag} />
+
+        },
+
+    ];
     const dispatch = useDispatch()
     const state = useSelector((state) => state.language)
+    const [lang, setLang] = useState(state.selectedLang)
+
     const handleLangChange = (val) => {
-        dispatch(changeLanguage(val))
+        // dispatch(changeLanguage(val))
+        console.log("df")
     }
-    const { Option } = Select
+
+    const onClick = ({ key }) => {
+        setLang(key)
+        dispatch(changeLanguage(key))
+      };
+
     return (
-        <Select defaultValue={state.selectedLang} onChange={handleLangChange}>
-            <Option value="EN">EN</Option>
-            <Option value="FR">FR</Option>
-        </Select>
+      
+  
+        <Dropdown
+            menu={{
+                items,
+                onClick
+            }}
+            trigger={['click']}
+        >
+                <div style={{display: "flex", alignItems:"center"}} >
+                <Avatar src={langAdrr[lang].flag} />
+                <span style={{ fontSize: "20px", margin: "0 5px", color: "#3B404A" }}>{lang}</span>
+                <CaretDown width={"1em"} color="#3B404A" />
+                </div>
+        </Dropdown>
+        
+
     )
 }
 

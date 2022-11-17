@@ -26,7 +26,8 @@ import {
   APPROVE_TRANX_ERROR,
   DECLINE_TRANX_SUCCESS,
   DECLINE_TRANX_REQUEST,
-  DECLINE_TRANX_ERROR
+  DECLINE_TRANX_ERROR,
+  EDIT_USER_SUCCESS
 } from "./types"
 
 
@@ -178,6 +179,27 @@ export const getUsers = () => {
           }
       }
   };
+}
+
+export const updateBusUser = (details, id)=>{
+    return async (dispatch) => {
+        dispatch({
+            type: ADDING_USER_REQUEST,
+        });
+
+        try {
+            dispatch({
+                type: EDIT_USER_SUCCESS,
+                data : details,
+                id:id
+            });
+            dispatch(showSuccessNotification('Updated successfully'))
+        } catch (error) {
+            dispatch(showErrorNotification('Error occured'))
+        }
+    }
+
+
 }
 
 export const addingUser = (details) => {

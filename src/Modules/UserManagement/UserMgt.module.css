@@ -28,3 +28,24 @@ color: #00050E;
     line-height: 31px;
     color: #FFFFFF;
     }
+
+.permTile{
+border: 1px solid #3DA31F;
+border-radius: 4px;
+ margin-top: "5px";
+  padding: "10px"
+}
+
+.editButton{
+
+}
+
+.actionBtn{
+    color: '#FFFFFF';
+    padding: "5px 10px";
+    border-radius: "20px";
+    font-size: "16px";
+}
+.delete{
+
+}

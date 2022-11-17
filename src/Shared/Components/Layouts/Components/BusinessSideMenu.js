@@ -105,12 +105,12 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 icon={<WalletIconDas className={Styles.menuIcon} stroke="iconStroke" width="1.5em" height="1.5em" />}
                 text={text.WALLET}
             />
-            <SideMenuItem
+            {/* <SideMenuItem
                 style={current_route === "/business/profile" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/profile")}
                 icon={<Chart2 className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={text.PROFILE}
-            />
+            /> */}
             <SideMenuItem
                 style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/requests")}
@@ -124,7 +124,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 head={{ title: "User Management", icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}
                 items={menu_items}
             />
-            <div className={Styles.bottomMenu}>
+            {/* <div className={Styles.bottomMenu}>
                 <Divider />
                 <Menu mode="inline" >
                     <Menu.Item key="2" icon={<LogOutIcon className={Styles.menuIcon} stroke="iconStroke" width="1em" height="1em" />}>
@@ -133,7 +133,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                         </Link>
                     </Menu.Item>
                 </Menu>
-            </div>
+            </div> */}
         </>
     )
 }

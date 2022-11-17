@@ -24,7 +24,8 @@ import {
   APPROVE_TRANX_ERROR,
   DECLINE_TRANX_SUCCESS,
   DECLINE_TRANX_REQUEST,
-  DECLINE_TRANX_ERROR
+  DECLINE_TRANX_ERROR,
+ EDIT_USER_SUCCESS
 } from "./types"
 
 
@@ -103,6 +104,17 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
         users: {
           ...state.users,
           ...action.data
+        },
+        addingUser: false,
+      };
+    case EDIT_USER_SUCCESS:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+         [action.id]:{
+          ...action.data
+          }
         },
         addingUser: false,
       };
