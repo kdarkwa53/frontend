@@ -22,7 +22,6 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
 
     const handleCancel = () => {
         setIsModalVisible(false)
-        form.resetFields()
     }
 
     const showModal = () => {

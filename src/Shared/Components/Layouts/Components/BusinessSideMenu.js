@@ -11,6 +11,7 @@ import { userLogout } from "../../../../Modules/Login/duck/action";
 import { setCurrentRoute } from "../../duck/action";
 import MenuDropdownItem from "./MenuDropdownItem";
 import SideMenuItem from "./MenuItem";
+import AccessControl from "../../AccessControl/AccessControl";
 
 const BusinessSideMenu = ({ menuRoute}) => {
 
@@ -37,7 +38,14 @@ const BusinessSideMenu = ({ menuRoute}) => {
     const items = [
    
         getItem('User Management', '/user', <People width={'1.5em'} height={'1.5em'} />, [
-            getItem('User', '/user-management', <UserTag2 width={'1.5em'} height={'1.5em'}/>),
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['']}
+                userPermissions={['VIEW_DASHBOARD']}
+            >
+                {getItem('User', '/user-management', <UserTag2 width={'1.5em'} height={'1.5em'}/>)}
+            </AccessControl>
+            ,
             getItem('Role', '/role-management', <ShieldSecurityIcon width={'1.5em'} height={'1.5em'}/>),
         ]),
        
@@ -69,13 +77,23 @@ const BusinessSideMenu = ({ menuRoute}) => {
     }
 
     const menu_items = [
+        
         {
-            menu: <SideMenuItem
-                style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}
-                onClick={(e) => handleMenuClick("/user-management")}
-                icon={<ListChecks width={'1.5em'} height={'1.5em'} />}
-                text={"Users"}
-            />,
+            menu: 
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['VIEW_DASHBOARD']}
+                userPermissions={['VIEW_DASHBOARD']}
+            >
+            <SideMenuItem
+                            style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}
+                            onClick={(e) => handleMenuClick("/user-management")}
+                            icon={<ListChecks width={'1.5em'} height={'1.5em'} />}
+                            text={"Users"}
+                        />
+            </AccessControl>,
+            
+
             id: 1
               
         },
@@ -91,49 +109,59 @@ const BusinessSideMenu = ({ menuRoute}) => {
     ]
     return (
         <>
-            
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['VIEW_DASHBOARD']}
+                userPermissions={['VIEW_DASHBOARD']}
+            >
             <SideMenuItem 
                 style={current_route === "/" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/")}
                 icon={<Stack className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={text.DASHBOARD}
             />
-           
+            </AccessControl>
+            
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['VIEW_WALLET']}
+                userPermissions={['VIEW_WALLET']}
+            >
             <SideMenuItem
                 style={current_route === "/business/wallet" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/wallet")}
                 icon={<WalletIconDas className={Styles.menuIcon} stroke="iconStroke" width="1.5em" height="1.5em" />}
                 text={text.WALLET}
             />
-            {/* <SideMenuItem
-                style={current_route === "/business/profile" ? activeMenuItem : defaultMenuItem}
-                onClick={(e) => handleMenuClick("/business/profile")}
-                icon={<Chart2 className={Styles.menuIcon} width="1.5em" height="1.5em" />}
-                text={text.PROFILE}
-            /> */}
+            </AccessControl>
+            
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['VIEW_PENDING_TRANSACTIONS']}
+                userPermissions={['VIEW_PENDING_TRANSACTIONS']}
+            >
             <SideMenuItem
                 style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/requests")}
                 icon={<RocketLaunch className={Styles.menuIcon} width="1.5em" height="1.5em" />}
                 text={"Pending Requests"}
             />
+            </AccessControl>
+            
             
      
-
-            <MenuDropdownItem
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['USER_MANAGEMENT']}
+                userPermissions={['USER_MANAGEMENT']}
+            >
+                <MenuDropdownItem
                 head={{ title: "User Management", icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}
                 items={menu_items}
             />
-            {/* <div className={Styles.bottomMenu}>
-                <Divider />
-                <Menu mode="inline" >
-                    <Menu.Item key="2" icon={<LogOutIcon className={Styles.menuIcon} stroke="iconStroke" width="1em" height="1em" />}>
-                        <Link className={Styles.menuText} onClick={logout} to="/" style={{ textDecoration: "none" }}>
-                            {text.LOGOUT}
-                        </Link>
-                    </Menu.Item>
-                </Menu>
-            </div> */}
+            </AccessControl>
+            
+            
         </>
     )
 }

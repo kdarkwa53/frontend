@@ -3,9 +3,8 @@ import { useState } from "react"
 
 
 
-const RoleItem = ({perm, selectedPerm, setSelectedPerm})=>{
-    const [select, setSelect] = useState(false)
-
+const RoleItem = ({perm, allPerm, selectedPerm, setSelectedPerm})=>{
+    const [select, setSelect] = useState(allPerm? allPerm.includes(perm.id): null)
     const handleClick = (e)=>{
         if(e in selectedPerm){
             var perms = selectedPerm

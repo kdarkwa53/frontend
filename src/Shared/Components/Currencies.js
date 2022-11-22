@@ -49,6 +49,12 @@ const Currencies = () => {
                         <span className="darkGray"> Ghana cedis</span>
                     </div>
                 </Menu.Item>
+                <Menu.Item >
+                    <div >
+                        <span className="darkGray">$</span>
+                        <span className="darkGray"> USD </span>
+                    </div>
+                </Menu.Item>
             </>
             {/* ) */}
             {/* })} */}

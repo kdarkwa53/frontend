@@ -235,12 +235,9 @@ const SendMoneyInt = (props) => {
                     </div>
                 </div>
                 <div className={Styles.cardContainer}>
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
-                        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-                            {/* <h4>{counting}</h4> */}
-                            {/* <h2>
-                                {countP}
-                            </h2> */}
+                    <div style={{ width: "100%" }} className={Styles.cardContent}>
+                        <div style={{ padding: "0 3em", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                          
                             <>
                                 <ReviewPopUpInt setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
                                 <PassCode
@@ -265,138 +262,174 @@ const SendMoneyInt = (props) => {
                                         from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
                                     }}
                                 >
-                                    <div className={Styles.sectionBox}>
-                                        <p>Sending Info</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
+                                    <p style={{marginTop: "2em"}}>Destination</p>
+                                    <div className={Styles.secRow}>
+                                        <div className={Styles.sectionB}>
+                                            <div className={Styles.circle}></div>
                                         </div>
+                                    </div>
 
-                                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                                    <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label="Send to">
+                                        <Form.Item
+                                            noStyle
+                                        >
+                                            <Select style={{ width: "100%" }} size="large" defaultValue={'bank'}>
+                                                <Option value="bank">Bank</Option>
+                                            </Select>
+                                        </Form.Item>
+                                        </Form.Item>
+                                        </Col>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label="Beneficiary">
+                                            <Form.Item
+                                                name={"beneficiary_account"}
+                                                noStyle
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                    },
+                                                ]}
+                                                >
+                                                <Select size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
+                                                    <Option value={state?.id} key={state?.id}>
+                                                        <div className={`cardTile ${sel.title}`}>
+                                                            <div className="cardLeftHem">
+                                                                <div className={`cardName ${sel.lineHeight}`} >{state?.name}</div>
+                                                            </div>
+                                                            <div className="cardRightHem">
+                                                                <div className="accountNumber">
+                                                                    {state?.account_number ? state?.account_number : ""}
+                                                                </div>
+                                                                <div className="cardDesign">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Option>
 
-                                            <div className={Styles.itemRow}>
-                                                <div className={Styles.inputLabel}>Sending From</div>
-                                                <div className={Styles.inputContainer}>
-                                                    <Form.Item
-                                                        name={"from_account"}
-                                                        rules={[
-                                                            {
-                                                                required: true,
-                                                            },
-                                                        ]}
-                                                    >
-                                                        <JavolinAccounts setsourcewallet={setsourcewallet} />
-                                                    </Form.Item>
-                                                </div>
-                                            </div>
+                                                </Select>
+                                                </Form.Item>
+                                            </Form.Item>
+                                        </Col>
 
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label="Transaction Type">
+                                        <Form.Item
+                                            noStyle
+                                        >
+                                            <Select style={{ width: "100%" }} size="large" defaultValue={'international'}  placeholder="Select type">
+                                                <Option value="international">International</Option>
+                                            </Select>
+                                        </Form.Item>
+                                        </Form.Item>
+                                        
+                                        </Col>
 
-                                            <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Beneficiary</div>
-                                            <div className={Styles.inputContainer}>
+                                    </Row>
+
+                                    <p style={{marginTop: "2em"}}>Sending Info</p>
+                                    <div className={Styles.secRow}>
+                                        <div className={Styles.sectionB}>
+                                            <div className={Styles.circle}></div>
+                                        </div>
+                                    </div>
+
+                                    <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label="Sending From">
                                                 <Form.Item
-
-                                                    name={"beneficiary_account"}
+                                                    name={"from_account"}
+                                                    noStyle
                                                     rules={[
                                                         {
                                                             required: true,
                                                         },
                                                     ]}
                                                 >
-                                                    <Select size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
-                                                        <Option value={state?.id} key={state?.id}>
-                                                            <div className={`cardTile ${sel.title}`}>
-                                                                <div className="cardLeftHem">
-                                                                    <div className={`cardName ${sel.lineHeight}`} >{state?.name}</div>
-                                                                </div>
-                                                                <div className="cardRightHem">
-                                                                    <div className="accountNumber">
-                                                                        {state?.account_number ? state?.account_number : ""}
-                                                                    </div>
-                                                                    <div className="cardDesign">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Option>
-
-                                                    </Select>
+                                                    <JavolinAccounts setsourcewallet={setsourcewallet} />
                                                 </Form.Item>
-                                            </div>
-                                        </div>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label={currencies[sourceWallet?.currency_id]?.ISO ? `Amount (${currencies[sourceWallet?.currency_id]?.ISO})` : "Amount"}>
+                                            <Form.Item
+                                        name="amount"
+                                        rules={[
+                                            { required: true },
+                                            {
+                                                pattern: /^([0-9]+\.?[0-9]*|\.[0-9]+)$/,
+                                                message: `Input invalid`
+                                            }
+                                        ]}
+                                    >
 
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Amount
-                                                <span style={{ fontWeight: "bold" }} >{currencies[sourceWallet?.currency_id]?.ISO ? ` (${currencies[sourceWallet?.currency_id]?.ISO})` : ""}</span></div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name="amount"
-                                                    rules={[
-                                                        { required: true },
-                                                        {
-                                                            pattern: /^([0-9]+\.?[0-9]*|\.[0-9]+)$/,
-                                                            message: `Input invalid`
-                                                        }
-                                                    ]}
-                                                >
+                                        <InputNumber
+                                            style={{ width: "100%" }}
+                                            formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange}
+                                            size="large" name='amount'
+                                        />
+                                    </Form.Item>
+                                            </Form.Item>
+                                        </Col>
 
-                                                    <InputNumber
-                                                        style={{ width: "100%" }}
-                                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange}
-                                                        size="large" name='amount'
-                                                    />
-                                                </Form.Item>
-                                            </div>
-                                        </div>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Beneficiary Receives <span style={{ fontWeight: "bold" }} >{state?.currency ? `(${state?.currency})` : ""}</span>  </div>
-                                            <div className={Styles.inputContainer}>
-                                                <Row gutter={[32, 16]}>
-                                                    <Col xs={24} sm={24} md={12} lg={24} xl={24}>
-                                                        <Form.Item
-                                                            name="beneficiary"
-                                                            rules={[
-                                                                {
-                                                                    required: true,
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <InputNumber
-                                                                style={{ width: "100%" }}
-                                                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
-                                                        </Form.Item>
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </div>
+                                    </Row>
+                                    <Row gutter={[32,16]}>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}> 
+                                            <Form.Item label= {state?.currency ? `Beneficiary Receives (${state?.currency})` : "Beneficiary Receives "}>
+                                            <Form.Item
+                                                        name="beneficiary"
+                                                        noStyle
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <InputNumber
+                                                            style={{ width: "100%" }}
+                                                            formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
+                                                    </Form.Item>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label="Rate">
+                                            <Row gutter={[32, 16]}>
+                                                <Col xs={24} sm={24} md={12} lg={15} xl={15}>
+                                                    <Form.Item
+                                                        name={'rate'}
+                                                    >
+                                                        <Input disabled width="100%" size="large" className={Styles.placeholder} />
+                                                    </Form.Item>
+                                                </Col>
+                                                <Col xs={24} sm={24} md={12} lg={9} xl={9}>
+                                                    <Button shape='round' loading={checkingRate} onClick={checkRate} disabled={checkDisabled} style={{ width: "100%" }} size='large' type="primary">
+                                                        Check Rate
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                            {showTimer ? (
+                                                <Timer reset={expireRate} />
+                                            ) : ""}  
+                                            </Form.Item>
+                                        </Col>
 
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Rate  </div>
-                                            <div className={Styles.inputContainer}>
-                                                <Row gutter={[32, 16]}>
-                                                    <Col xs={24} sm={24} md={12} lg={15} xl={15}>
-                                                        <Form.Item
-                                                            name={'rate'}
-                                                        >
-                                                            <Input disabled width="100%" size="large" className={Styles.placeholder} />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col xs={24} sm={24} md={12} lg={9} xl={9}>
-                                                        <Button loading={checkingRate} onClick={checkRate} disabled={checkDisabled} style={{ width: "100%" }} size='large' type="primary">
-                                                            Check Rate
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                                        {showTimer ? (
-                                                            <Timer reset={expireRate} />
-                                                        ) : ""}
-                                                    </div>
-                                        </div>
-                                        <div className={Styles.itemRow}>
+                                    </Row>
+                                   
+
+
+
+
+
+                                    
+
+                                    
+                                  
+
                                         <Button
                                             type="primary"
                                             shape='round'
-                                            style={{width: "400px"}}
+                                            style={{ width: "400px" }}
                                             block
                                             htmlType="submit"
                                             size="large"
@@ -406,31 +439,28 @@ const SendMoneyInt = (props) => {
                                         >
                                             Continue
                                         </Button>
-                                        </div>
-                        
-                                        
-
-                                        </div>
 
 
 
 
-                                         </div>
-                                                <Form.Item
 
-                                                    name="quote_id"
 
-                                                >
-                                                    <Input hidden />
-                                                </Form.Item>
 
-                                              
+                                    <Form.Item
+
+                                        name="quote_id"
+
+                                    >
+                                        <Input hidden />
+                                    </Form.Item>
+
+
                                 </Form>
 
                             </>
 
                         </div>
-                    </Col>
+                    </div>
                 </div>
             </div>
         </Content>

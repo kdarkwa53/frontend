@@ -1,4 +1,4 @@
-import { Button, Form, Input, Row, Col, Select, Modal } from "antd";
+import { Button, Form, Input, Row, Col, Select, Modal, InputNumber } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useState } from "react";
 import { XIcon } from "../../Shared/Components/JavIcons";
@@ -8,7 +8,7 @@ import { addingRole, addingUser } from "./duck/action";
 import RoleItem from "./RoleItem";
 
 
-const AddRole = ({ isVisible, setIsModalVisible})=>{
+const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
     const [form] = useForm();
     const dispatch = useDispatch()
     const [selectedPerm, setSelectedPerm] = useState({})
@@ -16,21 +16,44 @@ const AddRole = ({ isVisible, setIsModalVisible})=>{
     const rLoading = useSelector((state)=> state.userMgt.addingRole)
     const perm = useSelector((state)=> state.userMgt.permissions)
 
-    let _roles = roles ? roles : {}
+    const roleDetails = roles[editUser]
+    const getLimitValue=(permissions)=>{
+        let limitPerm = permissions.filter((per)=> per.name === "TRANSACTION_LIMIT")
+        return limitPerm[0]?.value
+    }
+    const getPermissionsIDs = (perm)=>{
+        let perms = perm.map(p => p.id)
+        return perms
+    }
+
+    let editFieldValiues = editUser ? {
+        name: roleDetails?.name,
+        limits: getLimitValue(roleDetails?.permissions)
+    }: null
+    form.setFieldsValue(editFieldValiues)
+    let allPerm = editUser ? getPermissionsIDs(roleDetails?.permissions) : null
+
+
+  
 
     const handleCancel = () => {
         setIsModalVisible(false)
     }
 
+
+    
     const showModal = () => {
-        console.log("berman")
         setIsModalVisible(true);
     };
 
     const onFinish = (val)=>{
         let details = {
             ...val,
-            permissions: `[${Object.values(selectedPerm).toString()}]`
+            permissions: `[${Object.values(selectedPerm).toString()}]`,
+            limits:[{
+                    "name": "TRANSACTION_LIMIT",
+                    "amount_limit": val.limits
+            }]
         }
         dispatch(addingRole(details)).then(()=>{
             form.resetFields()
@@ -76,7 +99,7 @@ const AddRole = ({ isVisible, setIsModalVisible})=>{
                 
                 >
                     <div style={{  padding: "20px 70px", display: "flex", alignItems:"center", justifyContent: "center", flexDirection: "column"}}>
-                    <Form.Item
+                            <Form.Item
                                         name="name"
                                         label="Role Name"
                                         rules={[
@@ -94,10 +117,22 @@ const AddRole = ({ isVisible, setIsModalVisible})=>{
                                     {
                                         Object.values(perm).map((per)=>{
                                             return(
-                                                <RoleItem selectedPerm={selectedPerm} setSelectedPerm={setSelectedPerm} key={per.id} perm={per} />
+                                                <RoleItem allPerm={allPerm} selectedPerm={selectedPerm} setSelectedPerm={setSelectedPerm} key={per.id} perm={per} />
                                             )
                                         })
                                     }
+                                    </Form.Item>
+                                    <Form.Item
+                                        label="Set Transaction Limit"
+                                        name="limits"
+                                        style={{width: "100%"}}
+                                        >
+                                        <InputNumber prefix={"USD"} style={{ width: "100%" }}
+                                        formatter={value => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                        width="100%"
+                                        size="large" name='amount' />
+
+
                                     </Form.Item>
                                    
                                 <Button

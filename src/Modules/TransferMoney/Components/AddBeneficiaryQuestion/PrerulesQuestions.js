@@ -2,7 +2,7 @@
 
 
 
-import { Layout, Col, Select, Form, Button } from 'antd';
+import { Layout, Col, Select, Form, Button, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Styles from "../../../TransferMoney/TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -158,9 +158,10 @@ const PrerulesQuestions = (props) => {
                     <div>
                         <span className={Styles.titleCard}>{ type === "forex" ? 'Forex': 'Send Money'}</span>
                     </div>
+                    
                 </div>
                 <div className={Styles.cardContainer}>
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
+                    <div style={{width: "100%"}} className={Styles.cardContent}>
                         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <>
                                 
@@ -173,13 +174,35 @@ const PrerulesQuestions = (props) => {
                                     onFieldsChange={handleFormChange}
                                 >
                                     
-                                    <div className={Styles.sectionBox}>
+                                    <div style={{ width: "100%", padding: "0 3em", display: "flex", justifyContent: "center", flexDirection: "column" }} className={Styles.sectionBox}>
                                         <p>{ type === "forex" ? 'Destination Account Information': 'Beneficiary Information'}</p>
-                                        <DynamicAPIDropdown key={'destinationCountry'} val={data['destinationCountry']} />
-                                        <DynamicAPIDropdown key={'bankCountry'} val={data['bankCountry']} />
-                                        <DynamicAPIDropdown key={'bankCurrency'} val={data['bankCurrency']} />
-                                        <DynamicDropdown key={'classification'} val={data['classification']} />
-                                        <Form.Item
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                        </div>
+
+                                        <Row style={{marginTop: "2em"}} gutter={[32,16]}>
+                                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                <DynamicAPIDropdown key={'destinationCountry'} val={data['destinationCountry']} />
+                                            </Col>
+                                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                <DynamicAPIDropdown key={'bankCountry'} val={data['bankCountry']} />
+                                            </Col>
+                                        </Row>
+                                        <Row gutter={[32,16]}>
+                                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <DynamicAPIDropdown key={'bankCurrency'} val={data['bankCurrency']} />
+
+                                            </Col>
+                                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <DynamicDropdown key={'classification'} val={data['classification']} />
+                                            </Col>
+                                        </Row>
+                                        <Row gutter={[32,16]}>
+                                            
+                                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item
                                             name={'paymentMethods'}
                                             rules={[
                                                 {required: true}
@@ -201,11 +224,15 @@ const PrerulesQuestions = (props) => {
                                                     })
                                                 }
                                             </Select>
-                                        </Form.Item>
+                                        </Form.Item>                                            </Col>
+                                        </Row>
+                                        
+                                       
                                     </div>
                                     <div className={Styles.buttonContainter}>
                                         <div className={Styles.tnxButton2}>
                                             <Button
+                                                shape='round'
                                                 disabled={disableButton}
                                                 type="primary"
                                                 block
@@ -223,7 +250,7 @@ const PrerulesQuestions = (props) => {
                             </>
 
                         </div>
-                    </Col>
+                    </div>
                 </div>
             </div>
         </Content>

@@ -75,8 +75,8 @@ const PassCode = ({ isPassCodeVisible, setPassCodeVisible, action, details, butt
                         ]}
                     >
                         <OtpInput
-                            inputStyle={{ width: "100%", padding: "1em", margin: "0.2em", borderRadius: "8px", border: "1px solid #AFB3BD" }}
-                            containerStyle={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", columnGap: "5px", width: "100%", maxWidth: "500px", margin: "0.5em" }}
+                            inputStyle={{ width: "100%", padding: "0.2em", margin: "0.2em", borderRadius: "8px", border: "1px solid #AFB3BD" }}
+                            containerStyle={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", columnGap: "1px", width: "100%", maxWidth: "600px", margin: "0.2em" }}
                             numInputs={6}
                         />
                     </Form.Item>

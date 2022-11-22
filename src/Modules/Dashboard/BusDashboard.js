@@ -6,23 +6,17 @@ import { useSelector } from 'react-redux';
 import { sortListByDate, isEmpty, statusTagColor } from "../../helpers/utils"
 import WelcomeCard from '../../Shared/Components/WelcomeCard/WelcomeCard';
 import JavProductCard from '../../Shared/Components/Products/JavProductCard';
-import Credit from "../../assets/tax.png"
-import CardIcon from "../../assets/Vector.png"
-import Payments from "../../assets/payments.png"
 
-import Tax from "../../assets/govfees.png"
 import Pin from "../../Shared/Components/Pin"
 import SetSecurityQuestions from '../../Shared/Components/SetSecurityQuestions/SetSecurityQuestions';
-import WalletCard from '../../Shared/Components/WalletCard/WalletCard';
 import SimpleCard from '../../Shared/Components/SimpleCard/SimpleCard';
-import { Cash, CreditArrow, DebitArrow, DepositIcon, MobileAirtimeIcon, Money, MoneyExchange, SendMoneyIcon, TransferDasIcon, TransferIcon } from '../../Shared/Components/JavIcons';
+import { Cash, DepositIcon, Money, MoneyExchange, SendMoneyIcon, TransferDasIcon, TransferIcon } from '../../Shared/Components/JavIcons';
 import CurrencyConverter from '../../Shared/Components/Layouts/Components/CurrencyConverter';
-import Circle from '../../Shared/Components/Circle/Circle';
 import DashboardTitleRow from './Components/DashboardTitleRow';
 import SpotRateCalculator from '../../Shared/Components/Layouts/Components/SpotRateCalculator';
 import DashboardWalletSection from '../../Shared/Components/DashboardWalletSection/DashboardWalletSection';
 import {InitialSetup} from '../../Shared/Components/InitialSetup/InitialSetup';
-import ReviewPopUp from '../../Shared/Components/ReviewPopUp/ReviewPopUp';
+import AccessControl from '../../Shared/Components/AccessControl/AccessControl';
 
 const BusDashboard = () => {
     const text = useSelector((state) => state?.language)
@@ -38,9 +32,7 @@ const BusDashboard = () => {
     })
     const [showSC, setSC] = useState(false)
 
-    const wallets = useSelector((state) => state?.resources?.wallets)
     const appData = useSelector((state) => state?.savings);
-    const user = useSelector((state) => state?.user);
 
     const default_wallet = userDetails?.default_savings_wallet
 
@@ -145,10 +137,38 @@ const BusDashboard = () => {
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                     <DashboardTitleRow title={"Javolin Services"} />
                         <div className={Styles.products}>
+                        <AccessControl
+                            userPermissions={['SEND_MONEY']}
+                            allowedPermissions={['SEND_MONEY']}
+                            renderNoAccess={''}
+                        >
                             <JavProductCard subTitle={text.PAYMENT_SENDMONEY} link={'/business/payments'} icon={<Money width="5em" height="5em" color="#ffffff" />} color="#BC416B" />
+
+                        </AccessControl>
+                        <AccessControl
+                            userPermissions={['FOREX']}
+                            allowedPermissions={['FOREX']}
+                            renderNoAccess={''}
+                        >
                             <JavProductCard subTitle={text.FOREIGN_EXCHANGE} icon={<MoneyExchange width="5em" height="5em" color="#ffffff" />} link="/business/forex" color="#007451" />
-                            <JavProductCard link="/business/transfer" subTitle={text.TRANSFER_MONEY} icon={<TransferDasIcon width="6em" height="6em" color="#ffffff" />} color="#FFA621" />
-                            <JavProductCard link="/business/fund-wallet" subTitle={text.FUND_MY_WALLET} icon={<Cash width="5em" height="5em" color="#ffffff" />} color="#EE735D" />
+
+                        </AccessControl>
+                        <AccessControl
+                            userPermissions={['TRANSFER_MONEY']}
+                            allowedPermissions={['TRANSFER_MONEY']}
+                            renderNoAccess={''}
+                        >
+                        <JavProductCard link="/business/transfer" subTitle={text.TRANSFER_MONEY} icon={<TransferDasIcon width="5em" height="5em" color="#ffffff" />} color="#FFA621" />
+
+                        </AccessControl>
+                        <AccessControl
+                            userPermissions={['FUND_WALLET']}
+                            allowedPermissions={['FUND_WALLET']}
+                            renderNoAccess={''}
+                        >
+                         <JavProductCard link="/business/fund-wallet" subTitle={text.FUND_MY_WALLET} icon={<Cash width="5em" height="5em" color="#ffffff" />} color="#EE735D" />
+
+                        </AccessControl>
                         </div>
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>

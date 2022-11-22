@@ -244,6 +244,7 @@ const ForexSend = (props) => {
                                     buttonloading={instructingPayment}
 
                                 />
+                                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
                                 <Form
                                     form={form}
                                     layout="vertical"
@@ -382,6 +383,8 @@ const ForexSend = (props) => {
                                         </div>
                                     </div>
                                 </Form>
+                                </div>
+                                
 
                             </>
 

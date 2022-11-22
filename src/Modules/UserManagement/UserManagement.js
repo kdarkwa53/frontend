@@ -6,6 +6,7 @@ import { EyeOutlined } from "@ant-design/icons";
 import {  useSelector } from "react-redux";
 
 import AddUser from "./AddUser";
+import AccessControl from "../../Shared/Components/AccessControl/AccessControl";
 
 
 const UserManagement = () => {
@@ -63,19 +64,30 @@ const UserManagement = () => {
             key: "action",
             render: (id) => {
                 return (
-                    <>
-
-                  
-
-                        <Tag key={id} onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
+                    <div key={id}>
+                        <AccessControl
+                            userPermissions={['EDIT_USER']}
+                            allowedPermissions={['EDIT_USER']}
+                            renderNoAccess={''}
+                        >
+                            <Tag  onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
                             <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
                             Edit
                         </Tag>
-                        <Tag key={id} style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
+                        </AccessControl>
+
+                        <AccessControl
+                            userPermissions={['DELET_USER']}
+                            allowedPermissions={['DELETE_USER']}
+                            renderNoAccess={''}
+                        >
+                            <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
                             <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
                             delete
                         </Tag>
-                    </>
+                        </AccessControl>
+                        
+                    </div>
                 );
             },
         },

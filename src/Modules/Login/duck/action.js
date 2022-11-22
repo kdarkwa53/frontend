@@ -37,6 +37,7 @@ export const ADD_PIN = "ADD_PIN";
 export const ADD_USER = "ADD_USER"
 export const VERIFY_USER = "VERIFY_USER"
 export const UPDATE_USER = "UPDATE_USER"
+export const USER_PERMISSIONS = "USER_PERMISSIONS"
 
 export const SIGNOUT_ERROR = "SIGNOUT_ERROR"
 export const SIGNOUT_REQUEST = "SIGNOUT_REQUEST"
@@ -44,6 +45,13 @@ export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS"
 
 export const SET_USER_TYPE = "SET_USER_TYPE"
 
+const saveUserPermissions = (per)=>{
+  let user_per = []
+
+  per.map((p)=>user_per.push(p.name))
+
+  return user_per
+}
 export const updateUser = (value, response)=>{
   return async (dispatch) => {
   dispatch({
@@ -138,6 +146,11 @@ export const login = (details, history, accountType) => {
           type: ADD_USER,
           user
         });
+
+        dispatch({
+          type: USER_PERMISSIONS,
+          permissions: saveUserPermissions(data.permissions) 
+        })
 
         dispatch({
           type: SET_USER_TYPE,

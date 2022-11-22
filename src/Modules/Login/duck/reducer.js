@@ -17,7 +17,8 @@ import {
  UPDATE_USER,
  SIGNOUT_ERROR,
  SIGNOUT_REQUEST,
- SIGNOUT_SUCCESS
+ SIGNOUT_SUCCESS,
+ USER_PERMISSIONS,
 } from "./action";
 
 
@@ -133,6 +134,11 @@ export const userReducer = (state = {type: "customer"}, action = { type: "" }) =
         ...state,
         ...action.user
       };
+      case USER_PERMISSIONS:
+        return {
+          ...state,
+          user_permissions: action.permissions
+        };
     case UPDATE_USER:
       return {
         ...state,

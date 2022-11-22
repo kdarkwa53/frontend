@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Edit, Edit2Icon, Trash, TrashIcon } from "../../Shared/Components/JavIcons";
 import AddRole from "./AddRole";
 import { getRoles } from "./duck/action";
+import AccessControl from "../../Shared/Components/AccessControl/AccessControl"
 
 import Styles from "./UserMgt.module.css"
 
@@ -19,7 +20,7 @@ const RoleManagement = () => {
 
     useEffect(()=>{
         dispatch(getRoles())
-    })
+    }, [dispatch])
     const roles = useSelector((state) => state.userMgt.roles)
 
     const customizeRenderEmpty = () => (
@@ -28,7 +29,17 @@ const RoleManagement = () => {
         </div>
     );
 
+    const [editUser, setEditUser] = useState(false)
 
+    const handleEdit = (user)=>{
+        setEditUser(user.id)
+        setIsModalVisible(true)
+     }
+ 
+     const handleDelete = (user)=>{
+        console.log(user.id)
+         
+     }
 
 
 
@@ -58,18 +69,31 @@ const RoleManagement = () => {
         {
             title: "Action",
             key: "action",
-            render: () => {
+            render: (id) => {
                 return (
-                    <>
-                        <Tag style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
-                            <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
-                            Edit
-                        </Tag>
-                        <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
+                    <div key={id}>
+                        <AccessControl
+                            userPermissions={['EDIT_ROLE']}
+                            allowedPermissions={['EDIT_ROLE']}
+                            renderNoAccess={''}
+                        >
+                            <Tag onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
+                                <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
+                                Edit
+                            </Tag>
+                        </AccessControl>
+                        <AccessControl
+                            userPermissions={['DELETE_ROLE']}
+                            allowedPermissions={['E_ROLE']}
+                            renderNoAccess={''}
+                        >
+                            <Tag onClick={()=>handleDelete(id)} style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
                             <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
                             delete
                         </Tag>
-                    </>
+                        </AccessControl>
+                        
+                    </div>
                 );
             },
         },
@@ -81,7 +105,8 @@ const RoleManagement = () => {
             return {
                 key: role.id,
                 name: role.name,
-                permissions: role.permissions
+                permissions: role.permissions,
+                id: role.id
             };
         })
         : [];
@@ -102,7 +127,7 @@ const RoleManagement = () => {
                     <div className={Styles.title}>
                         Role List
                     </div>
-                    <AddRole isVisible={isVisible} setIsModalVisible={setIsModalVisible} />
+                    <AddRole editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible} />
                 </div>
                 <Row style={{marginTop: "2em"}}>
 

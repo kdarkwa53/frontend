@@ -96,7 +96,7 @@ export default function BusinessRoutes() {
                 <MainLayoutRoute  subtitle="Transactions"  path="/business/requests" title="Pending Requests" component={PendingRequests} />
                 <DashboardLayoutRoute RightSider={BusRightSider} title="Portfolio" path="/business/portfolio" component={BusinessProducts} />
                 <MainLayoutRoute path="/prepaid/apply/:id" component={PrepaidApplication} />
-                <DashboardLayoutRoute RightSider={WalletRightSider} menuRoute="/business/wallet" title="Wallet" path="/business/wallet" component={WalletPage} />
+                <MainLayoutRoute subtitle={"Manage your wallet"} menuRoute="/business/wallet" title="Wallet" path="/business/wallet" component={WalletPage} />
                 <Route path="/check" component={MenuCheck} />
                 <MainLayoutRoute title="Send Money" path="/business/pre-rules" exact component={PrerulesQuestions} />
                 <MainLayoutRoute title="Send Money" path="/business/iban-validation" exact component={IbanValidation} />

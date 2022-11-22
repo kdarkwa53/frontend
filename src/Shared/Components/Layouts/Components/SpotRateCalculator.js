@@ -51,7 +51,7 @@ const SpotRateCalculator = () => {
     const _currencies = currencies ? currencies : []
     return (
         <div className={Styles.rateCard}>
-            <div className={Styles.exTitle}>Spot Rate</div>
+            <div className={Styles.exTitle}>Foreign Exchange Spot Rate</div>
 
 
            
@@ -154,7 +154,7 @@ const SpotRateCalculator = () => {
                             {
                             rate?
                             `${rate?.sender?.currency} ${currencyFormat(rate?.sender?.amount)} / ${rate?.recipient?.currency} ${currencyFormat(rate?.recipient?.amount)}`
-                            :  <div style={{color: '#727986', fontSize: "16px", fontWeight: "normal"}}>Rate result appears here....</div> 
+                            :  <div style={{color: '#727986', fontSize: "24px", fontWeight: "normal"}}>Rate result appears here</div> 
                             }
                         </div>
                         <div className={Styles.baseCurrency}>{  rate?`${Number(rate?.javolin_rate[1]).toFixed(4)} / ${Number(rate?.javolin_rate[0]).toFixed(4)}`: ''}</div>

@@ -88,7 +88,7 @@ const SendMoneyForex = (props) => {
                             "operation": "Sending",
                             "fee": fee,
                             "to": {
-                                "msg": "Destination Account",
+                                "msg": "Beneficiary Account",
                                 "title": state?.name,
                                 "subTitle": state?.account_number,
                                 "acc_num": "",
@@ -230,197 +230,242 @@ const SendMoneyForex = (props) => {
     const { Content } = Layout;
     return (
         <Content>
-            <div className={Styles.card}>
-                <div className={Styles.cardTitle}>
-                    <div>
-                        <span className={Styles.titleCard}>Forex</span>
-                    </div>
-                </div>
-                <div className={Styles.cardContainer}>
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
-                        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-                            {/* <h4>{counting}</h4> */}
-                            {/* <h2>
-                                {countP}
-                            </h2> */}
-                            <>
-                                <ReviewPopUpInt setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
-                                <PassCode
-                                    isPassCodeVisible={passcode}
-                                    setPassCodeVisible={setPasscode}
-                                    details={submitDetails}
-                                    form={form}
-                                    action={instructCorpayment}
-                                    buttonloading={instructingPayment}
-
-                                />
-                                <Form
-                                    form={form}
-                                    layout="vertical"
-                                    name="form_in_modal"
-                                    style={{ width: "100%" }}
-                                    onFinish={onFinish}
-                                    onFieldsChange={handleFormChange}
-                                    initialValues={{
-                                        accountNumber: state.accountNumber,
-                                        beneficiary_account: state.id,
-                                        from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
-                                    }}
-                                >
-                                    <div className={Styles.sectionBox}>
-                                        <p>Forex Info</p>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Source</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name={"from_account"}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <JavolinAccounts setsourcewallet={setsourcewallet} />
-                                                </Form.Item>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Destination</div>
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-
-                                                    name={"beneficiary_account"}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Select size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
-                                                        <Option value={state?.id} key={state?.id}>
-                                                            <div className={`cardTile ${sel.title}`}>
-                                                                <div className="cardLeftHem">
-                                                                    <div className={`cardName ${sel.lineHeight}`} >{state?.name}</div>
-                                                                </div>
-                                                                <div className="cardRightHem">
-                                                                    <div className="accountNumber">
-                                                                        {state?.account_number ? state?.account_number : ""}
-                                                                    </div>
-                                                                    <div className="cardDesign">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Option>
-
-                                                    </Select>
-                                                </Form.Item>
-                                            </div>
-                                        </div>
-
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Selling Amount
-                                            <span style={{ fontWeight: "bold" }} >{currencies[sourceWallet?.currency_id]?.ISO ? ` (${currencies[sourceWallet?.currency_id]?.ISO})` : ""}</span>
-                                            </div>
-                                            
-                                            <div className={Styles.inputContainer}>
-                                                <Form.Item
-                                                    name="amount"
-
-                                                    rules={[
-                                                        { required: true },
-                                                        {
-                                                            pattern: /^([0-9]+\.?[0-9]*|\.[0-9]+)$/,
-                                                            message: `Input invalid`
-                                                        }
-                                                    ]}
-                                                >
-                                                    <InputNumber style={{ width: "100%" }}
-                                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                                        onChange={handleAmountChange} 
-                                                        width="100%" 
-                                                        size="large" name='amount' />
-                                                </Form.Item>
-                                            </div>
-                                        </div>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Amount Purchased <span style={{ fontWeight: "bold" }} >{`(${state?.currency})`}</span>  </div>
-                                            <div className={Styles.inputContainer}>
-                                                <Row gutter={[32, 16]}>
-                                                    <Col xs={24} sm={24} md={12} lg={24} xl={24}>
-                                                        <Form.Item
-                                                            name="beneficiary"
-                                                            rules={[
-                                                                {
-                                                                    required: true,
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <InputNumber style={{ width: "100%" }}
-                                                                formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                                                onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
-                                                        </Form.Item>
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </div>
-                                        <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}> Rate  </div>
-                                            <div className={Styles.inputContainer}>
-                                                <Row gutter={[32, 16]}>
-                                                    <Col xs={24} sm={24} md={12} lg={15} xl={15}>
-                                                        <Form.Item
-                                                            name={'rate'}
-                                                        >
-                                                            <Input style={{ color: "black" }} disabled width="100%" size="large" className={Styles.placeholder} />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col xs={24} sm={24} md={12} lg={9} xl={9}>
-                                                        <Button loading={checkingRate} onClick={checkRate} disabled={checkDisabled} style={{ width: "100%" }} size='large' type="primary">
-                                                            Check Rate
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                                {showTimer ? (
-                                                    <Timer reset={expireRate} />
-                                                ) : ""}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Form.Item
-
-                                        name="quote_id"
-
-                                    >
-                                        <Input hidden />
-                                    </Form.Item>
-
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton2}>
-                                            <Button
-                                                type="primary"
-                                                block
-                                                htmlType="submit"
-                                                size="large"
-                                                loading={bookingRate}
-                                                disabled={disableContinue}
-
-                                            >
-                                                Continue
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </Form>
-
-                            </>
-
-                        </div>
-                    </Col>
+        <div className={Styles.card}>
+            <div className={Styles.cardTitle}>
+                <div>
+                    <span className={Styles.titleCard}>Forex</span>
                 </div>
             </div>
-        </Content>
+            <div className={Styles.cardContainer}>
+                <div style={{ width: "100%" }} className={Styles.cardContent}>
+                    <div style={{ padding: "0 3em", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                      
+                        <>
+                            <ReviewPopUpInt setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
+                            <PassCode
+                                isPassCodeVisible={passcode}
+                                setPassCodeVisible={setPasscode}
+                                details={submitDetails}
+                                form={form}
+                                action={instructCorpayment}
+                                buttonloading={instructingPayment}
+
+                            />
+                            <Form
+                                form={form}
+                                layout="vertical"
+                                name="form_in_modal"
+                                style={{ width: "100%" }}
+                                onFinish={onFinish}
+                                onFieldsChange={handleFormChange}
+                                initialValues={{
+                                    accountNumber: state.accountNumber,
+                                    beneficiary_account: state.id,
+                                    from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
+                                }}
+                            >
+                                <p style={{marginTop: "2em"}}>Destination</p>
+                                <div className={Styles.secRow}>
+                                    <div className={Styles.sectionB}>
+                                        <div className={Styles.circle}></div>
+                                    </div>
+                                </div>
+
+                                <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label="Send to">
+                                    <Form.Item
+                                        noStyle
+                                    >
+                                        <Select style={{ width: "100%" }} size="large" defaultValue={'bank'}>
+                                            <Option value="bank">Bank</Option>
+                                        </Select>
+                                    </Form.Item>
+                                    </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label="Beneficiary">
+                                        <Form.Item
+                                            name={"beneficiary_account"}
+                                            noStyle
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                },
+                                            ]}
+                                            >
+                                            <Select size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
+                                                <Option value={state?.id} key={state?.id}>
+                                                    <div className={`cardTile ${sel.title}`}>
+                                                        <div className="cardLeftHem">
+                                                            <div className={`cardName ${sel.lineHeight}`} >{state?.name}</div>
+                                                        </div>
+                                                        <div className="cardRightHem">
+                                                            <div className="accountNumber">
+                                                                {state?.account_number ? state?.account_number : ""}
+                                                            </div>
+                                                            <div className="cardDesign">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Option>
+
+                                            </Select>
+                                            </Form.Item>
+                                        </Form.Item>
+                                    </Col>
+
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <Form.Item label="Transaction Type">
+                                    <Form.Item
+                                        noStyle
+                                    >
+                                        <Select style={{ width: "100%" }} size="large" defaultValue={'international'}  placeholder="Select type">
+                                            <Option value="international">International</Option>
+                                        </Select>
+                                    </Form.Item>
+                                    </Form.Item>
+                                    
+                                    </Col>
+
+                                </Row>
+
+                                <p style={{marginTop: "2em"}}>Sending Info</p>
+                                <div className={Styles.secRow}>
+                                    <div className={Styles.sectionB}>
+                                        <div className={Styles.circle}></div>
+                                    </div>
+                                </div>
+
+                                <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label="Sending From">
+                                            <Form.Item
+                                                name={"from_account"}
+                                                noStyle
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                    },
+                                                ]}
+                                            >
+                                                <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                            </Form.Item>
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label={currencies[sourceWallet?.currency_id]?.ISO ? `Amount (${currencies[sourceWallet?.currency_id]?.ISO})` : "Amount"}>
+                                        <Form.Item
+                                    name="amount"
+                                    rules={[
+                                        { required: true },
+                                        {
+                                            pattern: /^([0-9]+\.?[0-9]*|\.[0-9]+)$/,
+                                            message: `Input invalid`
+                                        }
+                                    ]}
+                                >
+
+                                    <InputNumber
+                                        style={{ width: "100%" }}
+                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange}
+                                        size="large" name='amount'
+                                    />
+                                </Form.Item>
+                                        </Form.Item>
+                                    </Col>
+
+                                </Row>
+                                <Row gutter={[32,16]}>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}> 
+                                        <Form.Item label= {state?.currency ? `Beneficiary Receives (${state?.currency})` : "Beneficiary Receives "}>
+                                        <Form.Item
+                                                    name="beneficiary"
+                                                    noStyle
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                        },
+                                                    ]}
+                                                >
+                                                    <InputNumber
+                                                        style={{ width: "100%" }}
+                                                        formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
+                                                </Form.Item>
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                        <Form.Item label="Rate">
+                                        <Row gutter={[32, 16]}>
+                                            <Col xs={24} sm={24} md={12} lg={15} xl={15}>
+                                                <Form.Item
+                                                    name={'rate'}
+                                                >
+                                                    <Input disabled width="100%" size="large" className={Styles.placeholder} />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col xs={24} sm={24} md={12} lg={9} xl={9}>
+                                                <Button shape='round' loading={checkingRate} onClick={checkRate} disabled={checkDisabled} style={{ width: "100%" }} size='large' type="primary">
+                                                    Check Rate
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                        {showTimer ? (
+                                            <Timer reset={expireRate} />
+                                        ) : ""}  
+                                        </Form.Item>
+                                    </Col>
+
+                                </Row>
+                               
+
+
+
+
+
+                                
+
+                                
+                              
+
+                                    <Button
+                                        type="primary"
+                                        shape='round'
+                                        style={{ width: "400px" }}
+                                        block
+                                        htmlType="submit"
+                                        size="large"
+                                        loading={bookingRate}
+                                        disabled={disableContinue}
+
+                                    >
+                                        Continue
+                                    </Button>
+
+
+
+
+
+
+
+                                <Form.Item
+
+                                    name="quote_id"
+
+                                >
+                                    <Input hidden />
+                                </Form.Item>
+
+
+                            </Form>
+
+                        </>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Content>
     )
 };
 

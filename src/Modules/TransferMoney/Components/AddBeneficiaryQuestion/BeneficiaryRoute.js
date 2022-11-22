@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Layout, Col, Form, Button } from 'antd';
+import { Layout, Col, Form, Button, Row } from 'antd';
 import React, { useState } from 'react';
 import Styles from "../../../TransferMoney/TransferMoney.module.css"
 import DynamicForms from '../DynamicForms/DynamicForms';
@@ -80,7 +80,7 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                 </div>
                 <div className={Styles.cardContainer}>
                     
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
+                <div style={{width: "100%"}} className={Styles.cardContent}>
                         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <>
                                 
@@ -93,13 +93,21 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                                     initialValues={details}
                                 >
 
-                                    <div className={Styles.sectionBox}>
+                                    <div style={{ width: "100%", padding: "0 3em", display: "flex", justifyContent: "center", flexDirection: "column" }}  className={Styles.sectionBox}>
                                         <p>Beneficiary Information</p>
+                                        <div className={Styles.secRow}>
+                                            <div className={Styles.sectionB}>
+                                                <div className={Styles.circle}></div>
+                                            </div>
+                                        </div>
                                         
                                         {
                                             loading ?
                                                 <SkeletonLoader num={5} /> : (
+                                                    <Row style={{marginTop: "2em"}} gutter={[32,16]}>
                                                     <DynamicForms form={form} data={questions} />
+
+                                                    </Row>
                                                 )
                                         }
 
@@ -123,7 +131,7 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                             </>
 
                         </div>
-                    </Col>
+                    </div>
                 </div>
             </div>
         </Content>  

@@ -111,13 +111,12 @@ const WalletPage = () => {
     return (
 
         <>
-            <div >
-                <Row >
-                    <WelcomeCard2 name={userDetails?.first_name} />
-                </Row>
-                
+            <div style={{marginTop: "4em"}}>
                 <div className={Styles.titleRow}>
-                    <div className={Styles.secTitle}>{text.MY_CARDS}</div>
+                    <div className={Styles.secTitle}>Active accounts</div>
+                    <NewWallet>
+                    
+                    </NewWallet>
                 </div>
                 <div style={{overflowX: "scroll"}} className={Styles.serviceRow}>
                 

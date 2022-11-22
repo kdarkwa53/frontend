@@ -2,7 +2,7 @@
 
 
 
-import { Select} from 'antd';
+import { Row, Select} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom"
@@ -32,6 +32,7 @@ const BeneficiaryDetails = (props) => {
                 
 
                 pages.map((questions, i)=>{
+                    
                     if(i === 0){
                         
                         return(

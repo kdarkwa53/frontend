@@ -28,7 +28,7 @@ const ForexBeneficiary = () => {
                     </div>
                 </div>
                 <div className={Styles.cardContainer}>
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
+                    <Col xs={24} sm={24} md={24} lg={24} xl={24} className={Styles.cardContent}>
                         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <>
 
@@ -42,14 +42,16 @@ const ForexBeneficiary = () => {
 
                                     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <div className={Styles.sectionBox}>
-                                        <p>Destination Account</p>
+                                        <p>Beneficiary Account</p>
                                         <div className={Styles.secRow}>
                                             <div className={Styles.sectionB}>
                                                 <div className={Styles.circle}></div>
                                             </div>
                                         </div>
-
-                                        <InternationalBankTransferForm type={'forex'}  />
+                                        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                            <InternationalBankTransferForm type={'forex'}  />
+                                        </div>
+                                        
                                     </div>
                                    
                                             <Button
@@ -67,7 +69,6 @@ const ForexBeneficiary = () => {
                                 </Form>
 
                             </>
-
                         </div>
                     </Col>
                 </div>

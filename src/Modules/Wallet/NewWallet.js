@@ -1,5 +1,5 @@
 import { Button, Card, Form, Input, Modal, Select } from "antd"
-import { useState } from "react"
+import { Children, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { PlusIcon } from "../../Shared/Components/JavIcons"
 import Styles from "../Dashboard/Dashboard.module.css"
@@ -9,7 +9,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 
 
 
-const NewWallet = ()=>{
+const NewWallet = ({children})=>{
     const text = useSelector((state) => state?.language)
     const [isVisible, setIsModalVisible] = useState(false)
     const [form] = Form.useForm();
@@ -34,19 +34,14 @@ const NewWallet = ()=>{
     const _currencies = currencies ? currencies : {}
     return (
         <>
-         {/* <div onClick={showModal} className={Styles.walletTop}> */}
-            <div onClick={showModal}  className={Styles.dummyCon}>
+            <div onClick={showModal} className={Styles.dummyCon}>
                 <div className={Styles.plusIcon}>
                 <PlusCircleOutlined style={{color:"#0032A0"}} />
-                    {/* <PlusIcon width="2em" height="2em" color="#5D6066" /> */}
                 </div>
                 <div className={Styles.addNewText}>
                     Add Account
                 </div>
             </div>
-        {/* </div> */}
-
-
             <Modal
                 visible={isVisible}
                 onCancel={handleCancel}
@@ -54,7 +49,7 @@ const NewWallet = ()=>{
                 closable={false}
                 centered
             >
-                <Card title="ADD NEW WALLET">
+                <Card title="ADD NEW ACCOUNT">
                     <Form
                         form={form}
                         layout="vertical"
@@ -63,7 +58,7 @@ const NewWallet = ()=>{
                         onFinish={onFinish}
                     >
                          <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Wallet Name</div>
+                            <div className={Styles.inputLabel}>Account Name</div>
                             <div className={Styles.inputContainer}>
                                 <Form.Item
                                     name="name"
