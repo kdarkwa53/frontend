@@ -13,6 +13,7 @@ import { showErrorNotification } from '../../Shared/actions/alert.actions';
 import "../../Shared/Components/Accounts/JavolinAccounts.css"
 import { Timer } from '../../Shared/Components/Timer';
 import ReviewPopUpInt from '../../Shared/Components/ReviewPopUp/ReviewForex';
+import JavContentTitle from '../../Shared/Components/JavContentTitle';
 
 const { Option } = Select;
 
@@ -100,7 +101,7 @@ const SendMoneyForex = (props) => {
                                 "msg": "Source Account",
                                 "title": sourceWallet?.name,
                                 "subTitle": `${currencies[sourceWallet.currency_id].ISO} ${sourceWallet?.current_balance}`,
-                                "acc_num": `****`,
+                                "acc_num": `****${sourceWallet?.account_number?.slice(-4)}`,
                                 "image_url": `${REACT_APP_ASSETS_API_URL}${sourceWallet?.wallet_logo}`,
                                 "currency": currencies[sourceWallet.currency_id].ISO
                             },
@@ -264,12 +265,7 @@ const SendMoneyForex = (props) => {
                                     from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
                                 }}
                             >
-                                <p style={{marginTop: "2em"}}>Destination</p>
-                                <div className={Styles.secRow}>
-                                    <div className={Styles.sectionB}>
-                                        <div className={Styles.circle}></div>
-                                    </div>
-                                </div>
+                                <JavContentTitle title="Beneficiary Details"/>
 
                                 <Row style={{marginTop: "1em"}} gutter={[32,16]}>
                                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -330,12 +326,7 @@ const SendMoneyForex = (props) => {
 
                                 </Row>
 
-                                <p style={{marginTop: "2em"}}>Sending Info</p>
-                                <div className={Styles.secRow}>
-                                    <div className={Styles.sectionB}>
-                                        <div className={Styles.circle}></div>
-                                    </div>
-                                </div>
+                                <JavContentTitle title="Sending Info"/>
 
                                 <Row style={{marginTop: "1em"}} gutter={[32,16]}>
                                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -427,26 +418,23 @@ const SendMoneyForex = (props) => {
 
                                 
                               
-
+                                <div style={{display: "flex", justifyContent: "flex-end"}}>
                                     <Button
-                                        type="primary"
-                                        shape='round'
-                                        style={{ width: "400px" }}
-                                        block
-                                        htmlType="submit"
-                                        size="large"
-                                        loading={bookingRate}
-                                        disabled={disableContinue}
+                                            type="primary"
+                                            shape='round'
+                                            style={{ width: "400px" }}
+                                            block
+                                            htmlType="submit"
+                                            size="large"
+                                            loading={bookingRate}
+                                            disabled={disableContinue}
+                                            
 
-                                    >
-                                        Continue
-                                    </Button>
-
-
-
-
-
-
+                                        >
+                                            Continue
+                                        </Button>
+                                </div>
+                                    
 
                                 <Form.Item
 

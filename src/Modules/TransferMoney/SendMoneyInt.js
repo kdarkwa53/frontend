@@ -13,6 +13,7 @@ import { showErrorNotification } from '../../Shared/actions/alert.actions';
 import "../../Shared/Components/Accounts/JavolinAccounts.css"
 import { Timer } from '../../Shared/Components/Timer';
 import ReviewPopUpInt from '../../Shared/Components/ReviewPopUp/ReviewPopUpInt';
+import JavContentTitle from '../../Shared/Components/JavContentTitle';
 
 const { Option } = Select;
 
@@ -262,12 +263,7 @@ const SendMoneyInt = (props) => {
                                         from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
                                     }}
                                 >
-                                    <p style={{marginTop: "2em"}}>Destination</p>
-                                    <div className={Styles.secRow}>
-                                        <div className={Styles.sectionB}>
-                                            <div className={Styles.circle}></div>
-                                        </div>
-                                    </div>
+                                    <JavContentTitle title="Destination"/>
 
                                     <Row style={{marginTop: "1em"}} gutter={[32,16]}>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -328,12 +324,7 @@ const SendMoneyInt = (props) => {
 
                                     </Row>
 
-                                    <p style={{marginTop: "2em"}}>Sending Info</p>
-                                    <div className={Styles.secRow}>
-                                        <div className={Styles.sectionB}>
-                                            <div className={Styles.circle}></div>
-                                        </div>
-                                    </div>
+                                    <JavContentTitle title="Sending Info"/>
 
                                     <Row style={{marginTop: "1em"}} gutter={[32,16]}>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -425,12 +416,11 @@ const SendMoneyInt = (props) => {
 
                                     
                                   
-
-                                        <Button
+                                    <div style={{display: "flex", justifyContent: "flex-end"}}>
+                                    <Button
                                             type="primary"
                                             shape='round'
                                             style={{ width: "400px" }}
-                                            block
                                             htmlType="submit"
                                             size="large"
                                             loading={bookingRate}
@@ -439,6 +429,8 @@ const SendMoneyInt = (props) => {
                                         >
                                             Continue
                                         </Button>
+                                    </div>
+                                        
 
 
 
@@ -460,6 +452,7 @@ const SendMoneyInt = (props) => {
                             </>
 
                         </div>
+                        
                     </div>
                 </div>
             </div>

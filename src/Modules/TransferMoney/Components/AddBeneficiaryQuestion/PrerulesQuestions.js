@@ -10,6 +10,7 @@ import { beneficiaryQuestions, getDropdownListFromAPI, getPreRules } from '../..
 import { useHistory } from 'react-router';
 import DynamicAPIDropdown from '../DynamicForms/DynamicAPIDropdown';
 import DynamicDropdown from '../DynamicForms/DynamicDropdown';
+import JavContentTitle from '../../../../Shared/Components/JavContentTitle';
 
 
 
@@ -175,12 +176,7 @@ const PrerulesQuestions = (props) => {
                                 >
                                     
                                     <div style={{ width: "100%", padding: "0 3em", display: "flex", justifyContent: "center", flexDirection: "column" }} className={Styles.sectionBox}>
-                                        <p>{ type === "forex" ? 'Destination Account Information': 'Beneficiary Information'}</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                        </div>
+                                        <JavContentTitle title={type === "forex" ? 'Destination Account Information': 'Beneficiary Information'} />
 
                                         <Row style={{marginTop: "2em"}} gutter={[32,16]}>
                                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -229,20 +225,18 @@ const PrerulesQuestions = (props) => {
                                         
                                        
                                     </div>
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton2}>
+                                    <div style={{display: "flex", justifyContent: "flex-end"}}>
                                             <Button
                                                 shape='round'
                                                 disabled={disableButton}
                                                 type="primary"
-                                                block
+                                                style={{width: "400px"}}
                                                 htmlType="submit"
                                                 size="large"
                                                 loading={load}
                                             >
                                                 Continue
                                             </Button>
-                                        </div>
                                     </div>
                                         
                                 </Form>

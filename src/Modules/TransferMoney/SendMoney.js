@@ -17,6 +17,7 @@ import { useHistory } from 'react-router';
 import { showErrorNotification } from '../../Shared/actions/alert.actions';
 import { REACT_APP_ASSETS_API_URL } from '../../helpers/contants';
 
+import JavContentTitle from "../../Shared/Components/JavContentTitle"
 
 
 const { Option } = Select;
@@ -310,14 +311,8 @@ const SendMoney = (props) => {
 
 
                                     <div className={Styles.sectionBox}>
-                                    <p>Destination</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                        </div>
-                                       
-                                        
+                                    {/* <p>Destination</p> */}
+                                    <JavContentTitle title="Destination"/>
                                         <   div style={{display: "flex", justifyContent:"center"}}>
                                             <div className={Styles.itemRow}>
                                             <div className={Styles.inputLabel}>Send to</div>
@@ -351,6 +346,7 @@ const SendMoney = (props) => {
                                                         </>
                                                     
                                                     ) : ""} 
+                                                <div style={{display: "flex", justifyContent: "flex-end"}}>
                                                 <Button
                                                 shape="round"
                                                 type="primary"
@@ -362,6 +358,8 @@ const SendMoney = (props) => {
                                             >
                                                 Continue
                                             </Button>
+                                                </div>
+                                                
                                             </div>
                                                     
 

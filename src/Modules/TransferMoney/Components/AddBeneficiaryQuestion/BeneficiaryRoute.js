@@ -7,6 +7,7 @@ import SkeletonLoader from '../../../../helpers/SkeletonLoader';
 import { useDispatch, useSelector } from "react-redux";
 import { addBeneficiary, addBeneValues } from "../../duck/action";
 import { formatRegResults } from "../../../../helpers/utils";
+import JavContentTitle from "../../../../Shared/Components/JavContentTitle";
 
 const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
     const [form] = Form.useForm();
@@ -81,7 +82,7 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                 <div className={Styles.cardContainer}>
                     
                 <div style={{width: "100%"}} className={Styles.cardContent}>
-                        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                        <div style={{ width: "100%", display: "flex",flexDirection: "column" }}>
                             <>
                                 
                                 <Form
@@ -94,12 +95,7 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                                 >
 
                                     <div style={{ width: "100%", padding: "0 3em", display: "flex", justifyContent: "center", flexDirection: "column" }}  className={Styles.sectionBox}>
-                                        <p>Beneficiary Information</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                        </div>
+                                        <JavContentTitle title={"Beneficiary Information"} />
                                         
                                         {
                                             loading ?
@@ -112,18 +108,17 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                                         }
 
                                     </div>
-                                    <div className={Styles.buttonContainter}>
-                                        <div className={Styles.tnxButton2}>
+                                    <div style={{display: "flex", justifyContent: "flex-end"}}>
                                             <Button
                                                 type="primary"
                                                 block
                                                 htmlType="submit"
                                                 size="large"
+                                                style={{width: "400px"}}
                                                 loading={addLoading}
                                             >
                                                 Continue
                                             </Button>
-                                        </div>
                                     </div>
 
                                 </Form>

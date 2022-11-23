@@ -2,7 +2,7 @@
     font-weight: bold;
     font-size: 23px;
     line-height: 24px;
-    color: #000C26;
+    color: #ffffff;
     font-weight: bold;
     margin: 1em;
 }
@@ -37,6 +37,20 @@ color: #000C26;
     margin: 2em;
 }
 
+.cancel{
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 100px;
+    color: #ffffff;
+    padding: 0em 1em;
+    cursor: pointer;
+    margin: 1em;
+    height: min-content;
+
+}
+
+.contentArea{
+    padding: 0.5em 2em;
+}
 .circleClose {
     display: flex;
     align-items: center;
@@ -55,7 +69,7 @@ color: #000C26;
 }
 .header {
     display: flex;
-    background: url('../../../assets/review_header.svg') no-repeat center;
+    background: url('../../../assets/review_bg.png') no-repeat top;
     background-size: 100%;
     justify-content: space-between;
     height: 150px;
@@ -109,24 +123,48 @@ color: #000C26;
 }
 
 .detailsTitle {
-    color: #888B93;
-    text-transform: uppercase;
-    font-size: 13px;
-    margin-top: 2.5em;
+    margin-top: 1em;
+    font-weight: 450;
+    font-size: 20px;
+    line-height: 26px;
+    color: #727986;
+}
+
+.recSubTitle{
+    margin-top: 0.2em;
+    font-weight: 450;
+    font-size: 20px;
+    line-height: 26px;
+    color: #727986;
+}
+
+.recTitle{
+    font-weight: normal;
+    font-weight: 450;
+    font-size: 24px;
+    line-height: 31px;
+    color: #00050E;
+    margin-top: 0.5em;
 }
 
 .ansRed {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 17px;
-    line-height: 21px;
-    color: #DB211E;
+    color: #DD4918;
+    font-size: 28px;
+    font-weight: 700;
+    font-weight: 450;
+    line-height: 31px;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
 }
 
 .ans {
     font-weight: normal;
-    font-size: 17px;
-    line-height: 21px;
+    font-weight: 450;
+    font-size: 24px;
+    line-height: 31px;
+    color: #00050E;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
 }
 
 .subAns {

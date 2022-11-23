@@ -103,25 +103,43 @@
 
 .sectionB{
     border-top: 2px solid #2272F4;
+    width: 100%;
 }
 
-/* .secRow{
-    d
-} */
+.secRow, .javSpecialRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    flex: 2;
+}
+.secRow{
+    align-items: center;
+    margin-left: 1em;
 
-.sectionB .circle{
+}
+.javSpecialRow{
+  align-items: baseline;
+  /* width: max-content; */
+  flex: 2;
+}
+
+.circle{
     border-radius: 100%;
     border: 2px solid #2272F4;
     width: 9px;
     height: 9px;
     text-align: left;
-    margin-top: -5px;
     background: #F0F4FD;
 }
 
-.sectionBox p {
+
+.javRowTitle {
+    /* flex-basis: 200px; */
+    
     /* text-align: left;
     margin-top: -33px;
+    width: max-content; 
     
     width: fit-content; */
     text-transform: lowercase;
@@ -132,7 +150,7 @@
     font-size: 20px;
 }
 
-.sectionBox p:first-letter {
+.javRowTitle:first-letter {
     text-transform: uppercase;
 }
 

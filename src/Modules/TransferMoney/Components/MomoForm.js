@@ -1,4 +1,4 @@
-import { Input, Select, Form, Spin } from 'antd';
+import { Input, Select, Form, Spin, Col } from 'antd';
 import { useState } from 'react';
 import Styles from "../TransferMoney.module.css"
 import CountryCode from '../../../Shared/Components/CountryCode/CountryCode';
@@ -39,11 +39,11 @@ const MomoForms = ({ form }) => {
         })
     }
     return (
-        <>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Phone Number</div>
-                <div className={Styles.inputContainer}>
-                    <Form.Item
+            <>
+            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            <Form.Item label="Phone Number" >
+                <Form.Item
+                        noStyle
                         name="momo_number"
                         rules={[
                             {
@@ -56,12 +56,12 @@ const MomoForms = ({ form }) => {
 
                         <Input onChange={resetNameField}  prefix={<CountryCode />} size="large" type="number" placeholder="mobile number" />
                     </Form.Item>
-                </div>
-            </div>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Momo Network</div>
-                <div className={Styles.inputContainer}>
-                    <Form.Item
+                </Form.Item  >
+
+</Col>
+            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            <Form.Item label="Momo Network" >
+                <Form.Item
                         name="momo_network"
                         rules={[
                             {
@@ -78,13 +78,14 @@ const MomoForms = ({ form }) => {
                             })}
                         </Select>
                     </Form.Item>
-                </div>
-            </div>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Account Name</div>
-                <div className={Styles.inputContainer}>
+                </Form.Item>
+            </Col>
+           
+          
                     {loading ? (<Spin />) : (
-                        <Form.Item
+                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                            <Form.Item label="Account Name" >
+                            <Form.Item
                             onClick={handleGetRecepient}
                             name="recepient"
                             rules={[
@@ -96,9 +97,12 @@ const MomoForms = ({ form }) => {
                         >
                             <Input style={{ color: recepient ? "black" : "inherit" }} size="large" disabled />
                         </Form.Item>
+
+                        </Form.Item>
+                         </Col>
+                        
+                        
                     )}
-                </div>
-            </div>
         </>
     )
 }

@@ -3,6 +3,7 @@ import { Layout, Col, Select, Form, Button } from 'antd';
 import InternationalBankTransferForm from "./Components/InternationalBankTranferForm";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
+import JavContentTitle from "../../Shared/Components/JavContentTitle";
 
 
 const ForexBeneficiary = () => {
@@ -29,7 +30,7 @@ const ForexBeneficiary = () => {
                 </div>
                 <div className={Styles.cardContainer}>
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} className={Styles.cardContent}>
-                        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                        <div style={{ width: "100%", padding: "0 3em", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <>
 
                                 <Form
@@ -42,12 +43,8 @@ const ForexBeneficiary = () => {
 
                                     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <div className={Styles.sectionBox}>
-                                        <p>Beneficiary Account</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                        </div>
+                                    <JavContentTitle title="Beneficiary Account"/>
+                                        
                                         <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                             <InternationalBankTransferForm type={'forex'}  />
                                         </div>
