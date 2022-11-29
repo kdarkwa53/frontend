@@ -57,6 +57,9 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                                                 <div>
                                                     <span style={{ fontWeight: "bold" }}>CFA</span> 691.95
                                                 </div>
+                                                <div>
+                                                    <span style={{ fontWeight: "bold" }}>GHS</span> 10.70
+                                                </div>
                                                 </div>
                                     </marquee>
                 </div>
