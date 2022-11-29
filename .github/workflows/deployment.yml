@@ -1,0 +1,38 @@
+name: Deploy Forex App
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout branche
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Create .env file
+        run: |
+          chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
+          echo "${{secrets.ENV_CONFIG}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
+          cat ".env"  
+      - name: Generate the build
+        run: npm run build
+  
+      - name: Restart Nginx
+        run: |
+          cd ..
+          sudo systemctl restart nginx
