@@ -454,6 +454,14 @@ input[type=number] {
     max-width: 1000px;
 }
 
+.ant-steps-navigation .ant-steps-item-container{
+    margin-left: 36px !important;
+}
+
+.ant-steps-navigation .ant-steps-item::after{
+    margin-top: -11px;
+    margin-left: 7px;
+}
 .textTitle {
     font-size: 23px;
     font-weight: bold;

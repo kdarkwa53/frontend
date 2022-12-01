@@ -9,10 +9,28 @@ import "./SetSecurityQuestions.css"
 import { useState } from 'react';
 import SuccessTransaction from '../SuccessTransaction';
 import { XIcon } from '../JavIcons';
+import { useHistory } from 'react-router';
 
 
 
-
+const SuccessQuestionsSet = ({ showModal, setModal }) => {
+    
+    return (
+        <>
+            <SuccessTransaction
+                showModal={showModal}
+                setShowModal={setModal}
+                // handleClick={handleShowSuccessContinue}
+                titleT="Security Questions Set Successfully"
+                action={"continue"}
+                msg={
+                    <>You have successfully reset your security questions.
+                    </>
+                }
+            />
+        </>
+    )
+}
 
 const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
 
@@ -20,13 +38,19 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch()
     const [indexValue, setIndexValue] = useState(0)
+    const [showSuccess, setShowSuccess] = useState(false)
 
 
     const loading = useSelector((state) => state?.resources?.settingQuestion)
     const questions = useSelector((state) => state?.resources?.securityQuestions)
 
-
-
+    const history = useHistory()
+    const handleShowSuccess=()=>{
+        // setShowSuccess(true)
+        setIsModalVisible(false)
+        history.push("/business/compliance")
+        
+    }
 
     const nextSlide = () => {
         let newIndex = indexValue
@@ -35,7 +59,13 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
     }
 
     const onFinish = (e) => {
-        dispatch(setSecurityQuestion(e, form, nextSlide))
+        let nextMove = indexValue === 3 ? handleShowSuccess : nextSlide
+        dispatch(setSecurityQuestion(e, form, nextMove))
+        // if (indexValue === 3){
+        //     setShowSuccess(true)
+        //     // setIsModalVisible(false)
+            
+        // }
     }
 
     const handleCancel = ()=>{
@@ -50,6 +80,7 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
                 style={{ width: "100%" }}
                 onFinish={onFinish}
             >
+                
                 <div className="set-containter">
                     <h3 className="set-title">Set up your password reset questions</h3>
                     <p className='set-subtitle'>You will need to answer these question when you forget your password</p>
@@ -90,6 +121,7 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
                         block
                         htmlType="submit"
                         size="large"
+                        shape='round'
                         loading={loading}
                         style={{margin: "1em 0"}}
                     >
@@ -105,14 +137,29 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
 
     return (
         <>
-            
+            {/* <SuccessQuestionsSet
+                showModal={true}
+                setModal={setShowSuccess}
+                /> */}
+            <SuccessTransaction
+                showModal={showSuccess }
+                setShowModal={setShowSuccess}
+                // handleClick={handleShowSuccessContinue}
+                titleT="Security Questions Set Successfully"
+                action={"continue"}
+                msg={
+                    <>You have successfully reset your security questions.
+                    </>
+                }
+            />
             <Modal
                 visible={isVisible}
                 onCancel={handleCancel}
                 footer={false}
-                closable={indexValue < 4 ? false : true}
+                closable={true}
                 centered
-                maskClosable={indexValue < 4 ? false : true}
+                maskClosable={true}
+                width={706}
                 closeIcon={
                     <div className="circle-close">
                         <XIcon width="1em" height="1em"/>

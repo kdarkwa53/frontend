@@ -61,7 +61,8 @@ const ForgotPin = () => {
     const Question = ({question})=>{
         return(
             
-                    <div key={question.id}>
+                    <div key={question?.id}>
+                        
                         <div className={Styles.editTitle}>Forgot Pin</div>
                         <Form
                             // form={form}

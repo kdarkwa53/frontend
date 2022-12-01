@@ -180,6 +180,7 @@ export const getConvertion = (id) => {
 
 export const getAllSecurityQuestions= () => {
     const userType = getUserType()
+    
     return async (dispatch) => {
         try {
             let { data } = await axios.get(
@@ -187,21 +188,22 @@ export const getAllSecurityQuestions= () => {
                 authHeader
             );
             
-            data = normalizeIdData(data?.questions)
+            
+            data = normalizeIdArrayData(data)
             dispatch({
                 type: GET_ALL_SECURITY_QUESTIONS_SUCCESS,
                 data
             });
         } catch (error) {
-            // if (!error.response) {
-            //     dispatch(
-            //         showErrorNotification("Action failed", "Check your internet and try again")
-            //     );
-            // } else {
-            //     dispatch(
-            //         showErrorNotification(error?.response?.data?.message)
-            //     );
-            // }
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Check your internet and try again")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+            }
         }
     };
 }

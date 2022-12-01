@@ -1,15 +1,20 @@
 import { Button, Form, Input, Row, Col, Select, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
+import React, { useEffect } from "react";
 import { XIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addingUser, updateBusUser } from "./duck/action";
+import { addingUser, getRoles, updateBusUser } from "./duck/action";
 
 
 const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
-    const [form] = useForm();
     const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getRoles())
+    }, [dispatch])
+
+    const [form] = useForm();
+    
     const { Option } = Select
     const roles = useSelector((state) => state?.userMgt?.roles)
     const users = useSelector((state) => state?.userMgt?.users)
@@ -24,6 +29,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
         setIsModalVisible(false)
     }
 
+    
     const showModal = () => {
         setIsModalVisible(true);
     };

@@ -1,12 +1,12 @@
 import { Modal, Button } from "antd";
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import ThemeStyles from "../../style/Auth.module.css";
 import { Form, Input, } from "antd";
 import SwipeableViews from 'react-swipeable-views';
 import Styles from "./Pin.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { ShieldIcon, XIcon } from "../../Shared/Components/JavIcons"
-import { setPin } from "./duck/action"
+import { getAllSecurityQuestions, setPin } from "./duck/action"
 import SuccessTransaction from "./SuccessTransaction"
 
 
@@ -129,21 +129,7 @@ const SetPinMessage = ({ handleCancel, next }) => {
     )
 }
 
-const SetPinSuccess = ({ pin }) => {
-    return (
-        <>
-            <SuccessTransaction
-                titleT="PIN Set Successful"
-                msg={
-                    <>You have successfully reset your pin.
-                        Your new pin is <span style={{ fontWeight: "bold", color: "#000C26" }}>{pin}</span>.
-                        You are ready to perform your first transaction.
-                    </>
-                }
-            />
-        </>
-    )
-}
+
 
 const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => {
     const state = useSelector((state) => state.pin)
@@ -151,15 +137,46 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
     const [form] = Form.useForm()
     const [pinTrim, setPinTrim] = useState('')
     const [indexValue, setIndexValue] = useState(0)
+    const [showSuccess, setShowSuccess] = useState(false)
     const [hasError, setError] = useState({ isError: false, msg: "" })
     let codeP = []
     let codeP2 = []
 
+    useEffect(()=>{
+        dispatch(getAllSecurityQuestions())
+    })
+
+    const SetPinSuccess = ({showSuccess,setShowSuccess, showSecurityQuestions }) => {
+        const handleShowSuccessContinue = ()=>{
+            console.log('close and open questions')
+            showSecurityQuestions(true)
+            setShowSuccess(false)
+        }
+        return (
+            <>
+                <SuccessTransaction
+                    showSuccess={showSuccess}
+                    setShowSuccess ={setShowSuccess}
+                    handleClick={handleShowSuccessContinue}
+                    titleT="PIN Set Successful"
+                    action={"continue"}
+                    msg={
+                        <>You have successfully reset your pin.
+                        </>
+                    }
+                />
+            </>
+        )
+    }
 
     const handleCancel = () => {
         setIsPinSetVisible(false);
-        showSecurityQuestions(true)
     };
+    const handleShowSuccess=()=>{
+        // setShowSuccess(true)
+        setIsPinSetVisible(false)
+        showSecurityQuestions(true)
+    }
 
     const onCreate = () => {
         let confirmPin = codeP2.toString().replaceAll(',', '')
@@ -172,7 +189,7 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
             prevSlide()
 
         } else {
-            dispatch(setPin({ "passcode": pinTrim }, nextSlide))
+            dispatch(setPin({ "passcode": pinTrim }, handleShowSuccess))
         }
 
     }
@@ -212,12 +229,14 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
 
     }
 
+    
 
 
     const nextSlide = () => {
         let newIndex = indexValue
         newIndex = newIndex + 1
         setIndexValue(newIndex)
+       
     }
 
     const prevSlide = () => {
@@ -236,7 +255,7 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
             centered
             closeIcon={
                 <div className={Styles.circleClose}>
-                <XIcon width="1em" />
+                    <XIcon width="1em" />
                  </div>
             }
             maskClosable={indexValue < 3 ? false : true}
@@ -253,8 +272,13 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
             <Form
                 form={form}
                 name="normal_login"
-            // className={indexValue === 3 ? Styles.star_bg : ""}
-            >
+              >
+                <SetPinSuccess 
+                showSuccess={ showSuccess } 
+                setShowSuccess={setShowSuccess} 
+                showSecurityQuestions={showSecurityQuestions} 
+                /> 
+
                 <SwipeableViews
                     axis='x'
                     index={indexValue}
@@ -292,7 +316,6 @@ const Pin = ({ isPinSetVisible, setIsPinSetVisible, showSecurityQuestions }) => 
                             </div>
                         }
                     />
-                    <SetPinSuccess pin={pinTrim} />
                 </SwipeableViews>
             </Form>
         </Modal>

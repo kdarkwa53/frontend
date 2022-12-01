@@ -110,49 +110,67 @@ const BusinessKYCForm = (props) => {
     return (
         <>
               
-                <Content
+                {/* <Content
                     style={{
                         minHeight: 300,
                         padding: "50px",
                         margin: "1em",
                         backgroundColor: "white",
                     }}
-                >
+                > */}
+                    <div className={Styles.card}>
+                            <div className={Styles.kyccardTitle}>
+                                <div>
+                                    <span className={Styles.titleCard}>Forex</span>
+                                </div>
+                            </div>
                 <div className={Styles.pageContainer}>
-                    <div className={Styles.sider}>
+                    {/* <div className={Styles.sider}>
                         <KYCSider steps={steps} onChange={onChange} current={current} />
-                    </div>
+                    </div> */}
                     <div className={Styles.mainContainArea}>
-                        <Steps className={Styles.steps} responsive="true" current={current} onChange={onChange}>
+                        {/* <Steps className={Styles.steps} responsive="true" current={current} onChange={onChange}>
                             {steps.map((item) => (
                                 <Step key={item.title}  />
                             ))}
-                        </Steps>
-                        <Form
-                            form={form}
-                            name="dynamic_form_nest_item"
-                            layout="vertical"
-                            onFinish={onFinish}
-                            validateMessages={validateMessages}
-                            onFinishFailed={onFinishFailed}
-                            initialValues={kycValues}
-                            
-                        >
-                            {/* <div >
-                                <Button type="primary">
-                                    Save
-                                </Button>
-                                <Button htmlType="submit" loading={loading} onClick={showConfirm} >Save and Continue later</Button>
-                            </div> */}
-                            <div className={Styles.formArea}>
-                                {steps[current].content}
-                            </div>
-                            
-                        </Form>
+                        </Steps> */}
+
+                        <Steps
+                            type="navigation"
+                            current={current}
+                            onChange={onChange}
+                            className="site-navigation-steps"
+                            items={steps}
+                            style={{ overflowX: "scroll", marginLeft: "1em" }}
+                            responsive
+                        />
+                        
+                            <Form
+                                form={form}
+                                name="dynamic_form_nest_item"
+                                layout="vertical"
+                                onFinish={onFinish}
+                                validateMessages={validateMessages}
+                                onFinishFailed={onFinishFailed}
+                                initialValues={kycValues}
+                                
+                            >
+                                {/* <div >
+                                    <Button type="primary">
+                                        Save
+                                    </Button>
+                                    <Button htmlType="submit" loading={loading} onClick={showConfirm} >Save and Continue later</Button>
+                                </div> */}
+                                <div className={Styles.formArea}>
+                                    {steps[current].content}
+                                </div>
+                                
+                            </Form>
+                        </div>
                     </div>
                 </div>
                
-                </Content>
+                {/* </Content> */}
         </>
     );
 };

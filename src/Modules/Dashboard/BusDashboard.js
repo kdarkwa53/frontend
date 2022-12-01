@@ -22,12 +22,16 @@ const BusDashboard = () => {
     const text = useSelector((state) => state?.language)
 
     const userDetails = useSelector((state) => state?.user)
+    const setSecurityQ = useSelector((state)=>state?.resources?.userSecurityQuestions)
     const vis = userDetails?.app_passcode ? false : true
+    // const vis = true
+
     const [isPinSetVisible, setIsPinSetVisible] = useState(vis)
     const business_kyc = userDetails?.business_kyc
 
     const [setupAction, setActions] = useState({
         setPin: !vis,
+        setSecurityQ: setSecurityQ ? true : false,
         bus_kyc: business_kyc ? true : false
     })
     const [showSC, setSC] = useState(false)
@@ -120,7 +124,10 @@ const BusDashboard = () => {
                         <WelcomeCard
                             name={userDetails?.first_name} />
 
-                        <InitialSetup actions={setupAction} />
+                        <InitialSetup actions={setupAction} 
+                        setIsPinSetVisible={setIsPinSetVisible}  
+                        showSecurityQuestions={setSC}
+                        />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                         <SpotRateCalculator />

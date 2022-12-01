@@ -64,7 +64,7 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                                     </marquee>
                 </div>
                 <Row style={{background: "#F8F8F8"}}>
-                    <div className={Styles.middleCol} >
+                    <div style={{background: "#E0EAFF"}} className={Styles.middleCol} >
                       
                         <div className={Styles.layoutContainer}>
                                

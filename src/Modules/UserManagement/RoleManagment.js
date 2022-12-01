@@ -21,6 +21,7 @@ const RoleManagement = () => {
     useEffect(()=>{
         dispatch(getRoles())
     }, [dispatch])
+
     const roles = useSelector((state) => state.userMgt.roles)
 
     const customizeRenderEmpty = () => (

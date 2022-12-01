@@ -1,11 +1,12 @@
 import { Button, Form, Input, Row, Col, Select, Modal, InputNumber } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { XIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { addingRole, addingUser } from "./duck/action";
 import RoleItem from "./RoleItem";
+import { getRoles } from "./duck/action";
 
 
 const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
@@ -34,7 +35,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
     let allPerm = editUser ? getPermissionsIDs(roleDetails?.permissions) : null
 
 
-  
+    
 
     const handleCancel = () => {
         setIsModalVisible(false)
@@ -61,6 +62,10 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
         })
        
     }
+
+    useEffect(()=>{
+        dispatch(getRoles())
+    }, [dispatch, rLoading])
 
     return(
         <>
@@ -116,9 +121,12 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                                     >
                                     {
                                         Object.values(perm).map((per)=>{
-                                            return(
-                                                <RoleItem allPerm={allPerm} selectedPerm={selectedPerm} setSelectedPerm={setSelectedPerm} key={per.id} perm={per} />
-                                            )
+                                            if (per.name !== "TRANSACTION_LIMIT") {
+                                                return(
+                                                    <RoleItem allPerm={allPerm} selectedPerm={selectedPerm} setSelectedPerm={setSelectedPerm} key={per.id} perm={per} />
+                                                )
+                                            }
+                                           
                                         })
                                     }
                                     </Form.Item>

@@ -1,6 +1,7 @@
 
 import { Button, Col, Row } from "antd"
 import { useState } from "react"
+import { useHistory } from "react-router"
 import Circle from "../Circle/Circle"
 import { CheckIcon, TickBold } from "../JavIcons"
 import Styles from "./InitiailSetup.module.css"
@@ -43,7 +44,24 @@ export const TaskTodo = ({ completed, title, desc, fontSub }) => {
 }
 
 
-export const InitialSetup = ({ actions }) => {
+export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestions }) => {
+   
+    const history = useHistory()
+    const handleClick=()=>{
+
+    
+    if(actions.setPin===false){
+        // show start
+        return setIsPinSetVisible(true)
+    }else if(actions.setSecurityQ===false){
+        return showSecurityQuestions(true)
+    }else if(actions.bus_kyc===false){
+        return history.push("/business/compliance")
+    }else console.log("here")
+    
+
+    }
+    
 
     const [steps, setSteps] = useState(1 + (+actions.setPin) + (+actions.bus_kyc))
     return (
@@ -61,7 +79,7 @@ export const InitialSetup = ({ actions }) => {
                             Let's secure your account
                         </div>
 
-                        <div className={Styles.conButton}>
+                        <div onClick={handleClick} className={Styles.conButton}>
                             Continue
                         </div>
 

@@ -1,6 +1,5 @@
-import { Layout, Col, Input, Form, Button, Divider } from 'antd';
+import { Layout, Col, Input, Form, Button, Row } from 'antd';
 import { useState } from 'react';
-import { ArrowDownCircle } from "../../Shared/Components/JavIcons"
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { accountTranfer, getTransactionFee } from "./duck/action"
@@ -11,6 +10,7 @@ import ReviewPopUp from '../../Shared/Components/ReviewPopUp/ReviewPopUp';
 import { REACT_APP_ASSETS_API_URL } from '../../helpers/contants';
 import { showErrorNotification } from '../../Shared/actions/alert.actions';
 import JavolinAccountsFiltered from '../../Shared/Components/Accounts/JavolinAccountsFiltered';
+import JavContentTitle from '../../Shared/Components/JavContentTitle';
 
 
 
@@ -100,19 +100,14 @@ const TransferMoney = () => {
                     onFinish={onFinish}
                     
                 >
-                    <div style={{display: "flex",  justifyContent: "center", alignItems: "center" }}>
-                    <div className={Styles.sectionBox}>
-                        <p>Source</p>
-                                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                            
-                                        </div>
-                        <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Transfer From</div>
-                            <div className={Styles.inputContainer}>
+                     <JavContentTitle title="Source"/>
+
+                     <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                       
+                            <Form.Item label="Transfer From">
                                 <Form.Item
+                                 noStyle
                                     name={"source"}
                                     rules={[
                                         {
@@ -122,33 +117,31 @@ const TransferMoney = () => {
                                 >
                                     <JavolinAccounts setsourcewallet={setsourcewallet} />
                                 </Form.Item>
-                            </div>
-                        </div>
+                               </ Form.Item>
+                        </Col>
 
-
-
-                        <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Amount</div>
-                            <div className={Styles.inputContainer}>
-                                <Form.Item
-                                name="amount"
-                                    rules={[
-                                        { required: true },
-                                        {
-                                            pattern: /^[1-9]+[0-9]*$/,
-                                            message: `Input invalid`
-                                        }
-                                    ]}
-                                >
+                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                       
+                       <Form.Item label="Amount">
+                       <Form.Item
+                            name="amount"
+                            noStyle
+                                rules={[
+                                    { required: true },
+                                    {
+                                        pattern: /^[1-9]+[0-9]*$/,
+                                        message: `Input invalid`
+                                    }
+                                ]}
+                            >
                                     <Input prefix={<Currencies />} width="100%" size="large" name='amount' type="number" />
                                 </Form.Item>
-                            </div>
-                        </div>
-
-                        <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Note <span style={{ color: "#888B93" }}>(optional)</span> </div>
-                            <div className={Styles.inputContainer}>
-                                <Form.Item
+                          </ Form.Item>
+                   </Col>
+                   <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                       
+                       <Form.Item label="Note">
+                       <Form.Item
                                     name="note"
                                     rules={[
                                         {
@@ -158,29 +151,19 @@ const TransferMoney = () => {
                                 >
                                     <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
                                 </Form.Item>
-                            </div>
-                        </div>
-                    </div>
-
-                    </div>
+                          </ Form.Item>
+                   </Col>
                    
-                    <Divider>
-                        <ArrowDownCircle width="2em" color="#63B344" />
-                    </Divider>
-                    
-                    <div style={{display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <div className={Styles.sectionBox}>
-                        <p>Destination</p>
-                        <div className={Styles.secRow}>
-                                            <div className={Styles.sectionB}>
-                                                <div className={Styles.circle}></div>
-                                            </div>
-                                            
-                                        </div>
-                        <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Transfer To</div>
-                            <div className={Styles.inputContainer}>
-                                <Form.Item
+
+                    </Row>
+
+                       
+
+                    <JavContentTitle title="Destination"/>
+                    <Row style={{marginTop: "1em"}} gutter={[32,16]}>
+                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                        <Form.Item label="Transfer to">
+                        <Form.Item
                                     name={"destination"}
                                     rules={[
                                         {
@@ -191,17 +174,19 @@ const TransferMoney = () => {
                                     {/* <JavolinAccounts setsourcewallet={setDestWallet} /> */}
                                     <JavolinAccountsFiltered setsourcewallet={setDestWallet} choosenwallet={sourceWallet.id} />
                                 </Form.Item>
-                            </div>
-                        </div>
+                        </Form.Item>
+                        
+                        </Col>
+                    </Row>
 
-                    </div>
-                    </div>
-                   
+
                     
-                    
-                            <Button
+                    <div style={{display: "flex", justifyContent: "flex-end"}}>
+                    <Button
                                 type="primary"
                                 block
+                                shape='round'
+                                style={{ width: "400px" }}
                                 htmlType="submit"
                                 size="large"
                                 loading={feeLoading}
@@ -209,7 +194,7 @@ const TransferMoney = () => {
                             >
                                 Transfer Money
                             </Button>
-                 
+                    </div>
                 </Form>
 
             </>

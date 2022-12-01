@@ -32,7 +32,7 @@ const FundWallet = () => {
     const [passcode, setPasscode] = useState(false)
     const [details, setDetails] = useState("")
     const btnLoading = useSelector((state) => state?.savings?.makingDeposit)
-    const getLoading = useSelector((state) => state?.savings?.gettingPLink)
+    const getLoading = useSelector((state) => state?.transfer?.gettingPLink)
     const feeLoading = useSelector((state) => state?.transfer?.gettingFee)
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
     let defaultWallet = useSelector((state) => state?.user?.default_savings_wallet)

@@ -130,6 +130,12 @@ color: #000C26;
     color: #727986;
 }
 
+.rowGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 5px;
+    column-gap: 5px;
+}
 .recSubTitle{
     margin-top: 0.2em;
     font-weight: 450;

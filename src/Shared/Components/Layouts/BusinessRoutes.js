@@ -79,7 +79,7 @@ export default function BusinessRoutes() {
                 <MainLayoutRoute path="/new-application" component={NewApplication} />
                 <Route path="/homeInfo" component={HomeInfo} />
                 <MainLayoutRoute path='/beneficiary' component={BeneficiaryDetails} />
-                <BusinessKYCLayout title={'Business Account Application'} primary path='/business/compliance' component={BusinessKYCForm} />
+                <MainLayoutRoute title={'Business Account Application'} subtitle="Home / " breadSub="Business KYC"  path='/business/compliance' component={BusinessKYCForm} />
                 <LayoutView primary path="/preview/:id" component={MortgagePreviewPage} />
                 <MainLayoutRoute title="Transfer Money" path="/business/transfer" component={TransferMoney} />
                 <MainLayoutRoute title="Send Money" path="/send-money/international" component={SendMoneyInt} />

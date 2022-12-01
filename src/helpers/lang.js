@@ -49,7 +49,7 @@ export const lang = {
         PROFILE: "Profile",
         ACCOUNT_BALANCE: "Account balance",
         ACCOUNT_NUMBER: "Account number",
-        WELCOME_MSG: "Welcome to Javolin, we are happy to see you here. Get to know more about us. Watch this 60 seconds video",
+        WELCOME_MSG: "Welcome to Javolin! Get to know more about us. Watch this 60 seconds video",
         HELLO_THERE: "Hello to Javolin",
         FIRST_NAME: "First name",
         SURNAME: "Last Name",

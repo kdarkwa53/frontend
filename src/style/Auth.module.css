@@ -134,7 +134,7 @@ div.serviceCard {
 .pinInput {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    column-gap: 5px;
+    column-gap: 23px;
     margin: 2em 0
 }
 .signupCard {

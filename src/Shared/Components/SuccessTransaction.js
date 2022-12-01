@@ -1,34 +1,57 @@
 
-import { Button } from "antd"
+import { Button, Modal } from "antd"
 import { useHistory } from "react-router"
-import { TickBold } from "./JavIcons"
+import { TickBold, XIcon } from "./JavIcons"
 import Styles from "./Pin.module.css"
+import Confetti from "../../assets/confetti.gif"
 
 
-const SuccessTransaction = ({ titleT, msg, action, link }) => {
+const SuccessTransaction = ({ titleT, msg, action, showSuccess, setShowSuccess, handleClick }) => {
 
-    const history = useHistory()
+    const handleCancel = ()=>{
+        setShowSuccess(false)
+    }
 
+   
     return (
         <>
-            <div className={[`${Styles.center} ${Styles.star_bg}`]}>
-                <div style={{ margin: "3em 0 2em" }}>
-                    <TickBold width="5em" height="auto" color="#2D9319" />
+        <Modal
+            visible={showSuccess}
+            className={Styles.popupModals}
+            footer={false}
+            width={503}
+            closable={true}
+            centered
+            closeIcon={
+                <div className={Styles.circleClose}>
+                    <XIcon width="1em" />
+                 </div>
+            }
+            onCancel={handleCancel}
+            bodyStyle={
+                {
+                    padding: "0"
+                }
+            }
+        >
+            <div className={[`${Styles.center}`]}>
+                <div className={Styles.confettiSec}>
+                    <img src={Confetti} alt="confetti" />
                 </div>
                 <h2 className={Styles.title}>{titleT}</h2>
                 <p style={{ color: "#888B93", }} className="textCenter">
                     {msg}
                 </p>
-                <Button
-                    block
-                    size="large"
-                    style={{ marginTop: "2em" }}
-                    type="primary"
-                    onClick={() => history.push({ link })}
+                <div
+                className={Styles.actionBtn}
+                 
+                onClick={handleClick}
                 >
                     {action}
-                </Button>
+                </div>
             </div>
+        </Modal>
+            
         </>
     )
 }

@@ -114,9 +114,12 @@ const WalletPage = () => {
             <div style={{marginTop: "4em"}}>
                 <div className={Styles.titleRow}>
                     <div className={Styles.secTitle}>Active accounts</div>
-                    <NewWallet>
+                    <div style={{width: "400px"}}>
+                    <NewWallet/>
+                    </div>
                     
-                    </NewWallet>
+                    
+                  
                 </div>
                 <div style={{overflowX: "scroll"}} className={Styles.serviceRow}>
                 

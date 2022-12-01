@@ -51,7 +51,7 @@ const ReviewPopUpInt = ({ setReview, showReview, details, setPasscode }) => {
                     </div>
                     <div className={Styles.contentArea}>
                     <JavContentTitle title={details?.to?.msg} />
-                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <div className={Styles.rowGrid} >
                             <div>
                                 <div className={Styles.detailsTitle}>
                                     Account name
