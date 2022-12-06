@@ -120,7 +120,7 @@ const BusinessSignUpPage2 = () => {
 
                     <div className={ThemeStyles.topSection}>
                         <div className={ThemeStyles.authTitle}>
-                            Register as Forex Trader
+                            Register
                         </div>
                     </div>
                     <div style={{ marginTop: "2em" }}>

@@ -232,7 +232,7 @@ const BusinessSignUp = (props) => {
 
                     <div className={ThemeStyles.topSection}>
                         <div className={ThemeStyles.authTitle}>
-                        Register as Forex Trader
+                        Register
                         </div>
                     </div>
                     <div >
