@@ -85,7 +85,7 @@ const RoleManagement = () => {
                         </AccessControl>
                         <AccessControl
                             userPermissions={['DELETE_ROLE']}
-                            allowedPermissions={['E_ROLE']}
+                            allowedPermissions={['DELETE_ROLE']}
                             renderNoAccess={''}
                         >
                             <Tag onClick={()=>handleDelete(id)} style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >

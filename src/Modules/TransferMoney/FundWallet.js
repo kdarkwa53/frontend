@@ -245,7 +245,7 @@ const FundWallet = () => {
                                         style={{width: "400px"}}
                                         loading={feeLoading}
                                     >
-                                        Fund Wallet
+                                        Continue
                                     </Button>
                                     </div>
                                     

@@ -8,12 +8,15 @@ import JavolinAccounts from '../../Shared/Components/Accounts/JavolinAccounts';
 import { REACT_APP_ASSETS_API_URL } from '../../helpers/contants';
 import { showErrorNotification } from '../../Shared/actions/alert.actions';
 
-
+import {
+    PlusCircleOutlined
+} from '@ant-design/icons';
 
 import "../../Shared/Components/Accounts/JavolinAccounts.css"
 import { Timer } from '../../Shared/Components/Timer';
 import ReviewPopUpInt from '../../Shared/Components/ReviewPopUp/ReviewForex';
 import JavContentTitle from '../../Shared/Components/JavContentTitle';
+import { useHistory } from 'react-router';
 
 const { Option } = Select;
 
@@ -40,6 +43,9 @@ const SendMoneyForex = (props) => {
     const [sourceWallet, setsourcewallet] = useState(Object.keys(wallets).length === 1 ? wallets[defaultWallet?.id] : '')
     const [settlementDetails, setSettlementDetails] = useState()
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
+    const bene = useSelector((state) => state?.transfer?.beneficiaries)
+    const beneficiaries = bene ? bene : {}
+    const history = useHistory()
 
 
 
@@ -153,7 +159,6 @@ const SendMoneyForex = (props) => {
         const fieldVals = form.getFieldValue('amount')
         const beneField = form.getFieldValue('beneficiary')
         let disabled = (fieldVals === undefined || fieldVals === '') && (beneField === undefined || beneField === '')
-        console.log('disable: ', disabled)
         setCheckDisabled(disabled)
     }
 
@@ -211,6 +216,12 @@ const SendMoneyForex = (props) => {
         }
     }
 
+    const handleChangeBene = (e)=>{
+       if (e === "new"){
+        history.push("/business/pre-rules")
+       }
+    }
+
 
     const reset = () => {
         form.setFieldsValue({
@@ -260,9 +271,9 @@ const SendMoneyForex = (props) => {
                                 onFinish={onFinish}
                                 onFieldsChange={handleFormChange}
                                 initialValues={{
-                                    accountNumber: state.accountNumber,
-                                    beneficiary_account: state.id,
-                                    from_account: Object.keys(wallets).length === 1 ? defaultWallet?.id : ''
+                                    accountNumber: state?.accountNumber,
+                                    beneficiary_account: state?.id,
+                                    from_account: Object?.keys(wallets)?.length === 1 ? defaultWallet?.id : ''
                                 }}
                             >
                                 <JavContentTitle title="Beneficiary Details"/>
@@ -290,8 +301,8 @@ const SendMoneyForex = (props) => {
                                                 },
                                             ]}
                                             >
-                                            <Select size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
-                                                <Option value={state?.id} key={state?.id}>
+                                            <Select onChange={handleChangeBene} size="large" className="c_select" style={{ width: "100%" }} placeholder="Select Beneficiary">
+                                                {/* <Option value={state?.id} key={state?.id}>
                                                     <div className={`cardTile ${sel.title}`}>
                                                         <div className="cardLeftHem">
                                                             <div className={`cardName ${sel.lineHeight}`} >{state?.name}</div>
@@ -304,7 +315,27 @@ const SendMoneyForex = (props) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </Option>
+                                                    
+                                                </Option> */}
+                                                 <Option value='new' > <PlusCircleOutlined/> {'Add New Beneficiary'}</Option>
+                                                 {Object.values(beneficiaries)?.map((bene) => { 
+                                                    return ( 
+                                                        <Option value={bene?.id} key={bene?.id}>
+                                                        <div className={`cardTile ${sel.title}`}>
+                                                            <div className="cardLeftHem">
+                                                                    <div className={`cardName ${sel.lineHeight}`} >{bene?.name}</div>
+                                                            </div>
+                                                            <div className="cardRightHem">
+                                                                <div className="accountNumber">
+                                                                    {bene?.account_number ? bene?.account_number : ""}
+                                                                </div>
+                                                                <div className="cardDesign">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Option>
+                                                        ) 
+                                                    })}
 
                                             </Select>
                                             </Form.Item>

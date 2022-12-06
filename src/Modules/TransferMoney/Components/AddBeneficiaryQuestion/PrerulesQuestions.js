@@ -42,7 +42,6 @@ const PrerulesQuestions = (props) => {
         const fieldVals = Object.values(fields)
         const disP = fieldVals[0] === undefined || fieldVals[1] === undefined || fieldVals[2]=== undefined || fieldVals[3] === undefined
         const errors = fieldVals.includes(undefined)
-        console.log(errors)
         setButton(errors)
         setDisPM(disP)
 

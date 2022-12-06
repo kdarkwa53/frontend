@@ -3,6 +3,7 @@ import { Button, Col, Form, InputNumber, Row, Select } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router"
 import { currencyFormat } from "../../../../helpers/utils"
 import { getSpotRate } from "../../../../Modules/TransferMoney/duck/action"
 import { showErrorNotification } from "../../../actions/alert.actions"
@@ -17,9 +18,12 @@ const SpotRateCalculator = () => {
     
     const [buyCurrency, setBuyCurrency] = useState("")
     const [showTimer, setShowTimer] = useState(false)
+    const [disableContinue, setDisCount] = useState(true)
+    const [checkDisabled, setCheckDisabled] = useState(true)
 
     const [rate, setRate] = useState("")
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const onFinish = (values)=>{
         console.log(values)
@@ -30,8 +34,21 @@ const SpotRateCalculator = () => {
         dispatch(getSpotRate(details)).then((rate)=>{
             setRate(rate)
             setShowTimer(true)
+            setDisCount(false)
         })
 
+    }
+
+    const handleProceedBooking = ()=>{
+        history.push("/send-money/forex")
+    }
+
+    const handleFormChange = (e) => {
+        const fields = form.getFieldsValue()
+        const fieldVals = Object.values(fields)
+        const errors = fieldVals.includes(undefined)
+        console.log(fieldVals, errors)
+        setCheckDisabled(errors)
     }
 
     const reset = () => {
@@ -63,6 +80,7 @@ const SpotRateCalculator = () => {
                 form={form}
                 layout="vertical"
                 onFinish={onFinish}
+                onChange= {handleFormChange}
                 >
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 24 }}>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -135,16 +153,29 @@ const SpotRateCalculator = () => {
                         </Col>
                     </Row>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 24 }}>
-                        <Col xs={24} sm={24} md={12} lg={24} xl={24}>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Button
                             block
                             type="primary"
                             size="large"
                             shape="round"
+                            disabled={checkDisabled}
                             htmlType="submit"
                                 loading={rateLoading}
                             >
                                 check rate
+                            </Button>
+                        </Col>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <Button
+                            block
+                            type="primary"
+                            size="large"
+                            shape="round"
+                            disabled={disableContinue}
+                            onClick={handleProceedBooking}
+                            >
+                                proceed
                             </Button>
                         </Col>
                         
