@@ -8,6 +8,7 @@ import { getTransactionFee } from "../TransferMoney/duck/action";
 import { approveTransaction, declineTransaction, getPendingTransactions } from "./duck/action";
 import PendingActionTag from "./PendingActionTag";
 import ViewPendingTransDetails from "./ViewPendingTransDetails";
+import { getTransactions } from "../Savings/duck/action";
 
 
 
@@ -29,6 +30,7 @@ const PendingRequests = () => {
   
     useEffect(()=>{
         dispatch(getPendingTransactions())
+        dispatch(getTransactions())
     }, [dispatch])
 
 

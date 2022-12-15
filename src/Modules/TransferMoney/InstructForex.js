@@ -21,6 +21,7 @@ import JavolinAccountCurrencyFiltered from '../../Shared/Components/Accounts/Jav
 import { getWallets } from '../../Shared/Components/duck/action';
 import AddBenefeciaryPopUp from './AddBenefeciaryPopUp';
 import IBANPopUp from './IBANPopUp';
+import { getPendingTransactions } from '../UserManagement/duck/action';
 
 const { Option } = Select;
 
@@ -67,6 +68,7 @@ const InstructForex = (props) => {
     useEffect(()=>{
         dispatch(getBeneficiaries())
         dispatch(getWallets())
+        dispatch(getPendingTransactions())
     },[dispatch])
     
     const onFinish = (values) => {

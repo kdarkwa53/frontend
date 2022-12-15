@@ -188,8 +188,7 @@ export const formatRegResults = (data)=>{
 }
 
 export function* chunks(l) {
-    const n = Math.round(l.length/5)
-    for (let i = 0; i < l.length; i = i + 5) {
+    for (let i = 0; i < l?.length; i = i + 5) {
         yield l.slice(i, i + 5)
     }
 }

@@ -1,7 +1,8 @@
 import { Spin, Tag } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { approveTransaction, declineTransaction } from "./duck/action"
+import { getTransactions } from "../Savings/duck/action"
+import { approveTransaction, declineTransaction, getPendingTransactions } from "./duck/action"
 import Styles from "./UserMgt.module.css"
 
 
@@ -10,6 +11,10 @@ const PendingActionTag = ({action, id, closeModal, styles})=>{
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
 
+    useEffect(()=>{
+        dispatch(getPendingTransactions())
+        dispatch(getTransactions())
+    }, [dispatch])
     const handleClick=(id)=>{
         if(action === "approve"){
             setLoading(true)
