@@ -19,7 +19,7 @@ const PhoneVerification = (props) => {
     const login = useSelector((state) => state?.login);
 
     const handleOPTResend = () => {
-        dispatch(resendOTP(formatNumber(state.phone_number)))
+        dispatch(resendOTP(formatNumber(state.email)))
     }
     const onFinish = (values) => {
         dispatch(verifyPhone(values?.pin, state?.phone_number, history))
@@ -40,10 +40,10 @@ const PhoneVerification = (props) => {
                         <img align="center" src={PhoneImage} alt="phone icon" />
                     </div>
                     <div className={ThemeStyles.authTitle}>
-                        Verify Phone Number
+                        Enter Verification Code
                     </div>
                     <p style={{ textAlign: "center" }} className={ThemeStyles.subInfo}>
-                        We have sent a 6-digit code to your number <span className={ThemeStyles.subBoldGray}> {state?.phone_number} </span>
+                        We have sent a 6-digit code to your phone and email <span className={ThemeStyles.subBoldGray}> {`${state?.email} | ${state?.phone_number}`}</span>
                     </p>
                     <Form.Item
                         name={["pin"]}
@@ -74,7 +74,7 @@ const PhoneVerification = (props) => {
                 </Form>
                 <div className={ThemeStyles.footerMsg}>
                     <div className={ThemeStyles.footerContent}>
-                        Didn't receive code? <span style={{ color: '#467fcf', cursor: 'pointer' }} onClick={handleOPTResend}>Resend code</span>
+                        Didn't receive code? <span style={{ color: '#467fcf', cursor: 'pointer' }} onClick={handleOPTResend}>Resend code to phone </span>
                     </div>
                 </div>
             </div>

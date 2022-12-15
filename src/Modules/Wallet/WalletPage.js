@@ -110,7 +110,7 @@ const WalletPage = () => {
             <div style={{marginTop: "4em"}}>
                 <div className={Styles.titleRow}>
                     <div className={Styles.secTitle}>Active accounts</div>
-                    <div style={{width: "400px"}}>
+                    <div style={{width: "200px"}}>
                     <NewWallet/>
                     </div>
                     
@@ -135,7 +135,7 @@ const WalletPage = () => {
                         }
                        
                  
-                    <NewWallet/>
+                    {/* <NewWallet/> */}
                 </div>
 
                 <div className={Styles.titleRow}>

@@ -209,7 +209,7 @@ const BusinessSignUp = (props) => {
 
         values = { ...values, ...{ "phone_number": intNum, country_code: 'gh', date_of_birth: '1995-03-28', first_name: 'Sese', last_name: 'Smiths' } }
         values = { ...state, ...values }
-        dispatch(signup(values, history, accountType));
+        dispatch(signup(values, history, "business"));
 
 
     };
