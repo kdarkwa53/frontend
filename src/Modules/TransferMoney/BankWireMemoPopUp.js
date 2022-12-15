@@ -5,6 +5,7 @@ import { Button, Modal } from "antd"
 import Styles from "../../Shared/Components/Menu/Menu.module.css"
 import { XIcon } from "../../Shared/Components/JavIcons";
 import JavContentTitle from "../../Shared/Components/JavContentTitle";
+import { useSelector } from "react-redux";
 
 
 
@@ -12,7 +13,7 @@ const BankWireMemoPopUp = ({ isVisible, setVisible, reference }) => {
 
 
 
-
+   const businessName = useSelector((state)=>state.user.business_name)
 
 
     const handleCancel = () => {
@@ -37,7 +38,7 @@ const BankWireMemoPopUp = ({ isVisible, setVisible, reference }) => {
                     }
                 }
 
-                width="700px"
+                width="1000px"
             >
                 <div className={Styles.jav_modal_header}>
                     <div className={Styles.jav_modal_secTitle}>Banks wire instructions</div>
@@ -46,7 +47,7 @@ const BankWireMemoPopUp = ({ isVisible, setVisible, reference }) => {
                 <div style={{ display: "flex", padding: "2em 1em", flexDirection: "column", alignItems: "right", justifyContent: "center" }}>
                     <div>
                         <p>Dear valued customer,</p>
-                        <p>To fund your account on Javolin via bank, you need wire the money to either one of our bank accounts with details below: <span style={{ color: "red" }}>{reference}</span> </p>
+                        <p>To fund your account on Javolin via bank, you need to wire the money to either one of our bank accounts with details below: <span style={{ color: "red" }}>{reference}</span> </p>
                         <JavContentTitle title="Local Account" />
                         <p>Bank name: <span style={{ fontWeight: "bold" }}>ZENITH BANK GHANA</span> </p>
                         <p>Address: <span style={{ fontWeight: "bold" }}>Zenith Heights Accra</span> </p>
@@ -62,7 +63,7 @@ const BankWireMemoPopUp = ({ isVisible, setVisible, reference }) => {
                             <p>IBAN #: <span style={{ fontWeight: "bold" }}>GB92 BARC 2000 0074 8445 88 </span> </p>
                         <p>Beneficiary Bank SWIFT : <span style={{ fontWeight: "bold" }}>BARCGB22</span> </p>
                         <p>Correspondent Bank SWIFT : <span style={{ fontWeight: "bold" }}>BARCGHAC </span> </p>
-                        <p>Reference : <span style={{ fontWeight: "bold" }}>294901, (Enter your institution name here) </span> </p>
+                        <p>Reference : <span style={{ fontWeight: "bold" }}>294901, {businessName} </span> </p>
 
                     </div>
 
