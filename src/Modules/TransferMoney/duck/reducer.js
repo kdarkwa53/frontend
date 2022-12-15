@@ -148,7 +148,9 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
                 ...state,
                 beneficiaries:{
                     ...state.beneficiaries,
-                    ...action.data
+                    [action.data.id]: {
+                        ...action.data
+                    }
                 },
                 addingBeneficiary: false,
                 

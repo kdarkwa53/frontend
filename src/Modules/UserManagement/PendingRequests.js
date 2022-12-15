@@ -2,8 +2,12 @@ import { Layout, Row, ConfigProvider, Table, Tag, Spin } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { customDatFormat } from "../../helpers/utils";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
+import { getTransactionFee } from "../TransferMoney/duck/action";
 import { approveTransaction, declineTransaction, getPendingTransactions } from "./duck/action";
+import PendingActionTag from "./PendingActionTag";
+import ViewPendingTransDetails from "./ViewPendingTransDetails";
 
 
 
@@ -16,6 +20,10 @@ const PendingRequests = () => {
     const transactions = useSelector((state)=> state.userMgt.pending_tranx)
     const users = useSelector((state)=> state?.userMgt?.users)
     const loading = useSelector((state)=> state?.userMgt?.approveTranx)
+    const currencies = useSelector((state) => state?.resources?.defaultCurrencies)
+    
+
+    const [transDetails, setTrans] = useState()
 
     const dispatch = useDispatch()
   
@@ -35,13 +43,41 @@ const PendingRequests = () => {
         console.log(e)
         dispatch(approveTransaction(e))
     }
+
+    const handleView = (e)=>{
+        const details = transactions[e]
+
+        dispatch(getTransactionFee({
+            "reference": details?.params?.order_id,
+            "module": "FOREX",
+            "amount": details?.transaction?.amount, 
+            "currency_id": details?.transaction?.currency_id,
+        })).then((fee) => {
+        
+        console.log(fee)
+        let info = {
+            ...details,
+            fee: fee
+        }
+
+        console.log("info: ",info)
+
+
+       
+        setTrans(info)
+        setVisible(true)
+
+        })
+        
+    }
   
     const handleApprove = (e)=>{
         console.log(e)
-        dispatch(declineTransaction(e))
+        dispatch(approveTransaction(e))
     }
 
-    
+    const [isVisible, setVisible] = useState(false)
+
 
     const columns = [
        
@@ -61,20 +97,14 @@ const PendingRequests = () => {
             key: "amount",
         },
         {
-            title: "Account Number",
-            dataIndex: "account_number",
-            key: "account_number",
+            title: "Date",
+            dataIndex: "date",
+            key: "date",
         },
         {
             title: "User",
             dataIndex: "user",
             key: "user",
-            // render: (user) => {
-            //     return (
-            //         users[user].name
-            //     );
-            // },
-        
         },
         {
             title: "Action",
@@ -82,15 +112,11 @@ const PendingRequests = () => {
             render: (action) => {
                 return (
                     <>
-                    
-                        <Tag onClick={()=>handleDecline(action?.key)} style={{ color: '#008000', padding: "10px", cursor:"pointer" }}  color="#E0FFE0" >
-                            Approve
-                        </Tag>
-                        <Tag onClick={()=>handleApprove(action?.key)} style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
-                            Decline 
-                        </Tag>
                         
-                        <Spin spinning={loading}/>
+                        <PendingActionTag action={"decline"} id={action?.key} /> 
+                        <Tag onClick={()=>handleView(action?.key)} style={{  padding: "10px", cursor:"pointer" }} color="gold">View</Tag>
+                        
+                        
                     </>
                 );
             },
@@ -98,22 +124,16 @@ const PendingRequests = () => {
     ];
 
 
-
-    // const data = [{
-    //     role: 'admin',
-    //     permissions: ['Create user', 'Edit user', 'Delete User', 'Apply service', 'Create Wallet', 'Edit Wallet'],
-
-    // }]
     
     let tableData = transactions
     ? Object.values(transactions).map((trans) => {
         return {
             key: trans.id,
-            user: trans.user_id,
+            user: trans?.business?.full_name,
             module: trans.module,
             transaction_id: trans?.transaction_id,
-            account_number: trans?.transaction?.account_number,
-            amount: `GHS ${Number(trans?.transaction?.amount).toFixed(2)}`,
+            date:  customDatFormat(trans?.transaction?.created_at) ,
+            amount: `${currencies[trans?.transaction?.currency_id]?.ISO} ${Number(trans?.transaction?.amountAndFee).toFixed(2)}`,
             action: trans?.id
         };
     })
@@ -121,7 +141,6 @@ const PendingRequests = () => {
 
 
 
-    const [form] = useForm();
     return (
         <>
                 <Content
@@ -131,6 +150,8 @@ const PendingRequests = () => {
                         margin: "1em",
                     }}
                 >
+                    <ViewPendingTransDetails  details={transDetails} setReview={setVisible} showReview={isVisible} />
+
                     <Row>
                        
                             <ConfigProvider renderEmpty={customizeRenderEmpty}>

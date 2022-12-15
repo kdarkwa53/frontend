@@ -6,6 +6,7 @@ import { Layout, Col, Input, Form, Button, Row } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import JavContentTitle from '../../../../Shared/Components/JavContentTitle';
 import Styles from "../../../TransferMoney/TransferMoney.module.css"
 import { addBeneValues, validateIBAN } from '../../duck/action';
 
@@ -175,37 +176,38 @@ const IbanValidation = (props) => {
                                     onFieldsChange={handleFormChange}
                                 >
 
-                                    <div className={Styles.sectionBox}>
-                                        <p>Beneficiary Information</p>
-                                        <div style={{padding: "1em 0"}}> IBAN number</div>
-                                        <Row gutter={[32, 16]}>
-                                            <Col xs={24} sm={24} md={12} lg={12} xl={18}>
-                                                <Form.Item
-                                                    name={'ibanDetails'}
-                                                    rules={rules}
-                                                >
-                                                    <Input size='large' />
-                                                </Form.Item>
-                                            </Col>
-                                            <Col xs={24} sm={24} md={12} lg={12} xl={6}>
-                                                <Button
-                                                    type="primary"
-                                                    loading={loading}
-                                                    block
-                                                    size="large"
-                                                    onClick={onClickValidate}
-                                                    disabled={disableValidate}
-                                                >
-                                                    Validate IBAN
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                        
-                                    
+                                    <div >
+                                        <JavContentTitle title={"Beneficiary Information"} />
 
-                                    {ibanDetails ? 
-                                        (<ShowBankDetails ibanDetails={ibanDetails} />)
-                                     : ""}
+                                        <div style={{padding: "1em 0"}}> IBAN number</div>
+                                            <Row gutter={[32, 16]}>
+                                                <Col xs={24} sm={24} md={12} lg={12} xl={18}>
+                                                    <Form.Item
+                                                        name={'ibanDetails'}
+                                                        rules={rules}
+                                                    >
+                                                        <Input size='large' />
+                                                    </Form.Item>
+                                                </Col>
+                                                <Col xs={24} sm={24} md={12} lg={12} xl={6}>
+                                                    <Button
+                                                        type="primary"
+                                                        loading={loading}
+                                                        block
+                                                        size="large"
+                                                        onClick={onClickValidate}
+                                                        disabled={disableValidate}
+                                                    >
+                                                        Validate IBAN
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                            
+                                        
+
+                                        {ibanDetails ? 
+                                            (<ShowBankDetails ibanDetails={ibanDetails} />)
+                                        : ""}
 
                                        
                                     </div>

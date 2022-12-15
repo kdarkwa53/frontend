@@ -41,7 +41,13 @@ const JavolinAccountCurrencyFiltered = (props) => {
 
 
     const handleSelectSource = (val) => {
-        setsourcewallet(state[val])
+        console.log(val)
+        if(val === "EXTERNAL_WIRE"){
+            setsourcewallet(val)
+        }
+        else{
+            setsourcewallet(state[val])
+        }
     }
 
     const { Option } = Select
@@ -74,6 +80,9 @@ const JavolinAccountCurrencyFiltered = (props) => {
                 }
                 
             })} 
+            <Option value={"EXTERNAL_WIRE"} key={"EXTERNAL_WIRE"}>
+                EXTERNAL WIRE
+            </Option>
 </Select>
         </ConfigProvider>
         

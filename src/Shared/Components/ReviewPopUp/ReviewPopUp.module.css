@@ -144,6 +144,13 @@ color: #000C26;
     color: #727986;
 }
 
+.rowGrid2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5px;
+    column-gap: 5px;
+}
+
 .recTitle{
     font-weight: normal;
     font-weight: 450;

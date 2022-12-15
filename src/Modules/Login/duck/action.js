@@ -162,7 +162,7 @@ export const login = (details, history, accountType) => {
       }
 
     } catch (error) {
-      console.log(error)
+      console.log("eoor: ",error)
       dispatch({
         type: LOGIN_ERROR,
       });

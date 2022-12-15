@@ -52,11 +52,13 @@ import ForexSend from "../../../Modules/TransferMoney/ForexSend";
 import SendMoneyForex from "../../../Modules/TransferMoney/SendMoneyForex";
 import PendingRequests from "../../../Modules/UserManagement/PendingRequests";
 import InstructForex from "../../../Modules/TransferMoney/InstructForex";
+import { getBeneficiaries } from "../../../Modules/TransferMoney/duck/action";
 export default function BusinessRoutes() {
     
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getRulesCurrencies())
+        dispatch(getBeneficiaries())
          // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (

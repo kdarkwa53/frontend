@@ -90,8 +90,8 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                 >
                     <div style={{ padding: "20px 70px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                         <Form.Item
-                            name="first_name"
-                            label="First Name"
+                            name="full_name"
+                            label="Full Name"
                             rules={[
                                 {
                                     required: true,
@@ -102,7 +102,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. Evans" />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             label="Last Name"
                             name="last_name"
                             rules={[
@@ -113,7 +113,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             style={{ width: "100%" }}
                         >
                             <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. Asante" />
-                        </Form.Item>
+                        </Form.Item> */}
 
 
                         <Form.Item

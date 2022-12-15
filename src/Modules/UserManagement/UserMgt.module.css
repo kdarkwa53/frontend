@@ -21,6 +21,20 @@ color: #00050E;
     background: url(../../assets/headerpopup.png), #000638;
 }
 
+
+.javTag{
+    padding: "10px";
+    cursor:"pointer";
+
+}
+
+.declineBtn{
+    color: "FF0000"
+}
+
+.approveBtn{
+    color: '#008000' 
+}
 .secTitle{
     padding: 15px;
     font-weight: 700;

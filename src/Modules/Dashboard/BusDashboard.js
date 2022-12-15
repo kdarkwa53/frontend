@@ -63,12 +63,7 @@ const BusDashboard = () => {
         {
             title: text.AMOUNT,
             dataIndex: "amount",
-            render: (amount) => {
-                return (
-                    `GHS ${Number(amount).toFixed(2)}`
-                );
-            },
-
+            key: "amount",
         },
         {
             title: "Status",
@@ -104,7 +99,7 @@ const BusDashboard = () => {
             return {
                 key: transaction.id,
                 reference: transaction.reference,
-                amount: transaction.amount,
+                amount:  `${transaction?.currency?.ISO ? transaction?.currency?.ISO: "GHS"} ${Number(transaction.amountAndFee).toFixed(2)}`,
                 date: new Date(transaction.created_at).toLocaleString('en-GB', { timeZone: 'UTC' }),
                 status: transaction.status,
                 type: { title: transaction.transaction_type, module: transaction.module.replaceAll("_", " ") }

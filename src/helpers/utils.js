@@ -145,6 +145,13 @@ export const fileterRules = (data, filt)=>{
     return result
 }
 
+
+export const customDatFormat = (date)=>{
+    let time = new Date(date).toLocaleTimeString()
+    let date_ = new Date(date).toLocaleDateString()
+
+    return `${date_} ${time}`
+}
 // creates an array id for sub json object
 export const formatRegulatoryQuestions = (data)=>{
     let res = []

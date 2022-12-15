@@ -1,8 +1,8 @@
 import { Layout, Col, Input, InputNumber, Select, Form, Button, Row, Alert, } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { bookRate, getRate, getTransactionFee, instructCorpayment } from "./duck/action"
+import { bookRate, getBeneficiaries, getRate, getTransactionFee, instructCorpayment } from "./duck/action"
 import PassCode from "../../Shared/Components/PassCode"
 import JavolinAccounts from '../../Shared/Components/Accounts/JavolinAccounts';
 import { REACT_APP_ASSETS_API_URL } from '../../helpers/contants';
@@ -18,6 +18,9 @@ import ReviewPopUpInt from '../../Shared/Components/ReviewPopUp/ReviewForex';
 import JavContentTitle from '../../Shared/Components/JavContentTitle';
 import { useHistory } from 'react-router';
 import JavolinAccountCurrencyFiltered from '../../Shared/Components/Accounts/JavolinAccountCurrencyFiltered';
+import { getWallets } from '../../Shared/Components/duck/action';
+import AddBenefeciaryPopUp from './AddBenefeciaryPopUp';
+import IBANPopUp from './IBANPopUp';
 
 const { Option } = Select;
 
@@ -55,11 +58,17 @@ const InstructForex = (props) => {
     const [disableAmount, setDisableAmount] = useState(true)
     const [disableBeneAmount, setDisableBeneAmount] = useState(state ? true : false)
 
+    const [isVisible, setVisible] = useState()
 
 
 
 
 
+    useEffect(()=>{
+        dispatch(getBeneficiaries())
+        dispatch(getWallets())
+    },[dispatch])
+    
     const onFinish = (values) => {
         // if (values?.amount > sourceWallet?.current_balance) {
         //     dispatch(showErrorNotification("Insufficient balance"))
@@ -67,7 +76,7 @@ const InstructForex = (props) => {
         // }
 
 
-
+        console.log("source",sourceWallet)
         values = {
             ...values,
             ...defaultValues
@@ -81,7 +90,7 @@ const InstructForex = (props) => {
                         order_id: state?.deal?.orderNumber,
                         amount: state?.rate?.recipient_without_fees?.amount,
                         beneficiary_id: bene_detatils?.id,
-                        wallet_id: sourceWallet?.id
+                        wallet_id: sourceWallet=== "EXTERNAL_WIRE" ? "EXTERNAL_WIRE" : sourceWallet?.id
                     }
                 )
                 // show review screen  
@@ -107,11 +116,11 @@ const InstructForex = (props) => {
                             },
                             "from": {
                                 "msg": "Source Account",
-                                "title": sourceWallet?.name,
-                                "subTitle": `${currencies[sourceWallet.currency_id].ISO} ${sourceWallet?.current_balance}`,
-                                "acc_num": `****${sourceWallet?.account_number?.slice(-4)}`,
+                                "title": sourceWallet==="EXTERNAL_WIRE" ? "EXTERNAL WIRE" : sourceWallet?.name,
+                                "subTitle": sourceWallet==="EXTERNAL_WIRE" ? "EXTERNAL WIRE" : `${currencies[sourceWallet?.currency_id]?.ISO} ${sourceWallet?.current_balance}`,
+                                "acc_num": sourceWallet==="EXTERNAL_WIRE" ? "" : `****${sourceWallet?.account_number?.slice(-4)}`,
                                 "image_url": `${REACT_APP_ASSETS_API_URL}${sourceWallet?.wallet_logo}`,
-                                "currency": currencies[sourceWallet.currency_id].ISO
+                                "currency": sourceWallet==="EXTERNAL_WIRE" ? state.rate.sender.currency : currencies[sourceWallet?.currency_id]?.ISO
                             },
                             "info": values,
                             'settlement': state?.rate?.recipient
@@ -145,7 +154,8 @@ const InstructForex = (props) => {
 
     const handleChangeBene = (e) => {
         if (e === "new") {
-            history.push("/business/pre-rules")
+            // history.push("/business/pre-rules")
+            setVisible(true)
         }
         else {
             set_beneDetails(beneficiaries[e])
@@ -190,6 +200,7 @@ const InstructForex = (props) => {
 
                             <>
                                 <ReviewPopUpInt setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
+                                <AddBenefeciaryPopUp isVisible={isVisible} setVisible={setVisible} />
                                 <PassCode
                                     isPassCodeVisible={passcode}
                                     setPassCodeVisible={setPasscode}
@@ -253,7 +264,7 @@ const InstructForex = (props) => {
                                                         placeholder={`Select bank account with buying currency (${state?.rate?.recipient.currency})`}
                                                         >
                                                        
-                                                        <Option value='new' > <PlusCircleOutlined /> {'Add New Beneficiary'}</Option>
+                                                        <Option  value='new'  > <PlusCircleOutlined /> {'Add New Beneficiary'}</Option>
                                                         {Object.values(beneficiaries)?.map((bene) => {
                                                             if (bene?.currency === state?.rate?.recipient.currency){
                                                                 return (

@@ -348,6 +348,71 @@ export const addBeneficiary = (details, history, type) => {
     };
 }
 
+export const addBeneficiary2 = (details, history, type, close) => {
+    console.log('my details: ',details)
+    const userType = getUserType()
+    return async (dispatch) => {
+        dispatch({ type: ADD_BENE_REQUEST });
+        try {
+            let {data} = await axios.post(
+                `${REACT_APP_BASE_API_URL}/${userType}/beneficiary`,
+                details,
+                authHeader
+            );
+            
+            dispatch({
+                type: ADD_BENE_SUCCESS,
+                data: data
+            });
+            dispatch(
+                showSuccessNotification('Beneficiary Added Successfully')
+            )
+            
+            dispatch({
+                type: CLEAR_BENE_DATA
+            })
+            
+            data = {
+                ...data,
+                type:type
+            }
+
+            console.log("data",data)
+
+            close(false)
+            // if(type === 'forex'){
+            //     history.push({
+            //         'pathname': '/send-money/forex',
+            //         'state': data
+            //     })
+            // }else{
+            //     history.push({
+            //         'pathname': '/send-money/international',
+            //         'state': data
+            //     })
+            // }
+           
+          
+        } catch (error) {
+            dispatch({
+                type: ADD_BENE_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Check your internet and try again")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+                dispatch({
+                    type: GET_ERROR_MSG,
+                    error: error?.response?.data?.message
+                });
+            }
+        }
+    };
+}
 export const getBeneficiaries = () => {
     const userType = getUserType()
     return async (dispatch) => {
@@ -741,8 +806,6 @@ export const beneficiaryQuestions = (details, history, type) => {
                     rules:  filtedData
                 }
                 
-               
-                console.log('allallRules - after: ', allRules)
                 dispatch({
                     type: GET_FILTERED_RULES,
                     data: allRules
@@ -773,6 +836,95 @@ export const beneficiaryQuestions = (details, history, type) => {
     }
 }
 
+
+export const beneficiaryQuestions2 = (details, history, type) => {
+    const { destinationCountry, bankCountry, bankCurrency, classification, paymentMethods } = details
+    const userType = getUserType()
+
+    return async (dispatch) => {
+        dispatch({ type: GET_RULES_REQUEST });
+
+        try {
+            return Promise.all([
+                axios.get(
+                    `${REACT_APP_BASE_API_URL}/${userType}/rules?destinationCountry=${destinationCountry}&bankCountry=${bankCountry}&bankCurrency=${bankCurrency}&classification=${classification}&paymentMethods=${paymentMethods}`,
+                    authHeader
+                ),
+                await axios.get(
+                    `${REACT_APP_BASE_API_URL}/${userType}/rules-regulatory?destinationCountry=${destinationCountry}&bankCountry=${bankCountry}&bankCurrency=${bankCurrency}&classification=${classification}&paymentMethods=${paymentMethods}`,
+                    authHeader
+                ),
+            ]).then(([
+                rules,
+                regRules
+            ]) => {
+               
+
+                dispatch({
+                    type: GET_RULES_SUCCESS,
+                    data: rules.data
+                })
+
+                details = {
+                    ...details,
+                    preferredMethod: details?.paymentMethods
+                }
+
+
+                dispatch(
+                    {
+                        type: BENE_VALUES,
+                        data: details
+                    }
+                )
+
+                const regRulesFormated = regRules.data ? formatRegulatoryQuestions(regRules.data) : []
+
+                //  Save default values
+                dispatch({
+                    type: BENE_VALUES,
+                    data: getRulesDefaultValues(rules?.data?.rules)
+                })
+
+                let allRules = rules?.data?.rules.concat(regRulesFormated)
+                console.log('allallRules - before: ', allRules)
+                const filtedData = fileterRules(allRules, ["destinationCountry", "bankCountry", "bankCurrency", "classification", "preferredMethod", "paymentMethod", "paymentMethods","settlementMethods"])
+
+                allRules = {
+                    ...rules?.data,
+                    rules:  filtedData
+                }
+                
+                dispatch({
+                    type: GET_FILTERED_RULES,
+                    data: allRules
+                })
+
+                // Route to page to validate IBAN number
+                return allRules
+                // if (allRules?.isIbanEnabled){
+                //     history.push({pathname:'/business/iban-validation',state: {type:type}})
+                // }else{
+                //     history.push({pathname:'/beneficiary', state:{type:type}})
+                // }
+            })
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: GET_RULES_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Something went wrong. Try again")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+            }
+        }
+    }
+}
 
 
 export const validateIBAN = (details)=>{

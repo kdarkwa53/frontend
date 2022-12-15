@@ -40,25 +40,25 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                                                     {/* <span style={{ fontWeight: "bold" }}>USD</span> 10.05 */}
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>EUR</span> 1.06
+                                                    <span style={{ fontWeight: "bold" }}>EUR</span> 0.98
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>GBP</span>  0.91
+                                                    <span style={{ fontWeight: "bold" }}>GBP</span>  0.85
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>CAD</span>   1.38
+                                                    <span style={{ fontWeight: "bold" }}>CAD</span>   1.41
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>AED</span> 3.86
+                                                    <span style={{ fontWeight: "bold" }}>AED</span> 3.84
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>CNY</span> 7.32
+                                                    <span style={{ fontWeight: "bold" }}>CNY</span> 7.3
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>CFA</span> 691.95
+                                                    <span style={{ fontWeight: "bold" }}>CFA</span> 646.77
                                                 </div>
                                                 <div>
-                                                    <span style={{ fontWeight: "bold" }}>GHS</span> 10.70
+                                                    <span style={{ fontWeight: "bold" }}>GHS</span> 10.23
                                                 </div>
                                                 </div>
                                     </marquee>
