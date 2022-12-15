@@ -90,6 +90,7 @@ const PassCode = ({ isPassCodeVisible, setPassCodeVisible, action, details, butt
                         size="large"
                         style={{ marginTop: "2em" }}
                         type="primary"
+                        shape="round"
                         onClick={handleSubmit}
                         loading={buttonloading}
 

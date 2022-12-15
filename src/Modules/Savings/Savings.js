@@ -1,8 +1,10 @@
 import { Layout, Col, Table, Tag, Card } from 'antd';
-import { useSelector } from "react-redux"
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux"
 import { sortListByDate, isEmpty, statusTagColor } from "../../helpers/utils"
 import Circle from '../../Shared/Components/Circle/Circle';
 import { CreditArrow, DebitArrow } from '../../Shared/Components/JavIcons';
+import { getTransactions } from './duck/action';
 
 
 
@@ -10,7 +12,12 @@ import { CreditArrow, DebitArrow } from '../../Shared/Components/JavIcons';
 
 const Savings = () => {
     const text = useSelector((state) => state?.language)
+    const dispatch = useDispatch()
 
+
+    useEffect(()=>{
+        dispatch(getTransactions())
+    }, [dispatch])
     const columns = [
         {
             title: text.TRANSACTION_TYPE,
@@ -39,11 +46,7 @@ const Savings = () => {
         {
             title: text.AMOUNT,
             dataIndex: "amount",
-            render: (amount) => {
-                return (
-                    `GHS ${Number(amount).toFixed(2)}`
-                );
-            },
+            key: "amount",
 
         },
         {
@@ -79,7 +82,7 @@ const Savings = () => {
             return {
                 key: transaction.id,
                 reference: transaction.reference,
-                amount: transaction.amount,
+                amount: `${transaction?.currency?.ISO ? transaction?.currency?.ISO: "GHS"} ${transaction?.amountAndFee}`,
                 date: new Date(transaction.created_at).toLocaleString('en-GB', { timeZone: 'UTC' }),
                 status: transaction.status,
                 type: { title: transaction.transaction_type, module: transaction.module.replaceAll("_", " ") }
@@ -94,11 +97,11 @@ const Savings = () => {
 
     const { Content } = Layout
     return (
-        <Content style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }} >
+        // <Content style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }} >
            
             <Col
                 xs={24} sm={24} md={24} lg={24} xl={24}>
-                <Card>
+                {/* <Card> */}
                     <Table
                         columns={columns}
                         dataSource={data}
@@ -107,9 +110,9 @@ const Savings = () => {
                         loading={appData?.gettingSavings}
 
                     />
-                </Card>
+                {/* </Card> */}
             </Col>
-        </Content>
+        // </Content>
     )
 };
 

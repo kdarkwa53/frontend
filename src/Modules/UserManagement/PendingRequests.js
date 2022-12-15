@@ -1,9 +1,9 @@
 import { Layout, Row, ConfigProvider, Table, Tag, Spin } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit2Icon, TrashIcon } from "../../Shared/Components/JavIcons";
-import { approveTransaction, declineTransaction } from "./duck/action";
+import { approveTransaction, declineTransaction, getPendingTransactions } from "./duck/action";
 
 
 
@@ -19,6 +19,9 @@ const PendingRequests = () => {
 
     const dispatch = useDispatch()
   
+    useEffect(()=>{
+        dispatch(getPendingTransactions())
+    }, [dispatch])
 
 
     const customizeRenderEmpty = () => (
@@ -86,6 +89,7 @@ const PendingRequests = () => {
                         <Tag onClick={()=>handleApprove(action?.key)} style={{ color: '#FF0000', padding: "10px", cursor:"pointer" }} color="#FFE0E0" >
                             Decline 
                         </Tag>
+                        
                         <Spin spinning={loading}/>
                     </>
                 );
@@ -95,11 +99,11 @@ const PendingRequests = () => {
 
 
 
-    const data = [{
-        role: 'admin',
-        permissions: ['Create user', 'Edit user', 'Delete User', 'Apply service', 'Create Wallet', 'Edit Wallet'],
+    // const data = [{
+    //     role: 'admin',
+    //     permissions: ['Create user', 'Edit user', 'Delete User', 'Apply service', 'Create Wallet', 'Edit Wallet'],
 
-    }]
+    // }]
     
     let tableData = transactions
     ? Object.values(transactions).map((trans) => {
@@ -107,10 +111,10 @@ const PendingRequests = () => {
             key: trans.id,
             user: trans.user_id,
             module: trans.module,
-            transaction_id: trans.transaction_id,
-            account_number: trans.transaction.account_number,
-            amount: `GHS ${Number(trans.transaction.amount).toFixed(2)}`,
-            action: trans.id
+            transaction_id: trans?.transaction_id,
+            account_number: trans?.transaction?.account_number,
+            amount: `GHS ${Number(trans?.transaction?.amount).toFixed(2)}`,
+            action: trans?.id
         };
     })
     : [];

@@ -43,13 +43,20 @@ const SendMoneyForex = (props) => {
     const [sourceWallet, setsourcewallet] = useState(Object.keys(wallets).length === 1 ? wallets[defaultWallet?.id] : '')
     const [settlementDetails, setSettlementDetails] = useState()
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
+
     const bene = useSelector((state) => state?.transfer?.beneficiaries)
     const beneficiaries = bene ? bene : {}
     const history = useHistory()
 
+    const [bene_currency, set_beneCurrency] = useState(state?.currency)
+
+    const [bene_detatils, set_beneDetails] = useState(state?.currency)
+    const [disableAmount, setDisableAmount] = useState(true)
+    const [disableBeneAmount, setDisableBeneAmount] = useState(state ? false: true)
 
 
 
+    
 
 
     const onFinish = (values) => {
@@ -77,15 +84,14 @@ const SendMoneyForex = (props) => {
                     {
                         order_id: val?.response?.orderNumber,
                         amount: settlementDetails?.recipient_without_fees?.amount,
-                        beneficiary_id: state?.id
+                        beneficiary_id: bene_detatils?.id
                     }
                 )
                 // show review screen  
-                console.log('order: ', val)
                 if (val) {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
-                        "module": "COREPAY",
+                        "module": "FOREX",
                         "amount": settlementDetails?.sender_without_fees?.amount,
                         "currency_id": 1,
                     })).then((fee) => {
@@ -96,12 +102,12 @@ const SendMoneyForex = (props) => {
                             "fee": fee,
                             "to": {
                                 "msg": "Beneficiary Account",
-                                "title": state?.name,
-                                "subTitle": state?.account_number,
+                                "title": bene_detatils?.name,
+                                "subTitle": bene_detatils?.account_number,
                                 "acc_num": "",
                                 "image_url": "",
-                                "bank_location": state?.address1,
-                                "bank_name": state?.bank_name
+                                "bank_location": bene_detatils?.address,
+                                "bank_name": bene_detatils?.bank_name
                             },
                             "from": {
                                 "msg": "Source Account",
@@ -216,12 +222,22 @@ const SendMoneyForex = (props) => {
         }
     }
 
-    const handleChangeBene = (e)=>{
-       if (e === "new"){
-        history.push("/business/pre-rules")
-       }
+   
+
+    const handleChangeBene = (e) => {
+        if (e === "new") {
+            history.push("/business/pre-rules")
+        }
+        else {
+            set_beneDetails(beneficiaries[e])
+            setDisableBeneAmount(false)
+
+        }
     }
 
+    const handleAccountChange = ()=>{
+        setDisableAmount(false)
+    }
 
     const reset = () => {
         form.setFieldsValue({
@@ -321,19 +337,21 @@ const SendMoneyForex = (props) => {
                                                  {Object.values(beneficiaries)?.map((bene) => { 
                                                     return ( 
                                                         <Option value={bene?.id} key={bene?.id}>
-                                                        <div className={`cardTile ${sel.title}`}>
-                                                            <div className="cardLeftHem">
+                                                            <div className={`cardTile ${sel.title}`}>
+                                                                <div className="cardLeftHem">
                                                                     <div className={`cardName ${sel.lineHeight}`} >{bene?.name}</div>
-                                                            </div>
-                                                            <div className="cardRightHem">
-                                                                <div className="accountNumber">
-                                                                    {bene?.account_number ? bene?.account_number : ""}
+                                                                    <div className={`currencyName ${sel.lineHeight}`}  >{`currency: ${bene?.currency}`}</div>
                                                                 </div>
-                                                                <div className="cardDesign">
+                                                                <div className="cardRightHem">
+                                                                    <div className={`accountNumber ${sel.lineHeight}`}  >
+                                                                        {bene?.account_number ? bene?.account_number : ""}
+                                                                    </div>
+                                                                    
+                                                                    <div className={`bankName ${sel.lineHeight}`}  >{bene?.bank_name}</div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Option>
+                                                        </Option>
+                                                        
                                                         ) 
                                                     })}
 
@@ -371,7 +389,7 @@ const SendMoneyForex = (props) => {
                                                     },
                                                 ]}
                                             >
-                                                <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                                <JavolinAccounts onChange={handleAccountChange} setsourcewallet={setsourcewallet} />
                                             </Form.Item>
                                         </Form.Item>
                                     </Col>
@@ -389,6 +407,7 @@ const SendMoneyForex = (props) => {
                                 >
 
                                     <InputNumber
+                                        disabled={disableAmount}
                                         style={{ width: "100%" }}
                                         formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleAmountChange}
                                         size="large" name='amount'
@@ -400,7 +419,7 @@ const SendMoneyForex = (props) => {
                                 </Row>
                                 <Row gutter={[32,16]}>
                                     <Col xs={24} sm={24} md={24} lg={12} xl={12}> 
-                                        <Form.Item label= {state?.currency ? `Beneficiary Receives (${state?.currency})` : "Beneficiary Receives "}>
+                                        <Form.Item label= {bene_detatils?.currency ? `Beneficiary Receives (${bene_detatils?.currency})` : "Beneficiary Receives "}>
                                         <Form.Item
                                                     name="beneficiary"
                                                     noStyle
@@ -411,6 +430,7 @@ const SendMoneyForex = (props) => {
                                                     ]}
                                                 >
                                                     <InputNumber
+                                                        disabled={disableBeneAmount}
                                                         style={{ width: "100%" }}
                                                         formatter={value => `${Number(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} onChange={handleBeneChange} width="100%" size="large" className={Styles.placeholder} name='beneficiary' />
                                                 </Form.Item>

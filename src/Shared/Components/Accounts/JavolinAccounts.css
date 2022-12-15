@@ -14,7 +14,12 @@
 
 .cardRightHem {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.bankName{
+    font-size: 15px;
+    color: var(--javolin-text-lt-gray);
 }
 
 .lastSeen {
@@ -25,6 +30,13 @@
 .cardDesign {
     margin-left: 0.5em;
 }
+
+.currencyName{
+    font-size: 15px;
+    color: var(--javolin-text-lt-gray);
+}
+
+
 
 .cardName{
     margin-right: 1em;

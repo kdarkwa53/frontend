@@ -51,6 +51,7 @@ import { useDispatch } from "react-redux";
 import ForexSend from "../../../Modules/TransferMoney/ForexSend";
 import SendMoneyForex from "../../../Modules/TransferMoney/SendMoneyForex";
 import PendingRequests from "../../../Modules/UserManagement/PendingRequests";
+import InstructForex from "../../../Modules/TransferMoney/InstructForex";
 export default function BusinessRoutes() {
     
     const dispatch = useDispatch()
@@ -72,7 +73,7 @@ export default function BusinessRoutes() {
                 <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Forex" path="/business/forex" exact component={ForexBeneficiary} />
                 <Route path="/preq" component={PreQualification} />
                 <MainLayoutRoute path="/payment" component={BorrowerPayment} />
-                <DashboardLayoutRoute RightSider={BusRightSider} title="Transactions" menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
+                <MainLayoutRoute title="Transactions" subtitle="Home / " breadSub="Transactions"  menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
                 <MainLayoutRoute title="Payment Option" path="/payment-option" component={ChoosePaymentOption} />
                 <MainLayoutRoute title="Mortgage Application" path="/apply" component={MortgageApplicationForm} />
                 <MainLayoutRoute title="Application" path="/application/:id" component={MortgageApplicationForm} />
@@ -84,6 +85,7 @@ export default function BusinessRoutes() {
                 <MainLayoutRoute title="Transfer Money" path="/business/transfer" component={TransferMoney} />
                 <MainLayoutRoute title="Send Money" path="/send-money/international" component={SendMoneyInt} />
                 <MainLayoutRoute title="Forex" path="/send-money/forex" component={SendMoneyForex} />
+                <MainLayoutRoute title="Forex" path="/business/instruct-forex" component={InstructForex} />
                 <MainLayoutRoute title="Send Money" path="/business/forex" component={ForexSend} />
                 <MainLayoutRoute title="Fund My Wallet" path="/business/fund-wallet" component={FundWallet} />
                 <LayoutView menuRoute="/profile" background="#F0F4FD" title="Profile" path="/business/profile" component={BusinessProfilePage} />

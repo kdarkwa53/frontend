@@ -111,13 +111,14 @@ export const changePassword = (details, form) => {
 }
 
 export const verifySecurityQuestion = (details, nextSlide)=>{
+    const userType = getUserType()
     return async (dispatch) => {
         dispatch({
             type: UPDATE_PROFILE_REQUEST,
         });
         try {
             const { data } = await axios.post(
-                `${REACT_APP_BASE_API_URL}/security_question/verify`,
+                `${REACT_APP_BASE_API_URL}/${userType}/security_question/verify`,
                 details,
                 {
                     headers: {

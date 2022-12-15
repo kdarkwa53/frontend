@@ -163,7 +163,7 @@ const Login = () => {
 
         <div className={ThemeStyles.footerMsg}>
           <div className={ThemeStyles.footerContent}>
-            New to Javolin? <Link to={'/business/signUp'}> Register as a Forex Trader</Link>
+            New to Javolin? <Link to={'/business/signUp'}> Register</Link>
           </div>
         </div>
 

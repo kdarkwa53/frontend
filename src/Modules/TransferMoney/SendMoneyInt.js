@@ -77,7 +77,7 @@ const SendMoneyInt = (props) => {
                 if (val) {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
-                        "module": "COREPAY",
+                        "module": "FOREX",
                         "amount": settlementDetails?.sender_without_fees?.amount,
                         "currency_id": 1,
                     })).then((fee) => {

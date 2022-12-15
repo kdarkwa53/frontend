@@ -4,11 +4,12 @@ import { useForm } from "antd/lib/form/Form"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
-import { currencyFormat } from "../../../../helpers/utils"
-import { getSpotRate } from "../../../../Modules/TransferMoney/duck/action"
-import { showErrorNotification } from "../../../actions/alert.actions"
-import Styles from "../../Menu/Menu.module.css"
-import { Timer } from "../../Timer"
+import { currencyFormat } from "../../../../../helpers/utils"
+import { getSpotRate } from "../../../../../Modules/TransferMoney/duck/action"
+import { showErrorNotification } from "../../../../actions/alert.actions"
+import Styles from "../../../Menu/Menu.module.css"
+import { Timer } from "../../../Timer"
+import BookDealPopUp from "./BookDealPopUp"
 
 const SpotRateCalculator = () => {
     const [form] = useForm()
@@ -23,7 +24,6 @@ const SpotRateCalculator = () => {
 
     const [rate, setRate] = useState("")
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const onFinish = (values)=>{
         console.log(values)
@@ -35,14 +35,13 @@ const SpotRateCalculator = () => {
             setRate(rate)
             setShowTimer(true)
             setDisCount(false)
+        }).catch((e)=>{
+            setShowTimer(false)
         })
 
     }
 
-    const handleProceedBooking = ()=>{
-        history.push("/send-money/forex")
-    }
-
+    
     const handleFormChange = (e) => {
         const fields = form.getFieldsValue()
         const fieldVals = Object.values(fields)
@@ -52,8 +51,10 @@ const SpotRateCalculator = () => {
     }
 
     const reset = () => {
-        setRate("")
+        // setRate("")
+        setDisCount(true)
         setShowTimer(false)
+        
     }
 
     const handleAmountChange = (e)=>{
@@ -72,9 +73,7 @@ const SpotRateCalculator = () => {
 
 
            
-            {/* {showTimer ? (
-                <Timer reset={expireRate} />
-            ) : ""} */}
+            
             <div style={{marginTop: "1em"}}>
                 <Form
                 form={form}
@@ -167,16 +166,12 @@ const SpotRateCalculator = () => {
                             </Button>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Button
-                            block
-                            type="primary"
-                            size="large"
-                            shape="round"
-                            disabled={disableContinue}
-                            onClick={handleProceedBooking}
-                            >
-                                proceed
-                            </Button>
+                            <BookDealPopUp
+                            reset={reset}
+                            rate={rate}
+                            disableContinue={disableContinue}
+                            />
+
                         </Col>
                         
                     </Row>
@@ -190,6 +185,9 @@ const SpotRateCalculator = () => {
                         </div>
                         <div className={Styles.baseCurrency}>{  rate?`${Number(rate?.javolin_rate[1]).toFixed(4)} / ${Number(rate?.javolin_rate[0]).toFixed(4)}`: ''}</div>
                     </div>
+                    {showTimer ? (
+                        <Timer reset={expireRate} />
+                    ) : ""}
                 </Form>
             </div>
         </div>

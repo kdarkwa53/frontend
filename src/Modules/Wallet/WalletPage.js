@@ -144,7 +144,7 @@ const WalletPage = () => {
 
                 <div className={Styles.titleRow}>
                     <div className={Styles.secTitle}>{text.RECENT_TRANSACTION}</div>
-                    <div className={Styles.viewLink}><a href="/transactions">{text.VIEW_ALL} </a></div>
+                    <div className={Styles.viewLink}><a href="/business/transactions">{text.VIEW_ALL} </a></div>
                 </div>
 
             </div>

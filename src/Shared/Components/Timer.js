@@ -19,7 +19,7 @@ const Timer = ({reset})=>{
     }
     
     return(
-        <div role="alert" className="ant-form-item-explain-error" style={{ fontSize: "13px" }} >This rate expires in {count} seconds</div>
+        <div role="alert" className="ant-form-item-explain-error" style={{ fontSize: "17px", textAlign: "center"}} >This rate expires in {count} seconds</div>
     )
 }
 

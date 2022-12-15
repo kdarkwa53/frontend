@@ -92,7 +92,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
             >
                 <div className={Styles.header}>
                         <div className={Styles.secTitle}>Add new role</div>
-                    </div>
+                </div>
                 
                 <Form
                     layout="vertical"

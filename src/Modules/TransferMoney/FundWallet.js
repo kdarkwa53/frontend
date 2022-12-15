@@ -17,6 +17,7 @@ import AwaitDepositApproval from '../Savings/MakeDeposit/AwaitDepositApproval';
 import { showErrorNotification } from '../../Shared/actions/alert.actions';
 import { getPrepaidLink, getTransactionFee } from './duck/action';
 import JavContentTitle from '../../Shared/Components/JavContentTitle';
+import BankWireMemoPopUp from './BankWireMemoPopUp';
 
 
 
@@ -36,9 +37,10 @@ const FundWallet = () => {
     const feeLoading = useSelector((state) => state?.transfer?.gettingFee)
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
     let defaultWallet = useSelector((state) => state?.user?.default_savings_wallet)
-
+    const [visibleBankMemo, setVisibleBankMemo] = useState(false)
 
     const [destination, setDestination] = useState('')
+    const [fundingDetail, setFundingDetails] = useState(false)
     const [sourceWallet, setsourcewallet] = useState('')
     const [approving, showApproving] = useState(false)
     const dispatch = useDispatch()
@@ -92,7 +94,13 @@ const FundWallet = () => {
             } catch (error) {
                 dispatch(showErrorNotification('An error occurred. Try again later!'))
             }
+        }else if (destination === "bank"){
+            setVisibleBankMemo(true)
         } else {
+            values ={
+                amount: 3
+            }
+
             setDetails(values)
             setPasscode(true)
         }
@@ -109,6 +117,9 @@ const FundWallet = () => {
 
 
 
+    const handleFundFrom = () => {
+
+    }
 
 
 
@@ -138,6 +149,7 @@ const FundWallet = () => {
                             <>
                                 <AwaitDepositApproval approving={approving} showApproving={showApproving} />
                                 <ReviewPopUp setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
+                                <BankWireMemoPopUp isVisible={visibleBankMemo} setVisible= {setVisibleBankMemo } />
                                 <PassCode isPassCodeVisible={passcode}
                                     setPassCodeVisible={setPasscode}
                                     details={details}
@@ -170,7 +182,7 @@ const FundWallet = () => {
                                                     <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder="destination">
                                                         <Option value="momo">Mobile Money (Momo) </Option>
                                                         <Option value="card"> New Debit/Credit Card </Option>
-                                                        {/* <Option value="bank"> <div style={myStylesheet.item}> <div>Bank Account </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option> */}
+                                                        <Option value="bank"> <div style={myStylesheet.item}> <div>Bank </div> </div></Option>
                                                         <Option value="cash"> <div style={myStylesheet.item}> <div> Cash </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option>
 
                                                     </Select>
@@ -179,55 +191,90 @@ const FundWallet = () => {
                                         </Col>
                                         {sendingTo[destination]?.form}
                                     </Row>
-                                    <JavContentTitle title="Funding Details" />
 
-                                    <Row gutter={[32, 16]}>
-                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Funding Destination">
-                                                <Form.Item
-                                                    name={"account"}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <JavolinAccounts setsourcewallet={setsourcewallet} />
-                                                </Form.Item>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Amount" >
-                                                <Form.Item
-                                                    name="amount"
-                                                    rules={[
-                                                        { required: true },
-                                                        {
-                                                            pattern: /^[1-9]+[0-9]*$/,
-                                                            message: `Input invalid`
-                                                        }
-                                                    ]}
-                                                >
-                                                    <Input prefix={"GHS"} width="100%" size="large" name='amount' type="number" />
-                                                </Form.Item>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Note" >
-                                                <Form.Item
-                                                    name="note"
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
-                                                </Form.Item>
-                                            </Form.Item>
-                                        </Col>
+                                    {destination === "momo" ? (
+                                        <>
+                                            <JavContentTitle title="Funding Details" />
 
-                                    </Row>
+                                            <Row gutter={[32, 16]}>
+                                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                    <Form.Item label="Funding Destination">
+                                                        <Form.Item
+                                                            name={"account"}
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                },
+                                                            ]}
+                                                        >
+                                                            <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                                        </Form.Item>
+                                                    </Form.Item>
+                                                </Col>
+                                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                    <Form.Item label="Amount" >
+                                                        <Form.Item
+                                                            name="amount"
+                                                            rules={[
+                                                                { required: true },
+                                                                {
+                                                                    pattern: /^[1-9]+[0-9]*$/,
+                                                                    message: `Input invalid`
+                                                                }
+                                                            ]}
+                                                        >
+                                                            <Input prefix={"GHS"} width="100%" size="large" name='amount' type="number" />
+                                                        </Form.Item>
+                                                    </Form.Item>
+                                                </Col>
+                                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                    <Form.Item label="Note" >
+                                                        <Form.Item
+                                                            name="note"
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                },
+                                                            ]}
+                                                        >
+                                                            <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
+                                                        </Form.Item>
+                                                    </Form.Item>
+                                                </Col>
+
+                                            </Row>
+
+                                        </>
+                                    ) : (
+                                        ""
+
+                                    )}
+
+                                    {
+                                      destination === "bank" || destination ===  "card"  ? (
+                                            <>
+                                            <JavContentTitle title="Funding Details" />
+                                            <Row gutter={[32, 16]}>
+                                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                                    <Form.Item label="Funding Destination">
+                                                        <Form.Item
+                                                            name={"account"}
+                                                            noStyle
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                },
+                                                            ]}
+                                                        >
+                                                            <JavolinAccounts setsourcewallet={setsourcewallet} />
+                                                        </Form.Item>
+                                                    </Form.Item>
+                                                </Col>
+                                            </Row>
+
+                                        </>
+                                        ) : ""
+                                    }
 
 
 
@@ -236,19 +283,19 @@ const FundWallet = () => {
 
 
 
-                                    <div style={{display: "flex", justifyContent: "flex-end"}}>
-                                    <Button
-                                        type="primary"
-                                        shape='round'
-                                        htmlType="submit"
-                                        size="large"
-                                        style={{width: "400px"}}
-                                        loading={feeLoading}
-                                    >
-                                        Continue
-                                    </Button>
+                                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                                        <Button
+                                            type="primary"
+                                            shape='round'
+                                            htmlType="submit"
+                                            size="large"
+                                            style={{ width: "400px" }}
+                                            loading={feeLoading}
+                                        >
+                                            Continue
+                                        </Button>
                                     </div>
-                                    
+
                                 </Form>
 
                             </>

@@ -13,7 +13,7 @@ import SimpleCard from '../../Shared/Components/SimpleCard/SimpleCard';
 import { Cash, DepositIcon, Money, MoneyExchange, SendMoneyIcon, TransferDasIcon, TransferIcon } from '../../Shared/Components/JavIcons';
 import CurrencyConverter from '../../Shared/Components/Layouts/Components/CurrencyConverter';
 import DashboardTitleRow from './Components/DashboardTitleRow';
-import SpotRateCalculator from '../../Shared/Components/Layouts/Components/SpotRateCalculator';
+import SpotRateCalculator from '../../Shared/Components/Layouts/Components/SpoteRateCalculator/SpotRateCalculator';
 import DashboardWalletSection from '../../Shared/Components/DashboardWalletSection/DashboardWalletSection';
 import {InitialSetup} from '../../Shared/Components/InitialSetup/InitialSetup';
 import AccessControl from '../../Shared/Components/AccessControl/AccessControl';
@@ -157,7 +157,7 @@ const BusDashboard = () => {
                             allowedPermissions={['FOREX']}
                             renderNoAccess={''}
                         >
-                            <JavProductCard subTitle={text.FOREIGN_EXCHANGE} icon={<MoneyExchange width="5em" height="5em" color="#ffffff" />} link="/business/forex" color="#007451" />
+                            <JavProductCard subTitle={text.FOREIGN_EXCHANGE} icon={<MoneyExchange width="5em" height="5em" color="#ffffff" />} link="send-money/forex" color="#007451" />
 
                         </AccessControl>
                         <AccessControl

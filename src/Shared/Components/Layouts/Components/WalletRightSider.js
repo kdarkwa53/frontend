@@ -8,7 +8,7 @@ import CurrencyConverter from "./CurrencyConverter";
 import VerifyIdentity from "./VerifyIdentity/VerifyIdentity";
 import { Alert, Button } from "antd";
 import { useHistory } from "react-router";
-import SpotRateCalculator from "./SpotRateCalculator";
+import SpotRateCalculator from "../Components/SpoteRateCalculator/SpotRateCalculator";
 
 
 const WalletRightSider = () => {
