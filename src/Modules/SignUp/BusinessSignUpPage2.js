@@ -7,6 +7,7 @@ import Logo from "../../assets/javolin_logo.png";
 import { Link, useHistory } from "react-router-dom";
 import { REACT_APP_GOOGLE_API_URL } from "../../helpers/contants";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import LangDropDown from "../../Shared/Components/LangDropDown";
 
 
 
@@ -118,10 +119,16 @@ const BusinessSignUpPage2 = () => {
                     layout="vertical"
                 >
 
-                    <div className={ThemeStyles.topSection}>
-                        <div className={ThemeStyles.authTitle}>
-                            Register
+                     <div className={ThemeStyles.topSection}>
+                    <div style={{marginBottom: "1em"}}>
+                        <LangDropDown fullname/>
                         </div>
+                        <div className={ThemeStyles.authTitle}>
+                        Register
+                        </div>
+                        <div className={ThemeStyles.subauthTitle}>
+                        Create an account and start trading with us
+                            </div>
                     </div>
                     <div style={{ marginTop: "2em" }}>
                         <BusinessRegistrationDetails />
@@ -132,7 +139,7 @@ const BusinessSignUpPage2 = () => {
                             htmlType="submit"
                             size="large"
                             className="login-form-button"
-                            
+                            shape="round"
                             style={{ marginTop: "1em" }}
                         >
                             <span >Continue</span>
@@ -142,7 +149,7 @@ const BusinessSignUpPage2 = () => {
                 </Form>
                 <div className={ThemeStyles.footerMsg}>
                     <div className={ThemeStyles.footerContent}>
-                        Have an account? <Link to='/login'>Login</Link>
+                    Already have an account? <Link to='/login'> <span className={ThemeStyles.footerLink}>Sign In</span> </Link>
                     </div>
                 </div>
             </div>

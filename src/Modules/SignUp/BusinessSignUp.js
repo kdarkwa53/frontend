@@ -14,6 +14,7 @@ import axios from "axios";
 
 import IntlTelInput from 'react-intl-tel-input';
 import { signup } from "./duck/action";
+import LangDropDown from "../../Shared/Components/LangDropDown";
 // import IntInputPhoneNumber from "../../Shared/Components/IntInputPhoneNumber/IntInputPhoneNumber";
 
 
@@ -183,8 +184,8 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                     },
                 ]}
             >
-                <Checkbox className={[ThemeStyles.subInfo, ThemeStyles.agreement]}> I agree with your <span className={ThemeStyles.subBoldGray}>Terms of Service</span>  and
-                    <span className={ThemeStyles.subBoldGray}> Privacy Policy </span>
+                <Checkbox className={[ThemeStyles.footerContent]}> I agree with your <Link to='/login'> <span className={ThemeStyles.footerLink}>Terms of Service</span> </Link>  and
+                <Link to='/login'> <span className={ThemeStyles.footerLink}>Privacy Policy</span> </Link> 
                 </Checkbox>
             </Form.Item>
 
@@ -231,9 +232,15 @@ const BusinessSignUp = (props) => {
                 >
 
                     <div className={ThemeStyles.topSection}>
+                    <div style={{marginBottom: "1em"}}>
+                        <LangDropDown fullname/>
+                        </div>
                         <div className={ThemeStyles.authTitle}>
                         Register
                         </div>
+                        <div className={ThemeStyles.subauthTitle}>
+                        Create an account and start trading with us
+                            </div>
                     </div>
                     <div >
                         <BusinessRegistrationDetails setNum={setIntNum} />
@@ -242,6 +249,7 @@ const BusinessSignUp = (props) => {
                             type="primary"
                             htmlType="submit"
                             size="large"
+                            shape="round"
                             className="login-form-button"
                             loading={signingUp}
                             style={{ marginTop: "2em" }}
@@ -254,7 +262,7 @@ const BusinessSignUp = (props) => {
                 </Form>
                 <div className={ThemeStyles.footerMsg}>
                     <div className={ThemeStyles.footerContent}>
-                        Have an account? <Link to='/login'>Login</Link>
+                    Already have an account? <Link to='/login'> <span className={ThemeStyles.footerLink}>Sign In</span> </Link>
                     </div>
                 </div>
             </div>
