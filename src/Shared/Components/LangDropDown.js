@@ -6,14 +6,16 @@ import { CaretDown } from "./JavIcons"
 import en_flag from "../../assets/usflag.png"
 import fr_flag from "../../assets/frflag.png"
 
-const LangDropDown = () => {
+const LangDropDown = ({fullname}) => {
     const langAdrr = {
         EN: {
             name: "EN",
+            fullname: "English",
             flag: en_flag
         },
         FR: {
             name: "FR",
+            fullname: "French",
             flag: fr_flag
         }
     }
@@ -59,7 +61,7 @@ const LangDropDown = () => {
         >
                 <div style={{display: "flex", alignItems:"center"}} >
                 <Avatar src={langAdrr[lang].flag} />
-                <span style={{ fontSize: "20px", margin: "0 5px", color: "#3B404A" }}>{lang}</span>
+                <span style={{ fontSize: "20px", margin: "0 5px", color: "#3B404A" }}>{ fullname ? langAdrr[lang].fullname : lang}</span>
                 <CaretDown width={"1em"} color="#3B404A" />
                 </div>
         </Dropdown>

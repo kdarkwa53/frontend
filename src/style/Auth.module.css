@@ -2,8 +2,9 @@
 .containerRight {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
+    text-align: right;
 }
 
 .containerLeft {
@@ -25,7 +26,22 @@
 }
 
 
+.footerContent{
+font-weight: 450;
+font-size: 16px;
+line-height: 21px;
+color: #727986;
+}
 
+.footerLink{
+    color: #6CC24A;
+}
+.subauthTitle{
+font-weight: 450;
+font-size: 16px;
+line-height: 21px;
+color: #727986;
+}
 @media(max-width: 769px) {
     .signupCard {
         width: 100%;
@@ -138,9 +154,9 @@ div.serviceCard {
     margin: 2em 0
 }
 .signupCard {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    /* background-color: #ffffff; */
+    /* border-radius: 8px; */
+    /* box-shadow: rgb(0 0 0 / 10%) 0 0 10px; */
     box-sizing: border-box;
     overflow-y: scroll;
     -ms-overflow-style: none; /* IE and Edge */
@@ -154,15 +170,13 @@ div.serviceCard {
 
 
 .topSection {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 2em;
 
 }
 
 .welcomeMsg {
     color: #F8F8F8;
+    padding: 1.5em;
 
 }
 .welcomeTitle {
@@ -180,10 +194,9 @@ div.serviceCard {
 
 }
 .authTitle {
-    font-size: 23px;
+    font-size: 39px;
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 2em;
+    text-align: left;
     color: #000C26;
 }
 
@@ -269,12 +282,13 @@ height: 100vh;
     display: block;
     }
     .auth_bg {
-    background: url("../assets/auth_bg.png") no-repeat;
+    background: linear-gradient(213.04deg, rgba(48, 78, 35, 0.8) 3.6%, rgba(0, 11, 107, 0.8) 70.19%, rgba(0, 11, 107, 0.8) 98.58%), url("../assets/auth_bg.png") no-repeat right;
     overflow: hidden;
-    background-size: cover;
+    background-size: 60%;
+    
 }
 .overlay {
-    background: linear-gradient(54.83deg, #0036A0 -42.86%, #0032A0 13.18%, rgba(0, 50, 160, 0.6) 47.88%, rgba(0, 50, 160, 0.285121) 80.38%, rgba(0, 50, 160, 0) 109.82%);
+    background: linear-gradient(105deg, #E0EAFF 50%, transparent 25%);
 
 }
 .ringContainer {

@@ -9,6 +9,7 @@ import 'react-intl-tel-input/dist/main.css';
 import { Link, useHistory } from "react-router-dom";
 import { login, SET_USER_TYPE } from "../duck/action";
 import { useDispatch, useSelector } from "react-redux";
+import LangDropDown from "../../../Shared/Components/LangDropDown";
 
 
 // import IntInputPhoneNumber from "../../../Shared/Components/IntInputPhoneNumber/IntInputPhoneNumber";
@@ -71,10 +72,17 @@ const Login = () => {
           layout="vertical"
         >
           <div className={ThemeStyles.topSection}>
-            <div className={ThemeStyles.authTitle}>
-              Login
+            <div style={{marginBottom: "1em"}}>
+            <LangDropDown fullname/>
             </div>
           
+            <div className={ThemeStyles.authTitle}>
+              Sign in
+            </div>
+            <div className={ThemeStyles.subauthTitle}>
+            Sign in to start trading with us
+            </div>
+
           </div>
           {/* <div style={{ marginBottom: "3em" }}>
             <Radio.Group style={{ width: "100%", }} size="large" name="accType" onChange={handleAccountType} defaultValue={accountType}>
@@ -145,25 +153,27 @@ const Login = () => {
               <Input.Password size="large" type={'password'} placeholder="password" />
             </Form.Item>
           </Form.Item>
+          <div style={{textAlign: "right", fontWeight:450, fontSize: "20px"}}>
+           <Link to='/forgot-password'>Forgot Password?</Link>
+          </div>
           <Button
             block
             size="large"
             style={{ marginTop: "2em" }}
             type="primary"
+            shape="round"
             htmlType="submit"
             className="login-form-button"
             loading={userlogin.loggingIn}
           >
             Login
           </Button>
-          <div style={{textAlign: "center", marginTop: "0.5em", fontSize: "13px"}}>
-           <Link to='/forgot-password'>Forgot Password?</Link>
-          </div>
+          
         </Form>
 
         <div className={ThemeStyles.footerMsg}>
           <div className={ThemeStyles.footerContent}>
-            New to Javolin? <Link to={'/business/signUp'}> Register</Link>
+          Don’t have an account? <Link to={'/business/signUp'}> <span className={ThemeStyles.footerLink}>Create account</span> </Link>
           </div>
         </div>
 

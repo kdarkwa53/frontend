@@ -29,17 +29,8 @@ const AuthUserLayout = ({ children, title, ...rest }) => {
                                         <img src={Logo} alt="javolin polychrome-logo" />
                                     </div>
                                     {/* ) : ""} */}
-                                    <div className={ThemeStyles.welcomeTitle}>Welcome to<span style={{ color: "#6CC24A" }}> Javolin</span> </div>
+                                    <div className={ThemeStyles.welcomeTitle}>Welcome to<span style={{ color: "#6CC24A" }}> JAVOLIN</span> </div>
                                     <div className={ThemeStyles.welcomeBody}> Financial services you can trust.</div>
-                                </div>
-                                <div className={ThemeStyles.ringContainer}>
-                                    <div >
-                                        <img className={ThemeStyles.ringOne} alt="rign1" src={Ring} />
-                                    </div>
-                                    <div>
-                                        <img className={ThemeStyles.ringTwo} alt="ring2" src={Ring} />
-
-                                    </div>
                                 </div>
                             </Col>
                     </Row>

@@ -77,7 +77,7 @@ const UserManagement = () => {
                         </AccessControl>
 
                         <AccessControl
-                            userPermissions={['DELET_USER']}
+                            userPermissions={['DELETE_USER']}
                             allowedPermissions={['DELETE_USER']}
                             renderNoAccess={''}
                         >

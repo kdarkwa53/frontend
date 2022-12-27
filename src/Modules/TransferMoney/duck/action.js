@@ -661,7 +661,6 @@ export const getPrepaidLink = (details, setPassCodeVisible, form, history) => {
             // console.log(data?.zenithRedirectionUrl)
             window.open(data?.zenithRedirectionUrl, "_blank");
         } catch (error) {
-            console.log(error)
             dispatch({
                 type: GET_PREPAID_LINK_ERROR,
             });
