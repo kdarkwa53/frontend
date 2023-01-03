@@ -1,4 +1,4 @@
-import { Input, Select, Form, Spin } from 'antd';
+import { Input, Select, Form, Spin, Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanksAndMomos } from '../../../Shared/Components/duck/action';
@@ -21,6 +21,7 @@ const BankOptionForm = ({ form }) => {
     const state = useSelector((state) => state?.resources?.banksAndMomos)
     const [recepient, setRecepient] = useState()
     const [loading, setLoading] = useState()
+    const text = useSelector((state)=> state.language)
 
     const handleGetRecepient = () => {
         const { bank_name, acc_number } = form.getFieldsValue()
@@ -52,12 +53,12 @@ const BankOptionForm = ({ form }) => {
     }
 
     return (
-        <>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Bank</div>
-                <div className={Styles.inputContainer}>
+        <Row gutter={[32, 16]}>
+            
+                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                    <Form.Item label={text["Bank"]}>
                     <Form.Item
-                        name="bank_name"
+                        name={text["bank_name"]}
                         onChange={resetNameField}
                         rules={[
                             {
@@ -68,7 +69,7 @@ const BankOptionForm = ({ form }) => {
 
                         <Select showSearch
                          size="large" 
-                         defaultValue="Select Bank"
+                         defaultValue={text["Select Bank"]}
                         optionFilterProp="children"
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -82,11 +83,11 @@ const BankOptionForm = ({ form }) => {
                         </Select>
 
                     </Form.Item>
-                </div>
-            </div>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Account Number</div>
-                <div className={Styles.inputContainer}>
+                    </Form.Item>
+                    </Col>
+            
+                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                    <Form.Item label={text["Account Number"]}>
                     <Form.Item
                         name="acc_number"
                         onChange={resetNameField}
@@ -99,27 +100,28 @@ const BankOptionForm = ({ form }) => {
 
                         <Input size="large" type="number" placeholder="1223330031393" />
                     </Form.Item>
-                </div>
-            </div>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Account Name</div>
-                <div className={Styles.inputContainer}>
-                    {loading ? (<Spin />) : (
-                        <Form.Item
-                            name="acc_name"
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-                            onClick={handleGetRecepient}
-                        >
-                            <Input size="large" style={{ color: recepient ? "black" : "inherit" }} disabled placeholder="Eg. Drew Ansong" />
+                    </Form.Item>
+                </Col>
+            
+            
+                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                        <Form.Item label={text["Account Name"]}>
+                        {loading ? (<Spin />) : (
+                            <Form.Item
+                                name="acc_name"
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                                onClick={handleGetRecepient}
+                            >
+                                <Input size="large" style={{ color: recepient ? "black" : "inherit" }} disabled placeholder="Eg. Drew Ansong" />
+                            </Form.Item>
+                        )}
                         </Form.Item>
-                    )}
-                </div>
-            </div>
-        </>
+                    </Col>
+        </Row>
     )
 }
 

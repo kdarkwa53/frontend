@@ -1,5 +1,5 @@
-import { Layout, Col, Input,InputNumber, Select, Form, Button, Divider } from 'antd';
-import React, {useRef, useState } from 'react';
+import { Layout, Col, Input, InputNumber, Select, Form, Button, Row } from 'antd';
+import React, { useRef, useState } from 'react';
 import { ArrowDownCircle } from "../../Shared/Components/JavIcons"
 import Styles from "./TransferMoney.module.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,10 +25,10 @@ const { Option } = Select;
 
 
 const SendMoney = (props) => {
-    
+
     const [form] = Form.useForm();
-    
-  
+
+
     const [passcode, setPasscode] = useState(false)
     const [details, setDetails] = useState("")
     let defaultWallet = useSelector((state) => state?.user?.default_savings_wallet)
@@ -41,6 +41,7 @@ const SendMoney = (props) => {
     const phoneNum = useRef("")
     const history = useHistory()
     const dispatch = useDispatch()
+    const text = useSelector((state) => state.language)
 
 
 
@@ -50,25 +51,24 @@ const SendMoney = (props) => {
     let defWallet = useSelector((state) => state?.user?.default_savings_wallet)
     const bene = useSelector((state) => state?.transfer?.beneficiaries)
 
-   
+
 
     const handleChangeBeneList = (e) => {
         console.log('e', e)
     }
 
-    const SendFrom = ()=>{
+    const SendFrom = () => {
         let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
-        return(
+        return (
             <>
-             <Divider >
-                <ArrowDownCircle style={{transform: "rotate(180deg)"}} width="2em" st color="#63B344" />
-            </Divider> 
-                <div className={Styles.sectionBox}>
-                    <p>Source</p>
-                    <div className={Styles.itemRow}>
-                        <div className={Styles.inputLabel}>Send From</div>
-                        <div className={Styles.inputContainer}>
+
+                <Row style={{ marginTop: "1em" }} gutter={[32, 16]}>
+                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                        <Form.Item
+                            label={text["Send From"]}
+                        >
                             <Form.Item
+                                noStyle
                                 name={["from", "account"]}
                                 rules={[
                                     {
@@ -78,34 +78,32 @@ const SendMoney = (props) => {
                             >
                                 <JavolinAccounts setsourcewallet={setsourcewallet} />
                             </Form.Item>
-                        </div>
-                    </div>
+                        </Form.Item>
+                    </Col>
 
 
 
-                    <div className={Styles.itemRow}>
-                        <div className={Styles.inputLabel}>Amount</div>
-                        <div className={Styles.inputContainer}>
+                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                        <Form.Item label={text["Amount"]} >
                             <Form.Item
                                 name="amount"
-                                
+
                                 rules={[
                                     { required: true },
                                     {
                                         pattern: /^[1-9]+[0-9]*$/,
-                                        message: `Input invalid`
+                                        message: `${text["Input invalid"]}`
                                     }
                                 ]}
                             >
-                               <InputNumber style={{width: "100%"}}
-                                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
+                                <InputNumber style={{ width: "100%" }}
+                                    formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} prefix={currencies[defaultWallet?.currency_id].ISO} width="100%" size="large" name='amount' type="number" />
                             </Form.Item>
-                        </div>
-                    </div>
+                        </Form.Item>
+                    </Col>
 
-                    <div className={Styles.itemRow}>
-                        <div className={Styles.inputLabel}>Note <span style={{ color: "#888B93" }}>(optional)</span> </div>
-                        <div className={Styles.inputContainer}>
+                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                        <Form.Item label={`${text["Note"]} (${text["optional"]}) `} >
                             <Form.Item
                                 name="note"
                                 rules={[
@@ -116,45 +114,45 @@ const SendMoney = (props) => {
                             >
                                 <Input width="100%" size="large" name='note' placeholder="Eg. Stipend" />
                             </Form.Item>
-                        </div>
-                    </div>
-                </div>
+                        </Form.Item>
+                    </Col>
+                </Row>
             </>
-            
+
         )
     }
 
     const SelectTranxType = () => {
         return (
             <>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Transaction Type</div>
-                <div className={Styles.inputContainer}>
-                    <Form.Item
-                        name="transaction_type"
-                        rules={[
-                            { required: true },
 
-                        ]}
-                    >
-                        <Select style={{ width: "100%" }} size="large" onChange={handleTypeChange} placeholder="Select type">
-                            <Option disabled value="default">Select transaction type</Option>
-                            <Option value="local">Domestic</Option>
-                            <Option value="international">International</Option>
-                        </Select>
+                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                    <Form.Item label={[text["Transaction Type"]]} >
+                        <Form.Item
+                            name="transaction_type"
+                            rules={[
+                                { required: true },
+
+                            ]}
+                        >
+                            <Select style={{ width: "100%" }} size="large" onChange={handleTypeChange} placeholder="Select type">
+                                <Option disabled value="default">{text["Select transaction type"]}</Option>
+                                <Option value="local">{text["Domestic"]}</Option>
+                                <Option value="international">{text["International"]}</Option>
+                            </Select>
+                        </Form.Item>
                     </Form.Item>
-                </div>
-            </div>
+                </Col>
             </>
-            
+
         )
     }
 
-   
 
 
 
-    const  type = {
+
+    const type = {
         "javolin": 'JAVOLIN_TO_JAVOLIN_TRANSFER',
         "bank": 'SEND_BANK',
         "momo": 'SEND_MOMO'
@@ -165,7 +163,7 @@ const SendMoney = (props) => {
             "action": javolinTranfer,
             "loading": javLoading,
             "type": "JAVOLIN_TO_JAVOLIN_TRANSFER",
-            "send_from": <SendFrom/>
+            "send_from": <SendFrom />
         },
         "momo": {
             "form": <MomoForms form={form} />,
@@ -175,16 +173,16 @@ const SendMoney = (props) => {
             "send_from": <SendFrom />
         },
         "bank": {
-            "form": <SelectTranxType/>,
+            "form": <SelectTranxType />,
             "action": bankTranfer,
             "loading": momoLoading,
             "type": "SEND_BANK"
         },
     }
 
-    const bankTranxType =  {
+    const bankTranxType = {
         local: <BankOptionForm form={form} />,
-        international: <InternationalBankTransferForm handleChangeBeneList={handleChangeBeneList} form={form}/>
+        international: <InternationalBankTransferForm handleChangeBeneList={handleChangeBeneList} form={form} />
     }
 
 
@@ -199,7 +197,7 @@ const SendMoney = (props) => {
     }
 
     const onFinish = (values) => {
-         console.log(values)
+        console.log(values)
         // if (values?.amount > sourceWallet?.current_balance){
         //     dispatch(showErrorNotification("Insufficient balance"))
         //     return
@@ -208,16 +206,16 @@ const SendMoney = (props) => {
             values = { ...values, ...{ "phone_number": phoneNum.current }, acc_name: values?.recepient }
         }
 
-       
+
         // Route to international transfer page
-        if (showLocal === 'international'){
+        if (showLocal === 'international') {
             const id = values.beneficiary_account
             const beneficiary = bene[id]
             history.push({
                 pathname: '/send-money/international',
                 state: beneficiary
             })
-         return
+            return
         }
 
         // other send money options
@@ -226,7 +224,7 @@ const SendMoney = (props) => {
                 "module": type[destination],
                 "amount": values?.amount,
                 "currency_id": 2
-            })).then((fee)=>{
+            })).then((fee) => {
                 let info = {
                     "action": "Send Money",
                     "operation": "Sending",
@@ -258,19 +256,19 @@ const SendMoney = (props) => {
     }
 
     const handleDestinationChange = (e) => {
-        if(e !== 'bank'){
+        if (e !== 'bank') {
             setLocal('')
         }
         setDestination(e)
     }
-    
-    const handleTypeChange = (e)=>{
+
+    const handleTypeChange = (e) => {
         setLocal(e)
     }
 
-    
 
-    
+
+
 
     const { Content } = Layout;
 
@@ -279,12 +277,12 @@ const SendMoney = (props) => {
             <div className={Styles.card}>
                 <div className={Styles.cardTitle}>
                     <div>
-                        <span className={Styles.titleCard}>Send Money</span>
+                        <span className={Styles.titleCard}>{text["Send Money"]}</span>
                     </div>
                 </div>
                 <div className={Styles.cardContainer}>
-                    <Col xs={24} sm={24} md={12} lg={15} xl={15} className={Styles.cardContent}>
-                        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                    <div style={{ width: "100%" }} className={Styles.cardContent}>
+                        <div style={{ padding: "0 3em", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <>
                                 <ReviewPopUp setReview={setReview} details={details} setPasscode={setPasscode} showReview={review} />
                                 <PassCode
@@ -304,20 +302,13 @@ const SendMoney = (props) => {
                                     initialValues={{
                                         'transaction_type': 'default',
                                         'beneficiary': defWallet?.id,
-                                        'from': { account: wallets?.length === 1 ? defWallet?.id : ''}
+                                        'from': { account: wallets?.length === 1 ? defWallet?.id : '' }
                                     }}
                                 >
-                                  
-
-
-                                    <div className={Styles.sectionBox}>
-                                    {/* <p>Destination</p> */}
-                                    <JavContentTitle title="Destination"/>
-                                        <   div style={{display: "flex", justifyContent:"center"}}>
-                                            <div className={Styles.itemRow}>
-                                            <div className={Styles.inputLabel}>Send to</div>
-
-                                            <div className={Styles.inputContainer}>
+                                    <JavContentTitle title={text["Destination"]} />
+                                    <Row style={{ marginTop: "1em" }} gutter={[32, 16]}>
+                                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                            <Form.Item label={text["Send to"]}>
                                                 <Form.Item
                                                     name="destination"
                                                     rules={[
@@ -326,64 +317,58 @@ const SendMoney = (props) => {
                                                         },
                                                     ]}
                                                 >
-                                                    <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder="destination">
-                                                        <Option value="javolin">Other Javolin Account</Option>
-                                                        <Option value="momo">Mobile Money (Momo) Account</Option>
-                                                        <Option value="prepaid">Prepaid Visa Card</Option>
-                                                        <Option value="bank">Bank Account</Option>
+                                                    <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder={text["Destination"]}>
+                                                        <Option value="javolin">{text["Other Javolin Account"]}</Option>
+                                                        <Option value="momo">{text["Mobile Money (Momo) Account"]}</Option>
+                                                        <Option value="prepaid">{text["Prepaid Visa Card"]}</Option>
+                                                        <Option value="bank">{text["Bank Account"]}</Option>
                                                     </Select>
                                                 </Form.Item>
-                                                {tnxType[destination]?.form}
-                                                    {/* show the local or international form */}
-                                                    { bankTranxType[showLocal]}
-                                                    </div>
+                                            </Form.Item>
+                                        </Col>
 
-                                                    {tnxType[destination]?.send_from}
-                                                    
-                                                    {showLocal === 'local'? (
-                                                        <>
-                                                            <SendFrom />
-                                                        </>
-                                                    
-                                                    ) : ""} 
-                                                <div style={{display: "flex", justifyContent: "flex-end"}}>
-                                                <Button
+                                            {tnxType[destination]?.form}
+                                        </Row>
+
+                                        {/* show the local or international form */}
+                                        <Col>
+                                            {bankTranxType[showLocal]}
+                                        </Col>
+
+
+                                        {tnxType[destination]?.send_from}
+
+                                    
+                                        {showLocal === 'local' ? (
+                                            <>
+                                                <JavContentTitle title={text["Source"]} />
+                                                <Row>
+                                                    <SendFrom />
+                                                </Row>
+
+                                            </>
+
+                                        ) : ""}
+                                    <div className={Styles.sectionBox}>
+                                        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                                            <Button
                                                 shape="round"
                                                 type="primary"
                                                 block
                                                 htmlType="submit"
                                                 size="large"
+                                                style={{ width: "400px" }}
                                                 loading={feeLoading}
 
                                             >
-                                                Continue
+                                                {text["Continue"]}
                                             </Button>
-                                                </div>
-                                                
-                                            </div>
-                                                    
-
-                                   
-                                           
-                                    
-
-                                         </div>
-                                        
-                                        
-                                        
-                                       
-
-                                       
-                                    
+                                        </div>
                                     </div>
-                                   
-                                    
                                 </Form>
-
                             </>
-
                         </div>
-                    </Col>
+                    </div>
                 </div>
             </div>
         </Content>

@@ -71,12 +71,12 @@ export default function BusinessRoutes() {
                 <LayoutView primary title={"Government Fees"} exact path="/business/government-services" component={GovernmentServices} />
                 <LayoutView primary title="Government Fees" path="/business/government-services/fee" component={FeePayment} />
                 <MainLayoutRoute title="Deposit" path="/make-deposit" exact component={MakeDeposit} />
-                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Send Money" path="/send-money" exact component={SendMoney} />
-                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Send Money" menuRoute="/business/payments" path="/business/payments" exact component={SendMoney} />
-                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Forex" path="/business/forex" exact component={ForexBeneficiary} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle={`${text["Home"]} / `} breadSub={text["Send Money"]} path="/send-money" exact component={SendMoney} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle={`${text["Home"]} / `} breadSub={text["Send Money"]} menuRoute="/business/payments" path="/business/payments" exact component={SendMoney} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle={`${text["Home"]} / `} breadSub={text["Forex"]} path="/business/forex" exact component={ForexBeneficiary} />
                 <Route path="/preq" component={PreQualification} />
                 <MainLayoutRoute path="/payment" component={BorrowerPayment} />
-                <MainLayoutRoute title={text["Transactions"]} subtitle={`${text["Home"]} / `} breadSub="Transactions"  menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
+                <MainLayoutRoute title={text["Transactions"]} subtitle={`${text["Home"]} / `} breadSub={text["Transactions"]}  menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
                 <MainLayoutRoute title="Payment Option" path="/payment-option" component={ChoosePaymentOption} />
                 <MainLayoutRoute title="Mortgage Application" path="/apply" component={MortgageApplicationForm} />
                 <MainLayoutRoute title="Application" path="/application/:id" component={MortgageApplicationForm} />

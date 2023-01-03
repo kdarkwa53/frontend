@@ -182,7 +182,7 @@ const FundWallet = () => {
                                                     <Select style={{ width: "100%" }} size="large" onChange={handleDestinationChange} placeholder="destination">
                                                         <Option value="momo">Mobile Money (Momo) </Option>
                                                         <Option value="card"> New Debit/Credit Card </Option>
-                                                        <Option value="bank"> <div style={myStylesheet.item}> <div>Bank </div> </div></Option>
+                                                        <Option value="bank"> <div style={myStylesheet.item}> <div>Bank (Wire) </div> </div></Option>
                                                         <Option value="cash"> <div style={myStylesheet.item}> <div> Cash </div><div> <Tag color={"processing"}>coming soon</Tag> </div> </div></Option>
 
                                                     </Select>

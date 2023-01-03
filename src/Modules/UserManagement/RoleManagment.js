@@ -13,6 +13,7 @@ import Styles from "./UserMgt.module.css"
 
 
 const RoleManagement = () => {
+    const text = useSelector((state) => state?.language)
     const { Content } = Layout;
 
     const [isVisible, setIsModalVisible] = useState(false)
@@ -26,7 +27,7 @@ const RoleManagement = () => {
 
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
-            <p>You haven’t added any roles yet. Add new role</p>
+            <p>{text["You haven’t added any roles yet. Add new role"]}</p>
         </div>
     );
 
@@ -46,12 +47,12 @@ const RoleManagement = () => {
 
     const columns = [
         {
-            title: "Role Name",
+            title: text["Role Name"],
             dataIndex: "name",
             key: "name",
         },
         {
-            title: "Role Permissions",
+            title: text["Role Permissions"],
             dataIndex: "permissions",
             key: "permissions",
             render: (permissions) => {
@@ -68,7 +69,7 @@ const RoleManagement = () => {
             },
         },
         {
-            title: "Action",
+            title: text["Action"],
             key: "action",
             render: (id) => {
                 return (
@@ -80,7 +81,7 @@ const RoleManagement = () => {
                         >
                             <Tag onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
                                 <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
-                                Edit
+                                {text['edit']}
                             </Tag>
                         </AccessControl>
                         <AccessControl
@@ -90,7 +91,7 @@ const RoleManagement = () => {
                         >
                             <Tag onClick={()=>handleDelete(id)} style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
                             <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
-                            delete
+                            {text["delete"]}
                         </Tag>
                         </AccessControl>
                         
@@ -126,7 +127,7 @@ const RoleManagement = () => {
             >
                 <div className={Styles.titleRow}>
                     <div className={Styles.title}>
-                        Role List
+                        {text['Role List']}
                     </div>
                     <AddRole editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible} />
                 </div>

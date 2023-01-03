@@ -16,6 +16,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
     const roles = useSelector((state) => state?.userMgt?.roles)
     const rLoading = useSelector((state)=> state.userMgt.addingRole)
     const perm = useSelector((state)=> state.userMgt.permissions)
+    const text = useSelector((state) => state?.language)
 
     const roleDetails = roles[editUser]
     const getLimitValue=(permissions)=>{
@@ -71,7 +72,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
         <>
            
             <Button style={{background: "#0032A0", fontSize: "16px"}} onClick={showModal} type="primary" size="large" shape="round" >
-                            Add new role
+                            {text["Add new role"]}
                         </Button>
             <Modal
                 visible={isVisible}
@@ -91,7 +92,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                 }
             >
                 <div className={Styles.header}>
-                        <div className={Styles.secTitle}>Add new role</div>
+                        <div className={Styles.secTitle}>{text["Add new role"]}</div>
                 </div>
                 
                 <Form
@@ -106,7 +107,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                     <div style={{  padding: "20px 70px", display: "flex", alignItems:"center", justifyContent: "center", flexDirection: "column"}}>
                             <Form.Item
                                         name="name"
-                                        label="Role Name"
+                                        label={text["Role Name"]}
                                         rules={[
                                             {
                                                 required: true,
@@ -117,7 +118,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                                         <Input style={{ minWidth: "490px"}} size="large" placeholder="Eg. Admin" />
                                     </Form.Item>
                                     <Form.Item
-                                    label="Role Permissions"
+                                    label={text["Role Permissions"]}
                                     >
                                     {
                                         Object.values(perm).map((per)=>{
@@ -131,7 +132,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                                     }
                                     </Form.Item>
                                     <Form.Item
-                                        label="Set Transaction Limit"
+                                        label={text["Set Transaction Limit"]}
                                         name="limits"
                                         style={{width: "100%"}}
                                         >
@@ -152,7 +153,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
                                     loading={rLoading}
                                     shape="round"
                                 >
-                                    Add Role
+                                    {text["Add Role"]}
                                 </Button>
                     </div>
                                

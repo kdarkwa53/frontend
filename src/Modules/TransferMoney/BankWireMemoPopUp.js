@@ -63,8 +63,19 @@ const BankWireMemoPopUp = ({ isVisible, setVisible, reference }) => {
                             <p>IBAN #: <span style={{ fontWeight: "bold" }}>GB92 BARC 2000 0074 8445 88 </span> </p>
                         <p>Beneficiary Bank SWIFT : <span style={{ fontWeight: "bold" }}>BARCGB22</span> </p>
                         <p>Correspondent Bank SWIFT : <span style={{ fontWeight: "bold" }}>BARCGHAC </span> </p>
-                        <p>Reference : <span style={{ fontWeight: "bold" }}>294901, {businessName} </span> </p>
-
+                        <p>Reference : <span style={{ fontWeight: "bold" }}>294901 | Javolin Group LLC | {`${businessName} partner`} </span> </p>
+                        <p> <span style={{ fontWeight: "bold" }}>Important</span>: 
+                            <li>
+                            The name on your bank account must match the name on your JAVOLIN account.
+                            </li>
+                            <li>
+                            Deposits not in USD will be converted to USD and are subject to additional banking fees.
+                            </li>
+                            <li>
+                            If making multiple deposits over a short period, send different amounts to avoid delays.
+                            </li>
+                        
+                         </p>
                     </div>
 
                     <div width="100%" style={{ textAlign: "center" }}>

@@ -5,6 +5,7 @@ import MenuBar from "../Menu/Menu";
 import Styles from "../Menu/Menu.module.css"
 import SiderLayout from "./SiderLayout";
 import DefaultMenu from "../Menu/DefaultMenu";
+import { useSelector } from "react-redux";
 
 
 
@@ -14,6 +15,7 @@ const MainLayout = ({ children, menuRoute, subtitle, breadSub, title, ...rest })
 
 
     const { Header } = Layout
+    const text = useSelector((state)=> state.language)
 
     return (
         <SiderLayout menuRoute={menuRoute} >

@@ -109,7 +109,7 @@ const WalletPage = () => {
         <>
             <div style={{marginTop: "4em"}}>
                 <div className={Styles.titleRow}>
-                    <div className={Styles.secTitle}>Active accounts</div>
+                    <div className={Styles.secTitle}>{text["Active accounts"]}</div>
                     <div style={{width: "200px"}}>
                     <NewWallet/>
                     </div>

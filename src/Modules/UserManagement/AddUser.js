@@ -17,6 +17,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
     
     const { Option } = Select
     const roles = useSelector((state) => state?.userMgt?.roles)
+    const text = useSelector((state) => state?.language)
     const users = useSelector((state) => state?.userMgt?.users)
     const userDetails = users[editUser]
     
@@ -58,7 +59,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
         <>
 
             <Button style={{background: "#0032A0", fontSize: "16px"}}  onClick={showModal} type="primary" size="large" shape="round" >
-                Add new user
+                {text["Add new user"]}
             </Button>
             <Modal
                 visible={isVisible}
@@ -78,7 +79,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                 }
             >
                 <div className={Styles.header}>
-                    <div className={Styles.secTitle}>Add new user</div>
+                    <div className={Styles.secTitle}>{text["Add new user"]}</div>
                 </div>
 
                 <Form
@@ -91,7 +92,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                     <div style={{ padding: "20px 70px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                         <Form.Item
                             name="full_name"
-                            label="Full Name"
+                            label={text["Full Name"]}
                             rules={[
                                 {
                                     required: true,
@@ -102,22 +103,9 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. Evans" />
                         </Form.Item>
 
-                        {/* <Form.Item
-                            label="Last Name"
-                            name="last_name"
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-                            style={{ width: "100%" }}
-                        >
-                            <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. Asante" />
-                        </Form.Item> */}
-
 
                         <Form.Item
-                            label="Email"
+                            label={text["Email"]}
                             name="email"
                             rules={[
                                 {
@@ -130,7 +118,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Phone Number"
+                            label={text["Phone Number"]}
                             name="phone_number"
                             rules={[
                                 {
@@ -144,7 +132,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
 
 
                         <Form.Item
-                            label="Role"
+                            label={text["Role"]}
                             name="role_id"
                             rules={[
                                 {
@@ -153,7 +141,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             ]}
                             style={{ width: "100%" }}
                         >
-                            <Select style={{ width: "100%" }} placeholder='Select role' size="large" name="country" >
+                            <Select style={{ width: "100%" }} placeholder={text['Select role']} size="large" name="country" >
                                 {
                                     Object.values(_roles)?.map((role) => {
                                         return (
@@ -172,7 +160,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             loading={rLoading}
                             shape="round"
                         >
-                            Add User
+                            {text['Add user']}
                         </Button>
                     </div>
 

@@ -1,8 +1,8 @@
-import { Input, Form, Spin } from 'antd';
+import { Input, Form, Spin, Col } from 'antd';
 import React, { useState } from 'react';
 import Styles from "../TransferMoney.module.css"
 import { getJavRecepientName } from "../duck/action"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 import { formatNumber } from '../../../helpers/contants';
@@ -12,6 +12,7 @@ const JavolinAccountForm = ({ form, setIntNum }) => {
     const [recepient, setRecepient] = useState("");
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
+    const text = useSelector((state) => state.language)
 
     let phone = ''
     // const [intNum, setIntNum] = useState("")
@@ -26,10 +27,6 @@ const JavolinAccountForm = ({ form, setIntNum }) => {
     const handleGetRecepient = () => {
         phone = phone.replace(/\s/g, '')
         phone = phone.replaceAll("-", '')
-
-        // console.log(phone_number)
-
-     
 
             try {
                 setLoading(true)
@@ -49,26 +46,11 @@ const JavolinAccountForm = ({ form, setIntNum }) => {
     }
 
     return (
-        <>
-            <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Phone Number</div>
-                <div className={Styles.inputContainer}>
-                    {/* <Form.Item
-                        name="phone_number"
-                        rules={[
-                            {
-                                required: true,
-                                len: 10,
-                                message: "invalid number"
-                            },
-                        ]}
-                    >
-                        <Input prefix={<CountryCode />} size="large" type="number" onMouseOut={handleGetRecepient} placeholder="mobile number" />
-                    </Form.Item> */}
-
+            <>
+                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                    <Form.Item label={text["Phone Number"]}>
                     <Form.Item
                         name="phone_number"
-                        // validateTrigger={true}
                         rules={[
                             {
                                 required: true,
@@ -83,7 +65,7 @@ const JavolinAccountForm = ({ form, setIntNum }) => {
 
                                     return Promise.reject(
                                         new Error(
-                                            "Phone number is invalid"
+                                            text["Phone number is invalid"]
                                         )
                                     );
                                 },
@@ -98,41 +80,17 @@ const JavolinAccountForm = ({ form, setIntNum }) => {
                                 preferredCountries={['gh', 'us', 'ng', 'sn', 'gb']}
                                 defaultCountry='gh'
                                 formatOnInit={true}
-                                
                                 onPhoneNumberChange={(isval, val, cdata, fnum) => {
-                                    // setIntNum(fnum)
                                     setIntNum.current = fnum
                                     setPhoneValid(isval)
                                     resetNameField()
-                                    // phone = fnum
-                                    // phoneValid = isval
+                                   
                                 }}
                             />
                         </div>
                     </Form.Item>
-
-                </div>
-            </div>
-
-            {/* <div className={Styles.itemRow}>
-                <div className={Styles.inputLabel}>Recepient</div>
-                <div className={Styles.inputContainer}>
-                    {loading ? (<Spin />) : (
-                        <Form.Item
-                            name="recepient"
-                            onClick={handleGetRecepient}
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-
-                        >
-                            <Input style={{ color: recepient ? "black" : "inherit" }} size="large" disabled />
-                        </Form.Item>
-                    )}
-                </div> */}
-            {/* </div> */}
+                    </Form.Item>
+                </Col>
         </>
     )
 }

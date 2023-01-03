@@ -50,6 +50,7 @@ const InstructForex = (props) => {
     const [settlementDetails, setSettlementDetails] = useState()
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
     const feeLoading = useSelector((state) => state?.transfer?.gettingFee)
+    const text = useSelector((state) => state.language)
 
     const bene = useSelector((state) => state?.transfer?.beneficiaries)
     const beneficiaries = bene ? bene : {}
@@ -193,7 +194,7 @@ const InstructForex = (props) => {
             <div className={Styles.card}>
                 <div className={Styles.cardTitle}>
                     <div>
-                        <span className={Styles.titleCard}>Forex</span>
+                        <span className={Styles.titleCard}>{text["Forex"]}</span>
                     </div>
                 </div>
                 <div className={Styles.cardContainer}>
@@ -230,28 +231,28 @@ const InstructForex = (props) => {
                                     }}
                                 >
                                     <Alert
-                                        message={`You are seeking to buy ${state?.rate?.recipient.currency} hence the beneficiary account you select or add should be a ${state?.rate?.recipient.currency} account` }
+                                        message={`${text["You are seeking to buy"]} ${state?.rate?.recipient.currency} ${text["hence the beneficiary account you select or add should be a"]} ${state?.rate?.recipient.currency} ${text["account"]}` }
                                         type="warning"
                                         closable
                                         style={{fontSize: "15px", margin:"1em 0"}}
                                         />
 
-                                    <JavContentTitle title="Beneficiary Details" />
+                                    <JavContentTitle title={text["Beneficiary Details"]} />
 
                                     <Row style={{ marginTop: "1em" }} gutter={[32, 16]}>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Send to">
+                                            <Form.Item label={text["Send to"]}>
                                                 <Form.Item
                                                     noStyle
                                                 >
                                                     <Select style={{ width: "100%" }} size="large" defaultValue={'bank'}>
-                                                        <Option value="bank">Bank</Option>
+                                                        <Option value="bank">{text["Bank"]}</Option>
                                                     </Select>
                                                 </Form.Item>
                                             </Form.Item>
                                         </Col>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Beneficiary">
+                                            <Form.Item label={text["Beneficiary"]}>
                                                 <Form.Item
                                                     name={"beneficiary_account"}
                                                     noStyle
@@ -263,10 +264,10 @@ const InstructForex = (props) => {
                                                 >
                                                     <Select onChange={handleChangeBene} size="large" className="c_select" style={{ width: "100%" }} 
                                                     
-                                                        placeholder={`Select bank account with buying currency (${state?.rate?.recipient.currency})`}
+                                                        placeholder={`${text["Select bank account with buying currency"]} (${state?.rate?.recipient.currency})`}
                                                         >
                                                        
-                                                        <Option  value='new'  > <PlusCircleOutlined /> {'Add New Beneficiary'}</Option>
+                                                        <Option  value='new'  > <PlusCircleOutlined /> {text['Add New Beneficiary']}</Option>
                                                         {Object.values(beneficiaries)?.map((bene) => {
                                                             if (bene?.currency === state?.rate?.recipient.currency){
                                                                 return (
@@ -274,7 +275,7 @@ const InstructForex = (props) => {
                                                                         <div className={`cardTile ${sel.title}`}>
                                                                             <div className="cardLeftHem">
                                                                                 <div className={`cardName ${sel.lineHeight}`} >{bene?.name}</div>
-                                                                                <div className={`currencyName ${sel.lineHeight}`}  >{`currency: ${bene?.currency}`}</div>
+                                                                                <div className={`currencyName ${sel.lineHeight}`}  >{`${text["currency"]}: ${bene?.currency}`}</div>
                                                                             </div>
                                                                             <div className="cardRightHem">
                                                                                 <div className={`accountNumber ${sel.lineHeight}`}  >
@@ -309,7 +310,7 @@ const InstructForex = (props) => {
                                     </Row>
                                     
                                     <Alert
-                                        message={`You are seeking to sell ${state?.rate?.sender.currency} hence the your source account should be a ${state?.rate?.sender.currency} account` }
+                                        message={`${text["You are seeking to sell"]} ${state?.rate?.sender.currency} ${text["hence the your source account should be a"]} ${state?.rate?.sender.currency} ${text["account"]}` }
                                         type="warning"
                                         closable
                                         style={{fontSize: "15px", margin:"1em 0"}}
@@ -318,7 +319,7 @@ const InstructForex = (props) => {
 
                                     <Row style={{ marginTop: "1em" }} gutter={[32, 16]}>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Sending From">
+                                            <Form.Item label={text["Sending From"]}>
                                                 <Form.Item
                                                     name={"from_account"}
                                                     noStyle
@@ -333,7 +334,7 @@ const InstructForex = (props) => {
                                             </Form.Item>
                                         </Col>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label={state.rate.sender.currency ? `Amount (${state.rate.sender.currency})` : "Amount"}>
+                                            <Form.Item label={state.rate.sender.currency ? `${text["Amount"]} (${state.rate.sender.currency})` : `${text["Amount"]} `}>
                                                 <Form.Item
                                                     name="amount"
                                                     rules={[
@@ -358,7 +359,7 @@ const InstructForex = (props) => {
                                     </Row>
                                     <Row gutter={[32, 16]}>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label= {state.rate.recipient.currency ? `Beneficiary Receives (${state.rate.recipient.currency})` : "Beneficiary Receives "}>
+                                            <Form.Item label= {state.rate.recipient.currency ? `${text["Beneficiary Receives"]} (${state.rate.recipient.currency})` : `${text["Beneficiary Receives"]}`}>
                                                 <Form.Item
                                                     name="beneficiary"
                                                     noStyle
@@ -377,7 +378,7 @@ const InstructForex = (props) => {
                                             </Form.Item>
                                         </Col>
                                         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                            <Form.Item label="Rate">
+                                            <Form.Item label={text["Rate"]}>
 
                                                 <Form.Item
                                                     name={'rate'}
@@ -410,7 +411,7 @@ const InstructForex = (props) => {
                                             size="large"
                                             loading={feeLoading}
                                         >
-                                            Continue
+                                            {text["Continue"]}
                                         </Button>
                                     </div>
 

@@ -10,6 +10,8 @@ import PendingActionTag from "./PendingActionTag"
 
 const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
 
+    const text = useSelector((state)=> state.language)
+
     let currencies = useSelector((state) => state?.resources?.defaultCurrencies)
     const handleCancel = () => {
         setReview(false);
@@ -41,10 +43,10 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
             <div className={Styles.reviewCard}>
                 <div>
                     <div className={Styles.header}>
-                        <div className={Styles.secTitle}>Review Pending Transaction</div>
+                        <div className={Styles.secTitle}>{text["Review Pending Transaction"]}</div>
                         {/* <div className={Styles.secSubTitle}>Review Transaction</div> */}
                         <div onClick={handleCancel} className={Styles.cancel}>
-                            cancel
+                            {text["cancel"]}
                         </div>
                         {/* <div className={Styles.close} >x</div> */}
                     </div>
@@ -53,7 +55,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                     <div className={Styles.rowGrid2} >
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                    User name
+                                    {text["User name"]}
                                 </div>
                                 <div className={Styles.ans}>
                                 {details?.business?.full_name}
@@ -61,7 +63,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                    Role
+                                    {text["Role"]}
                                 </div>
                                 <div className={Styles.ans}>
                                     {details?.business?.is_parent? "Super Admin": details?.business?.role}
@@ -69,12 +71,12 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
 
                     </div>
-                    <JavContentTitle title={"Beneficiary account"} />
+                    <JavContentTitle title={text["Beneficiary account"]} />
                     
                     <div className={Styles.rowGrid} >
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                    Account name
+                                    {text["Account Name"]}
                                 </div>
                                 <div className={Styles.ans}>
                                 {details ? details?.beneficiary[0]?.name : ""}
@@ -82,7 +84,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                    Account number
+                                    {text["Account Number"]}
                                 </div>
                                 <div className={Styles.ans}>
                                 {details ? details?.beneficiary[0]?.account_number: ""}
@@ -90,7 +92,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                    Bank name 
+                                    {text["Bank name"]} 
                                 </div>
                                 <div className={Styles.ans}>
                                 {details ? details?.beneficiary[0]?.bank_name: ""}
@@ -98,10 +100,10 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                     </div>
 
-                    <JavContentTitle title={"Source account"} />
+                    <JavContentTitle title={text["Source account"]} />
 
                     <div >
-                        <div className={Styles.detailsTitle}>Source account</div>
+                        <div className={Styles.detailsTitle}>{text["Source account"]}</div>
 
                         <div className={Styles.receiverContent}>
                             <div className={Styles.contentRow}>
@@ -120,7 +122,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                Initial Trans. Amount
+                                {text["Initial Trans. Amount"]}
                                 </div>
                                 <div className={Styles.ans}>
                                     {`${currencies[details?.wallet[0]?.currency_id]?.ISO} ${currencyFormat(details?.transaction?.amount)}`}
@@ -128,7 +130,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                Trans. Fee
+                                {text["Trans. Fee"]}
                                 </div>
                                 <div className={Styles.ans}>
                                     {`${currencies[details?.wallet[0]?.currency_id]?.ISO} ${currencyFormat(Number(details?.fee?.fee).toFixed(2))}`}
@@ -136,7 +138,7 @@ const ViewPendingTransDetails = ({ setReview, showReview, details }) => {
                             </div>
                             <div>
                                 <div className={Styles.detailsTitle}>
-                                Selling Amount
+                                {text["Selling Amount"]}
                                 </div>
                                 <div className={Styles.ans}>
                                     {`${currencies[details?.wallet[0]?.currency_id]?.ISO} ${currencyFormat(Number(details?.fee?.amount_payable).toFixed(2))}`}

@@ -18,8 +18,6 @@ const BookDealPopUp = ({disableContinue, rate, reset})=>{
 
     const dispatch = useDispatch()
 
-    console.log("rate in pop: ",rate)
-
     const handleInstructDeal = ()=>{
         history.push({
             pathname: "/business/instruct-forex",
@@ -80,11 +78,11 @@ const BookDealPopUp = ({disableContinue, rate, reset})=>{
         width="700px"
         >  
             <div className={Styles.jav_modal_header}>
-                        <div className={Styles.jav_modal_secTitle}>Deal Booked</div>
+                        <div className={Styles.jav_modal_secTitle}>{text["Deal Booked"]}</div>
                 </div>
 
                 <div style={{display: "flex", padding: "2em 1em", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
-                <p>Your deal has been booked. Your deal number is <span style={{color: "red"}}>{deal?.orderNumber}</span> </p>
+                <p>{text["Your deal has been booked. Your deal number is"]} <span style={{color: "red"}}>{deal?.orderNumber}</span> </p>
            
                     <Button
                     block
@@ -94,7 +92,7 @@ const BookDealPopUp = ({disableContinue, rate, reset})=>{
                     style={{maxWidth: "400px"}}
                     onClick={handleInstructDeal}
                     >
-                        Instruct this deal
+                        {text["Instruct this deal"]}
                 </Button>
 
                 </div>

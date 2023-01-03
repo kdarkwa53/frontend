@@ -10,6 +10,7 @@ import AccessControl from "../../Shared/Components/AccessControl/AccessControl";
 
 
 const UserManagement = () => {
+    const text = useSelector((state) => state?.language)
     const { Content } = Layout;
     const [editUser, setEditUser] = useState(false)
 
@@ -31,36 +32,36 @@ const UserManagement = () => {
 
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
-            <p>You haven’t added any users yet. Add new</p>
+            <p>{text["You haven’t added any users yet. Add new"]}</p>
         </div>
     );
   
 
     const columns = [
         {
-            title: "Full Name",
+            title: text["Full Name"],
             dataIndex: "full_name",
             key: "full_name",
         },
         
         {
-            title: "Email",
+            title: text["Email"],
             dataIndex: "email",
             key: "email",
         },
         {
-            title: "Phone Number",
+            title: text["Phone Number"],
             dataIndex: "phone",
             key: "phone",
         },
         {
-            title: "Role",
+            title: text["Role"],
             dataIndex: "role",
             key: "role",
         },
        
         {
-            title: "Action",
+            title: text["Action"],
             key: "action",
             render: (id) => {
                 return (
@@ -72,7 +73,7 @@ const UserManagement = () => {
                         >
                             <Tag  onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
                             <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
-                            Edit
+                            {text["edit"]}
                         </Tag>
                         </AccessControl>
 
@@ -83,7 +84,7 @@ const UserManagement = () => {
                         >
                             <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
                             <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
-                            delete
+                            {text["delete"]}
                         </Tag>
                         </AccessControl>
                         
@@ -119,7 +120,7 @@ const UserManagement = () => {
             >
                  <div className={Styles.titleRow}>
                         <div className={Styles.title}>
-                            User List
+                            {text["User List"]}
                         </div>
                         <AddUser editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible}/>
                     </div>

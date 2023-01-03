@@ -1,6 +1,6 @@
 import { Spin, Tag } from "antd"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector, useStore } from "react-redux"
 import { getTransactions } from "../Savings/duck/action"
 import { approveTransaction, declineTransaction, getPendingTransactions } from "./duck/action"
 import Styles from "./UserMgt.module.css"
@@ -10,6 +10,7 @@ import Styles from "./UserMgt.module.css"
 const PendingActionTag = ({action, id, closeModal, styles})=>{
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
+    const text = useSelector((state) =>state.language)
 
     useEffect(()=>{
         dispatch(getPendingTransactions())
@@ -52,7 +53,7 @@ const PendingActionTag = ({action, id, closeModal, styles})=>{
             color={action==="approve"? "#E0FFE0" : "#FFE0E0"}
             >
             <Spin spinning={loading}/>
-            {action}
+            {text[action]}
         </Tag>
     )
 }

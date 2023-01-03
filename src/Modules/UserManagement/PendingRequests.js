@@ -27,6 +27,7 @@ const PendingRequests = () => {
     const [transDetails, setTrans] = useState()
 
     const dispatch = useDispatch()
+    const text = useSelector((state)=> state.language)
   
     useEffect(()=>{
         dispatch(getPendingTransactions())
@@ -36,7 +37,7 @@ const PendingRequests = () => {
 
     const customizeRenderEmpty = () => (
         <div style={{ textAlign: 'center' }}>
-            <p>You don't have any pending transactions</p>
+            <p>{text["You don't have any pending transactions"]}</p>
         </div>
     );
 
@@ -62,8 +63,6 @@ const PendingRequests = () => {
             fee: fee
         }
 
-        console.log("info: ",info)
-
 
        
         setTrans(info)
@@ -84,39 +83,39 @@ const PendingRequests = () => {
     const columns = [
        
         {
-            title: "Module",
+            title: text["Module"],
             dataIndex: "module",
             key: "module",
         },
         {
-            title: "Transaction ID",
+            title: text["Transaction ID"],
             dataIndex: "transaction_id",
             key: "transaction_id",
         },
         {
-            title: "Amount",
+            title: text["Amount"],
             dataIndex: "amount",
             key: "amount",
         },
         {
-            title: "Date",
+            title: text["Date"],
             dataIndex: "date",
             key: "date",
         },
         {
-            title: "User",
+            title: text["User"],
             dataIndex: "user",
             key: "user",
         },
         {
-            title: "Action",
+            title: text["Action"],
             key: "action",
             render: (action) => {
                 return (
                     <>
                         
-                        <PendingActionTag action={"decline"} id={action?.key} /> 
-                        <Tag onClick={()=>handleView(action?.key)} style={{  padding: "10px", cursor:"pointer" }} color="gold">View</Tag>
+                        <PendingActionTag action={["decline"]} id={action?.key} /> 
+                        <Tag onClick={()=>handleView(action?.key)} style={{  padding: "10px", cursor:"pointer" }} color="gold">{text["view"]}</Tag>
                         
                         
                     </>
