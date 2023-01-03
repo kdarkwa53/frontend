@@ -12,12 +12,7 @@ import flag from "../../../assets/flag.png"
 const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) => {
 
     const { Option } = Select
-    const state = useSelector((state) => state?.resources)
-    const currencies = state?.defaultCurrencies ? state?.defaultCurrencies : {}
-    console.log("Yo: ", currencies)
-    const newCurr = useSelector((state) => state?.user?.default_savings_wallet?.currency_id)
-    console.log("Yo: ", newCurr)
-
+    const text = useSelector((state) => state?.language)
 
     return (
 
@@ -67,12 +62,10 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                     <div style={{background: "#E0EAFF"}} className={Styles.middleCol} >
                       
                         <div className={Styles.layoutContainer}>
-                               
                             <div className={Styles.topNav}>
                                 {title}
-                               
                             </div>
-                            <span style={{fontSize: "20px", fontWeight: "700", color: "#727986"}} >Home</span>
+                            <span style={{fontSize: "20px", fontWeight: "700", color: "#727986"}} >{text["Home"]}</span>
 
                             <div className={Styles.layoutContent}>
                                 {children}

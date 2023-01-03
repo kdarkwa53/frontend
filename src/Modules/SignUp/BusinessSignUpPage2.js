@@ -12,37 +12,38 @@ import LangDropDown from "../../Shared/Components/LangDropDown";
 
 
 const BusinessRegistrationDetails = () => {
+    const text = useSelector((state) => state?.language)
     return (
         <>
-            <Form.Item label="Name of Business">
+            <Form.Item label={text["Name of Business"]}>
                 <Form.Item
                     name="business_name"
                     noStyle
                     rules={[
                         {
                             required: true,
-                            message: "Please input your business name!",
+                            message: text["Please input your business name!"],
                         },
                     ]}
                 >
-                    <Input size="large" placeholder="Business Name" />
+                    <Input size="large" placeholder={text["Enter business Name"]} />
                 </Form.Item>
             </Form.Item>
-            <Form.Item label="Type of business">
+            <Form.Item label={text["Type of business"]}>
                 <Form.Item
                     name="business_type"
                     noStyle
                     rules={[
                         {
                             required: true,
-                            message: "Please input your business type!",
+                            message: text["Please input your business type!"],
                         },
                     ]}
                 >
-                    <Input size="large" placeholder="Type of Name" />
+                    <Input size="large" placeholder={text["Enter business type"]} />
                 </Form.Item>
             </Form.Item>
-            <Form.Item label="Email">
+            <Form.Item label={text["Email"]}>
                 <Form.Item
                     name="email"
                     noStyle
@@ -50,7 +51,7 @@ const BusinessRegistrationDetails = () => {
                         {
                             required: true,
                             type: "email",
-                            message: "Email address not valid",
+                            message: `${text["Email"]} ${text["is required"]}`,
                         },
                     ]}
                 >
@@ -58,14 +59,14 @@ const BusinessRegistrationDetails = () => {
                 </Form.Item>
             </Form.Item>
 
-            <Form.Item label="Physical Address">
+            <Form.Item label={text["Physical Address"]}>
                 <Form.Item
                     noStyle
                     name="business_address"
                     rules={[
                         {
                             required: true,
-                            message: "Please enter your physical address",
+                            message: text["Please enter your physical address"],
                         },
                     ]}
                 >
@@ -96,8 +97,7 @@ const BusinessRegistrationDetails = () => {
 
 const BusinessSignUpPage2 = () => {
     const history = useHistory();
-    const signupState = useSelector((state) => state.userSignUp);
-    const { signingUp } = signupState;
+    const text = useSelector((state) => state?.language)
     const onFinish = (values) => {
         history.push({
             pathname: "/business/signup/2",
@@ -124,10 +124,10 @@ const BusinessSignUpPage2 = () => {
                         <LangDropDown fullname/>
                         </div>
                         <div className={ThemeStyles.authTitle}>
-                        Register
+                        {text["Register"]}
                         </div>
                         <div className={ThemeStyles.subauthTitle}>
-                        Create an account and start trading with us
+                        {text["Create an account and start trading with us"]}
                             </div>
                     </div>
                     <div style={{ marginTop: "2em" }}>
@@ -142,14 +142,14 @@ const BusinessSignUpPage2 = () => {
                             shape="round"
                             style={{ marginTop: "1em" }}
                         >
-                            <span >Continue</span>
+                            <span >{text["Continue"]}</span>
                         </Button>
                     </div>
 
                 </Form>
                 <div className={ThemeStyles.footerMsg}>
                     <div className={ThemeStyles.footerContent}>
-                    Already have an account? <Link to='/login'> <span className={ThemeStyles.footerLink}>Sign In</span> </Link>
+                    {text["Already have an account?"]} <Link to='/login'> <span className={ThemeStyles.footerLink}>{text["Sign in"]}</span> </Link>
                     </div>
                 </div>
             </div>

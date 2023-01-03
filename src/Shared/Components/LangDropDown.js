@@ -7,15 +7,16 @@ import en_flag from "../../assets/usflag.png"
 import fr_flag from "../../assets/frflag.png"
 
 const LangDropDown = ({fullname}) => {
+    const text = useSelector((state) => state?.language)
     const langAdrr = {
         EN: {
             name: "EN",
-            fullname: "English",
+            fullname: text["English"],
             flag: en_flag
         },
         FR: {
             name: "FR",
-            fullname: "French",
+            fullname: text["French"],
             flag: fr_flag
         }
     }

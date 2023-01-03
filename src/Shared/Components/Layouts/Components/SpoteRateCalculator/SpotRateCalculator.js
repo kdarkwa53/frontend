@@ -16,6 +16,7 @@ const SpotRateCalculator = () => {
     const { Option } = Select
     const currencies = useSelector((state) => state?.resources?.rules_currencies)
     const rateLoading = useSelector((state) => state?.transfer?.gettingRate)
+    const text = useSelector((state) => state?.language)
     
     const [buyCurrency, setBuyCurrency] = useState("")
     const [showTimer, setShowTimer] = useState(false)
@@ -64,12 +65,12 @@ const SpotRateCalculator = () => {
 
     const expireRate = () => {
         reset()
-        dispatch(showErrorNotification('Rate has expired'))
+        dispatch(showErrorNotification(text['Rate has expired']))
     }
     const _currencies = currencies ? currencies : []
     return (
         <div className={Styles.rateCard}>
-            <div className={Styles.exTitle}>Foreign Exchange Spot Rate</div>
+            <div className={Styles.exTitle}>{text["Foreign Exchange Spot Rate"]}</div>
 
 
            
@@ -84,7 +85,7 @@ const SpotRateCalculator = () => {
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 24 }}>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
-                            label={'Buy'}
+                            label={text['Buy']}
                             name={"to"}
                             >
                                 <Select
@@ -111,7 +112,7 @@ const SpotRateCalculator = () => {
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
-                                label={'Sell'}
+                                label={text['Sell']}
                                 name={"from"}
                             >
                                 <Select
@@ -140,7 +141,7 @@ const SpotRateCalculator = () => {
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 24 }}>
                         <Col xs={24} sm={24} md={12} lg={24} xl={24}>
                             <Form.Item
-                                label={`Amount ${buyCurrency}`}
+                                label={`${text["Amount"]} ${buyCurrency}`}
                                 name={"value"}
                             >
                                 <InputNumber
@@ -162,7 +163,7 @@ const SpotRateCalculator = () => {
                             htmlType="submit"
                                 loading={rateLoading}
                             >
-                                check rate
+                                {text["check rate"]}
                             </Button>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -180,7 +181,7 @@ const SpotRateCalculator = () => {
                             {
                             rate?
                             `${rate?.sender?.currency} ${currencyFormat(rate?.sender?.amount)} / ${rate?.recipient?.currency} ${currencyFormat(rate?.recipient?.amount)}`
-                            :  <div style={{color: '#727986', fontSize: "24px", fontWeight: "normal"}}>Rate result appears here</div> 
+                            :  <div style={{color: '#727986', fontSize: "24px", fontWeight: "normal"}}>{text["Rate result appears here"]}</div> 
                             }
                         </div>
                         <div className={Styles.baseCurrency}>{  rate?`${Number(rate?.javolin_rate[1]).toFixed(4)} / ${Number(rate?.javolin_rate[0]).toFixed(4)}`: ''}</div>

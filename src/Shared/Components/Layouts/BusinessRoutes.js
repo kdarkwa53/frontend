@@ -47,13 +47,14 @@ import Check from "../../../check";
 import IbanValidation from "../../../Modules/TransferMoney/Components/AddBeneficiaryQuestion/IbanValidation";
 import ForexBeneficiary from "../../../Modules/TransferMoney/ForexBeneficiary";
 import { getRulesCurrencies } from "../duck/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ForexSend from "../../../Modules/TransferMoney/ForexSend";
 import SendMoneyForex from "../../../Modules/TransferMoney/SendMoneyForex";
 import PendingRequests from "../../../Modules/UserManagement/PendingRequests";
 import InstructForex from "../../../Modules/TransferMoney/InstructForex";
 import { getBeneficiaries } from "../../../Modules/TransferMoney/duck/action";
 export default function BusinessRoutes() {
+    const text = useSelector((state) => state.language)
     
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -63,47 +64,47 @@ export default function BusinessRoutes() {
     },[])
     return (
         <Switch>
-                <DashboardLayoutRoute RightSider={BusRightSider} menuRoute='/' title="Dashboard" exact path="/" component={BusDashboard} />
+                <DashboardLayoutRoute menuRoute='/' title={text["DASHBOARD"]} exact path="/" component={BusDashboard} />
                 <Route path={'/check'} component={Check} />
-                <DashboardLayoutRoute RightSider={BusRightSider} path="/business/dashboard" component={BusDashboard} />
-                <LayoutView primary title="Loans" path="/business/loans" component={JavolinLoans} />
-                <LayoutView primary title="Government Fees" exact path="/business/government-services" component={GovernmentServices} />
+                <DashboardLayoutRoute path="/business/dashboard" component={BusDashboard} />
+                <LayoutView primary title={text["Loans"]} path="/business/loans" component={JavolinLoans} />
+                <LayoutView primary title={"Government Fees"} exact path="/business/government-services" component={GovernmentServices} />
                 <LayoutView primary title="Government Fees" path="/business/government-services/fee" component={FeePayment} />
                 <MainLayoutRoute title="Deposit" path="/make-deposit" exact component={MakeDeposit} />
-                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Send Money" path="/send-money" exact component={SendMoney} />
-                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Send Money" menuRoute="/business/payments" path="/business/payments" exact component={SendMoney} />
-                <MainLayoutRoute title="Dashboard" subtitle="Home / " breadSub="Forex" path="/business/forex" exact component={ForexBeneficiary} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Send Money" path="/send-money" exact component={SendMoney} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Send Money" menuRoute="/business/payments" path="/business/payments" exact component={SendMoney} />
+                <MainLayoutRoute title={text["Dashboard"]} subtitle="Home / " breadSub="Forex" path="/business/forex" exact component={ForexBeneficiary} />
                 <Route path="/preq" component={PreQualification} />
                 <MainLayoutRoute path="/payment" component={BorrowerPayment} />
-                <MainLayoutRoute title="Transactions" subtitle="Home / " breadSub="Transactions"  menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
+                <MainLayoutRoute title={text["Transactions"]} subtitle={`${text["Home"]} / `} breadSub="Transactions"  menuRoute="/business/transactions" path="/business/transactions" component={Savings} />
                 <MainLayoutRoute title="Payment Option" path="/payment-option" component={ChoosePaymentOption} />
                 <MainLayoutRoute title="Mortgage Application" path="/apply" component={MortgageApplicationForm} />
                 <MainLayoutRoute title="Application" path="/application/:id" component={MortgageApplicationForm} />
                 <MainLayoutRoute path="/new-application" component={NewApplication} />
                 <Route path="/homeInfo" component={HomeInfo} />
                 <MainLayoutRoute path='/beneficiary' component={BeneficiaryDetails} />
-                <MainLayoutRoute title={'Business Account Application'} subtitle="Home / " breadSub="Business KYC"  path='/business/compliance' component={BusinessKYCForm} />
+                <MainLayoutRoute title={text['Business Account Application']} subtitle={`${text["Home"]} / `} breadSub={text["Business KYC"]}  path='/business/compliance' component={BusinessKYCForm} />
                 <LayoutView primary path="/preview/:id" component={MortgagePreviewPage} />
-                <MainLayoutRoute title="Transfer Money" path="/business/transfer" component={TransferMoney} />
-                <MainLayoutRoute title="Send Money" path="/send-money/international" component={SendMoneyInt} />
-                <MainLayoutRoute title="Forex" path="/send-money/forex" component={SendMoneyForex} />
-                <MainLayoutRoute title="Forex" path="/business/instruct-forex" component={InstructForex} />
-                <MainLayoutRoute title="Send Money" path="/business/forex" component={ForexSend} />
-                <MainLayoutRoute title="Fund My Wallet" path="/business/fund-wallet" component={FundWallet} />
+                <MainLayoutRoute title={text["Transfer Money"]} path="/business/transfer" component={TransferMoney} />
+                <MainLayoutRoute title={text["Send Money"]} path="/send-money/international" component={SendMoneyInt} />
+                <MainLayoutRoute title={text["Forex"]} path="/send-money/forex" component={SendMoneyForex} />
+                <MainLayoutRoute title={text["Forex"]} path="/business/instruct-forex" component={InstructForex} />
+                <MainLayoutRoute title={text["Send Money"]} path="/business/forex" component={ForexSend} />
+                <MainLayoutRoute title={text["Fund My Wallet"]} path="/business/fund-wallet" component={FundWallet} />
                 <LayoutView menuRoute="/profile" background="#F0F4FD" title="Profile" path="/business/profile" component={BusinessProfilePage} />
                 <MainLayoutRoute path="/mortgage-success" component={ApplicationSuccess} />
                 <LayoutView primary path="/status/:id" component={MortgageStatusPage} />
                 <MainLayoutRoute path="/auth" component={AuthSignUp} />
                 <LayoutView primary path="/applications" component={MyApplications} />
-                <MainLayoutRoute subtitle={"Users"} primary path="/user-management" title="User Management" component={UserManagement} />
-                <MainLayoutRoute subtitle={"Roles"} primary path="/role-management" title="User Management" component={RoleManagement} />
-                <MainLayoutRoute  subtitle="Transactions"  path="/business/requests" title="Pending Requests" component={PendingRequests} />
+                <MainLayoutRoute subtitle={text["Users"]} primary path="/user-management" title={text["User Management"]} component={UserManagement} />
+                <MainLayoutRoute subtitle={text["Roles"]} primary path="/role-management" title={text["User Management"]} component={RoleManagement} />
+                <MainLayoutRoute  subtitle={text["Transactions"]}  path="/business/requests" title={text["Pending Requests"]} component={PendingRequests} />
                 <DashboardLayoutRoute RightSider={BusRightSider} title="Portfolio" path="/business/portfolio" component={BusinessProducts} />
                 <MainLayoutRoute path="/prepaid/apply/:id" component={PrepaidApplication} />
-                <MainLayoutRoute subtitle={"Manage your wallet"} menuRoute="/business/wallet" title="Wallet" path="/business/wallet" component={WalletPage} />
+                <MainLayoutRoute subtitle={text["Manage your wallet"]} menuRoute="/business/wallet" title={text["Wallet"]} path="/business/wallet" component={WalletPage} />
                 <Route path="/check" component={MenuCheck} />
-                <MainLayoutRoute title="Send Money" path="/business/pre-rules" exact component={PrerulesQuestions} />
-                <MainLayoutRoute title="Send Money" path="/business/iban-validation" exact component={IbanValidation} />
+                <MainLayoutRoute title={text["Send Money"]} path="/business/pre-rules" exact component={PrerulesQuestions} />
+                <MainLayoutRoute title={text["Send Money"]} path="/business/iban-validation" exact component={IbanValidation} />
                 <DashboardLayoutRoute RightSider={BusRightSider} menuRoute='/' title="Dashboard" exact path="/" component={BusDashboard} />
                 <MainLayoutRoute title="Airtime" path="/transfers/airtime" exact component={AirtimeTransfer} />
                 <Route path="/business/preq" component={BusinessPreq} />

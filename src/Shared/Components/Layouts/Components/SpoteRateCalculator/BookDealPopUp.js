@@ -14,6 +14,7 @@ const BookDealPopUp = ({disableContinue, rate, reset})=>{
     const [deal, setDeal] = useState(false)
     const bookingRate = useSelector((state) => state?.transfer?.bookingRate)
     const history = useHistory()
+    const text = useSelector((state) => state?.language)
 
     const dispatch = useDispatch()
 
@@ -59,9 +60,9 @@ const BookDealPopUp = ({disableContinue, rate, reset})=>{
             loading={bookingRate}
             onClick={handleProceedBooking}
             >
-                book rate
+                {text["book rate"]}
         </Button>
-        <Modal  visible={isVisible} onCancel={handleCancel}
+        <Modal  open={isVisible} onCancel={handleCancel}
         footer={false}
         centered
         closeIcon={

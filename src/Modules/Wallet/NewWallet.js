@@ -1,7 +1,7 @@
 import { Button, Card, Form, Input, Modal, Select } from "antd"
 import { Children, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { PlusIcon } from "../../Shared/Components/JavIcons"
+import { PlusIcon, XIcon } from "../../Shared/Components/JavIcons"
 import Styles from "../Dashboard/Dashboard.module.css"
 import { createWallet } from "../TransferMoney/duck/action"
 import { PlusCircleOutlined } from '@ant-design/icons';
@@ -38,19 +38,35 @@ const NewWallet = ({children})=>{
                 <div className={Styles.plusIcon}>
                 <PlusCircleOutlined style={{color:"#0032A0"}} />
                 </div>
-                <div className={Styles.addNewText}>
-                    Add Account
+                <div style={{textAlign: "center"}} className={Styles.addNewText}>
+                    {text["Add Account"]}
                 </div>
             </div>
             <Modal
-                visible={isVisible}
+                open={isVisible}
                 onCancel={handleCancel}
                 footer={false}
                 closable={false}
                 centered
+                closeIcon={
+                    <div className="circle-close">
+                        <XIcon width="1em" height="1em" />
+                    </div>
+                }
+                bodyStyle={
+                    {
+                        padding: 0,
+                        border: "16px 16px 0 0"
+                    }
+                }
+        
+                width="700px"
             >
-                <Card title="ADD NEW ACCOUNT">
-                    <Form
+                <div className={Styles.jav_modal_header}>
+                        <div className={Styles.jav_modal_secTitle}>{text["ADD NEW ACCOUNT"]}</div>
+                </div>
+                <div style={{display: "flex", padding: "2em 1em", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+                <Form
                         form={form}
                         layout="vertical"
                         name="form_in_modal"
@@ -58,7 +74,7 @@ const NewWallet = ({children})=>{
                         onFinish={onFinish}
                     >
                          <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Account Name</div>
+                            <div className={Styles.inputLabel}>{text["Account Name"]}</div>
                             <div className={Styles.inputContainer}>
                                 <Form.Item
                                     name="name"
@@ -73,7 +89,7 @@ const NewWallet = ({children})=>{
                             </div>
                         </div>
                         <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Description</div>
+                            <div className={Styles.inputLabel}>{text["Description"]}</div>
                             <div className={Styles.inputContainer}>
                                 <Form.Item
                                     name="description"
@@ -89,7 +105,7 @@ const NewWallet = ({children})=>{
                         </div>
 
                         <div className={Styles.itemRow}>
-                            <div className={Styles.inputLabel}>Currency</div>
+                            <div className={Styles.inputLabel}>{text["Currency"]}</div>
                             <div className={Styles.inputContainer}>
                                 <Form.Item
                                     name="currency_id"
@@ -99,7 +115,7 @@ const NewWallet = ({children})=>{
                                         },
                                     ]}
                                 >
-                                    <Select placeholder="Select the default currency for your account" size="large">
+                                    <Select placeholder={text["Select the default currency for your account"]} size="large">
                                         {
                                             Object.values(_currencies)?.map((item) => {
                                                 return (
@@ -116,17 +132,18 @@ const NewWallet = ({children})=>{
                             <Button
                                 type="primary"
                                 block
+                                shape="round"
                                 htmlType="submit"
                                 size="large"
                                 loading= {loading}
 
                             >
-                                Add Wallet
+                                {text["Add Account"]}
                             </Button>
                         {/* </div> */}
-                    </Form>
-                </Card>
-                
+                    </Form> 
+                </div>
+                                 
                 
             </Modal>
         </>

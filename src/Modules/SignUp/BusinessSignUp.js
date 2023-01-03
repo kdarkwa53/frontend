@@ -22,6 +22,7 @@ import LangDropDown from "../../Shared/Components/LangDropDown";
 
 
 const BusinessRegistrationDetails = ({ setNum }) => {
+    const text = useSelector((state) => state?.language)
 
     const { Option } = Select
     const currencies = useSelector((state) => state?.resources?.defaultCurrencies)
@@ -44,29 +45,30 @@ const BusinessRegistrationDetails = ({ setNum }) => {
     const _currencies = currencies ? currencies : {}
     return (
         <>
-            <Form.Item label="Full name">
+            <Form.Item label={text["Full name"]}>
                 <Form.Item
                     name="full_name"
                     noStyle
                     rules={[
                         {
                             required: true,
-                            message: "Please input your full name!",
+                            message: text["Please input your full name!"],
                         },
                     ]}
                 >
-                    <Input size="large" placeholder="Full Name" />
+                    <Input size="large" placeholder={text["Full Name"]} />
                 </Form.Item>
             </Form.Item>
 
 
-            <Form.Item label="Phone number">
+            <Form.Item label={text["Phone number"]}>
                 <Form.Item
                     noStyle
                     name="phone_number"
                     rules={[
                         {
                             required: true,
+                            message: `${text["Phone number"]} ${text["is required"]}`
                         },
                         () => ({
                             validator(_, value) {
@@ -78,7 +80,7 @@ const BusinessRegistrationDetails = ({ setNum }) => {
 
                                 return Promise.reject(
                                     new Error(
-                                        "Phone number is invalid"
+                                        text["Phone number is invalid"]
                                     )
                                 );
                             },
@@ -89,7 +91,6 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                         <IntlTelInput
                             containerClassName="intl-tel-input"
                             inputClassName="form-control"
-                            // nationalMode="true"
                             separateDialCode={true}
                             preferredCountries={['gh', 'us', 'ng', 'sn', 'gb']}
                             defaultCountry={defaultCountry.toLocaleLowerCase() ?? null}
@@ -100,26 +101,25 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                             }}
                         />
                     </div>
-                    {/* <IntInputPhoneNumber value={form.getFieldValue("phone_number")} setNum={setIntNum} /> */}
                 </Form.Item>
             </Form.Item>
-            <Form.Item label="Password">
+            <Form.Item label={text["Password"]}>
                 <Form.Item
                     noStyle
                     name="password"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your password!",
+                            message: text["Please input your password!"],
                         },
                     ]}
                     hasFeedback
                 >
-                    <Input.Password size="large" placeholder="password" />
+                    <Input.Password size="large" placeholder={text["Password"]} />
                 </Form.Item>
             </Form.Item>
 
-            <Form.Item label="Confirm Password">
+            <Form.Item label={text["Confirm Password"]}>
                 <Form.Item
                     noStyle
                     name="confirm"
@@ -128,7 +128,7 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                     rules={[
                         {
                             required: true,
-                            message: "Please confirm your password!",
+                            message: text["Please confirm your password!"],
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
@@ -141,18 +141,18 @@ const BusinessRegistrationDetails = ({ setNum }) => {
 
                                 return Promise.reject(
                                     new Error(
-                                        "The two passwords that you entered do not match!"
+                                        text["The two passwords that you entered do not match!"]
                                     )
                                 );
                             },
                         }),
                     ]}
                 >
-                    <Input.Password size="large" placeholder="re-enter password" />
+                    <Input.Password size="large" placeholder={text["re-enter password"]} />
                 </Form.Item>
             </Form.Item>
             <Form.Item
-                label="Currency"
+                label={text["Currency"]}
             >
                 <Form.Item
                     noStyle
@@ -163,7 +163,7 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                         },
                     ]}
                 >
-                    <Select placeholder="Select the default currency for your account" size="large">
+                    <Select placeholder={text["Select the default currency for your account" ]}size="large">
                         {
                             Object.values(_currencies)?.map((item) => {
                                 return (
@@ -180,12 +180,12 @@ const BusinessRegistrationDetails = ({ setNum }) => {
                 rules={[
                     {
                         validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                            value ? Promise.resolve() : Promise.reject(new Error(text['Should accept agreement'])),
                     },
                 ]}
             >
-                <Checkbox className={[ThemeStyles.footerContent]}> I agree with your <Link to='/login'> <span className={ThemeStyles.footerLink}>Terms of Service</span> </Link>  and
-                <Link to='/login'> <span className={ThemeStyles.footerLink}>Privacy Policy</span> </Link> 
+                <Checkbox className={[ThemeStyles.footerContent]}> {text["I agree with your"]} <Link to='/login'> <span className={ThemeStyles.footerLink}>{text["Terms of Service"]}</span> </Link>  {text["and"]}
+                <Link to='/login'> <span className={ThemeStyles.footerLink}>{text["Privacy Policy"]}</span> </Link> 
                 </Checkbox>
             </Form.Item>
 
@@ -196,6 +196,7 @@ const BusinessRegistrationDetails = ({ setNum }) => {
 const BusinessSignUp = (props) => {
 
     const [intNum, setIntNum] = useState("")
+    const text = useSelector((state) => state?.language)
 
 
     const { state } = props.location
@@ -236,10 +237,10 @@ const BusinessSignUp = (props) => {
                         <LangDropDown fullname/>
                         </div>
                         <div className={ThemeStyles.authTitle}>
-                        Register
+                        {text["Register"]}
                         </div>
                         <div className={ThemeStyles.subauthTitle}>
-                        Create an account and start trading with us
+                        {text["Create an account and start trading with us"]}
                             </div>
                     </div>
                     <div >
@@ -254,7 +255,7 @@ const BusinessSignUp = (props) => {
                             loading={signingUp}
                             style={{ marginTop: "2em" }}
                         >
-                            <span style={{ marginRight: "2em" }} >Sign up</span>
+                            <span style={{ marginRight: "2em" }} >{text["Sign up"]}</span>
                             <ArrowRight2 width="1.2em" height="1.2em" color="white" />
                         </Button>
                     </div>
@@ -262,7 +263,7 @@ const BusinessSignUp = (props) => {
                 </Form>
                 <div className={ThemeStyles.footerMsg}>
                     <div className={ThemeStyles.footerContent}>
-                    Already have an account? <Link to='/login'> <span className={ThemeStyles.footerLink}>Sign In</span> </Link>
+                    {text["Already have an account?"]} <Link to='/login'> <span className={ThemeStyles.footerLink}>{text["Sign in"]}</span> </Link>
                     </div>
                 </div>
             </div>

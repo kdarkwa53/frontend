@@ -37,7 +37,7 @@ const WalletCard = ({ accountNumber, accountBalance, currency_id, accountName })
             <div className={Styles.upperSide}>
                 <div className={Styles.accountBal}>
                 <div className={Styles.slimTitle}>
-                        Balance
+                        {text["Balance"]}
                         {/* {accountName} */}
                     </div>
                     <div className={Styles.answer}>

@@ -4,8 +4,11 @@ import Logo from "../../../assets/javolin_rev.png";
 import { Route } from "react-router-dom";
 import { Row, Col } from "antd";
 import Ring from "../../../assets/ring.png"
+import { useSelector } from "react-redux";
 
 const AuthUserLayout = ({ children, title, ...rest }) => {
+    const text = useSelector((state) => state?.language)
+
 
     return (
         <>
@@ -29,8 +32,8 @@ const AuthUserLayout = ({ children, title, ...rest }) => {
                                         <img src={Logo} alt="javolin polychrome-logo" />
                                     </div>
                                     {/* ) : ""} */}
-                                    <div className={ThemeStyles.welcomeTitle}>Welcome to<span style={{ color: "#6CC24A" }}> JAVOLIN</span> </div>
-                                    <div className={ThemeStyles.welcomeBody}> Financial services you can trust.</div>
+                                    <div className={ThemeStyles.welcomeTitle}>{text.WELCOME_TO}<span style={{ color: "#6CC24A" }}> JAVOLIN</span> </div>
+                                    <div className={ThemeStyles.welcomeBody}>{text.WELCOME_SUB}</div>
                                 </div>
                             </Col>
                     </Row>

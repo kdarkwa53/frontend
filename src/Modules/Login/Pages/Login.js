@@ -20,7 +20,7 @@ const Login = () => {
   const userlogin = useSelector((state) => state.login);
   const [intNum, setIntNum] = useState("")
   const [phoneValid, setPhoneValid] = useState('')
-  const accountType = useSelector((state) => state?.user?.type)
+  const text = useSelector((state) => state?.language)
 
   // const [form] = Form.useForm();
   
@@ -77,10 +77,10 @@ const Login = () => {
             </div>
           
             <div className={ThemeStyles.authTitle}>
-              Sign in
+              {text["Sign in"]}
             </div>
             <div className={ThemeStyles.subauthTitle}>
-            Sign in to start trading with us
+              {text["Sign in to start trading with us"]}
             </div>
 
           </div>
@@ -91,7 +91,7 @@ const Login = () => {
             </Radio.Group>
           </div> */}
           <Form.Item
-            label="Phone number"
+            label={text["Phone number"]} 
           >
             <Form.Item
               noStyle
@@ -99,6 +99,7 @@ const Login = () => {
               rules={[
                 {
                   required: true,
+                  message: `${text["Phone number"]} ${text["is required"]}`
                 },
                 () => ({
                   validator(_, value) {
@@ -110,7 +111,7 @@ const Login = () => {
 
                     return Promise.reject(
                       new Error(
-                        "Phone number is invalid"
+                        text["Phone number is invalid"]
                       )
                     );
                   },
@@ -145,16 +146,16 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your password!",
+                  message: text["Please input your password!"],
                 }
               ]}
               hasFeedback
             >
-              <Input.Password size="large" type={'password'} placeholder="password" />
+              <Input.Password size="large" type={'password'} placeholder={text["password"]} />
             </Form.Item>
           </Form.Item>
           <div style={{textAlign: "right", fontWeight:450, fontSize: "20px"}}>
-           <Link to='/forgot-password'>Forgot Password?</Link>
+           <Link to='/forgot-password'>{text["Forgot Password?"]}</Link>
           </div>
           <Button
             block
@@ -166,14 +167,14 @@ const Login = () => {
             className="login-form-button"
             loading={userlogin.loggingIn}
           >
-            Login
+            {text["Login"]}
           </Button>
           
         </Form>
 
         <div className={ThemeStyles.footerMsg}>
           <div className={ThemeStyles.footerContent}>
-          Don’t have an account? <Link to={'/business/signUp'}> <span className={ThemeStyles.footerLink}>Create account</span> </Link>
+          {text["Don’t have an account?"]} <Link to={'/business/signUp'}> <span className={ThemeStyles.footerLink}>{text["Create account"]}</span> </Link>
           </div>
         </div>
 

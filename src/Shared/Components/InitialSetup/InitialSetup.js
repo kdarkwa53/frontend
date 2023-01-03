@@ -1,6 +1,7 @@
 
 import { Button, Col, Row } from "antd"
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import Circle from "../Circle/Circle"
 import { CheckIcon, TickBold } from "../JavIcons"
@@ -9,7 +10,7 @@ import Styles from "./InitiailSetup.module.css"
 
 
 export const TaskTodo = ({ completed, title, desc, fontSub }) => {
-
+    const text = useSelector((state) => state?.language)
     return (
         <div className={Styles.rowTaskTodo}>
             <div className={Styles.titleRow}>
@@ -21,7 +22,7 @@ export const TaskTodo = ({ completed, title, desc, fontSub }) => {
                 </div>
                 {completed ?
                     (<div className={Styles.completedText}>
-                        Completed
+                        {text["Completed"]}
                     </div>)
                     : ""}
             </div>
@@ -45,7 +46,7 @@ export const TaskTodo = ({ completed, title, desc, fontSub }) => {
 
 
 export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestions }) => {
-   
+    const text = useSelector((state) => state?.language)
     const history = useHistory()
     const handleClick=()=>{
 
@@ -73,14 +74,14 @@ export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestion
                             {`${steps}/3`}
                         </div>
                         <div style={{ color: "rgba(246, 247, 249, 0.7)", fontSize: "14px", marginTop: "1em" }}>
-                            Welcome to Javolin
+                            {text["Welcome to Javolin"]}
                         </div>
                         <div style={{ color: "#FFFFFF", fontSize: "20px", fontWeight: "700" }}>
-                            Let's secure your account
+                            {text["Let's secure your account"]}
                         </div>
 
                         <div onClick={handleClick} className={Styles.conButton}>
-                            Continue
+                            {text["Continue"]}
                         </div>
 
                     </div>
@@ -89,10 +90,10 @@ export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestion
                     <div className={Styles.setupRight}>
 
                         <div style={{ marginBottom: "1em" }}>
-                            <TaskTodo title={"Create Account"} completed={true} />
+                            <TaskTodo title={text["Create account"]} completed={true} />
                         </div>
-                        <TaskTodo title={"Secure your Account"} desc="Set your account pin" completed={actions.setPin} />
-                        <TaskTodo title={"Business KYC"} desc="Provide your company details" completed={actions.bus_kyc} />
+                        <TaskTodo title={text["Secure your Account"]} desc={text["Set your account pin"]} completed={actions.setPin} />
+                        <TaskTodo title={text["Business KYC"]} desc={text["Provide your company details"]} completed={actions.bus_kyc} />
 
                     </div>
                 </Col>

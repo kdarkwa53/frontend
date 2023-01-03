@@ -37,7 +37,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
 
     const items = [
    
-        getItem('User Management', '/user', <People width={'1.5em'} height={'1.5em'} />, [
+        getItem(text['User Management'], '/user', <People width={'1.5em'} height={'1.5em'} />, [
             <AccessControl
                 renderNoAccess={""}
                 allowedPermissions={['']}
@@ -89,7 +89,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                             style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}
                             onClick={(e) => handleMenuClick("/user-management")}
                             icon={<ListChecks width={'1.5em'} height={'1.5em'} />}
-                            text={"Users"}
+                            text={text["Users"]}
                         />
             </AccessControl>,
             
@@ -102,7 +102,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 style={current_route === "/role-management" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/role-management")}
                 icon={<UserListsIcon width={'1.5em'} height={'1.5em'} />}
-                text={"Roles"}
+                text={text["Roles"]}
             />,
             id: 2
         }
@@ -144,7 +144,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
                 onClick={(e) => handleMenuClick("/business/requests")}
                 icon={<RocketLaunch className={Styles.menuIcon} width="1.5em" height="1.5em" />}
-                text={"Pending Requests"}
+                text={text["Pending Requests"]}
             />
             </AccessControl>
             
@@ -156,7 +156,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
                 userPermissions={['USER_MANAGEMENT']}
             >
                 <MenuDropdownItem
-                head={{ title: "User Management", icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}
+                head={{ title: text["User Management"], icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}
                 items={menu_items}
             />
             </AccessControl>

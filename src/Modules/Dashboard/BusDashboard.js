@@ -174,7 +174,7 @@ const BusDashboard = () => {
                         </div>
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                    <DashboardTitleRow title={"Your Wallet"} />
+                    <DashboardTitleRow title={text["Your Wallet"]} />
                         <DashboardWalletSection default_wallet={default_wallet} />
                     </Col>
                 </Row>

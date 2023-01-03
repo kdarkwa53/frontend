@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 
 
 const Timer = ({reset})=>{
     const [count, setCounter] = useState(10)
+    const text = useSelector((state) => state?.language)
     
     useEffect(()=>{
        
@@ -19,7 +21,7 @@ const Timer = ({reset})=>{
     }
     
     return(
-        <div role="alert" className="ant-form-item-explain-error" style={{ fontSize: "17px", textAlign: "center"}} >This rate expires in {count} seconds</div>
+        <div role="alert" className="ant-form-item-explain-error" style={{ fontSize: "17px", textAlign: "center"}} >{text["This rate expires in"]} {count} {text["seconds"]}</div>
     )
 }
 
