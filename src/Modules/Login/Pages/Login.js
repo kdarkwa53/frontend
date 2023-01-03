@@ -138,7 +138,7 @@ const Login = () => {
 
           </Form.Item>
           <Form.Item
-            label="Password"
+            label={text["Password"]}
           >
             <Form.Item
               noStyle
