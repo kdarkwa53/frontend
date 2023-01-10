@@ -29,7 +29,7 @@ jobs:
           chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
           echo "${{secrets.ENV_CONFIG}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
           cat ".env"  
-      - name: Generate build
+      - name: Generate the build
         run: CI=false npm run build
   
       - name: Restart Nginx
