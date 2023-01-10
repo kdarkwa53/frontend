@@ -1,11 +1,14 @@
 import { Col, Row, Form, Select, Input, Checkbox, DatePicker, Button } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import moment from 'moment';
 import { PlusIcon } from "../../../Shared/Components/JavIcons"
 import Styles from "../../TransferMoney/TransferMoney.module.css"
 import KYCListCard from "../Components/KYCListCard"
 import { useDispatch, useSelector } from "react-redux";
 import { saveKCYValues } from "../duck/action";
+import { addingUser, getRoles, updateBusUser } from "../../UserManagement/duck/action";
+import AddRolePopUp from "./components/AddRolePopUp";
+import { normalizeIdArrayData } from "../../../helpers/utils";
 
 
 
@@ -20,51 +23,59 @@ import { saveKCYValues } from "../duck/action";
 const UserRoles = ({ form }) => {
     const dispatch = useDispatch()
     const formValues = useSelector((state) => state.kyc.values)
+    const rLoading = useSelector((state) => state?.userMgt?.addingUser)
+    // useEffect(()=>{
+    //     dispatch(getRoles())
+    // }, [dispatch])
+
+    const roles = useSelector((state) => state?.userMgt?.roles)
+    let _roles = roles ? roles : {}
+    const [visible, setVisible] = useState(false)
+    const [disabledSave, setDisableSave] = useState(true)
 
     const UserRoleForms = () => {
         const { Option } = Select
 
+        const handleChangeRole = (e)=>{
+            if(e === "new"){
+                setVisible(true)
+            }
+        }
+
+        const onFormChange = (e)=>{
+            if(e === "new"){
+                setVisible(true)
+            }
+            const fields = form.getFieldValue('user_roles')
+            const fieldVals = Object.values(fields)
+            const disP = fieldVals[0] === undefined || fieldVals[1] === undefined || fieldVals[2]=== undefined || fieldVals[3] === undefined
+            console.log(disP)
+            setDisableSave(disP)
+        }
         const handleFormSubmit = () => {
             let values = form.getFieldValue('user_roles')
-            let user_roles = formValues?.user_roles
-            
-            // change moment date format
-            values = {
-                ...values,
-                date_of_birth: values.date_of_birth._d.toISOString().slice(0, 10).toString()
-            }
-
-            console.log('values: ', values)
+          
             if(values.id !== undefined){
                 // Editing an item
-                let userRoles = user_roles
-                userRoles.splice(values.id, 1, values)
-                console.log("newVal: ", userRoles)
-                dispatch(saveKCYValues({
-                    ...formValues,
-                    user_roles: userRoles
-                }))
+                dispatch(updateBusUser(values, values.id)).then((res)=>{
+                        setShowForm(false)
+                })
             }
             else{
-                // normal save 
-                const new_values = user_roles !== undefined ? user_roles?.concat(values) : [values]
-                dispatch(saveKCYValues({
-                    ...formValues,
-                    user_roles: new_values
-                }))
+                dispatch(addingUser(values)).then((res)=>{
+                    if(res){
+                        setShowForm(false)
+                    }
+                })
             }
-                       
-            setShowForm(false)
-
         }
         return (
             <>
-
                 <div className={Styles.formRow}>
                     <Input hidden name={['user_roles', 'id']}/>
-                    <Row gutter={[32, 16]}>
+                    {/* <Row gutter={[32, 16]}>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="User Type">
+                            <Form.Item label="Select User Role">
                                 <Form.Item
                                     name={['user_roles', 'user_type']}
                                     rules={[
@@ -73,24 +84,56 @@ const UserRoles = ({ form }) => {
                                         },
                                     ]}
                                 >
-                                    <Select size="large">
-                                        <Option value="super admin">Super Admin</Option>
-                                        <Option value="admin">Admin</Option>
-                                        <Option value="user">User</Option>
-                                    </Select>
+                                   
+                                <Select onChange={handleChangeRole}   size="large" >
+                                {
+                                    Object.values(_roles)?.map((role) => {
+                                        return (
+                                            <Option key={role.id}> {role.name}</Option>
+                                        )
+                                    })
+                                }
+                                <Option key="new"> <span style={{color: "#2272F4"}}><PlusIcon width="1em" height="1em" color="#2272F4"/>Add new role</span> </Option>
+                            </Select>
 
                                 </Form.Item>
                             </Form.Item>
                         </Col>
-                    </Row>
+                    </Row> */}
                 </div>
 
                 <div className={Styles.formRow}>
+
                     <Row gutter={[32, 16]}>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <Form.Item label="Select User Role">
+                                <Form.Item
+                                    name={['user_roles', 'role_id']}
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                   
+                                <Select onChange={(e)=>{handleChangeRole(e) ; onFormChange()}}   size="large" >
+                                {
+                                    Object.values(_roles)?.map((role) => {
+                                        return (
+                                            <Option value={role.id} key={role.id}> {role.name}</Option>
+                                        )
+                                    })
+                                }
+                                <Option value={"new"} key="new"> <span style={{color: "#2272F4"}}><PlusIcon width="1em" height="1em" color="#2272F4"/>Add new role</span> </Option>
+                            </Select>
+
+                                </Form.Item>
+                            </Form.Item>
+                        </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
                                 label="Full Legal Name"
-                                name={['user_roles', 'full_legal_name']}
+                                name={['user_roles', 'full_name']}
                                 rules={[
                                     {
                                         required: true,
@@ -98,20 +141,20 @@ const UserRoles = ({ form }) => {
                                 ]}
                             >
 
-                                <Input size="large" />
+                                <Input onChange={onFormChange} size="large" />
                             </Form.Item>
                         </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        {/* <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Occupation/Job Titile" rules={[{ required: true }]} name={['user_roles', 'job_title']}>
                                 <Input size="large" />
                             </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        </Col> */}
+                        {/* <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Date of Birth" rules={[{ required: true }]} name={['user_roles', 'date_of_birth']}>
                                 <DatePicker onChange={(d, ds) => console.log(ds)} size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
                             </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        </Col> */}
+                        {/* <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Physical Address">
                                 <Form.Item
                                     noStyle
@@ -126,15 +169,15 @@ const UserRoles = ({ form }) => {
                                     <Input size="large" />
                                 </Form.Item>
                             </Form.Item>
-                        </Col>
+                        </Col> */}
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Email" rules={[{ required: true }]} name={['user_roles', 'email']}>
-                                <Input type={'email'} size="large" />
+                                <Input onChange={onFormChange} type={'email'} size="large" placeholder="eg. james@javolin.com" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Phone Number" rules={[{ required: true }]} name={['user_roles', 'phone_number']}>
-                                <Input size="large" />
+                                <Input onChange={onFormChange} size="large" placeholder="+233123456789" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -143,23 +186,43 @@ const UserRoles = ({ form }) => {
                 </div>
 
                 <div style={{ width: "100%" }} className={Styles.buttonContainter}>
+                <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
+                        Cancel
+                    </div>
                     <div className={Styles.tnxButton3}>
                         <Button
                             type="primary"
                             block
                             htmlType="submit"
                             size="large"
+                            loading={rLoading}
+                            disabled={disabledSave}
                             onClick={handleFormSubmit}
 
                         >
-                            Save
+                           {form.getFieldValue('user_roles').id ? "Update User" : "Add User"} 
                         </Button>
                     </div>
                 </div>
             </>
         )
     }
-    const data = formValues?.user_roles ? formValues?.user_roles : []
+    const users = useSelector((state) => state?.userMgt?.users)
+    let data = users
+        ? Object.values(users).map((user) => {
+            return {
+                key: user.id,
+                full_name: user.full_name,
+                email: user.email,
+                phone_number: user.phone_number,
+                role_id: user?.is_parent? "1" : user?.role?.role?.id,
+                id: user.id,
+                is_parent: user.is_parent
+                
+            };
+        })
+        : [];
+    const users_data = normalizeIdArrayData(data)
 
     const openNewUserForm = ()=>{
         form.setFieldsValue({
@@ -171,10 +234,10 @@ const UserRoles = ({ form }) => {
     const UserList = ({ onCLickEdit }) => {
         return (
             <>
-                {data.map((item, i) => {
+                {data.map((item) => {
                     return (
-                        <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_legal_name} id={i} />
+                        <Col key={item.id} xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_name} id={item.id} />
                         </Col>
                     )
                 })}
@@ -202,22 +265,18 @@ const UserRoles = ({ form }) => {
 
     // function to show the edit form prepopulated
     const handleEditForm =(item_id)=>{
-        const user_roles = formValues?.user_roles
-
-        // Changes date format to moment
-        const editValues = {
-            ...user_roles[item_id],
-            id: item_id,
-            date_of_birth: moment(user_roles[item_id].date_of_birth, 'YYYY-MM-DD')
-        }
+        const user = users_data[item_id]
+        console.log(user)
         form.setFieldsValue({
-            user_roles: editValues
+            user_roles: user
         })
         setShowForm(true)
     }
 
     return (
         <div className={`${Styles.sectionBox} ${Styles.white}`}>
+            <AddRolePopUp isVisible={visible} setIsModalVisible={setVisible} />
+
             <p>USER ROLES & PERMISSIONS</p>
             <h5 className={Styles.kycnotes}>Business must appoint at least one Authorised user</h5>
             {

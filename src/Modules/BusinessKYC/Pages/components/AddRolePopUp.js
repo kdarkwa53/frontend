@@ -1,15 +1,15 @@
 import { Button, Form, Input, Row, Col, Select, Modal, InputNumber } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect, useState } from "react";
-import { XIcon } from "../../Shared/Components/JavIcons";
-import Styles from "./UserMgt.module.css"
+import { XIcon } from "../../../../Shared/Components/JavIcons";
+import Styles from "../../../UserManagement/UserMgt.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addingRole, addingUser, editingRole } from "./duck/action";
-import RoleItem from "./RoleItem";
-import { getRoles } from "./duck/action";
+import { addingRole, addingUser, editingRole } from "../../../UserManagement/duck/action";
+import RoleItem from "../../../UserManagement/RoleItem";
+import { getRoles } from "../../../UserManagement/duck/action";
 
 
-const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
+const AddRolePopUp = ({ isVisible, setIsModalVisible,editUser})=>{
     const [form] = useForm();
     const dispatch = useDispatch()
     const [selectedPerm, setSelectedPerm] = useState({})
@@ -81,9 +81,7 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
     return(
         <>
            
-            <Button style={{background: "#0032A0", fontSize: "16px"}} onClick={showModal} type="primary" size="large" shape="round" >
-                            {text["Add new role"]}
-                        </Button>
+            
             <Modal
                 open={isVisible}
                 onCancel={handleCancel}
@@ -174,4 +172,4 @@ const AddRole = ({ isVisible, setIsModalVisible,editUser})=>{
     )
 }
 
-export default AddRole
+export default AddRolePopUp

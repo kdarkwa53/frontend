@@ -14,11 +14,11 @@ const ClientInformation = ({ form }) => {
     const [intNum, setIntNum] = useState("")
     const formValues = useSelector((state) => state.kyc.values)
     const handleFormSubmit = () => {
-        const values = form.getFieldValue('client_information')
+        const values = form.getFieldValue('clientInformation')
         console.log(values)
         dispatch(saveKCYValues({
             ...formValues,
-            client_information: {
+            clientInformation: {
                 ...values,
                 street_address: values?.street_address?.label,
                 business_number: intNum
@@ -36,7 +36,7 @@ const ClientInformation = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item
                             label="Client Organization’s Complete Legal name"
-                            name={['client_information', 'client_org_legal_name']}
+                            name={['clientInformation', 'legal_name']}
                             rules={[
                                 {
                                     required: true,
@@ -49,7 +49,7 @@ const ClientInformation = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="DBA / Trade Name">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['client_information', 'trade_name']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['clientInformation', 'trade_name']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
@@ -63,7 +63,7 @@ const ClientInformation = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item
                             label="Address"
-                            name={['client_information', 'street_address']}
+                            name={['clientInformation', 'address']}
                             rules={[
                                 {
                                     required: true,
@@ -71,7 +71,7 @@ const ClientInformation = ({ form }) => {
                             ]}
                         >
 
-                            <GoogleAPIAddressInput  default={formValues?.client_information?.street_address}  />
+                            <GoogleAPIAddressInput  default={formValues?.clientInformation?.street_address}  />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -81,19 +81,19 @@ const ClientInformation = ({ form }) => {
                         ]
                         
                         } 
-                        name={['client_information', 'busines_number']}>
+                        name={['clientInformation', 'business_telephone_number']}>
                             <Input size="large" placeholder="+12345678910"/>
                         </Form.Item>
                     </Col>
 
 
                     {/* <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="City/Town" rules={[{ required: true }]} name={['client_information', 'city']}>
+                        <Form.Item label="City/Town" rules={[{ required: true }]} name={['clientInformation', 'city']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="State/Region" rules={[{ required: true }]} name={['client_information', 'region']}>
+                        <Form.Item label="State/Region" rules={[{ required: true }]} name={['clientInformation', 'region']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col> */}
@@ -102,7 +102,7 @@ const ClientInformation = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                         <Form.Item
                             label="Zip Code"
-                            name={['client_information', 'zip_code']}
+                            name={['clientInformation', 'zip_code']}
                             
                         >
 
@@ -110,17 +110,17 @@ const ClientInformation = ({ form }) => {
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Country" rules={[{ required: true }]} name={['client_information', 'country']}>
+                        <Form.Item label="Country" rules={[{ required: true }]} name={['clientInformation', 'country']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Business Telephone number" rules={[{ required: true }]} name={['client_information', 'busines_number']}>
+                        <Form.Item label="Business Telephone number" rules={[{ required: true }]} name={['clientInformation', 'busines_number']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Email Address" name={['client_information', 'email_address']}>
+                        <Form.Item label="Email Address" name={['clientInformation', 'email_address']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
@@ -132,7 +132,7 @@ const ClientInformation = ({ form }) => {
 
                 <Row gutter={[32, 16]}>
                     <Form.Item
-                        name={['client_information', 'business_identity']}
+                        name={['clientInformation', 'legal_structure']}
                         rules={[
                             {
                                 required: true,
@@ -185,7 +185,7 @@ const ClientInformation = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                         <Form.Item
                             label="Tax ID/ EIN"
-                            name={['client_information', 'tax_id']}
+                            name={['clientInformation', 'tax_id']}
                             rules={[
                                 {
                                     required: true,
@@ -197,12 +197,12 @@ const ClientInformation = ({ form }) => {
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Client Primary Activities" rules={[{ required: true }]} name={['client_information', 'client_primary']}>
+                        <Form.Item label="Client Primary Activities" rules={[{ required: true }]} name={['clientInformation', 'primary_activities']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Website link" name={['client_information', 'website_link']}>
+                        <Form.Item label="Website link" name={['clientInformation', 'website_link']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
@@ -211,7 +211,7 @@ const ClientInformation = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                         <Form.Item
                             label="Country of Formation"
-                            name={['client_information', 'country_formation']}
+                            name={['clientInformation', 'formation_country']}
                             rules={[
                                 {
                                     required: true,
@@ -224,17 +224,17 @@ const ClientInformation = ({ form }) => {
                     </Col>
 
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="State/Region Of Formation" rules={[{ required: true }]} name={['client_information', 'state_of_formation']}>
+                        <Form.Item label="State/Region Of Formation" rules={[{ required: true }]} name={['clientInformation', 'formation_state']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Business Incorporation number" rules={[{ required: true }]} name={['client_information', 'business_incorporation_no']}>
+                        <Form.Item label="Business Incorporation number" rules={[{ required: true }]} name={['clientInformation', 'incorporation_number']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col>
                     {/* <Col xs={24} sm={24} md={12} lg={8} xl={8}>
-                        <Form.Item label="Type of Business" rules={[{ required: true }]} name={['client_information', 'business_type']}>
+                        <Form.Item label="Type of Business" rules={[{ required: true }]} name={['clientInformation', 'business_type']}>
                             <Input size="large" />
                         </Form.Item>
                     </Col> */}

@@ -6,6 +6,7 @@ import { useState } from "react"
 const RoleItem = ({perm, allPerm, selectedPerm, setSelectedPerm})=>{
     const [select, setSelect] = useState(allPerm? allPerm.includes(perm.id): null)
     const handleClick = (e)=>{
+        console.log(e)
         if(e in selectedPerm){
             var perms = selectedPerm
             delete perms[e]

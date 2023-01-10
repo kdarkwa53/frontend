@@ -69,7 +69,6 @@ export const login = (details, history, accountType) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
 
-    console.log('accountType: ', accountType)
     try {
       const { data } = await axios.post(
         `${REACT_APP_BUSINESS_SERVICE_API_URL}/login`,

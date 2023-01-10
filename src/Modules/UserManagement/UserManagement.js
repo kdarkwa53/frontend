@@ -64,32 +64,34 @@ const UserManagement = () => {
             title: text["Action"],
             key: "action",
             render: (id) => {
-                return (
-                    <div key={id}>
-                        <AccessControl
-                            userPermissions={['EDIT_USER']}
-                            allowedPermissions={['EDIT_USER']}
-                            renderNoAccess={''}
-                        >
-                            <Tag  onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
-                            <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
-                            {text["edit"]}
-                        </Tag>
-                        </AccessControl>
-
-                        <AccessControl
-                            userPermissions={['DELETE_USER']}
-                            allowedPermissions={['DELETE_USER']}
-                            renderNoAccess={''}
-                        >
-                            <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
-                            <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
-                            {text["delete"]}
-                        </Tag>
-                        </AccessControl>
-                        
-                    </div>
-                );
+                if(!id.is_parent){
+                    return (
+                        <div key={id}>
+                            <AccessControl
+                                userPermissions={['EDIT_USER']}
+                                allowedPermissions={['EDIT_USER']}
+                                renderNoAccess={''}
+                            >
+                                <Tag  onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
+                                <Edit height="1.2em" width="1.2em" color='#FFFFFF' />
+                                {text["edit"]}
+                            </Tag>
+                            </AccessControl>
+    
+                            <AccessControl
+                                userPermissions={['DELETE_USER']}
+                                allowedPermissions={['DELETE_USER']}
+                                renderNoAccess={''}
+                            >
+                                <Tag style={{ color: '#FFFFFF', padding: "5px 10px" , borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#DD4918" >
+                                <Trash height={'1.2em'} width={'1.2em'} color='#FFFFFF' />
+                                {text["delete"]}
+                            </Tag>
+                            </AccessControl>
+                            
+                        </div>
+                    );
+                }
             },
         },
     ];
@@ -101,7 +103,9 @@ const UserManagement = () => {
                 full_name: user.full_name,
                 email: user.email,
                 phone: user.phone_number,
-                id: user.id
+                role: user?.is_parent? "Super Admin" : user?.role?.role?.name,
+                id: user.id,
+                is_parent: user.is_parent
                 
             };
         })

@@ -12,7 +12,7 @@ middlewares.push(logger);
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["acceptMortgage", "savings", "login", "profile",]
+  blacklist: ["acceptMortgage", "savings", "login", "profile"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -113,6 +113,43 @@ export const addingRole = (details) => {
   };
 }
 
+export const editingRole = (details, role_id) => {
+    const userType = getUserType()
+  
+    return async (dispatch) => {
+        dispatch({
+            type: ADDING_ROLE_REQUEST,
+        });
+        try {
+            const { data } = await axios.put(
+                `${REACT_APP_BASE_API_URL}/${userType}/roles/${role_id}`,
+                details,
+                authHeader
+            );
+  
+            dispatch({
+                type: ADDING_ROLE_SUCCESS,
+                // data : normalizeOneIdData(data)
+            });
+  
+            dispatch(showSuccessNotification('Role added successfully'))
+        } catch (error) {
+            dispatch({
+                type: ADDING_ROLE_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Check your internet and try again")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+            }
+        }
+    };
+  }
+
 export const getRoles = () => {
   const userType = getUserType()
 
@@ -182,12 +219,19 @@ export const getUsers = () => {
 }
 
 export const updateBusUser = (details, id)=>{
+    const userType = getUserType()
     return async (dispatch) => {
         dispatch({
             type: ADDING_USER_REQUEST,
         });
 
         try {
+            const { data } = await axios.put(
+                `${REACT_APP_BASE_API_URL}/${userType}/accounts/${id}`,
+                details,
+                authHeader
+            );
+  
             dispatch({
                 type: EDIT_USER_SUCCESS,
                 data : details,
@@ -195,7 +239,10 @@ export const updateBusUser = (details, id)=>{
             });
             dispatch(showSuccessNotification('Updated successfully'))
         } catch (error) {
-            dispatch(showErrorNotification('Error occured'))
+            dispatch({
+                type: ADDING_USER_ERROR,
+            });
+            dispatch(showErrorNotification(error?.response?.data?.message))
         }
     }
 
@@ -220,7 +267,6 @@ export const addingUser = (details) => {
               type: ADDING_USER_SUCCESS,
               data : normalizeOneIdData(data)
           });
-          console.log('Data: ', data)
           dispatch(showSuccessNotification('User added successfully'))
           return data
           

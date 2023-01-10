@@ -15,6 +15,13 @@
 
 }
 
+.withCancel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .placeholder::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: black;
   opacity: 1; /* Firefox */
@@ -67,7 +74,15 @@
 .buttonContainter {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
+}
+
+.cancelBtn{
+    margin-right: 1em;
+    color:crimson;
+    cursor: pointer;
+    display: flex;
+    justify-content: center
 }
 
 .card {

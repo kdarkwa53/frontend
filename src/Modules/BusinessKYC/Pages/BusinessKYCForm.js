@@ -104,7 +104,6 @@ const BusinessKYCForm = (props) => {
     ];
 
     const onChange = (value) => {
-        console.log('onChange:', current);
         setCurrent(value);
     };
     return (

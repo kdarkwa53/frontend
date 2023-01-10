@@ -1,8 +1,8 @@
 import { Row, Tag, Table, Col } from 'antd';
 import "./Dashboard.module.css"
 import Styles from "./Dashboard.module.css"
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { sortListByDate, isEmpty, statusTagColor } from "../../helpers/utils"
 import WelcomeCard from '../../Shared/Components/WelcomeCard/WelcomeCard';
 import JavProductCard from '../../Shared/Components/Products/JavProductCard';
@@ -17,6 +17,8 @@ import SpotRateCalculator from '../../Shared/Components/Layouts/Components/Spote
 import DashboardWalletSection from '../../Shared/Components/DashboardWalletSection/DashboardWalletSection';
 import {InitialSetup} from '../../Shared/Components/InitialSetup/InitialSetup';
 import AccessControl from '../../Shared/Components/AccessControl/AccessControl';
+import { getWallets } from '../../Shared/Components/duck/action';
+import { getTransactions } from '../Savings/duck/action';
 
 const BusDashboard = () => {
     const text = useSelector((state) => state?.language)
@@ -35,12 +37,16 @@ const BusDashboard = () => {
         bus_kyc: business_kyc ? true : false
     })
     const [showSC, setSC] = useState(false)
+    const dispatch = useDispatch()
 
     const appData = useSelector((state) => state?.savings);
 
     const default_wallet = userDetails?.default_savings_wallet
 
-
+    useEffect(()=>{
+        dispatch(getTransactions())
+        dispatch(getWallets())
+    }, [dispatch])
 
     const columns = [
         {

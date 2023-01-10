@@ -51,7 +51,7 @@ const Login = () => {
       type: SET_USER_TYPE,
       data: 'business'
     });
-    values = { ...values, ...{ "phone_number": formatNumber(intNum) } }
+    // values = { ...values, ...{ "phone_number": formatNumber(intNum) } }
     dispatch(login(values, history, 'business'));
   };
 
@@ -91,49 +91,26 @@ const Login = () => {
             </Radio.Group>
           </div> */}
           <Form.Item
-            label={text["Phone number"]} 
+            label={text["Email"]} 
           >
             <Form.Item
               noStyle
-              name="phone_number"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: `${text["Phone number"]} ${text["is required"]}`
+                  message: `${text["Email"]} ${text["is required"]}`,
+                  type: "email"
                 },
-                () => ({
-                  validator(_, value) {
-                    if (
-                      !value || phoneValid
-                    ) {
-                      return Promise.resolve();
-                    }
-
-                    return Promise.reject(
-                      new Error(
-                        text["Phone number is invalid"]
-                      )
-                    );
-                  },
-                }),
+                {
+                  // pattern: /^^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|rocketmail\.com$|live\.com$)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                  message: "Your email be be a business domain email eg. jamesjones@javolin.com"
+                }
+                
               ]}
             >
-              <div className="intInputClass">
-                <IntlTelInput
-                  containerClassName="intl-tel-input"
-                  inputClassName="form-control"
-                  // nationalMode="true"
-                  separateDialCode={true}
-                  preferredCountries={['gh', 'us', 'ng', 'sn', 'gb']}
-                  defaultCountry={defaultCountry.toLocaleLowerCase() ?? null}
-                  formatOnInit={true}
-                  onPhoneNumberChange={(isval, val, cdata, fnum) => {
-                    setIntNum(fnum)
-                    setPhoneValid(isval)
-                  }}
-                />
-              </div>
-              {/* <IntInputPhoneNumber value={form.getFieldValue("phone_number")} setNum={setIntNum} /> */}
+              
+              <Input size="large" placeholder="Eg. jamesjones@javolin.com" />
             </Form.Item>
 
           </Form.Item>

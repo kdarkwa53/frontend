@@ -62,7 +62,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                 {text["Add new user"]}
             </Button>
             <Modal
-                visible={isVisible}
+                open={isVisible}
                 onCancel={handleCancel}
                 footer={false}
                 width={"740px"}
@@ -141,7 +141,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             ]}
                             style={{ width: "100%" }}
                         >
-                            <Select style={{ width: "100%" }} placeholder={text['Select role']} size="large" name="country" >
+                            <Select style={{ width: "100%" }} placeholder={text['Select role']} size="large" >
                                 {
                                     Object.values(_roles)?.map((role) => {
                                         return (

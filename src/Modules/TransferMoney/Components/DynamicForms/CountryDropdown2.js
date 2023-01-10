@@ -7,7 +7,7 @@ import { unCamelCase } from "../../../../helpers/utils"
 import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
 
 
-const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
+const CountryDropdown2 = ({ val, setCountry, ...rest }) => {
     const { Option } = Select
     let rules = []
     rules.push({
@@ -49,9 +49,9 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
     return (
         <Form.Item
             {...rest}
-            name={val.id}
+            name={['bakingAndSettlement', 'bank_country']}
             rules={rules}
-            label={Array.isArray(val?.id) ? unCamelCase(val?.id[1]) : unCamelCase(val?.id)}
+            label={"Country"}
         >
             <Select
                 {...rest}
@@ -80,4 +80,4 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
     )
 }
 
-export default CountryAPIDropdown
+export default CountryDropdown2

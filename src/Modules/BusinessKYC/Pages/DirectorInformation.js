@@ -24,13 +24,13 @@ const DirectorInformation = ({ form }) => {
         return (
             <>
             <div className={Styles.formRow}>
-                    <Input hidden name={['directors', 'id']} />
+                    <Input hidden name={['directorAndAppointedOfficers', 'id']} />
                     <h5>Director/Appointee  Details</h5>
                     <Row gutter={[32, 16]}>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
                                 label="Full Legal Name"
-                                name={['directors', 'full_legal_name']}
+                                name={['directorAndAppointedOfficers', 'full_name']}
                                 rules={[
                                     {
                                         required: true,
@@ -42,7 +42,7 @@ const DirectorInformation = ({ form }) => {
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Occupation/Job Titile" rules={[{ required: true }]} name={['directors', 'job_title']}>
+                            <Form.Item label="Occupation/Job Titile" rules={[{ required: true }]} name={['directorAndAppointedOfficers', 'job_title']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
@@ -69,11 +69,11 @@ const DirectorInformation = ({ form }) => {
         )
     }
 
-    const data = formValues?.directors ? formValues?.directors : []
+    const data = formValues?.directorAndAppointedOfficers ? formValues?.directorAndAppointedOfficers : []
 
     const openNewUserForm = () => {
         form.setFieldsValue({
-            directors: ""
+            directorAndAppointedOfficers: ""
         })
         setShowForm(true)
     }
@@ -84,7 +84,7 @@ const DirectorInformation = ({ form }) => {
                 {data.map((item, i) => {
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_legal_name} id={i} />
+                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_name} id={i} />
                         </Col>
                     )
                 })}
@@ -109,8 +109,8 @@ const DirectorInformation = ({ form }) => {
 
 
     const handleFormSubmit = () => {
-        let values = form.getFieldValue('directors')
-        let directors = formValues?.directors
+        let values = form.getFieldValue('directorAndAppointedOfficers')
+        let directors = formValues?.directorAndAppointedOfficers
 
         console.log('hva: ', values)
         if (values.id !== undefined) {
@@ -119,7 +119,7 @@ const DirectorInformation = ({ form }) => {
             _directors.splice(values.id, 1, values)
             dispatch(saveKCYValues({
                 ...formValues,
-                directors: _directors
+                directorAndAppointedOfficers: _directors
             }))
         }
         else {
@@ -127,7 +127,7 @@ const DirectorInformation = ({ form }) => {
             const new_values = directors !== undefined ? directors?.concat(values) : [values]
             dispatch(saveKCYValues({
                 ...formValues,
-                directors: new_values
+                directorAndAppointedOfficers: new_values
             }))
         }
 
@@ -142,7 +142,7 @@ const DirectorInformation = ({ form }) => {
 
     // function to show the edit form prepopulated
     const handleEditForm = (item_id) => {
-        const directors = formValues?.directors
+        const directors = formValues?.directorAndAppointedOfficers
 
         // Changes date format to moment
         const editValues = {
@@ -150,7 +150,7 @@ const DirectorInformation = ({ form }) => {
             id: item_id
         }
         form.setFieldsValue({
-            directors: editValues
+            directorAndAppointedOfficers: editValues
         })
         setShowForm(true)
     }

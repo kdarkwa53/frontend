@@ -21,35 +21,33 @@ import { saveKCYValues } from "../duck/action"
 const Ownership = ({ form }) => {
 
     const formValues = useSelector((state) => state.kyc.values)
-    const owners = formValues?.ownership_information?.owner_details ? formValues?.ownership_information?.owner_details : []
-    const formState = owners.length === 0
+    const owners_ = formValues?.ownership?.owners ? formValues?.ownership?.owners : []
+    const formState = owners_.length === 0
     const [showForm, setShowForm] = useState(formState)
     console.log('values form:',formValues)
-    const [hasOver25Ownership, setHasOver25Ownership] = useState(formValues?.ownership_information?.ownershipPercentage)
+    const [hasOver25Ownership, setHasOver25Ownership] = useState(formValues?.ownership?.has_owner)
    
-    let ownership_information = formValues?.ownership_information
-    let owner_details = ownership_information?.owner_details
+    let ownership = formValues?.ownership
+    let owner_details = ownership?.owners
 
     const OwnerDetailsForm = () => {
         const dispatch = useDispatch()
 
         const handleFormSubmit = () => {
             
-            let values = form.getFieldValue('ownership_information')
+            let values = form.getFieldValue('ownership')
         
-            console.log('values: ', values)
             if (values.owner_details.id !== undefined) {
                 // Editing an item
                 let ownerDetails = owner_details
                 ownerDetails.splice(values.owner_details.id, 1, values.owner_details)
                 dispatch(saveKCYValues({
                     ...formValues,
-                    ownership_information: {
+                    ownership: {
                         ...values,
-                        owner_details: ownerDetails
+                        owners: ownerDetails
                     }
                 }))
-                console.log(formValues.ownership_information)
             }
             else {
                 // normal save 
@@ -57,12 +55,12 @@ const Ownership = ({ form }) => {
                 
                 dispatch(saveKCYValues({
                     ...formValues,
-                    ownership_information: {
+                    ownership: {
                         ...values,
-                        owner_details: new_values
+                        owners: new_values
                     }
                 }))
-                console.log(formValues.ownership_information)
+                console.log(formValues.ownership)
             }
 
             setShowForm(false)
@@ -72,12 +70,12 @@ const Ownership = ({ form }) => {
         return (
             <div className={Styles.formRow}>
                 <h5>Owner Details</h5>
-                <Input hidden name={['ownership_information', 'owner_details', 'id']} />
+                <Input hidden name={['ownership', 'owner_details', 'id']} />
                 <Row gutter={[32, 16]}>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Full Legal Name">
                             <Form.Item
-                                name={['ownership_information', 'owner_details', 'full_legal_name']}
+                                name={['ownership', 'owner_details', 'full_legal_name']}
                                 rules={[
                                     {
                                         required: true,
@@ -91,7 +89,7 @@ const Ownership = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Nationality/Citizenship">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership_information', 'owner_details', 'nationality']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owner_details', 'nationality']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
@@ -101,7 +99,7 @@ const Ownership = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Ownership Percentage (%)">
                             <Form.Item
-                                name={['ownership_information', 'owner_details', 'ownership_percentage']}
+                                name={['ownership', 'owner_details', 'ownership_percentage']}
                                 rules={[
                                     {
                                         required: true,
@@ -115,7 +113,7 @@ const Ownership = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Complete Residential Address">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership_information', 'owner_details', 'residential_address']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owner_details', 'residential_address']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
@@ -140,8 +138,8 @@ const Ownership = ({ form }) => {
     }
     const openNewUserForm = () => {
         form.setFieldsValue({
-            ownership_information: {
-                ...ownership_information,
+            ownership: {
+                ...ownership,
                 owner_details: ""
             }
         })
@@ -152,7 +150,7 @@ const Ownership = ({ form }) => {
         return (
             <>
                 <h5>List of Owners</h5>
-                {owners?.map((item, i) => {
+                {owners_?.map((item, i) => {
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
                             <KYCListCard onCLickEdit={onCLickEdit} name={item.full_legal_name} id={i} />
@@ -188,7 +186,7 @@ const Ownership = ({ form }) => {
                         <Col xs={24} sm={24} md={32} lg={16} xl={16}>
                             <Form.Item
                                 label="Owned by a publicly traded entity?"
-                                name={['ownership_information', 'isPublicCompany']}
+                                name={['ownership', 'isPublicCompany']}
                                 rules={[
                                     {
                                         required: true,
@@ -211,7 +209,7 @@ const Ownership = ({ form }) => {
                             <Form.Item
                             
                                 label="Symbol"
-                                name={['ownership_information', 'symbol']}
+                                name={['ownership', 'symbol']}
                                 
                             >
 
@@ -224,7 +222,7 @@ const Ownership = ({ form }) => {
                         <Col xs={24} sm={24} md={32} lg={32} xl={32}>
                             <Form.Item
                                 label="Does any individual own 25% or more?"
-                                name={['ownership_information', 'ownershipPercentage']}
+                                name={['ownership', 'has_owner']}
                                 rules={[
                                     {
                                         required: true,
@@ -234,10 +232,10 @@ const Ownership = ({ form }) => {
                                 <Radio.Group onChange={handleOwnershipPercentage} style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col style={{ width: "100%" }} span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="yes">Yes</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="true">Yes</Radio>
                                         </Col>
                                         <Col span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="no">No</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="false">No</Radio>
                                         </Col>
                                     </Row>
                                 </Radio.Group>
@@ -261,13 +259,13 @@ const Ownership = ({ form }) => {
         }
 
         console.log('editing: ',{
-            ...ownership_information,
+            ...ownership,
             owner_details: editValues
         })
         form.setFieldsValue({
-            ownership_information: {
-                ...ownership_information,
-                owner_details: editValues
+            ownership: {
+                ...ownership,
+                owners: editValues
             }
              
         })
@@ -296,7 +294,7 @@ const Ownership = ({ form }) => {
             Each individual who directly owns or controls 25% or more of the Client. Supporting documentation demonstrating beneficial ownership may be requested.</h5>
             <OwnershipForms />
 
-            {hasOver25Ownership === 'yes' ? (
+            {hasOver25Ownership === 'true' ? (
                 <ShowOwershipListDetails />
             ): ""}
 
