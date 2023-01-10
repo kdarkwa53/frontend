@@ -116,7 +116,7 @@ const BankSettlement = ({ form }) => {
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Currency of account" rules={[{ required: true }]} name={['bankSettlement', 'currency_of_account']}>
+                            <Form.Item label="Currency of account" rules={[{ required: true }]} name={['bankSettlement', 'account_currency']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
