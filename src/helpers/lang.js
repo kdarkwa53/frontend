@@ -240,7 +240,7 @@ export const lang = {
        "Terms of Service": "Terms of Service",
        "and": "and",
        "Confirm Password": "Confirm Password",
-       "Sign up":"s'inscrire",
+       "Sign up":"Sign up",
        "Password": "Password",
        "Loans": "Loans",
        "Business Account Application": "Business Account Application",
