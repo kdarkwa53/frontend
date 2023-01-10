@@ -61,7 +61,7 @@ jobs:
           cache: 'npm'
       - name: Decode Staging environment variables
         if: ${{ github.event_name == 'push' && github.event.ref == 'refs/heads/staging' }}
-        run: echo "Push to Staging branch detected. Decoding Staging environment variables..."
+        run: echo "Push to Staging branch detected Decoding Staging environment variables..."
       - name: Assign rights
         run: chmod -R a+rwx /var/www/forex_staging/actions-runner/_work/new-forex-app/new-forex-app/node_modules
       - name: Install dependencies
