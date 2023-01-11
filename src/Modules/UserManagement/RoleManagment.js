@@ -14,6 +14,7 @@ import Styles from "./UserMgt.module.css"
 
 const RoleManagement = () => {
     const text = useSelector((state) => state?.language)
+    const allPerm = useSelector((state)=> state.userMgt.permissions)
     const { Content } = Layout;
 
     const [isVisible, setIsModalVisible] = useState(false)
@@ -75,7 +76,7 @@ const RoleManagement = () => {
                 return (
                     <div key={id}>
                         <AccessControl
-                            allowedPermissions={['EDIT_ROLE']}
+                            allowedPermissions={['EDIT_ROLE']} 
                             renderNoAccess={''}
                         >
                             <Tag onClick={()=>handleEdit(id)} style={{ color: '#FFFFFF', padding: "5px 10px", borderRadius: "20px", fontSize: "16px", cursor:"pointer"}} color="#2272F4" >
@@ -127,7 +128,12 @@ const RoleManagement = () => {
                     <div className={Styles.title}>
                         {text['Role List']}
                     </div>
-                    <AddRole editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible} />
+                    <AccessControl
+                            allowedPermissions={['CREATE_BUSINESS_ROLE']} 
+                            renderNoAccess={''}
+                        >
+                        <AddRole editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible} />
+                    </AccessControl>
                 </div>
                 <Row style={{marginTop: "2em"}}>
 

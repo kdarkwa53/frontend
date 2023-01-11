@@ -58,9 +58,7 @@ export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestion
         return showSecurityQuestions(true)
     }else if(actions.bus_kyc===false){
         return history.push("/business/compliance")
-    }else console.log("here")
-    
-
+    }
     }
     
 

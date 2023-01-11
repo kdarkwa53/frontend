@@ -255,7 +255,7 @@ export const lang = {
        "hence the beneficiary account you select or add should be a": "hence the beneficiary account you select or add should be a",
        "You are seeking to sell":"You are seeking to sell",
        "hence the your source account should be a": "hence the your source account should be a",
-       "Select bank account with buying currency": "Sélectionnez le compte bancaire avec la devise d’achat",
+       "Select bank account with buying currency": "Select bank account with buying currency",
        "Beneficiary Details": "Beneficiary Details",
        "Beneficiary":"Beneficiary",
        "currency": "currency",
@@ -277,7 +277,8 @@ export const lang = {
        "Send From": "Send From",
        "We have sent a 6-digit code to your phone and email": "We have sent a 6-digit code to your phone and email",
        "Save": "Save",
-       "Submit": "Submit"
+       "Submit": "Submit",
+       "account": "account"
 
        
 
@@ -286,6 +287,7 @@ export const lang = {
 
     },
     FR: {
+        "account": "compte",
         "We have sent a 6-digit code to your phone and email": "Nous avons envoyé un code à six chiffres à votre téléphone et à votre courriel",
         "Send From": "Envoyer Depuis",
         "Source": "Source",

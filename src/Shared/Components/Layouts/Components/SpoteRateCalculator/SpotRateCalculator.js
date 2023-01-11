@@ -7,6 +7,7 @@ import { useHistory } from "react-router"
 import { currencyFormat } from "../../../../../helpers/utils"
 import { getSpotRate } from "../../../../../Modules/TransferMoney/duck/action"
 import { showErrorNotification } from "../../../../actions/alert.actions"
+import AccessControl from "../../../AccessControl/AccessControl"
 import Styles from "../../../Menu/Menu.module.css"
 import { Timer } from "../../../Timer"
 import BookDealPopUp from "./BookDealPopUp"
@@ -153,6 +154,10 @@ const SpotRateCalculator = () => {
                         </Col>
                     </Row>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 24 }}>
+                    {/* <AccessControl
+                            allowedPermissions={['CHECK_SPOT_RATE']}
+                            renderNoAccess={''}
+                        > */}
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Button
                             block
@@ -166,6 +171,11 @@ const SpotRateCalculator = () => {
                                 {text["check rate"]}
                             </Button>
                         </Col>
+                        {/* </AccessControl> */}
+                        {/* <AccessControl
+                            allowedPermissions={['BOOK_RATE']}
+                            renderNoAccess={''}
+                        > */}
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <BookDealPopUp
                             reset={reset}
@@ -174,6 +184,7 @@ const SpotRateCalculator = () => {
                             />
 
                         </Col>
+                        {/* </AccessControl> */}
                         
                     </Row>
                     <div className={Styles.base}>

@@ -4,6 +4,7 @@ import Styles from "./DashboardWalletSection.module.css"
 import {
     PlusCircleOutlined
 } from '@ant-design/icons';
+import AccessControl from "../AccessControl/AccessControl";
 
 const DashboardWalletSection = ({ default_wallet }) => {
 
@@ -30,10 +31,14 @@ const DashboardWalletSection = ({ default_wallet }) => {
                 />
             </div>
 
-            <div className={Styles.new_wallet}>
+            <AccessControl
+                allowedPermissions={['ADD_WALLET']}
+                renderNoAccess={''}
+                >
+           <div className={Styles.new_wallet}>
                 <NewWallet/>
-
             </div>
+            </AccessControl>
         </div>
     )
 

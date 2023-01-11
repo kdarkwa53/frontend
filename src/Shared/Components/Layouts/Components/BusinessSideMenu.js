@@ -68,7 +68,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
             menu: 
             <AccessControl
                 renderNoAccess={""}
-                allowedPermissions={['VIEW_DASHBOARD']}
+                allowedPermissions={['VIEW_BUSINESS_USERS']}
             >
             <SideMenuItem
                             style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}
@@ -83,12 +83,18 @@ const BusinessSideMenu = ({ menuRoute}) => {
               
         },
         {
-            menu: <SideMenuItem
-                style={current_route === "/role-management" ? activeMenuItem : defaultMenuItem}
-                onClick={(e) => handleMenuClick("/role-management")}
-                icon={<UserListsIcon width={'1.5em'} height={'1.5em'} />}
-                text={text["Roles"]}
-            />,
+            menu:
+            <AccessControl
+                renderNoAccess={""}
+                allowedPermissions={['VIEW_BUSINESS_ROLES']}
+            >
+                <SideMenuItem
+                    style={current_route === "/role-management" ? activeMenuItem : defaultMenuItem}
+                    onClick={(e) => handleMenuClick("/role-management")}
+                    icon={<UserListsIcon width={'1.5em'} height={'1.5em'} />}
+                    text={text["Roles"]}
+                />
+            </AccessControl>,
             id: 2
         }
     ]
@@ -109,8 +115,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
             
             <AccessControl
                 renderNoAccess={""}
-                allowedPermissions={['VIEW_WALLET']}
-                userPermissions={['VIEW_WALLET']}
+                allowedPermissions={['WALLET_MODULE']}
             >
             <SideMenuItem
                 style={current_route === "/business/wallet" ? activeMenuItem : defaultMenuItem}
@@ -123,7 +128,6 @@ const BusinessSideMenu = ({ menuRoute}) => {
             <AccessControl
                 renderNoAccess={""}
                 allowedPermissions={['VIEW_PENDING_TRANSACTIONS']}
-                userPermissions={['VIEW_PENDING_TRANSACTIONS']}
             >
             <SideMenuItem
                 style={current_route === "/business/requests" ? activeMenuItem : defaultMenuItem}
@@ -138,7 +142,6 @@ const BusinessSideMenu = ({ menuRoute}) => {
             <AccessControl
                 renderNoAccess={""}
                 allowedPermissions={['USER_MANAGEMENT']}
-                userPermissions={['USER_MANAGEMENT']}
             >
                 <MenuDropdownItem
                 head={{ title: text["User Management"], icon: <UsersIcon width={'1.5em'} height={'1.5em'} /> }}

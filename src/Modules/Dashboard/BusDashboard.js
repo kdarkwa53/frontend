@@ -119,7 +119,7 @@ const BusDashboard = () => {
     return (
 
         <>
-            <div>
+            <div style={{maxWidth: "100%"}}>
                 <Row gutter={[32, 16]} >
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                         <WelcomeCard
@@ -130,18 +130,20 @@ const BusDashboard = () => {
                         showSecurityQuestions={setSC}
                         />
                     </Col>
-                    <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                        <SpotRateCalculator />
-                    </Col>
+                    {/* <AccessControl
+                            allowedPermissions={['CHECK_SPOT_RATE']}
+                            renderNoAccess={''}
+                        > */}
+                        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                            <SpotRateCalculator />
+                        </Col>
+                    {/* </AccessControl> */}
 
                 </Row>
                 <SetSecurityQuestions isVisible={showSC} setIsModalVisible={setSC} />
                 
-
                 
-                
-                <Row style={{marginTop: "2em"}} gutter={[32, 16]} >
-                
+                <Row  style={{marginTop: "2em" }} gutter={[32, 16]} >
                     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                     <DashboardTitleRow title={"Javolin Services"} />
                         <div className={Styles.products}>
@@ -169,7 +171,7 @@ const BusDashboard = () => {
                         <AccessControl
                             allowedPermissions={['FUND_WALLET']}
                             renderNoAccess={''}
-                        >
+                        > 
                          <JavProductCard link="/business/fund-wallet" subTitle={text.FUND_MY_WALLET} icon={<Cash width="5em" height="5em" color="#ffffff" />} color="#EE735D" />
 
                         </AccessControl>
@@ -216,12 +218,16 @@ const BusDashboard = () => {
                     </div>
                     <CurrencyConverter />
                 </div>
-                <DashboardTitleRow link={"/business/transactions"} action={text.VIEW_ALL} title={text.RECENT_TRANSACTION} />
-            </div>
+           
 
             <Pin isPinSetVisible={isPinSetVisible} setIsPinSetVisible={setIsPinSetVisible} showSecurityQuestions={setSC} />
             {/* <ReviewPopUp  details={"details"}  showReview={true} /> */}
 
+            <AccessControl
+                            allowedPermissions={['VIEW_RECENT_TRANSACTIONS']}
+                            renderNoAccess={''}
+            >
+            <DashboardTitleRow link={"/business/transactions"} action={text.VIEW_ALL} title={text.RECENT_TRANSACTION} />
 
             <Row >
                 <Table
@@ -232,7 +238,8 @@ const BusDashboard = () => {
                     scroll={{ y: 400, }}
                 />
             </Row>
-
+            </AccessControl>
+            </div>
 
         </>
     )

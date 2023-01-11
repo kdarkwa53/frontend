@@ -78,7 +78,6 @@ const UserManagement = () => {
                             </AccessControl>
     
                             <AccessControl
-                                userPermissions={['DELETE_USER']}
                                 allowedPermissions={['DELETE_USER']}
                                 renderNoAccess={''}
                             >
@@ -125,7 +124,12 @@ const UserManagement = () => {
                         <div className={Styles.title}>
                             {text["User List"]}
                         </div>
+                        <AccessControl
+                                allowedPermissions={["CREATE_BUSINESS_USER"]}
+                                renderNoAccess={''}
+                            >
                         <AddUser editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible}/>
+                        </AccessControl>
                     </div>
                 <Row style={{marginTop: "2em"}}>
                             <ConfigProvider renderEmpty={customizeRenderEmpty}>

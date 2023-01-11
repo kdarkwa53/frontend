@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Layout, Col, Input, InputNumber, Select, Form, Button, Row, Alert, } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Styles from "./TransferMoney.module.css"
@@ -79,7 +80,6 @@ const InstructForex = (props) => {
         // }
 
 
-        console.log("source",sourceWallet)
         values = {
             ...values,
             ...defaultValues
@@ -154,11 +154,13 @@ const InstructForex = (props) => {
         setCheckDisabled(disabled)
     }
 
+    console.log("getBeneValue: ", form.getFieldValue("beneficiary_account"))
 
     const handleChangeBene = (e) => {
         if (e === "new") {
-            // history.push("/business/pre-rules")
+            form.setFieldsValue({"beneficiary_account":""})
             setVisible(true)
+            
         }
         else {
             set_beneDetails(beneficiaries[e])
@@ -231,7 +233,7 @@ const InstructForex = (props) => {
                                     }}
                                 >
                                     <Alert
-                                        message={`${text["You are seeking to buy"]} ${state?.rate?.recipient.currency} ${text["hence the beneficiary account you select or add should be a"]} ${state?.rate?.recipient.currency} ${text["account"]}` }
+                                        message={`${text["You are seeking to buy"]} ${state?.rate?.recipient.currency} ${text["hence the beneficiary account you select or add should be a"]} ${state?.rate?.recipient?.currency} ${text["account"]}` }
                                         type="warning"
                                         closable
                                         style={{fontSize: "15px", margin:"1em 0"}}
@@ -267,11 +269,11 @@ const InstructForex = (props) => {
                                                         placeholder={`${text["Select bank account with buying currency"]} (${state?.rate?.recipient.currency})`}
                                                         >
                                                        
-                                                        <Option  value='new'  > <PlusCircleOutlined /> {text['Add New Beneficiary']}</Option>
+                                                        <Option  value='new'   > <PlusCircleOutlined /> {text['Add New Beneficiary']}</Option>
                                                         {Object.values(beneficiaries)?.map((bene) => {
-                                                            if (bene?.currency === state?.rate?.recipient.currency){
+                                                            // if (bene?.currency === state?.rate?.recipient.currency){
                                                                 return (
-                                                                    <Option value={bene?.id} key={bene?.id}>
+                                                                    <Option disabled={bene?.currency !== state?.rate?.recipient.currency}  value={bene?.id} key={bene?.id}>
                                                                         <div className={`cardTile ${sel.title}`}>
                                                                             <div className="cardLeftHem">
                                                                                 <div className={`cardName ${sel.lineHeight}`} >{bene?.name}</div>
@@ -287,7 +289,7 @@ const InstructForex = (props) => {
                                                                         </div>
                                                                     </Option>
                                                                 )
-                                                            }
+                                                            // }
                                                         })}
                                                     </Select>
                                                 </Form.Item>

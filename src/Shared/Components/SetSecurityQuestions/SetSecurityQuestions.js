@@ -153,7 +153,7 @@ const SetSecurityQuestions = ({ isVisible, setIsModalVisible}) => {
                 }
             />
             <Modal
-                visible={isVisible}
+                open={isVisible}
                 onCancel={handleCancel}
                 footer={false}
                 closable={true}

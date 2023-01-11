@@ -120,20 +120,12 @@ export const login = (details, history, accountType) => {
        
 
     dispatch(saveKCYValues({
-      client_information: {
-        street_address: user.business_address,
-        client_org_legal_name: user.business_name,
+      clientInformation: {
+        address: user.business_address,
+        legal_name: user.business_name,
+        trade_name: user.business_name,
           
       },
-      user_roles: [
-          {
-            // date_of_birth: ,
-          email: user.email,
-          full_legal_name: user.full_name,
-          phone_number: user.phone_number,
-          user_type:"super admin",
-          }
-      ]
   }))
 
         showSuccessNotification(
