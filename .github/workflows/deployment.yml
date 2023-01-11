@@ -1,15 +1,12 @@
-name: Deploy Forex App to Production or Staging Server
+name: Deploy Forex App
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
-    branches:
-      - staging
+    branches: [ "main" ]
+
 
 jobs:
-  build-deploy:
+  build:
 
     runs-on: self-hosted
 
@@ -18,35 +15,19 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - name: Checkout branch
+      - name: Checkout branche
         uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Deploy to Production
-        if: ${{github.event_name == 'pull_request' && github.event.pull_request.merged == true}} 
-         echo "Merge to main branch detected. Decoding production environment variables..."
-         chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
-        run: echo "${{secrets.PRODUCTION_ENV_VARS}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
-           cat ".env"
-        env:
-          PRODUCTION_ENV: ${{secrets.PRODUCTION_ENV_VARS}} 
-      - name: Deploy to Staging
-        if: ${{ github.event_name == 'push' && github.event.ref == 'refs/heads/staging' }}
-        run: echo "Push to Staging branch detected. Decoding staging environment variables..."
-            chmod -R a+rwx /var/www/forex_staging/actions-runner/_work/new-forex-app/new-forex-app/node_modules
-            echo "${{secrets.STAGING_ENV_VARS}}" | base64 --decode > /var/www/forex_staging/actions-runner/_work/new-forex-app/new-forex-app/.env
-        env:
-          STAGING_ENV: ${{secrets.STAGING_ENV_VARS}}
-
-      - name: Install npm dependencies
+      - name: Install dependencies
         run: npm install
       - name: Create .env file
         run: |
           chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
-          echo "${{secrets.ENV_CONFIG}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
+          echo "${{secrets.PRODUCTION_ENV_VARS}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
           cat ".env"  
       - name: Generate the build
         run: CI=false npm run build
