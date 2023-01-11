@@ -1,6 +1,7 @@
 {
   "name": "javolin_forex",
   "version": "0.1.0",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.28",
