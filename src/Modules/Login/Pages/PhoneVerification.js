@@ -13,16 +13,16 @@ import { formatNumber } from "../../../helpers/contants";
 const PhoneVerification = (props) => {
     const dispatch = useDispatch()
     const { state } = props.location
-
-    console.log('state: ', state)
+    console.log("state: ", state)
     const history = useHistory()
     const login = useSelector((state) => state?.login);
 
     const handleOPTResend = () => {
-        dispatch(resendOTP(formatNumber(state.email)))
+        dispatch(resendOTP(formatNumber(state?.user?.phone_number)))
     }
     const onFinish = (values) => {
-        dispatch(verifyPhone(values?.pin, state?.phone_number, history))
+        let phoneNum =  state?.user?.phone_number
+        dispatch(verifyPhone(values?.pin, phoneNum, history))
     }
     return (
         <>
@@ -39,11 +39,11 @@ const PhoneVerification = (props) => {
                     <div className={ThemeStyles.iconHead} style={{ display: "flex", justifyContent: "center" }}>
                         <img align="center" src={PhoneImage} alt="phone icon" />
                     </div>
-                    <div className={ThemeStyles.authTitle}>
+                    <div style={{textAlign: "center"}} className={ThemeStyles.authTitle}>
                         Enter Verification Code
                     </div>
                     <p style={{ textAlign: "center" }} className={ThemeStyles.subInfo}>
-                        We have sent a 6-digit code to your phone and email <span className={ThemeStyles.subBoldGray}> {`${state?.email} | ${state?.phone_number}`}</span>
+                        We have sent a 6-digit code to your phone and email <span className={ThemeStyles.subBoldGray}> {`${state?.email} | ${state?.user?.phone_number}`}</span>
                     </p>
                     <Form.Item
                         name={["pin"]}
@@ -64,6 +64,7 @@ const PhoneVerification = (props) => {
                     <Button
                         block
                         size="large"
+                        shape="round"
                         type="primary"
                         htmlType="submit"
                         className="login-form-button"

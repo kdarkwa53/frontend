@@ -206,6 +206,7 @@ const BankSettlement = ({ form }) => {
                         <Button
                             type="primary"
                             block
+                            shape="round"
                             // htmlType="submit"
                             size="large"
                             onClick={handleFormSubmit}

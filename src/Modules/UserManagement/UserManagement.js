@@ -68,7 +68,6 @@ const UserManagement = () => {
                     return (
                         <div key={id}>
                             <AccessControl
-                                userPermissions={['EDIT_USER']}
                                 allowedPermissions={['EDIT_USER']}
                                 renderNoAccess={''}
                             >

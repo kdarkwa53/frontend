@@ -146,7 +146,6 @@ const BusDashboard = () => {
                     <DashboardTitleRow title={"Javolin Services"} />
                         <div className={Styles.products}>
                         <AccessControl
-                            userPermissions={['SEND_MONEY']}
                             allowedPermissions={['SEND_MONEY']}
                             renderNoAccess={''}
                         >
@@ -154,7 +153,6 @@ const BusDashboard = () => {
 
                         </AccessControl>
                         <AccessControl
-                            userPermissions={['FOREX']}
                             allowedPermissions={['FOREX']}
                             renderNoAccess={''}
                         >
@@ -162,7 +160,6 @@ const BusDashboard = () => {
 
                         </AccessControl>
                         <AccessControl
-                            userPermissions={['TRANSFER_MONEY']}
                             allowedPermissions={['TRANSFER_MONEY']}
                             renderNoAccess={''}
                         >
@@ -170,7 +167,6 @@ const BusDashboard = () => {
 
                         </AccessControl>
                         <AccessControl
-                            userPermissions={['FUND_WALLET']}
                             allowedPermissions={['FUND_WALLET']}
                             renderNoAccess={''}
                         >

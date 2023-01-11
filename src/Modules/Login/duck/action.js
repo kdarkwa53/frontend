@@ -87,6 +87,10 @@ export const login = (details, history, accountType) => {
 
       // Verify user before login
       if (user.phone_verified_at === null) {
+        details = {
+          ...details,
+          user: user
+        }
         history.push({ pathname: "/phone", state: details })
         dispatch({
           type: LOGIN_ERROR,
@@ -109,7 +113,6 @@ export const login = (details, history, accountType) => {
             expires: 7,
           });
         }else{
-          console.log("I'm here customer")
           Cookies.set("javCustomer", JSON.stringify(user), {
             expires: 7,
           });
@@ -328,16 +331,16 @@ export const verifyPhone = (code, phone, history) => {
     dispatch({ type: PHONE_VERIFICATION_REQUEST });
     // const accessToken = Cookies.get("javAccessToken");
     try {
-      await axios.post(
+      const {data} = await axios.post(
         `${REACT_APP_BASE_API_URL}/${userType}/account/verify`,
         body,
         authHeader
       );
-      console.log(body)
-      showSuccessNotification(
-        "Phone Verification successful!",
-        "You have successfully logged in."
-      );
+
+      dispatch(
+        showSuccessNotification(data?.message)
+      )
+      
       dispatch({
         type: PHONE_VERIFICATION_SUCCESS,
       });
@@ -383,14 +386,14 @@ export const resendOTP = (phone) => {
           },
         }
       );
-      showSuccessNotification(
-        data,
+      dispatch(showSuccessNotification(
+        data?.message,
         `New OTP sent to ${phone}`
-      );
+      ));
       dispatch({
         type: RESEND_PHONE_OTP_SUCCESS,
       });
-      removeCookies();
+      // removeCookies();
     } catch (error) {
       dispatch({
         type: RESEND_PHONE_OTP_ERROR,

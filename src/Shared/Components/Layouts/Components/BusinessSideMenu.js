@@ -35,21 +35,7 @@ const BusinessSideMenu = ({ menuRoute}) => {
         };
     }
 
-    const items = [
    
-        getItem(text['User Management'], '/user', <People width={'1.5em'} height={'1.5em'} />, [
-            <AccessControl
-                renderNoAccess={""}
-                allowedPermissions={['']}
-                userPermissions={['VIEW_DASHBOARD']}
-            >
-                {getItem('User', '/user-management', <UserTag2 width={'1.5em'} height={'1.5em'}/>)}
-            </AccessControl>
-            ,
-            getItem('Role', '/role-management', <ShieldSecurityIcon width={'1.5em'} height={'1.5em'}/>),
-        ]),
-       
-    ];
     const handleMenuClick = (val) => {
         setCurrent(val)
         console.log(val)
@@ -83,7 +69,6 @@ const BusinessSideMenu = ({ menuRoute}) => {
             <AccessControl
                 renderNoAccess={""}
                 allowedPermissions={['VIEW_DASHBOARD']}
-                userPermissions={['VIEW_DASHBOARD']}
             >
             <SideMenuItem
                             style={current_route === "/user-management" ? activeMenuItem : defaultMenuItem}

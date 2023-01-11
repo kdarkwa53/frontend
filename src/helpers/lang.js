@@ -275,6 +275,10 @@ export const lang = {
        "Bank": "Bank",
        "Source": "Source",
        "Send From": "Send From",
+       "We have sent a 6-digit code to your phone and email": "We have sent a 6-digit code to your phone and email",
+       "Save": "Save",
+       "Submit": "Submit"
+
        
 
        
@@ -282,6 +286,7 @@ export const lang = {
 
     },
     FR: {
+        "We have sent a 6-digit code to your phone and email": "Nous avons envoyé un code à six chiffres à votre téléphone et à votre courriel",
         "Send From": "Envoyer Depuis",
         "Source": "Source",
         "Bank": "Banque",

@@ -75,7 +75,6 @@ const RoleManagement = () => {
                 return (
                     <div key={id}>
                         <AccessControl
-                            userPermissions={['EDIT_ROLE']}
                             allowedPermissions={['EDIT_ROLE']}
                             renderNoAccess={''}
                         >
@@ -85,7 +84,6 @@ const RoleManagement = () => {
                             </Tag>
                         </AccessControl>
                         <AccessControl
-                            userPermissions={['DELETE_ROLE']}
                             allowedPermissions={['DELETE_ROLE']}
                             renderNoAccess={''}
                         >
