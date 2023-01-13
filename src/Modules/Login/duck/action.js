@@ -78,7 +78,6 @@ export const login = (details, history, accountType) => {
 
       let { user } = data;
 
-      console.log(user)
       user = {
         ...user,
         "pre_qualification_questions": "{}",
@@ -118,19 +117,22 @@ export const login = (details, history, accountType) => {
           });
         }
        
-
-    dispatch(saveKCYValues({
-      clientInformation: {
-        address: user.business_address,
-        legal_name: user.business_name,
-        trade_name: user.business_name,
-      },
-      authorizationAndCertification: {
-        legal_name: user.business_name
-      }
-  }))
-
-        
+    if(!user.business_kyc){
+        dispatch(saveKCYValues({
+          clientInformation: {
+            address: user.business_address,
+            legal_name: user.business_name,
+            trade_name: user.business_name,
+          },
+          authorizationAndCertification: {
+            legal_name: user.business_name
+          },
+          foreignExchangeAndPayments: {
+            currency: ["USD"]
+          }
+      }))
+    }
+    
         dispatch({
           type: LOGIN_SUCCESS,
           accountType

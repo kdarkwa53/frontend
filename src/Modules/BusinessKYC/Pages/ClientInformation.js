@@ -20,8 +20,8 @@ const ClientInformation = ({ form }) => {
             ...formValues,
             clientInformation: {
                 ...values,
-                street_address: values?.street_address?.label,
-                business_number: intNum
+                // street_address: values?.street_address?.label,
+                // business_number: intNum
             }
         }))
     }
@@ -70,8 +70,8 @@ const ClientInformation = ({ form }) => {
                                 },
                             ]}
                         >
-
-                            <GoogleAPIAddressInput  default={formValues?.clientInformation?.street_address}  />
+                            <Input size="large"/>
+                            {/* <GoogleAPIAddressInput  default={formValues?.clientInformation?.street_address}  /> */}
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -142,24 +142,24 @@ const ClientInformation = ({ form }) => {
                         <Radio.Group style={{ width: '100%' }}>
                             <Row gutter={[32, 16]}>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="corporation">Corporation/Ltd</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Corporation">Corporation/Ltd</Radio>
                                 </Col>
 
 
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="limited_liability_company">Limited Liability Company</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Limited_Liability_Company">Limited Liability Company</Radio>
                                 </Col>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="publicly_traded">Publicly Traded</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Publicly_Traded">Publicly Traded</Radio>
                                 </Col>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="partnership">Partnership</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Partnership">Partnership</Radio>
                                 </Col>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="trust">Trust</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Trust">Trust</Radio>
                                 </Col>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="non_profit">Non-Profit</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Non_Profit">Non-Profit</Radio>
                                 </Col>
                             </Row>
                         </Radio.Group>

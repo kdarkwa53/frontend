@@ -7,6 +7,9 @@ import { PlusIcon } from "../../../Shared/Components/JavIcons"
 import Styles from "../../TransferMoney/TransferMoney.module.css"
 import KYCListCard from "../Components/KYCListCard"
 import { saveKCYValues } from "../duck/action"
+import CountryDropdown2 from "../../TransferMoney/Components/DynamicForms/CountryDropdown2"
+import BankListDropdown from "./components/BankListDropdown.js"
+// import BankListDropdown from "../components/BankListDropdown"
 
 
 
@@ -19,6 +22,8 @@ const BankSettlement = ({ form }) => {
     const formValues = useSelector((state) => state.kyc.values)
 
     const data = formValues?.bakingAndSettlement ? formValues?.bakingAndSettlement : []
+    const [country, setCountry] = useState()
+    const [banks, setBanks] = useState()
 
     const openNewUserForm = () => {
         form.setFieldsValue({
@@ -31,7 +36,7 @@ const BankSettlement = ({ form }) => {
         let values = form.getFieldValue('bakingAndSettlement')
         let bakingAndSettlement = formValues?.bakingAndSettlement
 
-    
+
 
         console.log('values: ', values)
         if (values.id !== undefined) {
@@ -76,40 +81,39 @@ const BankSettlement = ({ form }) => {
         setShowForm(true)
     }
 
+    const bankCountryVariable = {
+        "id": "bankCountry",
+        "regEx": "",
+        "isRequired": true,
+        "defaultValue": "US",
+        "isRequiredInValueSet": true,
+        "links": [
+            {
+                "rel": "COUNTRIES",
+                "uri": "https://crossborder.beta.corpay.com/api/268710/0/countries",
+                "method": "GET",
+                "javolinRoute": "/api/business/rules-countries"
+            }
+        ],
+        "validationRules": [
+            {
+                "regEx": "^[^<>\\x22]*$",
+                "errorMessage": "The following characters are not allowed: <,>, \""
+            }
+        ]
+    }
+
     const BankSettlementForms = ({ form }) => {
         return (
             <>
                 <div className={Styles.formRow}>
                     <Input hidden name={['bakingAndSettlement', 'id']} />
                     <Row gutter={[32, 4]}>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Bank name">
-                                <Form.Item
-                                    name={['bakingAndSettlement', 'bank_country']}
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input size="large" />
-                                </Form.Item>
-                            </Form.Item>
-                    </Col>
-
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Bank name">
-                                <Form.Item
-                                    name={['bakingAndSettlement', 'bank_name']}
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
-                                >
-                                    <Input size="large" />
-                                </Form.Item>
-                            </Form.Item>
+                            <CountryDropdown2 setCountry={setCountry} val={bankCountryVariable} />
+                        </Col>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <BankListDropdown country={country} banks={banks} setBanks={setBanks}/>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
@@ -223,7 +227,7 @@ const BankSettlement = ({ form }) => {
                 </div>
 
                 <div style={{ width: "100%" }} className={Styles.buttonContainter}>
-                <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
+                    <div onClick={() => setShowForm(false)} className={Styles.cancelBtn}>
                         Cancel
                     </div>
                     <div className={Styles.tnxButton3}>
@@ -250,7 +254,7 @@ const BankSettlement = ({ form }) => {
                 {data.map((item, i) => {
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <KYCListCard onCLickEdit={onCLickEdit}  name={item.bank_name} id={i}/>
+                            <KYCListCard onCLickEdit={onCLickEdit} name={item.bank_name} id={i} />
                         </Col>
                     )
                 })}
@@ -277,7 +281,7 @@ const BankSettlement = ({ form }) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [showForm, setShowForm] = useState(formState)
 
-  
+
 
     return (
         <div className={`${Styles.sectionBox} ${Styles.white}`}>

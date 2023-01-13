@@ -2,11 +2,12 @@
 import { Form, Select } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { getDropdownListFromAPI } from "../../duck/action"
+import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
 
  const BankDropdown = ({ val }) => {
 
     const {Option} = Select
+    const [query, setQuery] = useState("")
 
     let rules = []
     rules.push({
@@ -15,14 +16,17 @@ import { getDropdownListFromAPI } from "../../duck/action"
     })
 
     const [items, setItems] = useState('')
+    const [loading, setLoading] = useState(false)
     const [selectedBank, setBankSelection] = useState('')
     const dispatch = useDispatch()
 
      useEffect(() => {
-         dispatch(getDropdownListFromAPI(val.links[0]?.javolinRoute)).then((res) => {
+        setLoading(true)
+         dispatch(getDropdownListFromAPI(`${val.links[0]?.javolinRoute}&query=${query}`)).then((res) => {
              setItems(res)
+             setLoading(false)
          })
-     }, [dispatch, val.links])
+     }, [dispatch, query, val.links])
 
     let _items = items ? items : []
 
@@ -33,7 +37,14 @@ import { getDropdownListFromAPI } from "../../duck/action"
     })
 
     const handleSelectBank = (e) => {
+        
         setBankSelection(e)
+    }
+
+    const handleSearch = (e)=>{
+        console.log(e)
+        console.log(`${val.links[0]?.javolinRoute}?query=${query}`)
+        setQuery(e)
     }
 
     let listFilteredByBankName = _items.filter(banks => banks.institutionName === selectedBank)
@@ -49,9 +60,12 @@ import { getDropdownListFromAPI } from "../../duck/action"
                 <Select
                     size='large'
                     optionFilterProp="children"
-                    filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
+                    // filterOption={(input, option) =>
+                    //     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    // }
+                    showSearch
+                    loading={loading}
+                    onSearch={handleSearch}
                     
                     onChange={handleSelectBank}
                 >

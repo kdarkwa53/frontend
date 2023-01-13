@@ -1,4 +1,4 @@
-import { Col, Row, Form, Select, Input, Checkbox, DatePicker, Button, Radio } from "antd"
+import { Col, Row, Form, Select, Input, Checkbox, DatePicker, Button } from "antd"
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { PlusIcon } from "../../../Shared/Components/JavIcons"
@@ -32,6 +32,7 @@ const Authorization = ({ form }) => {
     let sigPad = {}
 
     const handleFormSubmit = () => {
+
         let values = form.getFieldValue('authorizationAndCertification')
         // change moment date format
         values = {
@@ -43,6 +44,7 @@ const Authorization = ({ form }) => {
                 signature: sigPad ? getSignatureImage() : signatories_details[values.signatories.id]?.signature
             }
         }
+        
         if (values.signatories.id !== undefined) {
             // Editing an item
             let signatoriesDetails = signatories_details
@@ -58,7 +60,6 @@ const Authorization = ({ form }) => {
         else {
             // normal save 
             const new_values = signatories_details !== undefined ? signatories_details?.concat(values.signatories) : [values.signatories]
-            console.log(values)
             dispatch(saveKCYValues({
                 ...formValues,
                 authorizationAndCertification: {
@@ -109,7 +110,7 @@ const Authorization = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Date Signed">
                             <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'date_signed']}>
-                                <DatePicker onChange={(d, ds) => console.log(ds)} size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
+                                <DatePicker size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
                             </Form.Item>
                         </Form.Item>
                     </Col>
@@ -133,7 +134,7 @@ const Authorization = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Date of birth">
                             <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'dob']}>
-                                <DatePicker onChange={(d, ds) => console.log(ds)} size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
+                                <DatePicker size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
                             </Form.Item>
                         </Form.Item>
                     </Col>
@@ -233,14 +234,15 @@ const Authorization = ({ form }) => {
 
 
     const handleKYCsubmit = ()=>{
-        dispatch(submitKYCForm(formValues, history))
+        console.log(formValues)
+        debugger
+        // dispatch(submitKYCForm(formValues, history))
     }
     const SignatoryList = ({ onCLickEdit }) => {
         return (
             <>
                 <h5>List of Signatories</h5>
                 {signatories.map((item, i) => {
-                    console.log(item)
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
                             <KYCListCard onCLickEdit={onCLickEdit} name={item.full_name} id={i} />
@@ -282,6 +284,7 @@ const Authorization = ({ form }) => {
                 <div className={Styles.formRow}>
                     <Row gutter={[32, 16]}>
                         <Form.Item
+                            
                             name={['authorizationAndCertification', 'agreement_check']}
                             rules={[
                                 {
@@ -290,11 +293,13 @@ const Authorization = ({ form }) => {
                             ]}
                         >
                             
-                            <Checkbox.Group style={{ width: '100%' }}>
+                            
                             <Col >
-                                    <Checkbox value={'agreement_check'}  style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
+                            
+                                    <Checkbox onChange={(e)=>console.log(e)} value={"see"} style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
+                            
                             </Col>
-                            </Checkbox.Group>
+                            
                                     
                         </Form.Item>
                     </Row>
@@ -307,13 +312,15 @@ const Authorization = ({ form }) => {
                                 },
                             ]}
                         >
-                            <Checkbox.Group style={{ width: '100%' }}>
+                            
                             <Col >
-                                    <Checkbox value={'read_and_understood_check'} style={{ padding: '0.7em' }}>
+                            
+                                    <Checkbox onChange={(e)=>console.log(e)} value={"sede"}  style={{ padding: '0.7em' }}>
                                     Client has read, understood and hereby accepts the attached terms and conditions
                                     </Checkbox>
+                            
                             </Col>
-                            </Checkbox.Group>
+                            
 
                         </Form.Item>
                     </Row>
@@ -327,14 +334,16 @@ const Authorization = ({ form }) => {
                             ]}
                         >
 
-                            <Checkbox.Group style={{ width: '100%' }}>
+                            
                             <Col >
-                                    <Checkbox value={'privacy_read_check'}  style={{ padding: '0.7em' }}>
+                            
+                                    <Checkbox value={"seee"}  style={{ padding: '0.7em' }}>
                                     It consents to the Privacy Notice at https://javolin.com/privacy
                                 </Checkbox>
+                            
                             </Col>
 
-                            </Checkbox.Group>
+                            
                         </Form.Item>
                     </Row>
                     <Row gutter={[32, 16]}>
@@ -346,13 +355,15 @@ const Authorization = ({ form }) => {
                                 },
                             ]}
                         >
-                            <Checkbox.Group style={{ width: '100%' }}>
+                            
                             <Col >
-                                    <Checkbox value={'authority_check'} style={{ padding: '0.7em' }}>
+                            
+                                    <Checkbox value={"stee"}  style={{ padding: '0.7em' }}>
                                     The individual(s) signing this application have the authority to bind the Client to the terms of this Agreement (supporting documentation may be requested)
                                 </Checkbox>
+                            
                             </Col>
-                            </Checkbox.Group>
+                            
 
                         </Form.Item>
                     </Row>
@@ -373,7 +384,6 @@ const Authorization = ({ form }) => {
     const handleEditForm = (item_id) => {
         let authorization_information = formValues?.authorization_information.signatories
 
-        console.log(authorization_information[item_id])
         const editValues = {
             ...authorization_information[item_id],
             id: item_id,
@@ -389,11 +399,9 @@ const Authorization = ({ form }) => {
 
         })
         //Display image on canvas
-        console.log("iww: ", authorization_information[item_id].signature)
         
         setShowForm(true)
         setSignImage(authorization_information[item_id].signature)
-        console.log('hes: ', setSignImage)
         // sigPad.fromDataURL(authorization_information?.signature)
     }
 

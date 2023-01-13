@@ -25,13 +25,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
      }, [dispatch, val.links])
 
     let _items = items ? items : []
-    console.log("ds: s",items)
 
-    let uniqueItems = {}
-
-    // _items.map((val) => {
-    //     return uniqueItems[val.institutionName] = val.institutionName
-    // })
 
     const handleSelectBank = (e) => {
         setBankSelection(e)
@@ -59,8 +53,6 @@ import { getDropdownListFromAPI } from "../../duck/action"
                 >
                     {
                         Object.values(_items)?.map((option) => {
-                            // let val = JSON.stringify(option)
-
                             return (
                                 <Option key={option?.primaryKey} value={option?.institutionName}> {option?.institutionName}</Option>
                             )
@@ -70,7 +62,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
             </Form.Item>
             </Col>
             <Col key={2}  style={{width:"100%"}} xs={24} sm={24} md={12} lg={12} xl={12}>
-            {/* <Form.Item
+            <Form.Item
                 // labelInValue
                 name={['bakingAndSettlement', 'bank_address']}
                 rules={rules}
@@ -92,7 +84,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
                         })
                     }
                 </Select>
-            </Form.Item> */}
+            </Form.Item>
             </Col>
             {/* <Form.Item
                 noStyle

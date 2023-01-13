@@ -43,6 +43,7 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
         if(setCountry){
             setCountry(regionCode)
         }
+        console.log("region: ", regionurl)
         dispatch(changeRegionURL(regionurl))
     }
 

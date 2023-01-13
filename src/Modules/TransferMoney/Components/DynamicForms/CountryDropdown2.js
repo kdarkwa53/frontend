@@ -1,14 +1,14 @@
 
 
-import { Form, Select } from "antd"
+import { Form, Input, Select } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { unCamelCase } from "../../../../helpers/utils"
 import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
 
 
-const CountryDropdown2 = ({ val, setCountry, ...rest }) => {
-    const { Option } = Select
+const CountryDropdown2 = ({ val, country, setCountry, ...rest }) => {
+    // const { Option } = Select
     let rules = []
     rules.push({
         required: val.isRequired,
@@ -23,37 +23,33 @@ const CountryDropdown2 = ({ val, setCountry, ...rest }) => {
         )
     )))
 
-    const [items, setItems] = useState('')
-    const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch()
+    // const [items, setItems] = useState('')
+    // const [loading, setLoading] = useState(false)
+    // const dispatch = useDispatch()
 
-     useEffect(() => {
-         setLoading(true)
-         dispatch(getDropdownListFromAPI(val.links[0]?.javolinRoute)).then((res) => {
-             setItems(res)
-             setLoading(false)
-         })
-     }, [dispatch, val.links])
+    //  useEffect(() => {
+    //      setLoading(true)
+    //      dispatch(getDropdownListFromAPI(val.links[0]?.javolinRoute)).then((res) => {
+    //          setItems(res)
+    //          setLoading(false)
+    //      })
+    //  }, [dispatch, val.links])
 
     
-    const _items = items ? items : []
+    // const _items = items ? items : []
 
-    const handleAccountHolderCountry = (regionCode) => {
-        let regionurl = `/api/business/rules-regions?country=${regionCode}`
-        if(setCountry){
-            setCountry(regionCode)
-        }
-        dispatch(changeRegionURL(regionurl))
-    }
+    // const handleAccountHolderCountry = (regionCode) => {
+    //         console.log(regionCode)
+    //         setCountry(regionCode)
+    // }
 
     return (
-        <Form.Item
-            {...rest}
-            name={['bakingAndSettlement', 'bank_country']}
-            rules={rules}
-            label={"Country"}
-        >
-            <Select
+        <Form.Item label="Bank Country">
+            <Form.Item
+                name={['bakingAndSettlement', 'bank_country']}
+                rules={rules}
+                >
+            {/* <Select
                 {...rest}
                 size='large'
                 optionFilterProp="children"
@@ -75,7 +71,9 @@ const CountryDropdown2 = ({ val, setCountry, ...rest }) => {
                 }
 
 
-            </Select>
+            </Select> */}
+            <Input size="large" />
+            </Form.Item>
         </Form.Item>
     )
 }
