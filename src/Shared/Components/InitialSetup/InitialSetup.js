@@ -11,9 +11,13 @@ import Styles from "./InitiailSetup.module.css"
 
 export const TaskTodo = ({ completed, title, desc, fontSub }) => {
     const text = useSelector((state) => state?.language)
+    const history = useHistory()
+    const handleClick = ()=>{
+        history.push("/business/compliance")
+    }
     return (
         <div className={Styles.rowTaskTodo}>
-            <div className={Styles.titleRow}>
+            <div onClick={handleClick} style={{cursor: "pointer"}} className={Styles.titleRow}>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }} >
                     <Circle size="35px" color={completed ? "#3DA31F" : "#EDEEF0"}>
                         <CheckIcon width="1.5em" height="1.5em" color={completed ? "#FFFFFF" : "#727986"} />

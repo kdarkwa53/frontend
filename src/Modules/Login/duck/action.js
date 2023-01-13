@@ -83,7 +83,6 @@ export const login = (details, history, accountType) => {
         "pre_qualification_questions": "{}",
         'userType': accountType
       }
-
       // Verify user before login
       if (user.phone_verified_at === null) {
         details = {
@@ -116,6 +115,7 @@ export const login = (details, history, accountType) => {
             expires: 7,
           });
         }
+    
        
     if(!user.business_kyc){
         dispatch(saveKCYValues({
@@ -131,6 +131,10 @@ export const login = (details, history, accountType) => {
             currency: ["USD"]
           }
       }))
+    }else{
+      dispatch(saveKCYValues(
+        JSON.parse(user.business_kyc)
+      ))
     }
     
         dispatch({
