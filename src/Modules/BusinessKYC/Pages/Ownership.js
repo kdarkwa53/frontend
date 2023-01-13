@@ -162,19 +162,7 @@ const Ownership = ({ form }) => {
                     )
                 })}
                 <div onClick={openNewUserForm} className={Styles.kycSubNote}> <PlusIcon height={'1em'} width={'1em'} color={'#0032A0'} /> Add another owner</div>
-                <div style={{ width: "100%" }} className={Styles.buttonContainter}>
-                    <div className={Styles.tnxButton3}>
-                        <Button
-                            type="primary"
-                            block
-                            htmlType="submit"
-                            size="large"
-
-                        >
-                            Continue
-                        </Button>
-                    </div>
-                </div>
+               
             </>
 
         )
@@ -200,10 +188,10 @@ const Ownership = ({ form }) => {
                                 <Radio.Group style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col style={{ width: "100%" }} span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="true">Yes</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value={true}>Yes</Radio>
                                         </Col>
                                         <Col span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="false">No</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value={false}>No</Radio>
                                         </Col>
                                     </Row>
                                 </Radio.Group>
@@ -301,6 +289,19 @@ const Ownership = ({ form }) => {
             {hasOver25Ownership === 'true' ? (
                 <ShowOwershipListDetails />
             ): ""}
+             <div style={{ width: "100%" }} className={Styles.buttonContainter}>
+                    <div className={Styles.tnxButton3}>
+                        <Button
+                            type="primary"
+                            block
+                            htmlType="submit"
+                            size="large"
+
+                        >
+                            Continue
+                        </Button>
+                    </div>
+                </div>
 
             
         </div>

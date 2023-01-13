@@ -142,7 +142,7 @@ const ClientInformation = ({ form }) => {
                         <Radio.Group style={{ width: '100%' }}>
                             <Row gutter={[32, 16]}>
                                 <Col span={8}>
-                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Corporation">Corporation/Ltd</Radio>
+                                    <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Corporation/Ltd">Corporation/Ltd</Radio>
                                 </Col>
 
 
