@@ -186,7 +186,7 @@ const UserRoles = ({ form }) => {
                 </div>
 
                 <div style={{ width: "100%" }} className={Styles.buttonContainter}>
-                <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
+                     <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
                         Cancel
                     </div>
                     <div className={Styles.tnxButton3}>

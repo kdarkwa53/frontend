@@ -1,5 +1,5 @@
 import { CONSTANTS } from "@firebase/util"
-import { Col, Row, Form, Select, Input, Checkbox, DatePicker, Button, Radio } from "antd"
+import { Col, Row, Form, Select, Input, Checkbox, DatePicker, Button, Radio, InputNumber } from "antd"
 import { useState } from "react"
 import GooglePlacesAutocomplete from "react-google-places-autocomplete"
 import { useDispatch, useSelector } from "react-redux"
@@ -37,10 +37,10 @@ const Ownership = ({ form }) => {
             
             let values = form.getFieldValue('ownership')
         
-            if (values.owner_details.id !== undefined) {
+            if (values.owners.id !== undefined) {
                 // Editing an item
                 let ownerDetails = owner_details
-                ownerDetails.splice(values.owner_details.id, 1, values.owner_details)
+                ownerDetails.splice(values.owners.id, 1, values.owners)
                 dispatch(saveKCYValues({
                     ...formValues,
                     ownership: {
@@ -51,7 +51,7 @@ const Ownership = ({ form }) => {
             }
             else {
                 // normal save 
-                const new_values = owner_details !== undefined ? owner_details?.concat(values.owner_details) : [values.owner_details]
+                const new_values = owner_details !== undefined ? owner_details?.concat(values.owners) : [values.owners]
                 
                 dispatch(saveKCYValues({
                     ...formValues,
@@ -70,12 +70,12 @@ const Ownership = ({ form }) => {
         return (
             <div className={Styles.formRow}>
                 <h5>Owner Details</h5>
-                <Input hidden name={['ownership', 'owner_details', 'id']} />
+                <Input hidden name={['ownership', 'owners', 'id']} />
                 <Row gutter={[32, 16]}>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Full Legal Name">
                             <Form.Item
-                                name={['ownership', 'owner_details', 'full_legal_name']}
+                                name={['ownership', 'owners', 'name']}
                                 rules={[
                                     {
                                         required: true,
@@ -89,7 +89,7 @@ const Ownership = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Nationality/Citizenship">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owner_details', 'nationality']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owners', 'nationality']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
@@ -99,27 +99,31 @@ const Ownership = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Ownership Percentage (%)">
                             <Form.Item
-                                name={['ownership', 'owner_details', 'ownership_percentage']}
+                                name={['ownership', 'owners', 'percentage']}
                                 rules={[
                                     {
                                         required: true,
                                     },
                                 ]}
+                                style={{width:"100%"}}
                             >
 
-                                <Input size="large" />
+                                <InputNumber style={{ width: "100%" }}  size="large" />
                             </Form.Item>
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Complete Residential Address">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owner_details', 'residential_address']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['ownership', 'owners', 'resident']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
                     </Col>
                 </Row>
                 <div style={{ width: "100%" }} className={Styles.buttonContainter}>
+                 <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
+                        Cancel
+                    </div>
                     <div className={Styles.tnxButton3}>
                         <Button
                             type="primary"
@@ -140,7 +144,7 @@ const Ownership = ({ form }) => {
         form.setFieldsValue({
             ownership: {
                 ...ownership,
-                owner_details: ""
+                owners: ""
             }
         })
         setShowForm(true)
@@ -153,7 +157,7 @@ const Ownership = ({ form }) => {
                 {owners_?.map((item, i) => {
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_legal_name} id={i} />
+                            <KYCListCard onCLickEdit={onCLickEdit} name={item.name} id={i} />
                         </Col>
                     )
                 })}
@@ -186,7 +190,7 @@ const Ownership = ({ form }) => {
                         <Col xs={24} sm={24} md={32} lg={16} xl={16}>
                             <Form.Item
                                 label="Owned by a publicly traded entity?"
-                                name={['ownership', 'isPublicCompany']}
+                                name={['ownership', 'owned_by_public_entity']}
                                 rules={[
                                     {
                                         required: true,
@@ -196,10 +200,10 @@ const Ownership = ({ form }) => {
                                 <Radio.Group style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col style={{ width: "100%" }} span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="yes">Yes</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="true">Yes</Radio>
                                         </Col>
                                         <Col span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="no">No</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="false">No</Radio>
                                         </Col>
                                     </Row>
                                 </Radio.Group>

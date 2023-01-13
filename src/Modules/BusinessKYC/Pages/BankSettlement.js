@@ -18,25 +18,25 @@ const BankSettlement = ({ form }) => {
     const dispatch = useDispatch()
     const formValues = useSelector((state) => state.kyc.values)
 
-    const data = formValues?.bankSettlement ? formValues?.bankSettlement : []
+    const data = formValues?.bakingAndSettlement ? formValues?.bakingAndSettlement : []
 
     const openNewUserForm = () => {
         form.setFieldsValue({
-            bankSettlement: ""
+            bakingAndSettlement: ""
         })
         setShowForm(true)
     }
 
     const handleFormSubmit = () => {
-        let values = form.getFieldValue('bankSettlement')
-        let bankSettlement = formValues?.bankSettlement
+        let values = form.getFieldValue('bakingAndSettlement')
+        let bakingAndSettlement = formValues?.bakingAndSettlement
 
     
 
         console.log('values: ', values)
         if (values.id !== undefined) {
             // Editing an item
-            let bankSettlement_ = bankSettlement
+            let bankSettlement_ = bakingAndSettlement
             bankSettlement_.splice(values.id, 1, values)
             dispatch(saveKCYValues({
                 ...formValues,
@@ -45,10 +45,10 @@ const BankSettlement = ({ form }) => {
         }
         else {
             // normal save 
-            const new_values = bankSettlement !== undefined ? bankSettlement?.concat(values) : [values]
+            const new_values = bakingAndSettlement !== undefined ? bakingAndSettlement?.concat(values) : [values]
             dispatch(saveKCYValues({
                 ...formValues,
-                bankSettlement: new_values
+                bakingAndSettlement: new_values
             }))
         }
 
@@ -58,7 +58,7 @@ const BankSettlement = ({ form }) => {
 
     // function to show the edit form prepopulated
     const handleEditForm = (item_id) => {
-        const bankSettlement = formValues?.bankSettlement
+        const bankSettlement = formValues?.bakingAndSettlement
 
         // Changes date format to moment
         const editValues = {
@@ -71,7 +71,7 @@ const BankSettlement = ({ form }) => {
             id: item_id,
         })
         form.setFieldsValue({
-            bankSettlement: editValues
+            bakingAndSettlement: editValues
         })
         setShowForm(true)
     }
@@ -80,12 +80,27 @@ const BankSettlement = ({ form }) => {
         return (
             <>
                 <div className={Styles.formRow}>
-                    <Input hidden name={['bankSettlement', 'id']} />
+                    <Input hidden name={['bakingAndSettlement', 'id']} />
                     <Row gutter={[32, 4]}>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <Form.Item label="Bank name">
+                                <Form.Item
+                                    name={['bakingAndSettlement', 'bank_country']}
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input size="large" />
+                                </Form.Item>
+                            </Form.Item>
+                    </Col>
+
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Bank name">
                                 <Form.Item
-                                    name={['bankSettlement', 'bank_name']}
+                                    name={['bakingAndSettlement', 'bank_name']}
                                     rules={[
                                         {
                                             required: true,
@@ -99,7 +114,7 @@ const BankSettlement = ({ form }) => {
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item
                                 label="Bank Address"
-                                name={['bankSettlement', 'bank_address']}
+                                name={['bakingAndSettlement', 'bank_address']}
                                 rules={[
                                     {
                                         required: true,
@@ -110,13 +125,19 @@ const BankSettlement = ({ form }) => {
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
+
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Account number" rules={[{ required: true }]} name={['bankSettlement', 'account_number']}>
+                            <Form.Item label="Account number" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_number']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Currency of account" rules={[{ required: true }]} name={['bankSettlement', 'account_currency']}>
+                            <Form.Item label="Account number" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_holder_name']}>
+                                <Input size="large" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            <Form.Item label="Currency of account" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_currency']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
@@ -125,7 +146,7 @@ const BankSettlement = ({ form }) => {
                         <Col xs={24} sm={24} md={32} lg={32} xl={32}>
                             <Form.Item
                                 label="Type of transaction"
-                                name={['bankSettlement', 'type_of_transaction']}
+                                name={['bakingAndSettlement', 'type_of_transaction']}
                                 rules={[
                                     {
                                         required: true,
@@ -136,16 +157,16 @@ const BankSettlement = ({ form }) => {
                                 <Radio.Group style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col span={8}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="transit">Transit</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Transit">Transit</Radio>
                                         </Col>
                                         <Col span={8}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="aba">ABA</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="ABA">ABA</Radio>
                                         </Col>
                                         <Col span={8}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="fedwire">Fedwire</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Fedwire">Fedwire</Radio>
                                         </Col>
                                         <Col span={8}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="sort_code_number">Sort Code Number</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Sort_Code_Number">Sort Code Number</Radio>
                                         </Col>
 
                                     </Row>
@@ -159,7 +180,7 @@ const BankSettlement = ({ form }) => {
                         <Col xs={24} sm={24} md={32} lg={32} xl={32}>
                             <Form.Item
                                 label="Settlement method"
-                                name={['bankSettlement', 'settlement_method']}
+                                name={['bakingAndSettlement', 'settlement_method']}
                                 rules={[
                                     {
                                         required: true,
@@ -170,25 +191,25 @@ const BankSettlement = ({ form }) => {
                                 <Checkbox.Group style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="ach">ACH</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="ACH">ACH</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="wire">Wire</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Wire">Wire</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="draft">Draft</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Draft">Draft</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="check">Check</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Check">Check</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="electronic_bill_payment">Electronic bill payment</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Electronic_Bill_Payment">Electronic bill payment</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="checkmatic">Checkmatic</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Checkmatic">Checkmatic</Checkbox>
                                         </Col>
                                         <Col span={8}>
-                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="reverse_wire_drawdown">Reverse wire drawdown</Checkbox>
+                                            <Checkbox className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="Reverse_Wire_Drawdown">Reverse wire drawdown</Checkbox>
                                         </Col>
 
                                     </Row>
@@ -202,6 +223,9 @@ const BankSettlement = ({ form }) => {
                 </div>
 
                 <div style={{ width: "100%" }} className={Styles.buttonContainter}>
+                <div onClick={()=>setShowForm(false) } className={Styles.cancelBtn}>
+                        Cancel
+                    </div>
                     <div className={Styles.tnxButton3}>
                         <Button
                             type="primary"

@@ -22,23 +22,24 @@ import SignatureCanvas from 'react-signature-canvas'
 
 const Authorization = ({ form }) => {
     const formValues = useSelector((state) => state.kyc.values)
+    const user = useSelector((state) => state.user)
     const subLoading = useSelector((state) => state.kyc.submittingKyc)
-    const signatories = formValues?.authorization_information?.signatories ? formValues?.authorization_information?.signatories : []
-    let authorization_information = formValues?.authorization_information
+    const signatories = formValues?.authorizationAndCertification?.signatories ? formValues?.authorizationAndCertification?.signatories : []
+    let authorization_information = formValues?.authorizationAndCertification
     let signatories_details = authorization_information?.signatories
     const history = useHistory()
     const dispatch = useDispatch()
     let sigPad = {}
 
     const handleFormSubmit = () => {
-        let values = form.getFieldValue('authorization_information')
+        let values = form.getFieldValue('authorizationAndCertification')
         // change moment date format
         values = {
             ...values,
             signatories: {
                 ...values.signatories,
                 date_signed: values.signatories.date_signed._d.toISOString().slice(0, 10).toString(),
-                date_of_birth: values.signatories.date_of_birth._d.toISOString().slice(0, 10).toString(),
+                dob: values.signatories.dob._d.toISOString().slice(0, 10).toString(),
                 signature: sigPad ? getSignatureImage() : signatories_details[values.signatories.id]?.signature
             }
         }
@@ -48,7 +49,7 @@ const Authorization = ({ form }) => {
             signatoriesDetails.splice(values.signatories.id, 1, values.signatories)
             dispatch(saveKCYValues({
                 ...formValues,
-                authorization_information: {
+                authorizationAndCertification: {
                     ...values,
                     signatories: signatoriesDetails
                 }
@@ -60,7 +61,7 @@ const Authorization = ({ form }) => {
             console.log(values)
             dispatch(saveKCYValues({
                 ...formValues,
-                authorization_information: {
+                authorizationAndCertification: {
                     ...values,
                     signatories: new_values
                 }
@@ -76,10 +77,7 @@ const Authorization = ({ form }) => {
         sigPad.clear()
     }
 
-   const  getSignature = ()=>{
-       let d = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAAwICAgICAwICAgMDAwMEBgQEBAQECAYGBQYJCAoKCQgJCQoMDwwKCw4LCQkNEQ0ODxAQERAKDBITEhATDxAQEP/bAEMBAwMDBAMECAQECBALCQsQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAIkAyQMBIgACEQEDEQH/xAAVAAEBAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AlUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/9k="
-       sigPad.fromDataURL(d)
-    }
+  
 
     const clearEditSignature = ()=>{
         setSignImage(undefined)
@@ -91,12 +89,12 @@ const Authorization = ({ form }) => {
         return (
             <div className={Styles.formRow}>
                 <h5>Signatory Details</h5>
-                <Input hidden name={['authorization_information', 'signatories', 'id']} />
+                <Input hidden name={['authorizationAndCertification', 'signatories', 'id']} />
                 <Row gutter={[32, 16]}>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Client's Complete Legal Name">
                             <Form.Item
-                                name={['authorization_information', 'signatories', 'client_legal_name']}
+                                name={['authorizationAndCertification', 'legal_name']}
                                 rules={[
                                     {
                                         required: true,
@@ -110,7 +108,7 @@ const Authorization = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Date Signed">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['authorization_information', 'signatories', 'date_signed']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'date_signed']}>
                                 <DatePicker onChange={(d, ds) => console.log(ds)} size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
                             </Form.Item>
                         </Form.Item>
@@ -120,7 +118,7 @@ const Authorization = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Full Legal name">
                             <Form.Item
-                                name={['authorization_information', 'signatories', 'full_legal_name']}
+                                name={['authorizationAndCertification', 'signatories', 'full_name']}
                                 rules={[
                                     {
                                         required: true,
@@ -134,7 +132,7 @@ const Authorization = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Date of birth">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['authorization_information', 'signatories', 'date_of_birth']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'dob']}>
                                 <DatePicker onChange={(d, ds) => console.log(ds)} size="large" placeholder="yyyy-mm-dd" style={{ width: "100%", background: "#F7F7F7" }} />
                             </Form.Item>
                         </Form.Item>
@@ -144,7 +142,7 @@ const Authorization = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Job Title">
                             <Form.Item
-                                name={['authorization_information', 'signatories', 'job_title']}
+                                name={['authorizationAndCertification', 'signatories', 'job_title']}
                                 rules={[
                                     {
                                         required: true,
@@ -158,7 +156,7 @@ const Authorization = ({ form }) => {
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Email">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['authorization_information', 'signatories', 'email']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'email']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Form.Item>
@@ -168,7 +166,7 @@ const Authorization = ({ form }) => {
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Complete residential address">
                             <Form.Item
-                                name={['authorization_information', 'signatories', 'residential_address']}
+                                name={['authorizationAndCertification', 'signatories', 'residential_address']}
                                 rules={[
                                     {
                                         required: true,
@@ -182,7 +180,7 @@ const Authorization = ({ form }) => {
                     </Col>
                     <Col style={{ border: "solid 1px black" }} xs={24} sm={24} md={12} lg={12} xl={12}>
                         <Form.Item label="Signature">
-                            <Form.Item rules={[{ required: true }]} noStyle name={['authorization_information', 'signatories', 'signature']}>
+                            <Form.Item rules={[{ required: true }]} noStyle name={['authorizationAndCertification', 'signatories', 'signature']}>
                                
                                 {signImage ? (
                                     <>
@@ -225,7 +223,7 @@ const Authorization = ({ form }) => {
 
     const openNewUserForm = () => {
         form.setFieldsValue({
-            authorization_information: {
+            authorizationAndCertification: {
                 ...authorization_information,
                 signatories: ""
             }
@@ -245,7 +243,7 @@ const Authorization = ({ form }) => {
                     console.log(item)
                     return (
                         <Col key={i} xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_legal_name} id={i} />
+                            <KYCListCard onCLickEdit={onCLickEdit} name={item.full_name} id={i} />
                         </Col>
                     )
                 })}
@@ -284,7 +282,7 @@ const Authorization = ({ form }) => {
                 <div className={Styles.formRow}>
                     <Row gutter={[32, 16]}>
                         <Form.Item
-                            name={['authorization_information', 'correct_information']}
+                            name={['authorizationAndCertification', 'agreement_check']}
                             rules={[
                                 {
                                     required: true,
@@ -294,7 +292,7 @@ const Authorization = ({ form }) => {
                             
                             <Checkbox.Group style={{ width: '100%' }}>
                             <Col >
-                                    <Checkbox value={'correct_information'}  style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
+                                    <Checkbox value={'agreement_check'}  style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
                             </Col>
                             </Checkbox.Group>
                                     
@@ -302,7 +300,7 @@ const Authorization = ({ form }) => {
                     </Row>
                     <Row gutter={[32, 16]}>
                         <Form.Item
-                            name={['authorization_information', 'understood_terms']}
+                            name={['authorizationAndCertification', 'read_and_understood_check']}
                             rules={[
                                 {
                                     required: true,
@@ -311,7 +309,7 @@ const Authorization = ({ form }) => {
                         >
                             <Checkbox.Group style={{ width: '100%' }}>
                             <Col >
-                                    <Checkbox value={'understood_terms'} style={{ padding: '0.7em' }}>
+                                    <Checkbox value={'read_and_understood_check'} style={{ padding: '0.7em' }}>
                                     Client has read, understood and hereby accepts the attached terms and conditions
                                     </Checkbox>
                             </Col>
@@ -321,7 +319,7 @@ const Authorization = ({ form }) => {
                     </Row>
                     <Row gutter={[32, 16]}>
                         <Form.Item
-                            name={['authorization_information', 'privacy_notice_consent']}
+                            name={['authorizationAndCertification', 'privacy_read_check']}
                             rules={[
                                 {
                                     required: true,
@@ -331,7 +329,7 @@ const Authorization = ({ form }) => {
 
                             <Checkbox.Group style={{ width: '100%' }}>
                             <Col >
-                                    <Checkbox value={'privacy_notice_consent'}  style={{ padding: '0.7em' }}>
+                                    <Checkbox value={'privacy_read_check'}  style={{ padding: '0.7em' }}>
                                     It consents to the Privacy Notice at https://javolin.com/privacy
                                 </Checkbox>
                             </Col>
@@ -341,7 +339,7 @@ const Authorization = ({ form }) => {
                     </Row>
                     <Row gutter={[32, 16]}>
                         <Form.Item
-                            name={['authorization_information', 'authorized_signatory']}
+                            name={['authorizationAndCertification', 'authority_check']}
                             rules={[
                                 {
                                     required: true,
@@ -350,7 +348,7 @@ const Authorization = ({ form }) => {
                         >
                             <Checkbox.Group style={{ width: '100%' }}>
                             <Col >
-                                    <Checkbox value={'authorized_signatory'} style={{ padding: '0.7em' }}>
+                                    <Checkbox value={'authority_check'} style={{ padding: '0.7em' }}>
                                     The individual(s) signing this application have the authority to bind the Client to the terms of this Agreement (supporting documentation may be requested)
                                 </Checkbox>
                             </Col>
@@ -380,7 +378,7 @@ const Authorization = ({ form }) => {
             ...authorization_information[item_id],
             id: item_id,
             date_signed: moment(authorization_information[item_id].date_signed, 'YYYY-MM-DD'),
-            date_of_birth: moment(authorization_information[item_id].date_of_birth, 'YYYY-MM-DD')
+            dob: moment(authorization_information[item_id].dob, 'YYYY-MM-DD')
         }
 
         form.setFieldsValue({

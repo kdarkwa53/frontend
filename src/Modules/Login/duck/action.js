@@ -89,7 +89,7 @@ export const login = (details, history, accountType) => {
       if (user.phone_verified_at === null) {
         details = {
           ...details,
-          user: user
+          ...user
         }
         history.push({ pathname: "/phone", state: details })
         dispatch({
@@ -124,14 +124,13 @@ export const login = (details, history, accountType) => {
         address: user.business_address,
         legal_name: user.business_name,
         trade_name: user.business_name,
-          
       },
+      authorizationAndCertification: {
+        legal_name: user.business_name
+      }
   }))
 
-        showSuccessNotification(
-          "Login successful!",
-          "You have successfully logged in."
-        );
+        
         dispatch({
           type: LOGIN_SUCCESS,
           accountType

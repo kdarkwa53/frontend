@@ -18,10 +18,10 @@ const PhoneVerification = (props) => {
     const login = useSelector((state) => state?.login);
 
     const handleOPTResend = () => {
-        dispatch(resendOTP(formatNumber(state?.user?.phone_number)))
+        dispatch(resendOTP(formatNumber(state?.phone_number)))
     }
     const onFinish = (values) => {
-        let phoneNum =  state?.user?.phone_number
+        let phoneNum =  state?.phone_number
         dispatch(verifyPhone(values?.pin, phoneNum, history))
     }
     return (
@@ -43,7 +43,7 @@ const PhoneVerification = (props) => {
                         Enter Verification Code
                     </div>
                     <p style={{ textAlign: "center" }} className={ThemeStyles.subInfo}>
-                        We have sent a 6-digit code to your phone and email <span className={ThemeStyles.subBoldGray}> {`${state?.email} | ${state?.user?.phone_number}`}</span>
+                        We have sent a 6-digit code to your phone and email <span className={ThemeStyles.subBoldGray}> {`${state?.email} | ${state?.phone_number}`}</span>
                     </p>
                     <Form.Item
                         name={["pin"]}
