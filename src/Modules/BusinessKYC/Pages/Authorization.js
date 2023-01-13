@@ -296,7 +296,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox onChange={(e)=>console.log(e)} value={"see"} style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
+                                    <Checkbox checked style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
                             
                             </Col>
                             
@@ -315,7 +315,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox onChange={(e)=>console.log(e)} value={"sede"}  style={{ padding: '0.7em' }}>
+                                    <Checkbox checked  style={{ padding: '0.7em' }}>
                                     Client has read, understood and hereby accepts the attached terms and conditions
                                     </Checkbox>
                             
@@ -337,7 +337,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox value={"seee"}  style={{ padding: '0.7em' }}>
+                                    <Checkbox  checked style={{ padding: '0.7em' }}>
                                     It consents to the Privacy Notice at https://javolin.com/privacy
                                 </Checkbox>
                             
@@ -358,7 +358,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox value={"stee"}  style={{ padding: '0.7em' }}>
+                                    <Checkbox checked style={{ padding: '0.7em' }}>
                                     The individual(s) signing this application have the authority to bind the Client to the terms of this Agreement (supporting documentation may be requested)
                                 </Checkbox>
                             
@@ -382,8 +382,9 @@ const Authorization = ({ form }) => {
     
 
     const handleEditForm = (item_id) => {
-        let authorization_information = formValues?.authorization_information.signatories
+        let authorization_information = formValues?.authorizationAndCertification?.signatories
 
+        console.log("authorization_information", authorization_information[item_id])
         const editValues = {
             ...authorization_information[item_id],
             id: item_id,
@@ -392,7 +393,7 @@ const Authorization = ({ form }) => {
         }
 
         form.setFieldsValue({
-            authorization_information: {
+            authorizationAndCertification: {
                 ...authorization_information,
                 signatories: editValues
             }

@@ -224,10 +224,10 @@ const Ownership = ({ form }) => {
                                 <Radio.Group onChange={handleOwnershipPercentage} style={{ width: '100%' }}>
                                     <Row gutter={[32, 16]}>
                                         <Col style={{ width: "100%" }} span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="true">Yes</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value={true}>Yes</Radio>
                                         </Col>
                                         <Col span={12}>
-                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value="false">No</Radio>
+                                            <Radio className={Styles.checkboxContainer} style={{ padding: '0.7em' }} value={false}>No</Radio>
                                         </Col>
                                     </Row>
                                 </Radio.Group>
@@ -286,7 +286,7 @@ const Ownership = ({ form }) => {
             Each individual who directly owns or controls 25% or more of the Client. Supporting documentation demonstrating beneficial ownership may be requested.</h5>
             <OwnershipForms />
 
-            {hasOver25Ownership === 'true' ? (
+            {hasOver25Ownership === true ? (
                 <ShowOwershipListDetails />
             ): ""}
              <div style={{ width: "100%" }} className={Styles.buttonContainter}>
