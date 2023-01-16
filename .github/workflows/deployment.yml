@@ -35,4 +35,4 @@ jobs:
       - name: Restart Nginx
         run: |
           cd ..
-          sudo service nginx restart
+          sudo service nginx reload
