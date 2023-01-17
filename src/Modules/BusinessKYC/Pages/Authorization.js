@@ -235,8 +235,7 @@ const Authorization = ({ form }) => {
 
     const handleKYCsubmit = ()=>{
         console.log(formValues)
-        debugger
-        // dispatch(submitKYCForm(formValues, history))
+        dispatch(submitKYCForm(formValues, history))
     }
     const SignatoryList = ({ onCLickEdit }) => {
         return (
@@ -296,7 +295,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox checked style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
+                                    <Checkbox checked={formValues.authorizationAndCertification.agreement_check} value={true} style={{ padding: '0.7em' }}>All statements in this Agreement, and any other information and documentation submitted in support of this Agreement, are true and correct.</Checkbox>
                             
                             </Col>
                             
@@ -315,7 +314,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox checked  style={{ padding: '0.7em' }}>
+                                    <Checkbox checked={formValues.authorizationAndCertification.read_and_understood_check} value={true} style={{ padding: '0.7em' }}>
                                     Client has read, understood and hereby accepts the attached terms and conditions
                                     </Checkbox>
                             
@@ -337,7 +336,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox  checked style={{ padding: '0.7em' }}>
+                                    <Checkbox  checked={formValues.authorizationAndCertification.privacy_read_check} value={true} style={{ padding: '0.7em' }}>
                                     It consents to the Privacy Notice at https://javolin.com/privacy
                                 </Checkbox>
                             
@@ -358,7 +357,7 @@ const Authorization = ({ form }) => {
                             
                             <Col >
                             
-                                    <Checkbox checked style={{ padding: '0.7em' }}>
+                                    <Checkbox checked={formValues.authorizationAndCertification.authority_check} value={true} style={{ padding: '0.7em' }}>
                                     The individual(s) signing this application have the authority to bind the Client to the terms of this Agreement (supporting documentation may be requested)
                                 </Checkbox>
                             
@@ -384,12 +383,11 @@ const Authorization = ({ form }) => {
     const handleEditForm = (item_id) => {
         let authorization_information = formValues?.authorizationAndCertification?.signatories
 
-        console.log("authorization_information", authorization_information[item_id])
         const editValues = {
             ...authorization_information[item_id],
             id: item_id,
-            date_signed: moment(authorization_information[item_id].date_signed, 'YYYY-MM-DD'),
-            dob: moment(authorization_information[item_id].dob, 'YYYY-MM-DD')
+            date_signed: moment(authorization_information[item_id].date_signed, 'DD-MM-YYYY'),
+            dob: moment(authorization_information[item_id].dob, 'DD-MM-YYYY')
         }
 
         form.setFieldsValue({

@@ -19,6 +19,9 @@ const GoogleAPIAddressInput = (props) => {
                         minHeight: "55px",
                         backgroundColor: "#F7F7F7"
                     }),
+                    placeholder: () => ({
+                        color: "black"
+                    })
 
                 },
             }}

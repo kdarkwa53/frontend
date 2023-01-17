@@ -9,15 +9,17 @@ import Styles from "./InitiailSetup.module.css"
 
 
 
-export const TaskTodo = ({ completed, title, desc, fontSub }) => {
+export const TaskTodo = ({ completed, title, desc, fontSub, hasLink }) => {
     const text = useSelector((state) => state?.language)
     const history = useHistory()
     const handleClick = ()=>{
-        history.push("/business/compliance")
+        if(hasLink){
+            history.push("/business/compliance")
+        }
     }
     return (
-        <div className={Styles.rowTaskTodo}>
-            <div onClick={handleClick} style={{cursor: "pointer"}} className={Styles.titleRow}>
+        <div onClick={handleClick} className={Styles.rowTaskTodo}>
+            <div  style={{cursor: "pointer"}} className={Styles.titleRow}>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }} >
                     <Circle size="35px" color={completed ? "#3DA31F" : "#EDEEF0"}>
                         <CheckIcon width="1.5em" height="1.5em" color={completed ? "#FFFFFF" : "#727986"} />
@@ -95,7 +97,7 @@ export const InitialSetup = ({ actions, setIsPinSetVisible, showSecurityQuestion
                             <TaskTodo title={text["Create account"]} completed={true} />
                         </div>
                         <TaskTodo title={text["Secure your Account"]} desc={text["Set your account pin"]} completed={actions.setPin} />
-                        <TaskTodo title={text["Business KYC"]} desc={text["Provide your company details"]} completed={actions.bus_kyc} />
+                        <TaskTodo title={text["Business KYC"]} desc={text["Provide your company details"]} hasLink completed={actions.bus_kyc} />
 
                     </div>
                 </Col>

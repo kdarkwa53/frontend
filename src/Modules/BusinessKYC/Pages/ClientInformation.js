@@ -20,7 +20,7 @@ const ClientInformation = ({ form }) => {
             ...formValues,
             clientInformation: {
                 ...values,
-                // street_address: values?.street_address?.label,
+                address: values?.address?.label,
                 // business_number: intNum
             }
         }))
@@ -70,8 +70,8 @@ const ClientInformation = ({ form }) => {
                                 },
                             ]}
                         >
-                            <Input size="large"/>
-                            {/* <GoogleAPIAddressInput  default={formValues?.clientInformation?.street_address}  /> */}
+                            {/* <Input size="large"/> */}
+                            <GoogleAPIAddressInput  default={formValues?.clientInformation?.address}  />
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>

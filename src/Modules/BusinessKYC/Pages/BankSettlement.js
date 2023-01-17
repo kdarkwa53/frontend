@@ -9,6 +9,9 @@ import KYCListCard from "../Components/KYCListCard"
 import { saveKCYValues } from "../duck/action"
 import CountryDropdown2 from "../../TransferMoney/Components/DynamicForms/CountryDropdown2"
 import BankListDropdown from "./components/BankListDropdown.js"
+import CountryAPIDropdown from "../../TransferMoney/Components/DynamicForms/CountryAPIDropdown"
+import BankDropdown2 from "../../TransferMoney/Components/DynamicForms/BankDropdown2"
+import AllCurrencyDropdown from "../../../Shared/Components/Layouts/Components/SpoteRateCalculator/AllCurrencyDropdown"
 // import BankListDropdown from "../components/BankListDropdown"
 
 
@@ -103,32 +106,55 @@ const BankSettlement = ({ form }) => {
         ]
     }
 
+    const bankDetails = {
+        "id": "bankDetails",
+        "regEx": "^.{0,11}$",
+        "isRequired": true,
+        "errorMessage": "Beneficiary bank details need to be set",
+        "links": [
+            {
+                "rel": "BANK_DETAILS",
+                "method": "GET",
+                "javolinRoute": "/api/business/rules-banks"
+            }
+        ]
+    }
+
     const BankSettlementForms = ({ form }) => {
         return (
             <>
                 <div className={Styles.formRow}>
                     <Input hidden name={['bakingAndSettlement', 'id']} />
                     <Row gutter={[32, 4]}>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <CountryDropdown2 setCountry={setCountry} val={bankCountryVariable} />
-                        </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <BankListDropdown country={country} banks={banks} setBanks={setBanks}/>
-                        </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item
-                                label="Bank Address"
-                                name={['bakingAndSettlement', 'bank_address']}
-                                rules={[
-                                    {
-                                        required: true,
-                                    },
-                                ]}
-                            >
+                        {form.getFieldValue('bakingAndSettlement').id !== undefined ? (
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <Form.Item label="Bank Country" rules={[{ required: true }]} name={['bakingAndSettlement', 'bank_country']}>
+                                    <Input size="large" />
+                                </Form.Item>
+                            </Col>
+                        ) : (
+                            <CountryAPIDropdown name={"bank_country"} form={form} val={bankCountryVariable} />
+                        )}
 
-                                <Input size="large" />
-                            </Form.Item>
-                        </Col>
+                        {form.getFieldValue('bakingAndSettlement').id !== undefined ? (
+                            <>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <Form.Item label="Bank Name" rules={[{ required: true }]} name={['bakingAndSettlement', 'bank_name']}>
+                                        <Input size="large" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <Form.Item label="Bank Address" rules={[{ required: true }]} name={['bakingAndSettlement', 'bank_address']}>
+                                        <Input size="large" />
+                                    </Form.Item>
+                                </Col>
+                            </>
+
+                        ) : (
+                            <BankDropdown2 form={form} val={bankDetails} />
+                        )}
+
+
 
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                             <Form.Item label="Account number" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_number']}>
@@ -136,14 +162,20 @@ const BankSettlement = ({ form }) => {
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                            <Form.Item label="Account number" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_holder_name']}>
+                            <Form.Item label="Account Holder Name" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_holder_name']}>
                                 <Input size="large" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                            
+                            {form.getFieldValue('bakingAndSettlement').id !== undefined ? (
                             <Form.Item label="Currency of account" rules={[{ required: true }]} name={['bakingAndSettlement', 'account_currency']}>
-                                <Input size="large" />
-                            </Form.Item>
+                            <Input size="large" />
+                             </Form.Item>
+
+                        ) : (
+                            <AllCurrencyDropdown name={['bakingAndSettlement', 'account_currency']} label="Currency of account"/>
+                        )}
                         </Col>
                     </Row>
                     <Row gutter={[32, 16]}>

@@ -1,12 +1,16 @@
 
-import { Col, Form, Input, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import React, { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import { getDropdownListFromAPI } from "../../duck/action"
+import { useDispatch, useSelector } from "react-redux"
+import { capitalizeString } from "../../../../helpers/utils"
+import { addBeneValues, getDropdownListFromAPI } from "../../duck/action"
 
- const BankDropdown2 = ({ val }) => {
+ const BankDropdown2 = ({ val, form }) => {
+    const dispatch = useDispatch()
+    let countryISO = useSelector((state) => state.transfer.regionURL)
 
     const {Option} = Select
+    const [query, setQuery] = useState("")
 
     let rules = []
     rules.push({
@@ -14,30 +18,68 @@ import { getDropdownListFromAPI } from "../../duck/action"
         message: val.errorMessage
     })
 
+   
+
     const [items, setItems] = useState('')
+    const [loading, setLoading] = useState(false)
     const [selectedBank, setBankSelection] = useState('')
-    const dispatch = useDispatch()
+    
 
      useEffect(() => {
-         dispatch(getDropdownListFromAPI(val.links[0]?.javolinRoute)).then((res) => {
+        setLoading(true)
+         dispatch(getDropdownListFromAPI(`/api/business/rules-banks?country=${countryISO}&query=${query}`)).then((res) => {
              setItems(res)
+             setLoading(false)
          })
-     }, [dispatch, val.links])
+     }, [dispatch,countryISO, query, val.links])
 
     let _items = items ? items : []
 
+    let uniqueItems = {}
+
+    _items.map((val) => {
+        return uniqueItems[val.institutionName] = val.institutionName
+    })
 
     const handleSelectBank = (e) => {
+        let values = form.getFieldValue('bakingAndSettlement')
+        values={
+            ...values,
+            bank_name: e,
+            bank_address: ""
+        }
+        form.setFieldsValue({
+            "bakingAndSettlement": values
+        })
+        
         setBankSelection(e)
     }
 
+    const handleSelectBankAddress = (e,f) => {
+        let values = form.getFieldValue('bakingAndSettlement')
+        values={
+            ...values,
+            bank_address: e,
+            bank_primary_key: f.key
+        }
+
+        console.log("values: ", values)
+        form.setFieldsValue({
+            "bakingAndSettlement": values
+        })
+
+    }
+
+    const handleSearch = (e)=>{
+        setQuery(e)
+    }
+
     let listFilteredByBankName = _items.filter(banks => banks.institutionName === selectedBank)
-    console.log(listFilteredByBankName)
     return (
         <>
-        <Col key={1} xs={24} sm={24} md={12} lg={12} xl={12}>
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>        
             <Form.Item
-                name={['bakingAndSettlement', 'bank_name']}
+                name={'bank_name'}
                 rules={rules}
                 label={'Bank Name'}
 
@@ -46,55 +88,50 @@ import { getDropdownListFromAPI } from "../../duck/action"
                     size='large'
                     optionFilterProp="children"
                     filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        option?.children[1]?.toLowerCase()?.indexOf(input?.toLowerCase()) >= 0
                     }
+                    showSearch
+                    loading={loading}
+                    onSearch={handleSearch}
                     
                     onChange={handleSelectBank}
                 >
                     {
-                        Object.values(_items)?.map((option) => {
+                        Object.values(uniqueItems)?.map((option) => {
                             return (
-                                <Option key={option?.primaryKey} value={option?.institutionName}> {option?.institutionName}</Option>
+                                <Option key={option} value={option}> {option}</Option>
                             )
                         })
                     }
                 </Select>
             </Form.Item>
             </Col>
-            <Col key={2}  style={{width:"100%"}} xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Col xs={24} sm={24} md={24} lg={12} xl={12}>      
             <Form.Item
                 // labelInValue
-                name={['bakingAndSettlement', 'bank_address']}
+                name={'bank_address'}
                 rules={rules}
                 label={'Bank Address'}
-                style={{width:"100%"}}
 
             >
                 <Select
                     size='large'
                     filterOption={false}
-                    onChange={handleSelectBank}
+                    onChange={handleSelectBankAddress}
                     disabled={selectedBank === ''}
                 >
                     {
                         listFilteredByBankName?.map((option) => {
+                            let val = JSON.stringify(option)
+                            
                             return (
-                                <Option  value={option.primaryKey}> {option.address1} {option.city} {option.countryISO} {option.branchName}</Option>
+                                <Option key={option?.primaryKey} value={option?.address1}> {option.address1} {option.city} {option.countryISO} {option.branchName}</Option>
                             )
                         })
                     }
                 </Select>
             </Form.Item>
-            </Col>
-            {/* <Form.Item
-                noStyle
-                name={['bakingAndSettlement','bank_primary_key']}
-                rules={rules}
-                hidden
-
-            >
-                <Input value={selectedBank["primaryKey"]}/>
-            </Form.Item> */}
+            </Col> 
         </>
     )
 }

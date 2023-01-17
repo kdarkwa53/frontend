@@ -11,7 +11,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
     const { Option } = Select
      let url = useSelector((state) => state.transfer.regionURL)
 
-     url = url ? url : val.links[0]?.javolinRoute
+     url = url ? `/api/business/rules-regions?country=${url}` : val.links[0]?.javolinRoute
 
     let reg = val
     const dispatch = useDispatch()

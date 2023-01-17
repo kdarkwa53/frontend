@@ -7,7 +7,7 @@ import { unCamelCase } from "../../../../helpers/utils"
 import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
 
 
-const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
+const CountryAPIDropdown = ({ val, name, setCountry, ...rest }) => {
     const { Option } = Select
     let rules = []
     rules.push({
@@ -38,12 +38,10 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
     
     const _items = items ? items : []
 
-    const handleAccountHolderCountry = (regionCode) => {
-        let regionurl = `/api/business/rules-regions?country=${regionCode}`
+    const handleAccountHolderCountry = (regionurl) => {
         if(setCountry){
-            setCountry(regionCode)
+            setCountry(regionurl)
         }
-        console.log("region: ", regionurl)
         dispatch(changeRegionURL(regionurl))
     }
 
@@ -51,7 +49,7 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             {...rest}
-            name={val.id}
+            name={name ? name: val.id}
             rules={rules}
             label={Array.isArray(val?.id) ? unCamelCase(val?.id[1]) : unCamelCase(val?.id)}
         >
