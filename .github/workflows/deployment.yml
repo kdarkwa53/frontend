@@ -1,4 +1,4 @@
-name: Deploy Forex App
+name: Deploy Forex Application
 
 on:
   push:
