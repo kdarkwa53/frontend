@@ -1,10 +1,12 @@
 
-import { Form, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
+import { capitalizeString } from "../../../../helpers/utils"
+import { addBeneValues, changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
 
- const BankDropdown = ({ val }) => {
+ const BankDropdown = ({ val, form }) => {
+    const dispatch = useDispatch()
 
     const {Option} = Select
     const [query, setQuery] = useState("")
@@ -15,10 +17,15 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
         message: val.errorMessage
     })
 
+    const handleBankAddressChange = () => {
+        
+
+    }
+
     const [items, setItems] = useState('')
     const [loading, setLoading] = useState(false)
     const [selectedBank, setBankSelection] = useState('')
-    const dispatch = useDispatch()
+    
 
      useEffect(() => {
         setLoading(true)
@@ -37,20 +44,28 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
     })
 
     const handleSelectBank = (e) => {
-        
+        form.setFieldsValue({
+            "bankAddress" : ""
+        })
         setBankSelection(e)
+        
+    }
+
+    const handleSelectBankAddress = (e) => {
+        const address = {
+            "bankDetails": e
+        }
+        dispatch(addBeneValues(address))
     }
 
     const handleSearch = (e)=>{
-        console.log(e)
-        console.log(`${val.links[0]?.javolinRoute}?query=${query}`)
         setQuery(e)
     }
 
     let listFilteredByBankName = _items.filter(banks => banks.institutionName === selectedBank)
-    console.log(listFilteredByBankName)
     return (
         <>
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>        
             <Form.Item
                 name={'bank'}
                 rules={rules}
@@ -60,9 +75,9 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
                 <Select
                     size='large'
                     optionFilterProp="children"
-                    // filterOption={(input, option) =>
-                    //     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    // }
+                    filterOption={(input, option) =>
+                        option?.children[1]?.toLowerCase()?.indexOf(input?.toLowerCase()) >= 0
+                    }
                     showSearch
                     loading={loading}
                     onSearch={handleSearch}
@@ -71,9 +86,6 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
                 >
                     {
                         Object.values(uniqueItems)?.map((option) => {
-                            // let val = JSON.stringify(option)
-
-
                             return (
                                 <Option key={option} value={option}> {option}</Option>
                             )
@@ -81,10 +93,11 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
                     }
                 </Select>
             </Form.Item>
-
+            </Col>
+            <Col xs={24} sm={24} md={24} lg={12} xl={12}>      
             <Form.Item
                 // labelInValue
-                name={'bankDetails'}
+                name={'bankAddress'}
                 rules={rules}
                 label={'Bank Address'}
 
@@ -92,7 +105,7 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
                 <Select
                     size='large'
                     filterOption={false}
-                    onChange={handleSelectBank}
+                    onChange={handleSelectBankAddress}
                     disabled={selectedBank === ''}
                 >
                     {
@@ -105,6 +118,7 @@ import { changeRegionURL, getDropdownListFromAPI } from "../../duck/action"
                     }
                 </Select>
             </Form.Item>
+            </Col> 
         </>
     )
 }

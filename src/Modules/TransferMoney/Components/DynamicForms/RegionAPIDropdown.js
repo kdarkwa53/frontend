@@ -1,6 +1,6 @@
 
 
-import { Form, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import { formatCountdown } from "antd/lib/statistic/utils"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -45,6 +45,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
    
     const _reg_items = reg_items ? reg_items : []
     return (
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             {...rest}
             name={reg.id}
@@ -72,6 +73,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
                 }
             </Select>
         </Form.Item>
+        </Col>
 
     )
 }

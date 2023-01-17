@@ -114,6 +114,7 @@ const BeneficiaryLayoutRoute = ({ questions, pageNum, totalPages, type}) => {
                                                 block
                                                 htmlType="submit"
                                                 size="large"
+                                                shape="round"
                                                 style={{width: "400px"}}
                                                 loading={addLoading}
                                             >

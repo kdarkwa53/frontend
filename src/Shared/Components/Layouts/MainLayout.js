@@ -25,7 +25,7 @@ const MainLayout = ({ children, menuRoute, subtitle, breadSub, title, ...rest })
                         <DefaultMenu />
                     </div>
                 </div>
-                <div style={{ background: "#E0EAFF" }}>
+                <div style={{ height: "100%", background: "#E0EAFF" }}>
                     <div style={{padding: "1.5em 1.5em"}} className={Styles.runningHeader}>
                         <div style={{marginTop: "2em"}} className={Styles.runningTitle}>
                             <span style={{fontWeight: "700", fontSize: "28px", color: "white"}}>{title}</span> 

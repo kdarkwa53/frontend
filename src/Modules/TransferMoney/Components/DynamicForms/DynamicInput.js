@@ -1,6 +1,6 @@
 
 
-import { Form, Input } from "antd"
+import { Col, Form, Input } from "antd"
 import React from "react"
 import { unCamelCase } from "../../../../helpers/utils"
 
@@ -24,6 +24,7 @@ const DynamicInput = ({ val, ...rest }) => {
     }
 
     return (
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             {...rest}
             name={val?.id}
@@ -32,6 +33,7 @@ const DynamicInput = ({ val, ...rest }) => {
         >
             <Input size="large" />
         </Form.Item>
+        </Col>
     )
 }
 

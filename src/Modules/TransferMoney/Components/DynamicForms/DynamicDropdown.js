@@ -1,6 +1,6 @@
 
 
-import { Form, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import React from "react"
 import { filterValueSet, unCamelCase } from "../../../../helpers/utils"
 
@@ -28,6 +28,7 @@ import { filterValueSet, unCamelCase } from "../../../../helpers/utils"
 
     let newValueSet = val?.valueSet
     return (
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             name={val?.id}
             rules={rules}
@@ -54,6 +55,7 @@ import { filterValueSet, unCamelCase } from "../../../../helpers/utils"
                 }
             </Select>
         </Form.Item>
+        </Col>
     )
 }
 

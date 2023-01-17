@@ -22,22 +22,15 @@ const Savings = () => {
         {
             title: text.TRANSACTION_TYPE,
             dataIndex: "type",
+            key: "type",
             render: (type) => {
                 return (
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        {type?.title === "CREDIT" ? <Circle size={"30px"} color="green" > <CreditArrow color="white" /> </Circle> :
-                            <Circle size={"30px"} color="red" ><DebitArrow color={"white"} /> </Circle>
 
-                        }
-
-                        <span style={{ marginLeft: "0.5em" }}>
+                        <span >
                             {type?.module}
 
                         </span>
 
-
-
-                    </div>
                 );
             },
         },

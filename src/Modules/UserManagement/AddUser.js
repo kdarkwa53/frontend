@@ -1,46 +1,62 @@
 import { Button, Form, Input, Row, Col, Select, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { XIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addingUser, getRoles, updateBusUser } from "./duck/action";
+import { addingUser, getRoles, getUsers, updateBusUser } from "./duck/action";
 
 
-const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
+const AddUser = ({ isVisible, setIsModalVisible, editUser, setEditUser }) => {
     const dispatch = useDispatch()
+    const rLoading = useSelector((state) => state?.userMgt?.addingUser)
+
     useEffect(()=>{
         dispatch(getRoles())
-    }, [dispatch])
+        dispatch(getUsers())
+    }, [dispatch, rLoading])
 
     const [form] = useForm();
     
     const { Option } = Select
     const roles = useSelector((state) => state?.userMgt?.roles)
     const text = useSelector((state) => state?.language)
-    const users = useSelector((state) => state?.userMgt?.users)
-    const userDetails = users[editUser]
+    const [disableBtn, setButtonDisable] = useState(true)
+
     
-    form.setFieldsValue(userDetails)
-    const rLoading = useSelector((state) => state?.userMgt?.addingUser)
+
+    
+    // form.setFieldsValue(userDetails)
 
     let _roles = roles ? roles : {}
 
     const handleCancel = () => {
+        form.resetFields()
         setIsModalVisible(false)
+        
     }
 
     
     const showModal = () => {
+        form.resetFields();
+        setEditUser("")
+        console.log(editUser)
+        console.log("fieldVal:  ",form.getFieldsValue())
         setIsModalVisible(true);
     };
 
+
+    const handleformchange =()=>{
+        const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+        setButtonDisable(hasErrors)
+    }
     const onFinish = (val) => {
+        
         if(editUser){
-            form.resetFields()
-            setIsModalVisible(false)
             return(
-                dispatch(updateBusUser(val, editUser) )
+                dispatch(updateBusUser(val, editUser).then(()=>{
+                    setIsModalVisible(false)
+                }) )
             )
         }
         dispatch(addingUser(val)).then((res) => {
@@ -52,6 +68,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
         }).catch((err) => {
             console.log(err)
         })
+
 
     }
 
@@ -79,7 +96,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                 }
             >
                 <div className={Styles.header}>
-                    <div className={Styles.secTitle}>{text["Add new user"]}</div>
+                    <div className={Styles.secTitle}>{editUser ? text["Edit user"] : text["Add new user"]}</div>
                 </div>
 
                 <Form
@@ -88,6 +105,10 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                     style={{ width: "100%" }}
                     form={form}
                     onFinish={onFinish}
+                    onChange={handleformchange}
+                    initialValues={
+                        editUser
+                    }
                 >
                     <div style={{ padding: "20px 70px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                         <Form.Item
@@ -141,7 +162,7 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             ]}
                             style={{ width: "100%" }}
                         >
-                            <Select style={{ width: "100%" }} placeholder={text['Select role']} size="large" >
+                            <Select onChange={handleformchange} style={{ width: "100%" }} placeholder={text['Select role']} size="large" >
                                 {
                                     Object.values(_roles)?.map((role) => {
                                         return (
@@ -159,8 +180,9 @@ const AddUser = ({ isVisible, setIsModalVisible, editUser  }) => {
                             style={{ marginTop: "3em", padding: "5px 50px" }}
                             loading={rLoading}
                             shape="round"
+                            disabled={disableBtn}
                         >
-                            {text['Add user']}
+                            {editUser? text['Edit user'] : text['Add user'] }
                         </Button>
                     </div>
 

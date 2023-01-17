@@ -313,6 +313,16 @@ export const arrayToObjectByID= (data) => {
     return formattedData
 }
 
+export const capitalizeString=(mySentence)=>{
+const words = mySentence.split(" ");
+
+for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+}
+
+return words.join(" ");
+}
+
 
 export const _getFee = () => {
     return new Promise((res, rej) => {

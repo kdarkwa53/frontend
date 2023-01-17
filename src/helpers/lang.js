@@ -155,7 +155,7 @@ export const lang = {
         "Secure your Account": "Secure your Account",
         "Set your account pin": "Set your account pin",
         "Business KYC": "Business KYC",
-        "Provide your company details": "Fournir les renseignements sur votre entreprise",
+        "Provide your company details": "Provide your company details",
         "Let's secure your account": "Let's secure your account",
         "Javolin Services": "Javolin Services",
         "Completed": "Completed",
@@ -278,7 +278,8 @@ export const lang = {
        "We have sent a 6-digit code to your phone and email": "We have sent a 6-digit code to your phone and email",
        "Save": "Save",
        "Submit": "Submit",
-       "account": "account"
+       "account": "account",
+       "Edit user": "Edit user"
 
        
 
@@ -287,6 +288,8 @@ export const lang = {
 
     },
     FR: {
+        "Edit user": "Modifier l'utilisateur",
+        "Provide your company details": "Fournir les renseignements sur votre entreprise",
         "account": "compte",
         "We have sent a 6-digit code to your phone and email": "Nous avons envoyé un code à six chiffres à votre téléphone et à votre courriel",
         "Send From": "Envoyer Depuis",

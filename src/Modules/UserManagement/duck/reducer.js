@@ -110,12 +110,6 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
     case EDIT_USER_SUCCESS:
       return {
         ...state,
-        users: {
-          ...state.users,
-         [action.id]:{
-          ...action.data
-          }
-        },
         addingUser: false,
       };
     case ADDING_USER_ERROR:

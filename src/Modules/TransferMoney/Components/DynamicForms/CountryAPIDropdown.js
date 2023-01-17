@@ -1,6 +1,6 @@
 
 
-import { Form, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { unCamelCase } from "../../../../helpers/utils"
@@ -48,6 +48,7 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
     }
 
     return (
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             {...rest}
             name={val.id}
@@ -78,6 +79,7 @@ const CountryAPIDropdown = ({ val, setCountry, ...rest }) => {
 
             </Select>
         </Form.Item>
+        </Col>
     )
 }
 

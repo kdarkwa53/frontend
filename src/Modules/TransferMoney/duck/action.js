@@ -527,7 +527,7 @@ export const instructCorpayment = (details, setPassCodeVisible, form, history) =
     return async (dispatch) => {
         dispatch({ type: INSTRUCT_PAYMENT_REQUEST });
         try {
-             await axios.post(
+            const {data} = await axios.post(
                 `${REACT_APP_BASE_API_URL}/${userType}/spot-rate/instruct-payment`,
                 details,
                 authHeader
@@ -536,7 +536,8 @@ export const instructCorpayment = (details, setPassCodeVisible, form, history) =
                 type: INSTRUCT_PAYMENT_SUCCESS,
             });
 
-            dispatch(showSuccessNotification('Payment successful!'))
+            const resp = data?.message ? data?.message : 'Transaction Request sent!'
+            dispatch(showSuccessNotification(resp))
            
             history.push('/business/transactions')
 

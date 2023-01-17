@@ -148,18 +148,18 @@ const AddBenefeciaryPopUp = ({ isVisible, setVisible, type }) => {
     }
 
     const onFinish = (values) => {
-        dispatch(beneficiaryQuestions2(values, history, type)).then((val)=>{
-            if(val){
-                if(val.isIbanEnabled){
+        dispatch(beneficiaryQuestions2(values, history, type)).then((val) => {
+            if (val) {
+                if (val.isIbanEnabled) {
                     setVisibleIBAN(true)
                     setVisible(false)
-                }else{
+                } else {
                     setVisible(false)
                     setShowQuestions(true)
-                    
+
                 }
             }
-            
+
         })
     }
 
@@ -172,7 +172,7 @@ const AddBenefeciaryPopUp = ({ isVisible, setVisible, type }) => {
 
     return (
         <>
-            
+
             <BeneficiaryQuestionsPopUp isVisible={showQuestion} setVisible={setShowQuestions} />
 
             <Modal open={isVisible} onCancel={handleCancel}
@@ -210,24 +210,10 @@ const AddBenefeciaryPopUp = ({ isVisible, setVisible, type }) => {
                             <JavContentTitle title={type === "forex" ? 'Destination Account Information' : 'Beneficiary Information'} />
 
                             <Row style={{ marginTop: "2em" }} gutter={[32, 16]}>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                    <DynamicAPIDropdown key={'destinationCountry'} val={data['destinationCountry']} />
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                    <DynamicAPIDropdown key={'bankCountry'} val={data['bankCountry']} />
-                                </Col>
-                            </Row>
-                            <Row gutter={[32, 16]}>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                    <DynamicAPIDropdown key={'bankCurrency'} val={data['bankCurrency']} />
-
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                    <DynamicDropdown key={'classification'} val={data['classification']} />
-                                </Col>
-                            </Row>
-                            <Row gutter={[32, 16]}>
-
+                                <DynamicAPIDropdown key={'destinationCountry'} val={data['destinationCountry']} />
+                                <DynamicAPIDropdown key={'bankCountry'} val={data['bankCountry']} />
+                                <DynamicAPIDropdown key={'bankCurrency'} val={data['bankCurrency']} />
+                                <DynamicDropdown key={'classification'} val={data['classification']} />
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <Form.Item
                                         name={'paymentMethods'}
@@ -251,18 +237,16 @@ const AddBenefeciaryPopUp = ({ isVisible, setVisible, type }) => {
                                                 })
                                             }
                                         </Select>
-                                    </Form.Item>                                           
-                                     </Col>
+                                    </Form.Item>
+                                </Col>
                             </Row>
-
-
                         </div>
                         <div style={{ display: "flex", justifyContent: "flex-end" }}>
                             <Button
                                 shape='round'
                                 disabled={disableButton}
                                 type="primary"
-                                style={{ width: "400px", margin: "1em 0.5em"}}
+                                style={{ width: "400px", margin: "1em 0.5em" }}
                                 htmlType="submit"
                                 size="large"
                                 loading={load}

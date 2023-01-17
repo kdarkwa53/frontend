@@ -1,21 +1,38 @@
 import {  Layout, ConfigProvider, Table, Row, Tag } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Edit, Edit2Icon, Trash, TrashIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { EyeOutlined } from "@ant-design/icons";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 
 import AddUser from "./AddUser";
 import AccessControl from "../../Shared/Components/AccessControl/AccessControl";
+import { getUsers } from "./duck/action";
 
 
 const UserManagement = () => {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getUsers())
+    }, [dispatch])
+
+
     const text = useSelector((state) => state?.language)
     const { Content } = Layout;
     const [editUser, setEditUser] = useState(false)
+    const users = useSelector((state) => state?.userMgt?.users)
+
+    
 
     const handleEdit = (user)=>{
-       setEditUser(user.id)
+        let userDetails = users[user.id]
+
+        userDetails = {
+            ...userDetails,
+            role_id: userDetails?.role?.role_id
+        }
+
+       setEditUser(userDetails)
        setIsModalVisible(true)
     }
 
@@ -24,7 +41,6 @@ const UserManagement = () => {
     }
  
 
-    const users = useSelector((state) => state?.userMgt?.users)
    
 
     
@@ -56,8 +72,8 @@ const UserManagement = () => {
         },
         {
             title: text["Role"],
-            dataIndex: "role",
-            key: "role",
+            dataIndex: "role_id",
+            key: "role_id",
         },
        
         {
@@ -101,7 +117,7 @@ const UserManagement = () => {
                 full_name: user.full_name,
                 email: user.email,
                 phone: user.phone_number,
-                role: user?.is_parent? "Super Admin" : user?.role?.role?.name,
+                role_id: user?.is_parent? "Super Admin" : user?.role?.role?.name,
                 id: user.id,
                 is_parent: user.is_parent
                 
@@ -128,7 +144,7 @@ const UserManagement = () => {
                                 allowedPermissions={["CREATE_BUSINESS_USER"]}
                                 renderNoAccess={''}
                             >
-                        <AddUser editUser={editUser} isVisible={isVisible} setIsModalVisible={setIsModalVisible}/>
+                        <AddUser editUser={editUser} isVisible={isVisible} setEditUser={setEditUser} setIsModalVisible={setIsModalVisible}/>
                         </AccessControl>
                     </div>
                 <Row style={{marginTop: "2em"}}>

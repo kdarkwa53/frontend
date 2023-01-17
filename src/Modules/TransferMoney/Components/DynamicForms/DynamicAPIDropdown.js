@@ -1,5 +1,5 @@
 
-import { Form, Select } from "antd"
+import { Col, Form, Select } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { unCamelCase } from "../../../../helpers/utils"
@@ -39,6 +39,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
     const _items = items ? items : []
    
     return (
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             {...rest}
             name={val.id}
@@ -67,6 +68,7 @@ import { getDropdownListFromAPI } from "../../duck/action"
                 }
             </Select>
         </Form.Item>
+        </Col>
     )
 }
 
