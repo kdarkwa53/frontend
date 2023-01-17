@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const checkPermissions  = (allowedPermissions, userPermissions)=>{
 
-    if (allowedPermissions.length === 0) {
+    if (allowedPermissions?.length === 0) {
         return true;
       }
 

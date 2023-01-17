@@ -386,7 +386,7 @@ const Authorization = ({ form }) => {
         const editValues = {
             ...authorization_information[item_id],
             id: item_id,
-            date_signed: moment(authorization_information[item_id].date_signed, 'DD-MM-YYYY'),
+            date_signed: moment(authorization_information[item_id].date_signed, 'MM-DD-YYYY'),
             dob: moment(authorization_information[item_id].dob, 'DD-MM-YYYY')
         }
 

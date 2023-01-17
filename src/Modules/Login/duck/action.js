@@ -116,8 +116,8 @@ export const login = (details, history, accountType) => {
           });
         }
     
-       
-    if(!user.business_kyc){
+      
+    if(!user?.business_kyc){
         dispatch(saveKCYValues({
           clientInformation: {
             address: user.business_address,
@@ -132,8 +132,10 @@ export const login = (details, history, accountType) => {
           }
       }))
     }else{
+
+
       dispatch(saveKCYValues(
-        JSON.parse(user.business_kyc)
+        JSON.parse(user?.business_kyc)
       ))
     }
     
