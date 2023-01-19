@@ -8,6 +8,7 @@ import {  useDispatch, useSelector } from "react-redux";
 import AddUser from "./AddUser";
 import AccessControl from "../../Shared/Components/AccessControl/AccessControl";
 import { getUsers } from "./duck/action";
+import { statusTagColor } from "../../helpers/utils";
 
 
 const UserManagement = () => {
@@ -75,6 +76,16 @@ const UserManagement = () => {
             dataIndex: "role_id",
             key: "role_id",
         },
+        {
+            title: text["Status"],
+            dataIndex: "status",
+            key: "status",
+            render: (status) => {
+                return(
+                    <Tag color={statusTagColor(status)}>{status}</Tag>
+                )
+            }
+        },
        
         {
             title: text["Action"],
@@ -119,7 +130,8 @@ const UserManagement = () => {
                 phone: user.phone_number,
                 role_id: user?.is_parent? "Super Admin" : user?.role?.role?.name,
                 id: user.id,
-                is_parent: user.is_parent
+                is_parent: user.is_parent,
+                status: user?.status ? user?.status : "Approved"
                 
             };
         })

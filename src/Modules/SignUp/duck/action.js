@@ -55,7 +55,7 @@ export const signup = (details, history, accountType) => {
         });
         if (!error.response) {
           dispatch(
-            showErrorNotification("Action failed", "Check your internet and try again")
+            showErrorNotification("Action failed", "Something went wrong. Try again later.")
           );
         } else {
           dispatch(

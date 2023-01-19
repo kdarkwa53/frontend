@@ -78,7 +78,7 @@ export const setPin = (details, nextSlide) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -118,7 +118,7 @@ export const getCountries = () => {
         } catch (error) {
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -167,7 +167,7 @@ export const getConvertion = (id) => {
         } catch (error) {
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -197,7 +197,7 @@ export const getAllSecurityQuestions= () => {
         } catch (error) {
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -225,7 +225,7 @@ export const getUserSecurityQuestions = () => {
         } catch (error) {
             // if (!error.response) {
             //     dispatch(
-            //         showErrorNotification("Action failed", "Check your internet and try again")
+            //         showErrorNotification("Action failed", "Something went wrong. Try again later.")
             //     );
             // } else {
             //     dispatch(
@@ -259,7 +259,7 @@ export const getCurrencies = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -294,7 +294,7 @@ export const getRulesCurrencies = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -327,7 +327,7 @@ export const getWallets = () => {
             });
             if (!error.response) {
                 // dispatch(
-                //     showErrorNotification("Action failed", "Check your internet and try again")
+                //     showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 // );
             } else {
                 // dispatch(
@@ -358,7 +358,7 @@ export const getBanksAndMomos = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -421,7 +421,7 @@ export const saveFundSource = (details, form, visibleModal) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -461,7 +461,7 @@ export const verifyIdentity = (details, modal) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -509,7 +509,7 @@ export const setSecurityQuestion = (details, form, nextSlide) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(

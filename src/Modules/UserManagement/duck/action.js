@@ -27,7 +27,13 @@ import {
   DECLINE_TRANX_SUCCESS,
   DECLINE_TRANX_REQUEST,
   DECLINE_TRANX_ERROR,
-  EDIT_USER_SUCCESS
+  EDIT_USER_SUCCESS,
+  APPROVE_USER_REQUEST,
+  APPROVE_USER_SUCCESS,
+  APPROVE_USER_ERROR,
+  DECLINE_USER_REQUEST,
+  DECLINE_USER_SUCCESS,
+  DECLINE_USER_ERROR
 } from "./types"
 
 
@@ -65,7 +71,7 @@ export const getPermissions = () => {
           });
           if (!error.response) {
               dispatch(
-                  showErrorNotification("Action failed", "Check your internet and try again")
+                  showErrorNotification("Action failed", "Something went wrong. Try again later.")
               );
           } else {
               dispatch(
@@ -102,7 +108,7 @@ export const addingRole = (details) => {
           });
           if (!error.response) {
               dispatch(
-                  showErrorNotification("Action failed", "Check your internet and try again")
+                  showErrorNotification("Action failed", "Something went wrong. Try again later.")
               );
           } else {
               dispatch(
@@ -139,7 +145,7 @@ export const editingRole = (details, role_id) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -173,7 +179,7 @@ export const getRoles = () => {
           });
           if (!error.response) {
               dispatch(
-                  showErrorNotification("Action failed", "Check your internet and try again")
+                  showErrorNotification("Action failed", "Something went wrong. Try again later.")
               );
           } else {
               dispatch(
@@ -207,7 +213,7 @@ export const getUsers = () => {
           });
           if (!error.response) {
               dispatch(
-                  showErrorNotification("Action failed", "Check your internet and try again")
+                  showErrorNotification("Action failed", "Something went wrong. Try again later.")
               );
           } else {
               dispatch(
@@ -278,7 +284,7 @@ export const addingUser = (details) => {
           if (!error.response) {
 
               dispatch(
-                  showErrorNotification("Action failed", "Check your internet and try again")
+                  showErrorNotification("Action failed", "Something went wrong. Try again later.")
               );
           } else {
             const errors = error.response.data.errors;
@@ -313,7 +319,7 @@ export const getPendingTransactions = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -349,7 +355,7 @@ export const approveTransaction = (id) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -360,6 +366,75 @@ export const approveTransaction = (id) => {
     };
   }
 
+  export const approveUser = (id) => {
+    const userType = getUserType()
+  
+    return async (dispatch) => {
+        dispatch({
+            type: APPROVE_USER_REQUEST,
+        });
+        try {
+            const { data } = await axios.post(
+                `${REACT_APP_BASE_API_URL}/${userType}/account/${id}/approve`, {id: id},
+                authHeader
+            );
+  
+            dispatch({
+                type: APPROVE_USER_SUCCESS,
+            });
+            
+            const res = data?.message ? data?.message : "Approved user"
+            dispatch(showSuccessNotification(res))
+        } catch (error) {
+            dispatch({
+                type: APPROVE_USER_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message, spiltErrors(error?.errors))
+                );
+            }
+        }
+    };
+  }
+  export const declineUser = (id) => {
+    const userType = getUserType()
+  
+    return async (dispatch) => {
+        dispatch({
+            type: DECLINE_USER_REQUEST,
+        });
+        try {
+            const { data } = await axios.post(
+                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/decline`, {id: id},
+                authHeader
+            );
+  
+            dispatch({
+                type: DECLINE_USER_SUCCESS,
+            });
+            const res = data?.message ? data?.message : "Declined user"
+            dispatch(showSuccessNotification(res))
+        } catch (error) {
+            dispatch({
+                type: DECLINE_USER_ERROR,
+            });
+            if (!error.response) {
+                dispatch(
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
+                );
+            } else {
+                dispatch(
+                    showErrorNotification(error?.response?.data?.message)
+                );
+            }
+        }
+    };
+  }
   export const declineTransaction = (id) => {
     const userType = getUserType()
   
@@ -385,7 +460,7 @@ export const approveTransaction = (id) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(

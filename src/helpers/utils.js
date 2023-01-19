@@ -216,6 +216,8 @@ export const statusTagColor = (msg) => {
             return "yellow"
         case "FAILED":
             return "volcano"
+        case "approved":
+            return "lime"
         default:
             return "magenta";
     }

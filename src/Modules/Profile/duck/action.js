@@ -55,7 +55,7 @@ export const getProfile = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -98,7 +98,7 @@ export const changePassword = (details, form) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -143,7 +143,7 @@ export const verifySecurityQuestion = (details, nextSlide)=>{
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -188,7 +188,7 @@ export const changePin = (details, form) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -233,7 +233,7 @@ export const sendMessage = (details, form) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(

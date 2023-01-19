@@ -96,7 +96,7 @@ export const javolinTranfer = (details, setPassCodeVisible, form, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -141,7 +141,7 @@ export const createWallet = (details, form, setIsModalVisible)=>{
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -176,7 +176,7 @@ export const getTransactionFee = (details)=>{
             )
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -228,7 +228,7 @@ export const accountTranfer = (details, setPassCodeVisible, form, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -267,7 +267,7 @@ export const airtimeTransfer = (details, setPassCodeVisible, form, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -333,7 +333,7 @@ export const addBeneficiary = (details, history, type) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -399,7 +399,7 @@ export const addBeneficiary2 = (details, history, type, close) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -432,7 +432,7 @@ export const getBeneficiaries = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -468,7 +468,7 @@ export const momoTranfer = (details, setPassCodeVisible, form, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -505,7 +505,7 @@ export const bookRate = (details)=>{
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -547,7 +547,7 @@ export const instructCorpayment = (details, setPassCodeVisible, form, history) =
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -580,7 +580,7 @@ export const getRate = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -617,7 +617,7 @@ export const getSpotRate = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -667,7 +667,7 @@ export const getPrepaidLink = (details, setPassCodeVisible, form, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -705,7 +705,7 @@ export const getPreRules = () => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -949,7 +949,7 @@ export const validateIBAN = (details)=>{
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1020,7 +1020,7 @@ export const getRules = (details, history) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1058,7 +1058,7 @@ export const getJavRecepientName = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1082,7 +1082,7 @@ export const getDropdownListFromAPI = (link) => {
             
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1114,7 +1114,7 @@ export const getReceiverName = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1148,7 +1148,7 @@ export const getAccountHolderName = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1193,7 +1193,7 @@ export const momoTranfer2 = (details, setPassCodeVisible, form, history) => {
 
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(
@@ -1242,7 +1242,7 @@ export const bankTranfer = (details, setPassCodeVisible, form, history) => {
 
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(

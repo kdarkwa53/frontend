@@ -169,7 +169,7 @@ export const login = (details, history, accountType) => {
       });
       if (!error.response) {
         dispatch(
-          showErrorNotification("Action failed", "Check your internet and try again")
+          showErrorNotification("Action failed", "Something went wrong. Try again later.")
         );
       } else {
         dispatch(
@@ -210,7 +210,7 @@ export const recoverPassword = (details, history) => {
       });
       if (!error.response) {
         dispatch(
-          showErrorNotification("Action failed", "Check your internet and try again")
+          showErrorNotification("Action failed", "Something went wrong. Try again later.")
         );
       } else {
         dispatch(
@@ -309,7 +309,7 @@ export const busLogin = (details, history) => {
       });
       if (!error.response) {
         dispatch(
-          showErrorNotification("Action failed", "Check your internet and try again")
+          showErrorNotification("Action failed", "Something went wrong. Try again later.")
         );
       } else {
         dispatch(
