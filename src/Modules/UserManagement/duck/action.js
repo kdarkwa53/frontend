@@ -237,11 +237,11 @@ export const updateBusUser = (details, id)=>{
                 details,
                 authHeader
             );
-  
+                console.log("editing: ",details, id)
             dispatch({
                 type: EDIT_USER_SUCCESS,
-                data : details,
-                id:id
+                // data : details,
+                // id:id
             });
             dispatch(showSuccessNotification('Updated successfully'))
         } catch (error) {
@@ -263,15 +263,18 @@ export const addingUser = (details) => {
           type: ADDING_USER_REQUEST,
       });
       try {
-          const { data } = await axios.post(
+          let { data } = await axios.post(
               `${REACT_APP_BASE_API_URL}/${userType}/accounts`,
               details,
               authHeader
           );
+          
+
+          console.log("final: ",data)
 
           dispatch({
               type: ADDING_USER_SUCCESS,
-              data : normalizeOneIdData(data)
+            //   data : normalizeOneIdData(data)
           });
           dispatch(showSuccessNotification('User added successfully'))
           return data

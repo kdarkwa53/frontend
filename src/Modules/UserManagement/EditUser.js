@@ -4,16 +4,25 @@ import React, { useEffect, useState } from "react";
 import { XIcon } from "../../Shared/Components/JavIcons";
 import Styles from "./UserMgt.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addingUser } from "./duck/action";
+import { addingUser, getRoles, getUsers, updateBusUser } from "./duck/action";
 
 
-const AddUser = ({ isVisible, setIsModalVisible }) => {
+const EditUser = ({ isVisible, setIsModalVisible, editUser, setEditUser }) => {
+    console.log(editUser)
     const dispatch = useDispatch()
     const rLoading = useSelector((state) => state?.userMgt?.addingUser)
-
-
-
+    const users = useSelector((state) => state?.userMgt?.users)
+    let userDetails = users[editUser.id]
+    userDetails = {
+        ...userDetails,
+        role_id: userDetails?.role?.role_id
+    }
     const [form] = useForm();
+    useEffect(()=>{
+        form.setFieldsValue(userDetails)
+    }, [form, userDetails])
+
+    
     
     const { Option } = Select
     const roles = useSelector((state) => state?.userMgt?.roles)
@@ -23,7 +32,8 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
     
 
     
-    // form.setFieldsValue(userDetails)
+
+    
 
     let _roles = roles ? roles : {}
 
@@ -36,6 +46,7 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
     
     const showModal = () => {
         form.resetFields();
+        setEditUser("")
         setIsModalVisible(true);
     };
 
@@ -45,26 +56,15 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
         setButtonDisable(hasErrors)
     }
     const onFinish = (val) => {
-        
-        dispatch(addingUser(val)).then((res) => {
-            if (res) {
-                form.resetFields()
-                setIsModalVisible(false)
-            }
-
-        }).catch((err) => {
-            console.log(err)
+        // console.log(val, editUser.id)
+        dispatch(updateBusUser(val, editUser.id)).then(()=>{
+            setIsModalVisible(false)
         })
-
-
     }
 
     return (
         <>
 
-            <Button style={{background: "#0032A0", fontSize: "16px"}}  onClick={showModal} type="primary" size="large" shape="round" >
-                {text["Add new user"]}
-            </Button>
             <Modal
                 open={isVisible}
                 onCancel={handleCancel}
@@ -83,7 +83,7 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
                 }
             >
                 <div className={Styles.header}>
-                    <div className={Styles.secTitle}>{text["Add new user"]}</div>
+                    <div className={Styles.secTitle}>{userDetails ? text["Edit user"] : text["Add new user"]}</div>
                 </div>
 
                 <Form
@@ -93,6 +93,9 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
                     form={form}
                     onFinish={onFinish}
                     onChange={handleformchange}
+                    initialValues={
+                        userDetails
+                    }
                 >
                     <div style={{ padding: "20px 70px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                         <Form.Item
@@ -119,7 +122,7 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
                             ]}
                             style={{ width: "100%" }}
                         >
-                            <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. abc@zenithbank.com" />
+                            <Input disabled style={{ minWidth: "490px" }} size="large" placeholder="Eg. abc@zenithbank.com" />
                         </Form.Item>
 
                         <Form.Item
@@ -132,7 +135,7 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
                             ]}
                             style={{ width: "100%" }}
                         >
-                            <Input style={{ minWidth: "490px" }} size="large" placeholder="Eg. +1223449399304" />
+                            <Input disabled style={{ minWidth: "490px" }} size="large" placeholder="Eg. +1223449399304" />
                         </Form.Item>
 
 
@@ -166,7 +169,7 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
                             shape="round"
                             disabled={disableBtn}
                         >
-                            {text['Add user'] }
+                            {editUser? text['Edit user'] : text['Add user'] }
                         </Button>
                     </div>
 
@@ -177,4 +180,4 @@ const AddUser = ({ isVisible, setIsModalVisible }) => {
     )
 }
 
-export default AddUser
+export default EditUser

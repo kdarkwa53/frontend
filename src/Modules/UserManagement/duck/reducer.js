@@ -139,10 +139,10 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
     case ADDING_USER_SUCCESS:
       return {
         ...state,
-        users: {
-          ...state.users,
-          ...action.data
-        },
+        // users: {
+        //   ...state.users,
+        //   ...action.data
+        // },
         addingUser: false,
       };
     case EDIT_USER_SUCCESS:
