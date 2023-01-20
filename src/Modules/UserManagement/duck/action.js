@@ -413,7 +413,7 @@ export const approveTransaction = (id) => {
         });
         try {
             const { data } = await axios.post(
-                `${REACT_APP_BASE_API_URL}/${userType}/pending-transactions/${id}/decline`, {id: id},
+                `${REACT_APP_BASE_API_URL}/${userType}/account/${id}/decline`, {id: id},
                 authHeader
             );
   
