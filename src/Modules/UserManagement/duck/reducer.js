@@ -25,7 +25,13 @@ import {
   DECLINE_TRANX_SUCCESS,
   DECLINE_TRANX_REQUEST,
   DECLINE_TRANX_ERROR,
- EDIT_USER_SUCCESS
+  EDIT_USER_SUCCESS,
+  APPROVE_USER_REQUEST,
+  APPROVE_USER_SUCCESS,
+  APPROVE_USER_ERROR,
+  DECLINE_USER_REQUEST,
+  DECLINE_USER_SUCCESS,
+  DECLINE_USER_ERROR
 } from "./types"
 
 
@@ -37,7 +43,9 @@ const INITIAL_STATE = {
   addingUser: false,
   gettingUsers: false,
   getPending: false,
-  approveTranx: false
+  approveTranx: false,
+  approvingUser: false,
+  decliningUser: false
 };
 
 
@@ -45,6 +53,36 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
   const { type } = action;
 
   switch (type) {
+    case APPROVE_USER_REQUEST:
+      return {
+        ...state,
+        approvingUser: true,
+      };
+    case APPROVE_USER_SUCCESS:
+      return {
+        ...state,
+        approvingUser: false,
+      };
+    case APPROVE_USER_ERROR:
+      return {
+        ...state,
+        approvingUser: false,
+      };
+      case DECLINE_USER_REQUEST:
+        return {
+          ...state,
+          decliningUser: true,
+        };
+      case DECLINE_USER_SUCCESS:
+        return {
+          ...state,
+          decliningUser: false,
+        };
+      case DECLINE_USER_ERROR:
+        return {
+          ...state,
+          decliningUser: false,
+        };
     case GET_PENDING_TRANX_REQUEST:
       return {
         ...state,
@@ -61,38 +99,38 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
         ...state,
         getPending: false,
       };
-      case APPROVE_TRANX_REQUEST:
-        return {
-          ...state,
-          approveTranx: true,
-        };
-      case APPROVE_TRANX_SUCCESS:
-        return {
-          ...state,
-          pending_tranx: removeByKey(state?.pending_tranx, action.data),
-          approveTranx: false,
-        };
-      case APPROVE_TRANX_ERROR:
-        return {
-          ...state,
-          approveTranx: false,
-        };
-        case DECLINE_TRANX_REQUEST:
-          return {
-            ...state,
-            approveTranx: true,
-          };
-        case DECLINE_TRANX_SUCCESS:
-          return {
-            ...state,
-            pending_tranx: removeByKey(state?.pending_tranx, action.data),
-          approveTranx: false,
-          };
-        case DECLINE_TRANX_ERROR:
-          return {
-            ...state,
-            approveTranx: false,
-          };
+    case APPROVE_TRANX_REQUEST:
+      return {
+        ...state,
+        approveTranx: true,
+      };
+    case APPROVE_TRANX_SUCCESS:
+      return {
+        ...state,
+        pending_tranx: removeByKey(state?.pending_tranx, action.data),
+        approveTranx: false,
+      };
+    case APPROVE_TRANX_ERROR:
+      return {
+        ...state,
+        approveTranx: false,
+      };
+    case DECLINE_TRANX_REQUEST:
+      return {
+        ...state,
+        approveTranx: true,
+      };
+    case DECLINE_TRANX_SUCCESS:
+      return {
+        ...state,
+        pending_tranx: removeByKey(state?.pending_tranx, action.data),
+        approveTranx: false,
+      };
+    case DECLINE_TRANX_ERROR:
+      return {
+        ...state,
+        approveTranx: false,
+      };
     case ADDING_USER_REQUEST:
       return {
         ...state,
@@ -101,10 +139,10 @@ export default function reducer(state = INITIAL_STATE, action = { type: "" }) {
     case ADDING_USER_SUCCESS:
       return {
         ...state,
-        users: {
-          ...state.users,
-          ...action.data
-        },
+        // users: {
+        //   ...state.users,
+        //   ...action.data
+        // },
         addingUser: false,
       };
     case EDIT_USER_SUCCESS:

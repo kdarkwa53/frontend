@@ -54,7 +54,7 @@ export const getTransactions = () => {
             });
             if (!error.response) {
                 // dispatch(
-                //     showErrorNotification("Action failed", "Check your internet and try again")
+                //     showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 // );
             } else {
                 // dispatch(
@@ -93,7 +93,7 @@ const exec = async (token, dispatch) => {
         });
         if (!error.response) {
             dispatch(
-                showErrorNotification("Action failed", "Check your internet and try again")
+                showErrorNotification("Action failed", "Something went wrong. Try again later.")
             );
         } else {
             dispatch(
@@ -207,7 +207,7 @@ export const getTopupToken = (details) => {
             });
             if (!error.response) {
                 dispatch(
-                    showErrorNotification("Action failed", "Check your internet and try again")
+                    showErrorNotification("Action failed", "Something went wrong. Try again later.")
                 );
             } else {
                 dispatch(

@@ -279,7 +279,8 @@ export const lang = {
        "Save": "Save",
        "Submit": "Submit",
        "account": "account",
-       "Edit user": "Edit user"
+       "Edit user": "Edit user",
+       "Status": "Status"
 
        
 
@@ -288,6 +289,7 @@ export const lang = {
 
     },
     FR: {
+        "Status": "Le Statut",
         "Edit user": "Modifier l'utilisateur",
         "Provide your company details": "Fournir les renseignements sur votre entreprise",
         "account": "compte",
