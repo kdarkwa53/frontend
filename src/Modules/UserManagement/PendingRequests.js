@@ -43,24 +43,21 @@ const PendingRequests = () => {
 
 
     const handleDecline = (e)=>{
-        console.log(e)
         dispatch(approveTransaction(e))
     }
 
     const handleView = (e)=>{
         const details = transactions[e]
 
-        dispatch(getTransactionFee({
-            "reference": details?.params?.order_id,
-            "module": "FOREX",
-            "amount": details?.transaction?.amount, 
-            "currency_id": details?.transaction?.currency_id,
-        })).then((fee) => {
+        // dispatch(getTransactionFee({
+        //     "reference": details?.params?.order_id,
+        //     "module": "FOREX",
+        //     "amount": details?.transaction?.amount, 
+        //     "currency_id": details?.transaction?.currency_id,
+        // })).then((fee) => {
         
-        console.log(fee)
         let info = {
             ...details,
-            fee: fee
         }
 
 
@@ -68,7 +65,7 @@ const PendingRequests = () => {
         setTrans(info)
         setVisible(true)
 
-        })
+        // })
         
     }
   

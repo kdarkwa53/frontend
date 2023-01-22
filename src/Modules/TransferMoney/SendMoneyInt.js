@@ -73,12 +73,11 @@ const SendMoneyInt = (props) => {
                     }
                 )
                 // show review screen  
-                console.log('order: ', val)
                 if (val) {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
                         "module": "FOREX",
-                        "amount": settlementDetails?.sender_without_fees?.amount,
+                        "amount": settlementDetails?.sender?.amount,
                         "currency_id": 1,
                     })).then((fee) => {
                         console.log(fee)
