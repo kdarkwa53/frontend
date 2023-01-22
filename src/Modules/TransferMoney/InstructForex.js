@@ -63,6 +63,7 @@ const InstructForex = (props) => {
 
     const [isVisible, setVisible] = useState()
 
+    console.log("rate: ", state?.rate)
 
 
 
@@ -100,10 +101,9 @@ const InstructForex = (props) => {
                     dispatch(getTransactionFee({
                         "reference": state?.deal?.orderNumber,
                         "module": "FOREX",
-                        "amount": state?.rate?.sender_without_fees?.amount,
+                        "amount": state?.rate?.sender?.amount,
                         "currency_id": 1,
                     })).then((fee) => {
-                        console.log(fee)
                         let info = {
                             "action": "Confirm trade",
                             "operation": "Sending",

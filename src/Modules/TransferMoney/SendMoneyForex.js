@@ -51,7 +51,7 @@ const SendMoneyForex = (props) => {
     const [bene_currency, set_beneCurrency] = useState(state?.currency)
 
     const [bene_detatils, set_beneDetails] = useState(state?.currency)
-    const [disableAmount, setDisableAmount] = useState(true)
+    const [disableAmount, setDisableAmount] = useState(Object.keys(wallets).length === 1 ? false: true)
     const [disableBeneAmount, setDisableBeneAmount] = useState(state ? false: true)
 
 
@@ -92,7 +92,7 @@ const SendMoneyForex = (props) => {
                     dispatch(getTransactionFee({
                         "reference": val?.response?.orderNumber,
                         "module": "FOREX",
-                        "amount": settlementDetails?.sender_without_fees?.amount,
+                        "amount": settlementDetails?.sender?.amount,
                         "currency_id": 1,
                     })).then((fee) => {
                         console.log(fee)
