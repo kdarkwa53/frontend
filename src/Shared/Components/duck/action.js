@@ -31,6 +31,9 @@ import {
     ADD_DEFAULT_CURRENCIES,
     SETCURRENT_ROUTE,
     GET_RULES_CURRENCIES,
+    RUNNING_HEADER_REQUEST,
+    RUNNING_HEADER_SUCCESS,
+    RUNNING_HEADER_ERROR,
   
 } from "./types"
 
@@ -432,6 +435,50 @@ export const saveFundSource = (details, form, visibleModal) => {
     };
 }
 
+export const getRunningHeader = (currency) => {
+    const userType = getUserType()   
+    const details = {
+        "from": currency,
+        "value": 1,
+        "to": [
+            "USD","CAD","GHS","EUR","AED", "CFA", "CNY", "GBP",
+        ]
+    }
+    return async (dispatch) => {
+        dispatch({ type: RUNNING_HEADER_REQUEST });
+        try {
+            let { data } = await axios.post(
+                `${REACT_APP_BASE_API_URL}/${userType}/spot-rate/running-header`,
+                details,
+                authHeader
+            );
+
+            data = {
+                base: currency,
+                currency: data
+            }
+            dispatch({
+                type: RUNNING_HEADER_SUCCESS,
+                data: data
+            });
+
+           
+        } catch (error) {
+            dispatch({
+                type: RUNNING_HEADER_ERROR,
+            });
+            // if (!error.response) {
+            //     dispatch(
+            //         showErrorNotification("Action failed", "Something went wrong. Try again later.")
+            //     );
+            // } else {
+            //     dispatch(
+            //         showErrorNotification(error?.response?.data?.message)
+            //     );
+            // }
+        }
+    };
+}
 export const verifyIdentity = (details, modal) => {
     const userType = getUserType()
    

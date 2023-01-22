@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route } from "react-router-dom";
-import { Layout, Row, Col, Select } from "antd";
+import { Layout, Row, Col, Select, Dropdown, Button } from "antd";
 import DefaultMenu from "../Menu/DefaultMenu";
 import Styles from "../Menu/Menu.module.css"
 import SiderLayout from "./SiderLayout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import flag from "../../../assets/flag.png"
+import { getRunningHeader } from "../duck/action";
 
 
 
@@ -13,6 +14,32 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
 
     const { Option } = Select
     const text = useSelector((state) => state?.language)
+    const defaultCurrencies = useSelector((state) => state?.resources?.defaultCurrencies)
+    const base_currency = useSelector((state) => state?.resources?.base_currency)
+    const runningCurrencies = useSelector((state) => state?.resources?.running_header)
+    const loadingCurrencies = useSelector((state) => state?.resources?.loadingRunningHeader)
+    const items = []
+    const [baseCurrency, setBaseCurrency] = useState(base_currency)
+    const dispatch = useDispatch()
+
+    const handleCurrencyChange = (cur) => {
+        dispatch(getRunningHeader(cur))
+        setBaseCurrency(cur)
+    }
+    
+    Object.values(defaultCurrencies).forEach((cur, i) => {
+        const item = cur.ISO ? cur?.ISO : cur?.symbol
+        items.push({
+            key: i,
+            label: (
+                <div onClick={() => handleCurrencyChange(item)}>
+                    {item}
+                </div>
+            ),
+
+        })
+    })
+
 
     return (
 
@@ -23,49 +50,50 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                         <DefaultMenu />
                     </div>
                 </div>
-                <div className={Styles.topBar}>
-                                    <div className={Styles.def_curr}>
-                                        <img width={"20"} src={flag} alt="flag"/>
-                                        USD 1
-                                    </div>
-                                    <marquee>
-                                        <div style={{display: "flex", justifyContent: "space-around"}}>
+                <div style={{background: loadingCurrencies ? "#bbbdd3" : "#000B6B"}}  className={Styles.topBar}>
 
-                                                <div>
-                                                    {/* <span style={{ fontWeight: "bold" }}>USD</span> 10.05 */}
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>AED</span> 3.84
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>CAD</span>   1.41
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>CFA</span> 646.77
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>CNY</span> 7.3
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>EUR</span> 0.98
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>GBP</span>  0.85
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontWeight: "bold" }}>GHS</span> 10.23
-                                                </div>
-                                                </div>
-                                    </marquee>
-                </div>
-                <Row style={{background: "#F8F8F8"}}>
-                    <div style={{background: "#E0EAFF"}} className={Styles.middleCol} >
-                      
+                    <Dropdown
+                        menu={{
+                            items,
+                        }}
+                        placement="bottomLeft"
+                        arrow
+                    >
+                        <div className={Styles.def_curr}>
+                            {/* <img width={"20"} src={flag} alt="flag" /> */}
+                            {`${baseCurrency} 1`}
+                        </div>
+                    </Dropdown>
+                    <div className={`running-header`}>
+                        <div className="marquee">
+                            <div>
+                                {runningCurrencies?.map((item) => {
+                                    return (
+                                        <>{item?.currency} <span className="marq-rates">  {item?.amount} </span> </>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className="marquee marquee2">
+                            <div>
+                                {runningCurrencies?.map((item) => {
+                                    return (
+                                        <>{item?.currency} <span className="marq-rates">  {item?.amount} </span> </>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                </div >
+                <Row style={{ background: "#F8F8F8" }}>
+                    <div style={{ background: "#E0EAFF" }} className={Styles.middleCol} >
+
                         <div className={Styles.layoutContainer}>
                             <div className={Styles.topNav}>
                                 {title}
                             </div>
-                            <span style={{fontSize: "20px", fontWeight: "700", color: "#727986"}} >{text["Home"]}</span>
+                            <span style={{ fontSize: "20px", fontWeight: "700", color: "#727986" }} >{text["Home"]}</span>
 
                             <div className={Styles.layoutContent}>
                                 {children}
@@ -76,8 +104,8 @@ const DashboardLayout = ({ children, RightSider, menuRoute, title, ...rest }) =>
                     </div>
 
                 </Row>
-            </Layout>
-        </SiderLayout>
+            </Layout >
+        </SiderLayout >
     );
 
 }

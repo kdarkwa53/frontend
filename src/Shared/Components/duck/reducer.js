@@ -14,7 +14,7 @@ import {
     GET_WALLETS_ERROR,
     GET_WALLETS_SUCCESS,
     GET_WALLETS_REQUEST,
-SAVE_FUNDING_SOURCE_REQUEST,
+    SAVE_FUNDING_SOURCE_REQUEST,
     SAVE_FUNDING_SOURCE_SUCCESS,
     SAVE_FUNDING_SOURCE_ERROR,
     GET_FUNDING_SOURCE,
@@ -31,7 +31,10 @@ SAVE_FUNDING_SOURCE_REQUEST,
     SETCURRENT_ROUTE,
     GET_RULES_CURRENCIES,
     ADD_WALLET,
-    
+    RUNNING_HEADER_REQUEST,
+    RUNNING_HEADER_SUCCESS,
+    RUNNING_HEADER_ERROR,
+
 
 
 } from "./types"
@@ -42,16 +45,19 @@ const INITIAL_STATE = {
 }
 
 const INITIAL_STATE_2 = {
+    base_currency: "",
     gettingCountries: false,
     gettingCurrencies: false,
     gettingBanksAndMomos: false,
     savingFundSource: false,
     settingQuestion: false,
-    userSecurityQuestions:{},
-    fundingSource:[],
+    userSecurityQuestions: {},
+    fundingSource: [],
     gettingPermissions: false,
     verifyingIdentity: false,
-    current_route: "/"
+    current_route: "/",
+    loadingRunningHeader: false,
+    
 }
 
 export const pinReducer = (state = INITIAL_STATE, action = { type: "" }) => {
@@ -81,7 +87,23 @@ export const pinReducer = (state = INITIAL_STATE, action = { type: "" }) => {
 export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
     const { type } = action;
     switch (type) {
-        
+        case RUNNING_HEADER_REQUEST:
+            return {
+                ...state,
+                loadingRunningHeader: true,
+            };
+        case RUNNING_HEADER_SUCCESS:
+            return {
+                ...state,
+                loadingRunningHeader: false,
+                base_currency: action?.data?.base,
+                running_header: action?.data?.currency
+            };
+        case RUNNING_HEADER_ERROR:
+            return {
+                ...state,
+                loadingRunningHeader: false,
+            };
         case SETCURRENT_ROUTE:
             return {
                 ...state,
@@ -129,7 +151,7 @@ export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
                 currencies: action.data,
                 gettingCurrencies: false
             };
-        case GET_RULES_CURRENCIES: 
+        case GET_RULES_CURRENCIES:
             return {
                 ...state,
                 rules_currencies: action.data,
@@ -209,7 +231,7 @@ export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
             return {
                 ...state,
                 conversion: action.data
-            }; 
+            };
         case GET_ALL_SECURITY_QUESTIONS_SUCCESS:
             return {
                 ...state,
@@ -219,7 +241,7 @@ export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
             return {
                 ...state,
                 userSecurityQuestions: action.data,
-            }; 
+            };
         case SET_SECURITY_QUESTION_REQUEST:
             return {
                 ...state,
@@ -228,15 +250,15 @@ export const resources = (state = INITIAL_STATE_2, action = { type: "" }) => {
         case SET_SECURITY_QUESTION_SUCCESS:
             return {
                 ...state,
-                userSecurityQuestions:{
+                userSecurityQuestions: {
                     ...state.userSecurityQuestions,
-                    [action.id]:{
+                    [action.id]: {
                         ...state.securityQuestions[action.id]
                     }
                 },
                 securityQuestions: {
                     ...state.securityQuestions,
-                    [action.id]:{
+                    [action.id]: {
                         ...state.securityQuestions[action.id],
                         selected: false
 

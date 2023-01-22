@@ -46,7 +46,7 @@ import BusinessProfilePage from "../../../Modules/Profile/BusinessProfilePage";
 import Check from "../../../check";
 import IbanValidation from "../../../Modules/TransferMoney/Components/AddBeneficiaryQuestion/IbanValidation";
 import ForexBeneficiary from "../../../Modules/TransferMoney/ForexBeneficiary";
-import { getRulesCurrencies } from "../duck/action";
+import { getRulesCurrencies, getRunningHeader } from "../duck/action";
 import { useDispatch, useSelector } from "react-redux";
 import ForexSend from "../../../Modules/TransferMoney/ForexSend";
 import SendMoneyForex from "../../../Modules/TransferMoney/SendMoneyForex";
@@ -55,11 +55,14 @@ import InstructForex from "../../../Modules/TransferMoney/InstructForex";
 import { getBeneficiaries } from "../../../Modules/TransferMoney/duck/action";
 export default function BusinessRoutes() {
     const text = useSelector((state) => state.language)
+    const currency = useSelector((state) => state?.resources?.base_currency)
     
     const dispatch = useDispatch()
+    const curr = currency ? currency : "USD"
     useEffect(()=>{
         dispatch(getRulesCurrencies())
         dispatch(getBeneficiaries())
+        dispatch(getRunningHeader(curr))
          // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
