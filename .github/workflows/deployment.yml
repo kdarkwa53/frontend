@@ -10,39 +10,6 @@ on:
       - main
 
 jobs:
-  production-deploy:
-
-    runs-on: [self-hosted, forex-prod]
-    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main' && github.event.pull_request.merged == true
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
-    steps:
-      - name: Checkout branche
-        uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-
-      - name: Create .env file
-        run: |
-          chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
-          echo "${{secrets.PRODUCTION_ENV_VARS}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
-          cat ".env"  
-      - name: Generate the build
-        run: CI=false npm run build
-  
-      - name: Reload Nginx
-        run: |
-          cd ..
-          sudo service nginx reload
-
   staging-deploy:
 
     runs-on: [self-hosted, forex-staging]
@@ -61,7 +28,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install  --force
+          npm audit fix --force
         
       - name: Create .env file
         run: |
@@ -75,3 +44,40 @@ jobs:
         run: |
           cd ..
           sudo service nginx reload
+
+  production-deploy:
+
+    runs-on: [self-hosted, forex-prod]
+    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main' && github.event.pull_request.merged == true
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout branche
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: |
+          npm install  --force
+          npm audit fix --force
+
+      - name: Create .env file
+        run: |
+          chmod -R a+rwx /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/node_modules
+          echo "${{secrets.PRODUCTION_ENV_VARS}}" | base64 --decode > /var/www/forex-app/actions-runner/forex_work/new-forex-app/new-forex-app/.env
+          cat ".env"  
+      - name: Generate the build
+        run: CI=false npm run build
+  
+      - name: Reload Nginx
+        run: |
+          cd ..
+          sudo service nginx reload
+
+  
